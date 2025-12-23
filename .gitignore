@@ -1,0 +1,41 @@
+# Android 빌드 산출물
+*.apk
+*.aab
+*.ap_
+
+# Gradle 빌드 폴더 (루트/모듈 공통)
+.gradle/
+build/
+*/build/
+
+# Local configuration file (SDK path, API 키 등)
+local.properties
+
+# Android Studio / IntelliJ
+*.iml
+.idea/
+*.iws
+*.ipr
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+
+# NDK / Native
+obj/
+.externalNativeBuild/
+.cxx/
+
+# 캡쳐 / 프로파일링 / 로그
+captures/
+*.hprof
+*.log
+
+# Keystore (실제 서명키 쓰면)
+*.jks
+*.keystore
+
+# Google Services (예: Firebase)
+google-services.json
+
+# OS / 기타
+.DS_Store
