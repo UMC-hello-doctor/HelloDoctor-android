@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- 네트워크 통신 (Retrofit, Glide, Google Auth, Google Maps 등 외부 서버와의 통신에 필요) -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- 네트워크 연결 상태(Wi‑Fi/모바일 데이터 연결 여부)에 따라 통신 시도/에러 처리에 사용 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 사용자의 대략적인 위치(기지국/와이파이 기반)를 가져와 지도의 현재 위치 표시 등에 사용 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- GPS 등으로 더 정확한 위치를 가져와 내 위치 마커, 길찾기 등 정밀한 위치 기능에 사용 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
+        android:name=".app.HelloDoctorApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HelloDoctor">
         <activity
-            android:name=".MainActivity"
+            android:name=".app.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
