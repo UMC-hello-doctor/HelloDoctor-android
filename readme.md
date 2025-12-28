@@ -2,9 +2,9 @@
 
 ## 전체 개요
 
-umc.hellodoctor
-├─ app
-├─ core
+umc.hellodoctor  
+├─ app  
+├─ core  
 └─ feature
 
  
@@ -18,13 +18,13 @@ umc.hellodoctor
 
 ## 1. app 패키지
 
-umc.hellodoctor.app
-├─ HelloDoctorApp
-├─ MainActivity
-└─ di
-├─ AppModule
-├─ NetworkModule
-└─ AuthModule
+umc.hellodoctor.app  
+├─ HelloDoctorApp  
+├─ MainActivity  
+└─ di  
+├─ AppModule  
+├─ NetworkModule  
+└─ AuthModule  
 
  
 
@@ -59,14 +59,14 @@ DI 모듈 전용 패키지. Hilt(Koin 등)에서 사용할 의존성 정의를 �
 
 ## 2. core 패키지
 
-umc.hellodoctor.core
-├─ design
-├─ model
-├─ network
-├─ ui
-│ ├─ component
-│ ├─ extension
-│ └─ theme
+umc.hellodoctor.core  
+├─ design  
+├─ model  
+├─ network  
+├─ ui  
+│ ├─ component   \
+│ ├─ extension  
+│ └─ theme  
 └─ util
 
  
@@ -123,12 +123,12 @@ umc.hellodoctor.core
 
 현재 구조:
 
-umc.hellodoctor.feature
-└─ basicFolder
-├─ data
-├─ domain
-├─ presentation
-└─ ui
+umc.hellodoctor.feature  
+└─ basicFolder  
+├─ data  
+├─ domain  
+├─ presentation   
+└─ ui   
 
  
 
@@ -138,22 +138,22 @@ umc.hellodoctor.feature
 
 향후 목표 구조 예시:
 
-feature
-├─ auth
-│ ├─ data
-│ ├─ domain
-│ ├─ presentation
-│ └─ ui
-├─ home
-│ ├─ data
-│ ├─ domain
-│ ├─ presentation
-│ └─ ui
-└─ settings
-├─ data
-├─ domain
-├─ presentation
-└─ ui
+feature  
+├─ auth  
+│ ├─ data  
+│ ├─ domain  
+│ ├─ presentation  
+│ └─ ui  
+├─ home  
+│ ├─ data  
+│ ├─ domain  
+│ ├─ presentation  
+│ └─ ui  
+└─ settings  
+├─ data  
+├─ domain  
+├─ presentation  
+└─ ui  
 
  
 
@@ -179,10 +179,10 @@ feature
 
 예시 구조:
 
-feature/basicFolder/domain
-├─ model // 도메인 엔티티
-├─ repository // Repository 인터페이스
-└─ usecase // 유스케이스
+feature/basicFolder/domain  
+├─ model // 도메인 엔티티  
+├─ repository // Repository 인터페이스  
+└─ usecase // 유스케이스  
 
  
 
@@ -195,11 +195,11 @@ feature/basicFolder/domain
 
 예시 구조:
 
-feature/basicFolder/data
-├─ repository // Repository 구현체
-├─ remote // Retrofit API, 원격 데이터 소스
-├─ local // Room, DataStore, SharedPreferences
-└─ mapper // DTO ↔ 도메인 모델 변환
+feature/basicFolder/data  
+├─ repository // Repository 구현체  
+├─ remote // Retrofit API, 원격 데이터 소스  
+├─ local // Room, DataStore, SharedPreferences  
+└─ mapper // DTO ↔ 도메인 모델 변환  
 
  
 
@@ -222,5 +222,3 @@ feature/basicFolder/data
 4. DI는 `app.di`에서 조립:
     - `NetworkModule`에서 Retrofit/OkHttp 제공.
     - `AuthModule` 등에서 `AuthRepositoryImpl`을 `AuthRepository`에 바인딩하고, UseCase를 제공.
-
-이 문서를 기준으로, 새로운 기능이나 공통 모듈을 추가할 때 구조와 위치를 통일해서 관리한다.
