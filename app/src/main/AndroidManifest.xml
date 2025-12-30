@@ -12,6 +12,7 @@
 
     <!-- GPS 등으로 더 정확한 위치를 가져와 내 위치 마커, 길찾기 등 정밀한 위치 기능에 사용 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".app.HelloDoctorApp"
         android:allowBackup="true"
@@ -22,6 +23,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HelloDoctor">
+
+        <!-- 네이버 지도 Client ID -->
+        <meta-data
+            android:name="com.naver.maps.map.NCP_CLIENT_ID"
+            android:value="${NAVER_MAP_CLIENT_ID}" />
+
         <activity
             android:name=".app.MainActivity"
             android:exported="true">

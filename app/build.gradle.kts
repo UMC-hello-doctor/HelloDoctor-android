@@ -32,12 +32,25 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
+        //프로젝트 서버
         buildConfigField(
             "String",
             "SERVER_BASE_URL",
-            "\"${properties.getProperty("server.baseUrl", "https://api.hellodoctor.dev")}\""
+            "\"${properties.getProperty("SERVER_BASE_URL", "https://api.hellodoctor.dev")}\""
         )
+        //navermap
+        buildConfigField(
+            "String",
+            "NAVER_MAP_CLIENT_ID",
+            "\"${properties.getProperty("NAVER_MAP_CLIENT_ID", "")}\""
+        )
+        buildConfigField(
+            "String",
+            "NAVER_MAP_CLIENT_SECRET",
+            "\"${properties.getProperty("NAVER_MAP_CLIENT_SECRET", "")}\""
+        )
+        manifestPlaceholders["NAVER_MAP_CLIENT_ID"] =
+            project.properties["NAVER_MAP_CLIENT_ID"] ?: ""
     }
 
     signingConfigs {
@@ -108,10 +121,8 @@ dependencies {
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
     implementation("com.google.android.gms:play-services-auth:21.4.0")
 
-    // --- 지도 (Google Maps) ---
-    implementation("com.google.android.gms:play-services-maps:19.0.0")
-    implementation("com.google.maps.android:android-maps-utils:3.9.0")
-    implementation("com.google.maps.android:maps-utils-ktx:5.1.1")
+    // --- 지도 (Naver Maps) ---
+    implementation("com.naver.maps:map-sdk:3.23.0")
 
     // --- Hilt (DI) ---
     implementation("com.google.dagger:hilt-android:2.57.2")
