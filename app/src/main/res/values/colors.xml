@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary brand color -->
+    <color name="color_primary">#1852FF</color>          <!-- 브랜드 메인 색 (로고/강조) -->
+    <color name="color_on_primary">#FFFFFF</color>       <!-- primary 배경 위 텍스트/아이콘 -->
+
+    <!-- Secondary color -->
+    <color name="color_secondary">#CCC2DC</color>        <!-- 보조 강조 색 -->
+    <color name="color_on_secondary">#FFFFFF</color>     <!-- secondary 배경 위 텍스트/아이콘 -->
+
+    <!-- Text colors -->
+    <color name="color_text_main">#2A2A2A</color>        <!-- 기본 본문 텍스트 -->
+    <color name="color_text_sub">#696969</color>         <!-- 서브/보조 설명 텍스트 -->
+
+    <!-- Background -->
+    <color name="color_background">#F4F4F4</color>       <!-- 화면 기본 배경 색 -->
+
+    <!-- Buttons -->
+    <color name="color_button_primary_bg">#1852FF</color>          <!-- 주요 액션 버튼: 배경(활성) -->
+    <color name="color_button_primary_text">#FFFFFF</color>        <!-- 주요 액션 버튼: 텍스트(활성) -->
+    <color name="color_button_primary_bg_disabled">#CCCCCC</color> <!-- 주요 액션 버튼: 배경(비활성) -->
+    <color name="color_button_primary_text_disabled">#FFFFFFFF</color> <!-- 주요 액션 버튼: 텍스트(비활성) -->
+
+    <color name="color_button_secondary_bg">#FFFFFF</color>        <!-- 보조 버튼: 배경(활성) -->
+    <color name="color_button_secondary_text">#696969</color>      <!-- 보조 버튼: 텍스트(활성) -->
+    <color name="color_button_secondary_bg_disabled">#F0F0F0</color> <!-- 보조 버튼: 배경(비활성) -->
+    <color name="color_button_secondary_text_disabled">#B0B0B0</color> <!-- 보조 버튼: 텍스트(비활성) -->
+
 </resources>

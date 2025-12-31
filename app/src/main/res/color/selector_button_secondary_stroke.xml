@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 선택 -->
+    <item
+        android:state_selected="true"
+        android:color="@color/color_primary" />
+    <!-- 선택 안 됨 (기본값) -->
+    <item
+        android:color="@color/color_text_sub" />
+</selector>

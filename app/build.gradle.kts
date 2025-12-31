@@ -1,12 +1,27 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    //def version in project gradle
+    id("androidx.navigation.safeargs.kotlin")
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
+}
+val propertiesFile = rootProject.file("local.properties")
+val properties = Properties()
+if (propertiesFile.exists()) {
+    properties.load(FileInputStream(propertiesFile))
 }
 
 android {
     namespace = "com.umc.hellodoctor"
-    compileSdk {
-        version = release(36)
+    compileSdk = 36
+
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
     }
 
     defaultConfig {
@@ -17,33 +32,100 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        //프로젝트 서버
+        buildConfigField(
+            "String",
+            "SERVER_BASE_URL",
+            "\"${properties.getProperty("SERVER_BASE_URL", "https://api.hellodoctor.dev")}\""
+        )
+        //navermap
+        buildConfigField(
+            "String",
+            "NAVER_MAP_CLIENT_ID",
+            "\"${properties.getProperty("NAVER_MAP_CLIENT_ID", "")}\""
+        )
+        buildConfigField(
+            "String",
+            "NAVER_MAP_CLIENT_SECRET",
+            "\"${properties.getProperty("NAVER_MAP_CLIENT_SECRET", "")}\""
+        )
+        manifestPlaceholders["NAVER_MAP_CLIENT_ID"] =
+            project.properties["NAVER_MAP_CLIENT_ID"] ?: ""
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file(properties["storeFile"] as String)
+            storePassword = properties["storePassword"] as String
+            keyAlias = properties["keyAlias"] as String
+            keyPassword = properties["keyPassword"] as String
+        }
     }
 
     buildTypes {
-        release {
+        //디버그시(run app시)에도 release key
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+        }
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
 dependencies {
+    //basic lib
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.fragment)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // --- Navigation ---
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.4")
+
+    // --- UI / 레이아웃 ---
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    // --- 아키텍처 / 코루틴 ---
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+
+    // --- 네트워크 (Retrofit) ---
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // --- 이미지 로딩 (Glide + KSP) ---
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    ksp("com.github.bumptech.glide:ksp:4.16.0")
+
+    // --- 인증 (Credential Manager / Google 로그인) ---
+    implementation("androidx.credentials:credentials:1.3.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+    implementation("com.google.android.gms:play-services-auth:21.4.0")
+
+    // --- 지도 (Naver Maps) ---
+    implementation("com.naver.maps:map-sdk:3.23.0")
+
+    // --- Hilt (DI) ---
+    implementation("com.google.dagger:hilt-android:2.57.2")
+    ksp("com.google.dagger:hilt-compiler:2.57.2")
 }

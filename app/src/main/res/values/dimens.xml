@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_caption">12sp</dimen> <!-- 작은 보조 텍스트 -->
+    <dimen name="text_size_body">15sp</dimen>    <!-- 기본 본문/버튼 텍스트 -->
+    <dimen name="text_size_title">20sp</dimen>   <!-- 화면 타이틀 -->
+</resources>
