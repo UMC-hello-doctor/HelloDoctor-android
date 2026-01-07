@@ -49,6 +49,12 @@ android {
             "NAVER_MAP_CLIENT_SECRET",
             "\"${properties.getProperty("NAVER_MAP_CLIENT_SECRET", "")}\""
         )
+        //OAUTH
+        buildConfigField(
+            "String",
+            "GOOGLE_OAUTH_CLIENT_ID",
+            "\"${properties.getProperty("GOOGLE_OAUTH_CLIENT_ID", "")}\""
+        )
         manifestPlaceholders["NAVER_MAP_CLIENT_ID"] =
             project.properties["NAVER_MAP_CLIENT_ID"] ?: ""
     }

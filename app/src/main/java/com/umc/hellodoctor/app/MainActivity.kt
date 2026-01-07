@@ -2,6 +2,7 @@ package com.umc.hellodoctor.app
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -9,10 +10,13 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.umc.hellodoctor.R
 import com.umc.hellodoctor.databinding.ActivityMainBinding
+import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private val TAG = this.javaClass.simpleName
+    private val authViewModel: AuthViewModel by viewModels()
     private lateinit var binding : ActivityMainBinding
     private lateinit var navController: NavController
 
