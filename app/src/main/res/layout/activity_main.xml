@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottonLayout"
         app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_main"
         />
 
     <LinearLayout
