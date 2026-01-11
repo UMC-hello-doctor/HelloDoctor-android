@@ -11,12 +11,16 @@ import androidx.navigation.fragment.NavHostFragment
 import com.umc.hellodoctor.R
 import com.umc.hellodoctor.databinding.ActivityMainBinding
 import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
+import com.umc.hellodoctor.feature.location.LocationMapViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val TAG = this.javaClass.simpleName
+
     private val authViewModel: AuthViewModel by viewModels()
+    private val locationViewModel: LocationMapViewModel by viewModels()
+
     private lateinit var binding : ActivityMainBinding
     private lateinit var navController: NavController
 
