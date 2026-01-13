@@ -1,10 +1,13 @@
 package com.umc.hellodoctor.app.di
 
+import android.content.Context
 import com.umc.hellodoctor.BuildConfig
+import com.umc.hellodoctor.core.network.status.NetworkMonitor
 import com.umc.hellodoctor.feature.auth.data.repository.AuthApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,4 +31,11 @@ object NetworkModule {
         retrofit: Retrofit
     ): AuthApi = retrofit.create(AuthApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideNetworkMonitor(
+        @ApplicationContext context: Context
+    ): NetworkMonitor {
+        return NetworkMonitor(context)
+    }
 }

@@ -6,9 +6,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.umc.hellodoctor.R
+import com.umc.hellodoctor.core.network.status.NetworkViewModel
 import com.umc.hellodoctor.databinding.ActivityMainBinding
 import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
 import com.umc.hellodoctor.feature.location.LocationMapViewModel
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val authViewModel: AuthViewModel by viewModels()
     private val locationViewModel: LocationMapViewModel by viewModels()
+    private val networkViewModel: NetworkViewModel by viewModels()
 
     private lateinit var binding : ActivityMainBinding
     private lateinit var navController: NavController
@@ -27,7 +30,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
- 
+
+        //사용해야 networkViewmodel활성화됨 
+        networkViewModel
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
