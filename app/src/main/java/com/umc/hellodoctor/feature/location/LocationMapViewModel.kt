@@ -8,6 +8,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 data class LocationMapUiState(
     val isLoadingLocation: Boolean = false,
@@ -25,7 +26,7 @@ data class LocationMapUiState(
  * - 지도 카메라 위치 관리
  */
 @HiltViewModel
-class LocationMapViewModel(
+class LocationMapViewModel @Inject constructor(
     private val locationProvider: LocationProvider
 ) : ViewModel() {
 
