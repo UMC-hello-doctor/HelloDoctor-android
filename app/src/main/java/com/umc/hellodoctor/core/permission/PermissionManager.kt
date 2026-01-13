@@ -62,7 +62,25 @@ class PermissionManager(
             true
         }
     }
+    // ===== 앱 실행 시 기본 권한 요청 =====
 
+    /**
+     * 앱 공통으로 필요하다고 보는 권한들을 한 번에 요청.
+     * (알림 + 위치 + 카메라 + 정확 알람)
+     */
+    fun requestInitialPermissions(callback: Callback) {
+        val permissionGroups = listOf(
+            PermissionConstants.NOTIFICATION_PERMISSIONS,
+            PermissionConstants.LOCATION_PERMISSIONS,
+            PermissionConstants.CAMERA_PERMISSIONS
+        )
+
+        requestPermissions(
+            permissionGroups = permissionGroups,
+            requestExactAlarm = true,
+            callback = callback
+        )
+    }
     // ===== 동적 요청 (Constants 활용) =====
     /**
      * permissionGroups에는 PermissionConstants의 배열들을 원하는 조합으로 넣으면 됩니다.
