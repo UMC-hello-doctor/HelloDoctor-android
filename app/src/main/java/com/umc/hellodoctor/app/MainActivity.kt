@@ -62,12 +62,20 @@ class MainActivity : AppCompatActivity() {
         binding.toMain.setOnClickListener {
             binding.toMain.isSelected = true
             binding.toAuth.isSelected = false
+            binding.toTest.isSelected = false
             navController.setGraph(R.navigation.nav_main)
         }
         binding.toAuth.setOnClickListener {
             binding.toMain.isSelected = false
             binding.toAuth.isSelected = true
+            binding.toTest.isSelected = false
             navController.setGraph(R.navigation.nav_auth)
+        }
+        binding.toTest.setOnClickListener {
+            binding.toMain.isSelected = false
+            binding.toAuth.isSelected = false
+            binding.toTest.isSelected = true
+            navController.setGraph(R.navigation.nav_test)
         }
 
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_test"
+    app:startDestination="@id/testFragment">
+
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.umc.hellodoctor.test.TestFragment"
+        android:label="TestFragment" >
+        <action
+            android:id="@+id/action_testFragment_to_networkFragment"
+            app:destination="@id/networkFragment" />
+        <action
+            android:id="@+id/action_testFragment_to_naverMapFragment"
+            app:destination="@id/naverMapFragment" />
+        <action
+            android:id="@+id/action_testFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_testFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/naverMapFragment"
+        android:name="com.umc.hellodoctor.feature.navermap.presentation.NaverMapFragment"
+        android:label="NaverMapFragment" />
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.umc.hellodoctor.test.CameraFragment"
+        android:label="CameraFragment" />
+    <fragment
+        android:id="@+id/networkFragment"
+        android:name="com.umc.hellodoctor.core.network.status.NetworkFragment"
+        android:label="NetworkFragment" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.umc.hellodoctor.test.NotificationFragment"
+        android:label="NotificationFragment" />
+
+</navigation>

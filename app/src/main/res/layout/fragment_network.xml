@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 연결 상태 텍스트 -->
+    <TextView
+        android:id="@+id/tvNetworkStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="네트워크 상태 확인 중..."
+        android:textSize="18sp" />
+
+    <!-- 심플 인디케이터 (초록/빨강 동그라미) -->
+    <View
+        android:id="@+id/viewIndicator"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/holo_green_light" />
+
+</LinearLayout>

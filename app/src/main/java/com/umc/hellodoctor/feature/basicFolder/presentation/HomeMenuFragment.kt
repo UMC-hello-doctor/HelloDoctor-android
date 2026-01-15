@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.umc.hellodoctor.core.util.toast
 import com.umc.hellodoctor.databinding.FragmentHomeMenuBinding
 
 class HomeMenuFragment : Fragment() {
@@ -26,19 +27,19 @@ class HomeMenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.menuHospital.setOnClickListener {
-            Toast.makeText(requireContext(), "의료기관 검색", Toast.LENGTH_SHORT).show()
+            toast("의료기관 검색")
         }
 
         binding.menuPrescription.setOnClickListener {
-            Toast.makeText(requireContext(), "처방약 관리", Toast.LENGTH_SHORT).show()
+            toast("처방약 관리")
         }
 
         binding.menuSymptom.setOnClickListener {
-            Toast.makeText(requireContext(), "증상 번역", Toast.LENGTH_SHORT).show()
+            toast("증상 번역")
         }
 
         binding.menuMyPage.setOnClickListener {
-            Toast.makeText(requireContext(), "마이페이지", Toast.LENGTH_SHORT).show()
+            toast("마이페이지")
         }
     }
 
