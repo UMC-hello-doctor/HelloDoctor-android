@@ -1,6 +1,7 @@
 package com.umc.hellodoctor.app
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -59,9 +60,13 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.toMain.setOnClickListener {
+            binding.toMain.isSelected = true
+            binding.toAuth.isSelected = false
             navController.setGraph(R.navigation.nav_main)
         }
         binding.toAuth.setOnClickListener {
+            binding.toMain.isSelected = false
+            binding.toAuth.isSelected = true
             navController.setGraph(R.navigation.nav_auth)
         }
 

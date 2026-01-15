@@ -2,6 +2,7 @@ package com.umc.hellodoctor.app.di
 
 
 import android.content.Context
+import com.umc.hellodoctor.core.location.BearingProvider
 import com.umc.hellodoctor.core.location.LocationProvider
 import dagger.Module
 import dagger.Provides
@@ -20,4 +21,10 @@ object LocationModule {
     fun provideLocationProvider(
         @ApplicationContext context: Context
     ): LocationProvider = LocationProvider(context)
+
+    @Provides
+    @Singleton
+    fun provideBearingProvider(
+        @ApplicationContext context: Context
+    ): BearingProvider = BearingProvider(context)
 }
