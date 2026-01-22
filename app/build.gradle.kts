@@ -69,9 +69,8 @@ android {
     }
 
     buildTypes {
-        //디버그시(run app시)에도 release key
         getByName("debug") {
-            signingConfig = signingConfigs.getByName("release")
+            // debug는 기본 debug keystore 사용(자동)
             isMinifyEnabled = false
         }
         getByName("release") {
@@ -110,6 +109,8 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.android.material:material:1.11.0")
 
     // --- 아키텍처 / 코루틴 ---
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
