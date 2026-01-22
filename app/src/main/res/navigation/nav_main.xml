@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeMenuFragment"
-        android:name="com.umc.hellodoctor.feature.basicFolder.presentation.HomeMenuFragment"
+        android:name="com.umc.hellodoctor.app.presentation.HomeMenuFragment"
         android:label="HomeMenu" />
 
 </navigation>

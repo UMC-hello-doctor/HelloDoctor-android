@@ -1,4 +1,4 @@
-package com.umc.hellodoctor.feature.basicFolder.presentation
+package com.umc.hellodoctor.app.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

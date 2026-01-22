@@ -345,6 +345,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="18dp" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="다음"
+                android:enabled="false"
+                android:layout_marginTop="16dp"/>
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
