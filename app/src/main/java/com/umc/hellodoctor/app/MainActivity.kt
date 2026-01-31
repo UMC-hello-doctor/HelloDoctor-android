@@ -1,22 +1,19 @@
 package com.umc.hellodoctor.app
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.umc.hellodoctor.R
 import com.umc.hellodoctor.core.network.status.NetworkViewModel
-import com.umc.hellodoctor.core.notification.NotificationHelper
 import com.umc.hellodoctor.core.permission.PermissionManager
 import com.umc.hellodoctor.databinding.ActivityMainBinding
 import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
-import com.umc.hellodoctor.feature.location.LocationMapViewModel
+import com.umc.hellodoctor.core.location.LocationMapViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

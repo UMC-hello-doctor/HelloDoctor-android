@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.umc.hellodoctor.R
 import com.umc.hellodoctor.databinding.FragmentHomeMenuBinding
 
 class HomeMenuFragment : Fragment() {
@@ -35,6 +37,8 @@ class HomeMenuFragment : Fragment() {
 
         binding.menuSymptom.setOnClickListener {
             Toast.makeText(requireContext(), "증상 번역", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeMenuFragment_to_naverMapFragment)
+
         }
 
         binding.menuMyPage.setOnClickListener {

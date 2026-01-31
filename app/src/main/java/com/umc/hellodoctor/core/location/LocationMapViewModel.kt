@@ -1,9 +1,7 @@
-package com.umc.hellodoctor.feature.location
+package com.umc.hellodoctor.core.location
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.umc.hellodoctor.core.location.BearingProvider
-import com.umc.hellodoctor.core.location.LocationProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

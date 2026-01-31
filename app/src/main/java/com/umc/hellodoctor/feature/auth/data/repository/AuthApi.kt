@@ -1,13 +1,14 @@
 package com.umc.hellodoctor.feature.auth.data.repository
 
+import com.umc.hellodoctor.core.network.BaseResponse
 import com.umc.hellodoctor.feature.auth.data.model.SocialLoginRequest
 import com.umc.hellodoctor.feature.auth.data.model.SocialLoginResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface AuthApi {
-    @POST("")
+    @POST("auth/google")
     suspend fun socialLogin(
         @Body body: SocialLoginRequest
-    ): SocialLoginResponse
+    ): BaseResponse<SocialLoginResponse>
 }
