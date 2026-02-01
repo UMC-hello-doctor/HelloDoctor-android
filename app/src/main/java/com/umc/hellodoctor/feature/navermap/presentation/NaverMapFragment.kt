@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -21,10 +22,12 @@ import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.LocationOverlay
+import com.naver.maps.map.overlay.Marker
 import com.umc.hellodoctor.R
 import com.umc.hellodoctor.core.location.LocationMapViewModel
 import com.umc.hellodoctor.databinding.FragmentNaverMapBinding
 import com.umc.hellodoctor.feature.navermap.adapter.HospitalAdapter
+import com.umc.hellodoctor.feature.navermap.data.HospitalItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -122,6 +125,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     private fun observeHospitalData() {
         hospitalViewModel.hospitalList.observe(viewLifecycleOwner) { hospitals ->
             hospitalAdapter.submitList(hospitals)
+            showHospitalsOnMap(hospitals)
         }
     }
 
@@ -129,6 +133,38 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         binding.bottomSheetContainer.visibility = View.VISIBLE
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
+
+    private val markerList = mutableListOf<Marker>()
+
+    private fun showHospitalsOnMap(hospitals: List<HospitalItem>) {
+        // 기존 마커 제거
+        markerList.forEach { it.map = null }
+        markerList.clear()
+        Log.d(TAG, "showHospitalsOnMap: icon생성")
+        // 새 마커 추가
+        hospitals.forEach { hospital ->
+
+            val marker = Marker().apply {
+                position = LatLng(hospital.latitude, hospital.longitude)
+                captionText = hospital.name
+                map = naverMap
+            }
+            marker.setOnClickListener {
+                val index = hospitals.indexOf(hospital)
+                if (index != -1) {
+                    val smoothScroller = object : LinearSmoothScroller(requireContext()) {
+                        override fun getVerticalSnapPreference() = SNAP_TO_START
+                    }.apply { targetPosition = index }
+                    (binding.hospitalRecyclerView.layoutManager as? LinearLayoutManager)
+                        ?.startSmoothScroll(smoothScroller)
+                }
+                true
+            }
+            marker
+            markerList.add(marker)
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
