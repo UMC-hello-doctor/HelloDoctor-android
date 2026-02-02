@@ -59,7 +59,7 @@
                 android:text="306m"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/design_default_color_primary" />
+                android:textColor="@color/color_primary" />
 
         </LinearLayout>
 
@@ -73,6 +73,42 @@
             android:textSize="12sp"
             android:textColor="@android:color/darker_gray" />
 
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/call"
+                style="@style/Widget.HelloDoctor.Button.Secondary"
+                android:minWidth="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/baseline_call_24"
+                app:iconTint="@color/color_primary"
+                app:iconGravity="start"
+                android:text="call"
+                android:textColor="@color/color_primary"
+                app:iconPadding="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/marker"
+                style="@style/Widget.HelloDoctor.Button.Secondary"
+                android:minWidth="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/baseline_location_on_24"
+                app:iconTint="@color/color_primary"
+                app:iconGravity="start"
+                app:iconPadding="8dp"
+                android:text="find"
+                android:textColor="@color/color_primary"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

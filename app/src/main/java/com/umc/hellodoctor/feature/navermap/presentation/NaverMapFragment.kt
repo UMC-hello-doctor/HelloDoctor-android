@@ -1,9 +1,13 @@
 package com.umc.hellodoctor.feature.navermap.presentation
 
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -30,6 +34,7 @@ import com.umc.hellodoctor.feature.navermap.adapter.HospitalAdapter
 import com.umc.hellodoctor.feature.navermap.data.HospitalItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import androidx.core.net.toUri
 
 @AndroidEntryPoint
 class NaverMapFragment : Fragment(), OnMapReadyCallback {
@@ -98,16 +103,41 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         // 지도 클릭 → 내과 병원 검색
         naverMap.setOnMapClickListener { _, latLng ->
             hospitalViewModel.fetchNearbyHospitals(latLng.latitude, latLng.longitude)
-            showBottomSheet()
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setupRecyclerView() {
-        hospitalAdapter = HospitalAdapter()
-        binding.hospitalRecyclerView.apply {
-            adapter = hospitalAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-        }
+
+            hospitalAdapter = HospitalAdapter(
+                onCallClick = { tel ->
+                    val uri = "tel:$tel".toUri()
+                    val intent = Intent(Intent.ACTION_DIAL, uri)
+                    context?.startActivity(intent)
+                },
+                onMarkerClick = { lat, lng ->
+                    val cameraUpdate = CameraUpdate.scrollTo(LatLng(lat, lng))
+                    naverMap.moveCamera(cameraUpdate)
+                }
+            )
+
+            binding.hospitalRecyclerView.apply {
+                adapter = hospitalAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+
+            binding.hospitalRecyclerView.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
+                        binding.bottomSheetContainer.requestDisallowInterceptTouchEvent(true)
+                    }
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        binding.bottomSheetContainer.requestDisallowInterceptTouchEvent(false)
+                    }
+                }
+                v.performClick()  // 클릭 가능성 처리 → Lint 경고 사라짐
+                false
+            }
     }
 
     private fun setupBottomSheetBehavior() {
@@ -129,10 +159,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun showBottomSheet() {
-        binding.bottomSheetContainer.visibility = View.VISIBLE
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-    }
+
 
     private val markerList = mutableListOf<Marker>()
 

@@ -31,15 +31,6 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/bottom_sheet_handle" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="근처 병원"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="16dp" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hospitalRecyclerView"
             android:layout_width="match_parent"
