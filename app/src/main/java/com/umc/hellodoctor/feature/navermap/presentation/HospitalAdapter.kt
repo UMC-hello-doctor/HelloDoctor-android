@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.umc.hellodoctor.core.util.formatDistance
 import com.umc.hellodoctor.databinding.ItemHospitalBinding
 import com.umc.hellodoctor.feature.navermap.data.HospitalItem
 
@@ -18,7 +19,7 @@ class HospitalAdapter(
             binding.hospitalName.text = hospital.name
             binding.hospitalAddress.text = hospital.address
             binding.hospitalTel.text = hospital.tel
-            binding.hospitalDistance.text = hospital.distance.toInt().toString() + "m"
+            binding.hospitalDistance.text = formatDistance(hospital.distance)
             binding.hospitalHours.text = hospital.businessHours
 
             // call 버튼 – 전화 다이얼러 열기
