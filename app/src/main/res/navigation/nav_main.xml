@@ -8,6 +8,16 @@
     <fragment
         android:id="@+id/homeMenuFragment"
         android:name="com.umc.hellodoctor.app.presentation.HomeMenuFragment"
-        android:label="HomeMenu" />
+        android:label="HomeMenu">
+
+        <action
+            android:id="@+id/action_homeMenuFragment_to_naverMapFragment"
+            app:destination="@id/naverMapFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/naverMapFragment"
+        android:name="com.umc.hellodoctor.feature.navermap.presentation.NaverMapFragment"
+        android:label="NaverMapFragment" />
 
 </navigation>
