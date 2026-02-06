@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottonLayout"
         app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_main"
         />
 
     <LinearLayout
@@ -29,6 +30,7 @@
 
         <Button
             android:id="@+id/toAuth"
+            style="@style/Widget.HelloDoctor.Button.Secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="로그인" />
@@ -38,6 +40,7 @@
 
         <Button
             android:id="@+id/toMain"
+            style="@style/Widget.HelloDoctor.Button.Secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="메인으로" />

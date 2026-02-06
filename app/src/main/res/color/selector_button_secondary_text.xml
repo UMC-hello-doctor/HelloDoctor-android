@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 비활성 -->
     <item
-        android:state_enabled="false"
+        android:state_selected="false"
         android:color="@color/color_button_secondary_text_disabled" />
     <!-- 활성 -->
     <item

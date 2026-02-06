@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <!-- 네트워크 통신 (Retrofit, Glide, Google Auth, Google Maps 등 외부 서버와의 통신에 필요) -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- 네트워크 연결 상태(Wi‑Fi/모바일 데이터 연결 여부)에 따라 통신 시도/에러 처리에 사용 -->
@@ -13,6 +16,22 @@
     <!-- GPS 등으로 더 정확한 위치를 가져와 내 위치 마커, 길찾기 등 정밀한 위치 기능에 사용 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!-- 카메라 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- 진동 사용 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- 알림 권한 (Android 13+, POST_NOTIFICATIONS) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- 정확 알람 권한 (Play 정책 신경 써야 함) -->
+    <!-- API 33까지는 SCHEDULE_EXACT_ALARM, 34+는 USE_EXACT_ALARM 권장 케이스가 있음[web:53] -->
+    <uses-permission
+        android:name="android.permission.SCHEDULE_EXACT_ALARM"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+
     <application
         android:name=".app.HelloDoctorApp"
         android:allowBackup="true"
@@ -22,8 +41,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HelloDoctor">
+        android:theme="@style/Theme.HelloDoctor"
+        android:usesCleartextTraffic="true"
+        >
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
 
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <!-- 네이버 지도 Client ID -->
         <meta-data
             android:name="com.naver.maps.map.NCP_CLIENT_ID"
@@ -34,7 +64,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -1,5 +1,7 @@
 package com.umc.hellodoctor.feature.auth.presentation
 
+import android.media.session.MediaSession
+import android.util.Log
 import com.umc.hellodoctor.feature.auth.domain.model.SocialSignInResult
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,8 +21,10 @@ data class AuthUiState(
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val tokenManager: TokenManager
 ) : ViewModel() {
+    private val TAG  = "AuthViewModel"
     private val _uiState = MutableStateFlow(AuthUiState())
     val uiState: StateFlow<AuthUiState> = _uiState
 
@@ -34,15 +38,26 @@ class AuthViewModel @Inject constructor(
 
             try {
                 when (val result = service.signIn()) {
+
                     is SocialSignInResult.Success -> {
                         try {
-                            val response = authRepository.loginWithSocial(result.user)
+                            tokenManager.clearAllTokens()
+                            Log.d(TAG, "socialLogin: $result")
+                            val response = authRepository.loginWithSocial(result.user).result
+                            result.user.idToken?.let { tokenManager.saveGoogleIdToken(it) }
+                            tokenManager.saveAuthTokens(
+                                accessToken = response.accessToken,
+                                refreshToken = response.refreshToken
+                            )
+                            tokenManager.debugLog()
                             _uiState.value = _uiState.value.copy(
                                 isLoading = false,
                                 signInResult = result,
                                 errorMessage = null
                             )
+
                         } catch (e: Exception) {
+                            Log.e(TAG, "socialLogin: ${e.message}" )
                             _uiState.value = _uiState.value.copy(
                                 isLoading = false,
                                 signInResult = null,
@@ -56,6 +71,7 @@ class AuthViewModel @Inject constructor(
                             signInResult = result,
                             errorMessage = null
                         )
+                        Log.i(TAG, "socialLogin: Canceled")
                     }
                     is SocialSignInResult.Error -> {
                         _uiState.value = _uiState.value.copy(
