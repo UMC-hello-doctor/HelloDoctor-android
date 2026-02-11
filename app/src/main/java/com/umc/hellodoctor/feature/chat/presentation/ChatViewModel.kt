@@ -431,11 +431,12 @@ class ChatViewModel @Inject constructor(
                     Log.d(TAG, "세션 ID: ${session.id}")
                     Log.d(TAG, "질문 개수: ${session.questions.size}")
                     Log.d(TAG, "답변 개수: ${session.answers.size}")
-                    Log.d(TAG, "추천 진료과: ${session.symptomSummaryResponse}")
+                    Log.d(TAG, "추천 진료과: ${session.recommendedDepartments}")
                     Log.d(TAG, "증상 요약 여부: ${session.symptomSummaryResponse != null}")
                     Log.d(TAG, "생성 시간: ${session.createdAt}")
 
                     _chatSession.value = session
+                    _currentDepartment.value = session.recommendedDepartments.firstOrNull() ?: ""
                     _symptomSummaryResponse.value = session.symptomSummaryResponse
                     Log.d(TAG, "ViewModel에 세션 데이터 저장 완료")
                 } else {

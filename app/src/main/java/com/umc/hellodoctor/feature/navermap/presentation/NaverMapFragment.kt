@@ -1,6 +1,7 @@
 package com.umc.hellodoctor.feature.navermap.presentation
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -21,11 +23,14 @@ import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.LocationOverlay
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.Overlay
 import com.umc.hellodoctor.R
 import com.umc.hellodoctor.core.location.LocationMapViewModel
 import com.umc.hellodoctor.databinding.FragmentNaverMapBinding
 import com.umc.hellodoctor.feature.chat.presentation.ChatViewModel
 import com.umc.hellodoctor.feature.navermap.adapter.HospitalAdapter
+import com.umc.hellodoctor.feature.navermap.data.HospitalItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -42,6 +47,9 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private lateinit var hospitalAdapter: HospitalAdapter
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+
+    // 마커 관리
+    private val hospitalMarkers = mutableMapOf<String, Marker>() // hospitalId -> Marker
 
     private var hasPerformedInitialSearch = false
     private var hasMovedCameraToInitialLocation = false
@@ -165,21 +173,58 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setupRecyclerView() {
-        hospitalAdapter = HospitalAdapter()
+        hospitalAdapter = HospitalAdapter { hospital ->
+            Log.d(TAG, "========== 병원 아이템 클릭 ==========")
+            Log.d(TAG, "클릭 병원: ${hospital.name} (ID: ${hospital.id})")
+            Log.d(TAG, "위치: lat=${hospital.latitude}, lng=${hospital.longitude}")
+
+            // 아이템 클릭 시 바텀시트 축소 방지
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+            // 카메라 해당 병원으로 이동
+            naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(hospital.latitude, hospital.longitude)))
+
+            // 해당 마커 선택 표시
+            selectHospitalMarker(hospital.id)
+
+            // 병원을 최상단으로 올리기 (리사이클러뷰 스크롤)
+            scrollToHospitalAtTop(hospital)
+        }
         binding.hospitalRecyclerView.apply {
             adapter = hospitalAdapter
             layoutManager = LinearLayoutManager(requireContext())
+
+            // 중첩 스크롤 명시적 설정
+            isNestedScrollingEnabled = true
+
+            // 스크롤 변경 리스너로 드래그 제어
+            setOnScrollChangeListener { _, _, _, _, _ ->
+                val layoutManager = layoutManager as? LinearLayoutManager
+                val firstVisiblePosition = layoutManager?.findFirstCompletelyVisibleItemPosition() ?: -1
+
+                when (bottomSheetBehavior.state) {
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        // Expanded 상태일 때: 첫 아이템이 완전히 보일 때만 드래그 가능
+                        bottomSheetBehavior.isDraggable = firstVisiblePosition == 0
+                    }
+                    else -> {
+                        // 다른 상태일 때는 항상 드래그 가능
+                        bottomSheetBehavior.isDraggable = true
+                    }
+                }
+            }
         }
     }
 
     private fun setupBottomSheetBehavior() {
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetContainer)
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetContainer).apply {
+            isFitToContents = false
+            isDraggable = true
+        }
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                    binding.bottomSheetContainer.visibility = View.GONE
-                }
             }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
@@ -187,8 +232,17 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
 
     private fun observeHospitalData() {
         hospitalViewModel.hospitalList.observe(viewLifecycleOwner) { hospitals ->
+            Log.d(TAG, "========== 병원 목록 수신 ==========")
+            Log.d(TAG, "병원 개수: ${hospitals.size}")
+
             hospitalAdapter.submitList(hospitals)
             binding.loadingProgressBar.visibility = View.GONE
+
+            // 기존 마커 제거
+            clearMarkers()
+
+            // 새로운 마커 추가
+            addHospitalMarkers(hospitals)
         }
 
         hospitalViewModel.uiState.observe(viewLifecycleOwner) { state ->
@@ -207,9 +261,73 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun showBottomSheet() {
-        binding.bottomSheetContainer.visibility = View.VISIBLE
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    /**
+     * 병원 목록에 마커 추가
+     */
+    private fun addHospitalMarkers(hospitals: List<HospitalItem>) {
+        Log.d(TAG, "========== 마커 추가 시작 ==========")
+        hospitals.forEach { hospital ->
+            val marker = Marker().apply {
+                position = LatLng(hospital.latitude, hospital.longitude)
+                map = naverMap
+                captionText = hospital.name
+
+                // 마커 클릭 리스너
+                onClickListener = Overlay.OnClickListener{ marker ->
+                    Log.d(TAG, "========== 마커 클릭 ==========")
+                    Log.d(TAG, "클릭 마커: ${hospital.name} (ID: ${hospital.id})")
+
+                    // 해당 병원 아이템을 최상단으로 올리기
+                    scrollToHospitalAtTop(hospital)
+
+                    true
+                }
+            }
+            hospitalMarkers[hospital.id] = marker
+            Log.d(TAG, "마커 추가: ${hospital.name} (lat=${hospital.latitude}, lng=${hospital.longitude})")
+        }
+        Log.d(TAG, "========== 마커 추가 완료 ==========")
+    }
+
+    /**
+     * 모든 마커 제거
+     */
+    private fun clearMarkers() {
+        Log.d(TAG, "========== 마커 제거 시작 ==========")
+        hospitalMarkers.forEach { (_, marker) ->
+            marker.map = null
+        }
+        hospitalMarkers.clear()
+        Log.d(TAG, "========== 마커 제거 완료 ==========")
+    }
+
+    /**
+     * 특정 병원 마커 선택 표시
+     */
+    private fun selectHospitalMarker(hospitalId: String) {
+        hospitalMarkers.forEach { (id, marker) ->
+
+            if (id == hospitalId) {
+                marker.alpha = 1.0f
+                marker.zIndex = 100
+            } else {
+                marker.alpha = 0.8f
+                marker.zIndex = 0
+            }
+        }
+    }
+
+    /**
+     * 특정 병원을 리사이클러뷰 최상단으로 스크롤
+     */
+    private fun scrollToHospitalAtTop(hospital: HospitalItem) {
+        val hospitals = hospitalAdapter.currentList
+        val position = hospitals.indexOfFirst { it.id == hospital.id }
+
+        if (position >= 0) {
+            Log.d(TAG, "병원 최상단 스크롤: ${hospital.name} (위치: $position)")
+            (binding.hospitalRecyclerView.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(position, 0)
+        }
     }
 
     /**
@@ -231,8 +349,14 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    private fun showBottomSheet() {
+        binding.bottomSheetContainer.visibility = View.VISIBLE
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        clearMarkers()
         _binding = null
         locationViewModel.stopContinuousLocation()
     }
