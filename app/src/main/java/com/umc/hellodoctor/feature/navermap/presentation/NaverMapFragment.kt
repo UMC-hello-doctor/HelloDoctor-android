@@ -24,6 +24,7 @@ import com.naver.maps.map.overlay.LocationOverlay
 import com.umc.hellodoctor.R
 import com.umc.hellodoctor.core.location.LocationMapViewModel
 import com.umc.hellodoctor.databinding.FragmentNaverMapBinding
+import com.umc.hellodoctor.feature.chat.presentation.ChatViewModel
 import com.umc.hellodoctor.feature.navermap.adapter.HospitalAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -36,6 +37,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
 
     private val locationViewModel: LocationMapViewModel by activityViewModels()
     private val hospitalViewModel: HospitalResultViewModel by viewModels()
+    private val chatViewModel: ChatViewModel by activityViewModels()
 
     private lateinit var naverMap: NaverMap
     private lateinit var hospitalAdapter: HospitalAdapter
@@ -61,6 +63,9 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         setupRecyclerView()
         setupBottomSheetBehavior()
         observeHospitalData()
+
+        // Fragment 로드 시 현재 위치 기반 병원 검색
+        searchHospitalsAtCurrentLocation()
     }
 
     override fun onMapReady(naverMap: NaverMap) {
@@ -87,14 +92,17 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                             locationOverlay.position = LatLng(lat, lng)
                         }
                     }
-                    state.currentBearing?.let { locationOverlay::setBearing }
+                    state.currentBearing?.let { bearing ->
+                        locationOverlay.bearing = bearing
+                    }
                 }
             }
         }
 
-        // 지도 클릭 → 내과 병원 검색
+        // 지도 클릭 → 해당 위치의 병원 검색
         naverMap.setOnMapClickListener { _, latLng ->
-            hospitalViewModel.fetchNearbyHospitals(latLng.latitude, latLng.longitude)
+            val department = chatViewModel.currentDepartment.value ?: "내과"
+            hospitalViewModel.fetchNearbyHospitals(latLng.latitude, latLng.longitude, department)
             showBottomSheet()
         }
     }
@@ -128,6 +136,20 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     private fun showBottomSheet() {
         binding.bottomSheetContainer.visibility = View.VISIBLE
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    /**
+     * 현재 위치에서 병원 검색
+     */
+    private fun searchHospitalsAtCurrentLocation() {
+        locationViewModel.getLastLocation()?.let { (lat, lng) ->
+            val department = chatViewModel.currentDepartment.value ?: "내과"
+            Log.d(TAG, "현재 위치에서 병원 검색: lat=$lat, lng=$lng, department=$department")
+            hospitalViewModel.fetchNearbyHospitals(lat, lng, department)
+            showBottomSheet()
+        } ?: run {
+            Log.w(TAG, "현재 위치를 가져올 수 없습니다")
+        }
     }
 
     override fun onDestroyView() {

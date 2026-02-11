@@ -23,23 +23,23 @@ class HospitalResultViewModel @Inject constructor(
     private val _uiState = MutableLiveData<ApiState>()
     val uiState: LiveData<ApiState> = _uiState
 
-    fun fetchNearbyHospitals(lat: Double, lng: Double) {
+    fun fetchNearbyHospitals(lat: Double, lng: Double, department: String = "내과") {
         viewModelScope.launch {
             _uiState.value = ApiState.Loading
             try {
                 Log.d("HospitalVM", "API calling...")
-                Log.d("HospitalVM", "fetchNearbyHospitals: $lat, $lng, 내과")
-                val response = hospitalApi.getNearbyHospitals(lat, lng, "내과")
+                Log.d("HospitalVM", "fetchNearbyHospitals: $lat, $lng, $department")
+                val response = hospitalApi.getNearbyHospitals(lat, lng, department)
 
-                Log.d("HospitalVM", "API response: success=${response.success}, size=${response.result?.size}")
+                Log.d("HospitalVM", "API response: success=${response.success}, size=${response.result.size}")
 
                 if (response.success) {
-                    val hospitals = response.result ?: emptyList()
+                    val hospitals = response.result
                     _hospitalList.value = hospitals.sortedBy { it.distance }
                     _uiState.value = ApiState.Success(hospitals.size)
                     Log.d("HospitalVM", "Success: ${hospitals.size} hospitals")
                 } else {
-                    _uiState.value = ApiState.Error(response.message ?: "알 수 없는 오류")
+                    _uiState.value = ApiState.Error(response.message)
                     Log.d("HospitalVM", "API error: ${response.message}")
                 }
             } catch (e: Exception) {
