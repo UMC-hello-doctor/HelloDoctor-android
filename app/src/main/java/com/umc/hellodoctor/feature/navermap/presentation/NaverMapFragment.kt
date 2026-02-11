@@ -43,6 +43,9 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var hospitalAdapter: HospitalAdapter
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
+    private var hasPerformedInitialSearch = false
+    private var hasMovedCameraToInitialLocation = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentNaverMapBinding.inflate(inflater, container, false)
 
@@ -62,20 +65,70 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupBottomSheetBehavior()
-        observeHospitalData()
 
-        // Fragment 로드 시 현재 위치 기반 병원 검색
-        searchHospitalsAtCurrentLocation()
+        // 현재 진료과 타이틀 설정
+        val currentDept = chatViewModel.currentDepartment.value
+        Log.d(TAG, "========== onViewCreated 진료과 확인 ==========")
+        Log.d(TAG, "currentDepartment.value: $currentDept")
+        Log.d(TAG, "진료과 null 여부: ${currentDept.isNullOrEmpty()}")
+        binding.departmentTitle.text = if (currentDept.isNullOrEmpty()) "추천 진료과" else currentDept
+
+        observeHospitalData()
+        observeLocationForInitialSearch()
+        observeLocationForInitialCamera()
+    }
+
+    /**
+     * 위치 정보 수신 후 첫 병원 검색 실행
+     */
+    private fun observeLocationForInitialSearch() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                locationViewModel.uiState.collect { state ->
+                    if (!hasPerformedInitialSearch) {
+                        state.currentLat?.let { lat ->
+                            state.currentLng?.let { lng ->
+                                Log.d(TAG, "========== 위치 정보 수신 감지 (병원 검색) ==========")
+                                Log.d(TAG, "수신 위치: lat=$lat, lng=$lng")
+                                Log.d(TAG, "첫 번째 병원 검색 실행")
+                                hasPerformedInitialSearch = true
+                                searchHospitalsAtCurrentLocation()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 위치 정보와 지도 초기화 후 첫 카메라 이동
+     */
+    private fun observeLocationForInitialCamera() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                locationViewModel.uiState.collect { state ->
+                    if (!hasMovedCameraToInitialLocation && ::naverMap.isInitialized) {
+                        state.currentLat?.let { lat ->
+                            state.currentLng?.let { lng ->
+                                Log.d(TAG, "========== 위치 정보 수신 감지 (카메라 이동) ==========")
+                                Log.d(TAG, "수신 위치: lat=$lat, lng=$lng")
+                                Log.d(TAG, "첫 번째 카메라 이동 실행")
+                                naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
+                                hasMovedCameraToInitialLocation = true
+                                Log.d(TAG, "카메라 이동 완료")
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
 
-        Log.i(TAG, "onMapReady: loadlocation")
-        // 기존 위치 카메라
-        locationViewModel.getLastLocation()?.let { (lat, lng) ->
-            naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
-        }
+        Log.i(TAG, "onMapReady: map 초기화 완료")
 
         // LocationOverlay (기존)
         val locationOverlay = naverMap.locationOverlay.apply {
@@ -84,6 +137,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
             isVisible = true
         }
 
+        // 위치 업데이트에 따른 오버레이 업데이트
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 locationViewModel.uiState.collect { state ->
@@ -102,6 +156,10 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         // 지도 클릭 → 해당 위치의 병원 검색
         naverMap.setOnMapClickListener { _, latLng ->
             val department = chatViewModel.currentDepartment.value ?: "내과"
+            Log.d(TAG, "========== 지도 클릭 병원 검색 ==========")
+            Log.d(TAG, "클릭 위치: lat=${latLng.latitude}, lng=${latLng.longitude}")
+            Log.d(TAG, "currentDepartment.value: ${chatViewModel.currentDepartment.value}")
+            Log.d(TAG, "사용할 진료과: $department (null 처리 적용: ${chatViewModel.currentDepartment.value == null})")
             hospitalViewModel.fetchNearbyHospitals(latLng.latitude, latLng.longitude, department)
             showBottomSheet()
         }
@@ -130,6 +188,22 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     private fun observeHospitalData() {
         hospitalViewModel.hospitalList.observe(viewLifecycleOwner) { hospitals ->
             hospitalAdapter.submitList(hospitals)
+            binding.loadingProgressBar.visibility = View.GONE
+        }
+
+        hospitalViewModel.uiState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is ApiState.Loading -> {
+                    binding.loadingProgressBar.visibility = View.VISIBLE
+                }
+                is ApiState.Success -> {
+                    binding.loadingProgressBar.visibility = View.GONE
+                }
+                is ApiState.Error -> {
+                    binding.loadingProgressBar.visibility = View.GONE
+                    Log.e(TAG, "Error: ${state.message}")
+                }
+            }
         }
     }
 
@@ -144,10 +218,15 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     private fun searchHospitalsAtCurrentLocation() {
         locationViewModel.getLastLocation()?.let { (lat, lng) ->
             val department = chatViewModel.currentDepartment.value ?: "내과"
-            Log.d(TAG, "현재 위치에서 병원 검색: lat=$lat, lng=$lng, department=$department")
+            Log.d(TAG, "========== 현재 위치 기반 병원 검색 ==========")
+            Log.d(TAG, "현재 위치: lat=$lat, lng=$lng")
+            Log.d(TAG, "currentDepartment.value: ${chatViewModel.currentDepartment.value}")
+            Log.d(TAG, "사용할 진료과: $department (null 처리 적용: ${chatViewModel.currentDepartment.value == null})")
+            Log.d(TAG, "API 호출 준비 완료")
             hospitalViewModel.fetchNearbyHospitals(lat, lng, department)
             showBottomSheet()
         } ?: run {
+            Log.w(TAG, "========== 현재 위치 없음 ==========")
             Log.w(TAG, "현재 위치를 가져올 수 없습니다")
         }
     }
@@ -158,4 +237,3 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         locationViewModel.stopContinuousLocation()
     }
 }
-

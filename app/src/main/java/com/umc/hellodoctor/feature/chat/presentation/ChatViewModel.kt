@@ -185,7 +185,7 @@ class ChatViewModel @Inject constructor(
                 }
 
                 if (detailed != null && detailed.department.isNotBlank()) {
-                    addRecommendedDepartment(detailed.department)
+                    addRecommendedDepartment(detailed.departmentKo)
                     if (detailed.reason.isNotBlank()) {
                         addBotMessage(detailed.reason)
                     }
@@ -200,8 +200,8 @@ class ChatViewModel @Inject constructor(
                         Log.d(TAG, "동적 질문 저장: $dynamicQuestions")
                     }
 
-                    startDepartmentQuestionsFlow(detailed.department)
-                    Log.d(TAG, "recommendAndStartDepartmentFlow: ${detailed.department}")
+                    startDepartmentQuestionsFlow(detailed.departmentKo)
+                    Log.d(TAG, "recommendAndStartDepartmentFlow: ${detailed.departmentKo}")
                     return@launch
                 }
 
@@ -418,12 +418,29 @@ class ChatViewModel @Inject constructor(
      */
     fun loadSessionById(sessionId: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d(TAG, "========== 세션 로드 시작 ==========")
+            Log.d(TAG, "로드할 sessionId: $sessionId")
+
             val session = chatRepository.getChatSession(sessionId)
+
+            Log.d(TAG, "DB 조회 결과: ${if (session != null) "세션 찾음" else "세션 없음"}")
+
             withContext(Dispatchers.Main) {
                 if (session != null) {
+                    Log.d(TAG, "========== 세션 로드 성공 ==========")
+                    Log.d(TAG, "세션 ID: ${session.id}")
+                    Log.d(TAG, "질문 개수: ${session.questions.size}")
+                    Log.d(TAG, "답변 개수: ${session.answers.size}")
+                    Log.d(TAG, "추천 진료과: ${session.symptomSummaryResponse}")
+                    Log.d(TAG, "증상 요약 여부: ${session.symptomSummaryResponse != null}")
+                    Log.d(TAG, "생성 시간: ${session.createdAt}")
+
                     _chatSession.value = session
                     _symptomSummaryResponse.value = session.symptomSummaryResponse
+                    Log.d(TAG, "ViewModel에 세션 데이터 저장 완료")
                 } else {
+                    Log.e(TAG, "========== 세션 로드 실패 ==========")
+                    Log.e(TAG, "sessionId $sessionId 로 세션을 찾을 수 없습니다")
                     _errorMessage.value = "세션을 찾을 수 없습니다."
                 }
             }

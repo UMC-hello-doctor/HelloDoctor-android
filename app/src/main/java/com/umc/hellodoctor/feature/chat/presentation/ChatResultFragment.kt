@@ -1,6 +1,7 @@
 package com.umc.hellodoctor.feature.chat.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,8 +38,21 @@ class ChatResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupButtons()
 
-        args.sessionId?.let { sessionId ->
+        val sessionId = args.sessionId
+        Log.d("ChatResultFragment", "========== ChatResultFragment 세션 처리 ==========")
+        Log.d("ChatResultFragment", "전달받은 sessionId: $sessionId")
+        Log.d("ChatResultFragment", "sessionId null 여부: ${sessionId == null}")
+
+        if (sessionId != null) {
+            // 저장된 세션 로드
+            Log.d("ChatResultFragment", "저장된 세션 로드 시작: $sessionId")
             viewModel.loadSessionById(sessionId)
+            Log.d("ChatResultFragment", "저장된 세션 로드 완료")
+        } else {
+            // 새로운 채팅 세션 (기존 로직)
+            Log.d("ChatResultFragment", "새로운 세션 초기화 시작")
+            viewModel.resetSession()
+            Log.d("ChatResultFragment", "새로운 세션 초기화 완료")
         }
 
         // 초기 화면은 문진표
@@ -46,6 +60,7 @@ class ChatResultFragment : Fragment() {
         showFragment(FragmentType.FIELD_MODE)
         // 초기 버튼 스타일 설정
         updateButtonStyles(FragmentType.FIELD_MODE)
+        Log.d("ChatResultFragment", "========== ChatResultFragment 초기화 완료 ==========")
     }
 
     /**

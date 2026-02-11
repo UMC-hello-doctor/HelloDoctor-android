@@ -114,7 +114,10 @@ class ChatFragment : Fragment() {
      * ChatResultFragment로 이동
      */
     private fun navigateToChatResult() {
-        findNavController().navigate(R.id.action_chatFragment_to_chatResultFragment)
+        val sessionId = viewModel.chatSession.value?.id
+        val action = ChatFragmentDirections
+            .actionChatFragmentToChatResultFragment(sessionId)
+        findNavController().navigate(action)
     }
 
     /**

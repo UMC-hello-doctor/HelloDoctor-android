@@ -147,7 +147,7 @@ class ChatDataManager @Inject constructor(
         aiRepository?.let { repo ->
             try {
                 val detailed = repo.recommendDepartmentDetailed(combined).getOrNull()
-                if (detailed != null && detailed.department.isNotBlank()) {
+                if (detailed != null && detailed.departmentKo.isNotBlank()) {
                     return listOf(detailed.department)
                 }
             } catch (e: Exception) {
