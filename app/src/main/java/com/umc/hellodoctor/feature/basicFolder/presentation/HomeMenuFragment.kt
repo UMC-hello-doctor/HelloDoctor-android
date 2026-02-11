@@ -37,8 +37,7 @@ class HomeMenuFragment : Fragment() {
 
         binding.menuSymptom.setOnClickListener {
             Toast.makeText(requireContext(), "증상 번역", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_homeMenuFragment_to_naverMapFragment)
-
+            findNavController().navigate(R.id.action_homeMenuFragment_to_symptomMenuFragment)
         }
 
         binding.menuMyPage.setOnClickListener {
