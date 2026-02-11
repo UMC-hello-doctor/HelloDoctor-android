@@ -3,7 +3,7 @@
     <!-- 선택된 상태 -->
     <item
         android:state_selected="true"
-        android:color="@color/color_on_primary" />
+        android:color="@color/primary" />
     <!-- 활성 (기본) -->
     <item
         android:color="@color/color_button_secondary_text" />
