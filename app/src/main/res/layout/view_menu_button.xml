@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_button_default"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@drawable/selector_button_default_bg"
+    android:elevation="0dp"
+    android:layout_margin="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="26dp">
+
+        <!-- 검색 아이콘 -->
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:duplicateParentState="true"
+            app:tint="@color/selector_search_button_icon" />
+
+        <!-- 텍스트 -->
+        <TextView
+            android:id="@+id/search_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:text="버튼 텍스트"
+            android:textSize="20sp"
+            android:textColor="@color/selector_search_button_text"
+            android:textStyle="bold"
+            android:duplicateParentState="true" />
+
+        <!-- 우측 화살표 -->
+        <ImageView
+            android:id="@+id/arrow_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/rounded_arrow_forward_ios_24"
+            android:scaleType="centerInside"
+            android:duplicateParentState="true"
+            app:tint="@color/selector_search_button_icon" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
