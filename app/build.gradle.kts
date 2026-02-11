@@ -9,7 +9,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
 }
-val propertiesFile = rootProject.file("local.properties")
+val propertiesFile = rootProject.file("gradle.properties")
 val properties = Properties()
 if (propertiesFile.exists()) {
     properties.load(FileInputStream(propertiesFile))
@@ -32,6 +32,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        //AI API KEY
+        buildConfigField(
+            "String",
+            "AI_API_KEY",
+            "\"${properties.getProperty("AI_API_KEY", "")}\""
+        )
         //프로젝트 서버
         buildConfigField(
             "String",
@@ -96,6 +102,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.fragment)
+    implementation(libs.androidx.cardview)
     implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -135,4 +142,9 @@ dependencies {
     // --- Hilt (DI) ---
     implementation("com.google.dagger:hilt-android:2.57.2")
     ksp("com.google.dagger:hilt-compiler:2.57.2")
+
+    // --- Room DB ---
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 }

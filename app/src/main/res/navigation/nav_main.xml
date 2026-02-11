@@ -6,13 +6,61 @@
     app:startDestination="@id/homeMenuFragment">
 
     <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.umc.hellodoctor.feature.chat.presentation.ChatFragment"
+        android:label="ChatFragment"
+        tools:layout="@layout/fragment_chat">
+        <action
+            android:id="@+id/action_chatFragment_to_chatResultFragment"
+            app:destination="@id/chatResultFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatResultFragment"
+        android:name="com.umc.hellodoctor.feature.chat.presentation.ChatResultFragment"
+        android:label="ChatResultFragment"
+        tools:layout="@layout/fragment_chat_result_container">
+        <argument
+            android:name="sessionId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
         android:id="@+id/homeMenuFragment"
         android:name="com.umc.hellodoctor.feature.basicFolder.presentation.HomeMenuFragment"
         android:label="HomeMenu" >
         <action
             android:id="@+id/action_homeMenuFragment_to_naverMapFragment"
             app:destination="@id/naverMapFragment" />
+        <action
+            android:id="@+id/action_homeMenuFragment_to_symptomMenuFragment"
+            app:destination="@id/symptomMenuFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/symptomMenuFragment"
+        android:name="com.umc.hellodoctor.feature.menu.presentation.SymptomMenuFragment"
+        android:label="SymptomMenu"
+        tools:layout="@layout/fragment_symptom_menu" >
+        <action
+            android:id="@+id/action_symptomMenuFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_symptomMenuFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.umc.hellodoctor.feature.chat.presentation.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_historyFragment_to_chatResultFragment"
+            app:destination="@id/chatResultFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/naverMapFragment"
         android:name="com.umc.hellodoctor.feature.navermap.presentation.NaverMapFragment"

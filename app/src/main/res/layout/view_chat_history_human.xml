@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/img_chat_user_tail"
+        app:layout_constraintBottom_toBottomOf="@id/chatView"
+        app:layout_constraintRight_toRightOf="@id/chatView"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/chatView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:cardCornerRadius="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/color_button_primary_bg"
+        android:padding="@dimen/chat_coner"
+        >
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_margin="15dp"
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text="예시문장들\n두줄짜리 긴 문장도 입력가능aaaaaaaaaaa" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

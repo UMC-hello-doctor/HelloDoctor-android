@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 테마 상태 버튼 배경 -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/gray_200" />
+            <corners android:radius="16dp" />
+            <stroke android:width="1dp" android:color="@color/gray_400" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/gray_100" />
+            <corners android:radius="16dp" />
+            <stroke android:width="1dp" android:color="@color/gray_400" />
+        </shape>
+    </item>
+</selector>
+

@@ -11,16 +11,16 @@
         android:layout_height="match_parent"
         android:name="com.naver.maps.map.MapFragment" />
 
-    <!-- Bottom Sheet (CoordinatorLayout에서만 동작) -->
+    <!-- Bottom Sheet -->
     <LinearLayout
         android:id="@+id/bottomSheetContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/bottom_sheet_background"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        app:behavior_peekHeight="200dp">
-
+        app:behavior_peekHeight="200dp"
+        app:behavior_fitToContents="false">
 
         <!-- 핸들 바 -->
         <View
@@ -32,19 +32,29 @@
             android:background="@drawable/bottom_sheet_handle" />
 
         <TextView
+            android:id="@+id/departmentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="근처 병원"
+            android:text="추천 진료과"
             android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_marginBottom="16dp" />
 
+        <!-- 로딩 인디케이터 -->
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="16dp"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hospitalRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="true"
             android:clipToPadding="false"
             android:padding="8dp" />
 

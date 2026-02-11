@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 비활성 -->
+    <!-- 선택된 상태 -->
     <item
-        android:state_selected="false"
-        android:color="@color/color_button_secondary_bg_disabled" />
-    <!-- 활성 -->
-    <item
+        android:state_selected="true"
         android:color="@color/color_button_secondary_bg" />
+    <!-- 기본상태 -->
+    <item
+        android:color="@color/color_button_secondary_bg_disabled" />
 </selector>
