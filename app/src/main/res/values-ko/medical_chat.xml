@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 공통 -->
+    <string name="first_question">증상을 말씀해주세요. (예: 배가 아파요)</string>
+    <string name="more_symptom">증상을 더 자세히 말씀해주세요.</string>
+    <string name="dept_detected">진료과:</string>
+    <string name="pqrst_complete">PQRST 완료. 레드플래그 확인할게요.</string>
+    <string name="nrs_selected">통증 강도: %d (0-10)</string>
+    <string name="emergency_call_119">응급 상황! 가까운 응급실이나 119 호출하세요.</string>
+    <string name="hospital_search">현장 모드: 병원 찾기.</string>
+
+
+    <!-- 1. 내과 - 소화기 (Gastroenterology) -->
+    <string name="dept_gastro">내과 - 소화기</string>
+    <string name="dept_gastro_p">식사 후에 통증이 심해지나요, 아니면 공복일 때 더 아픈가요? 특정 음식(매운 것, 기름진 것)을 드셨나요?</string>
+    <string name="dept_gastro_q">쥐어짜는 듯한 통증인가요, 아니면 타는 듯한 느낌(쓰라림)인가요?</string>
+    <string name="dept_gastro_r">명치 부근인가요, 아랫배인가요, 아니면 배 전체가 돌아가며 아픈가요?</string>
+    <string name="dept_gastro_s">허리를 펴기 힘들 정도로 아픈가요? (NRS 0-10)</string>
+    <string name="dept_gastro_t">통증이 지속적인가요, 아니면 아팠다 안 아팠다를 반복(간헐적)하나요?</string>
+    <string name="dept_gastro_a">구토, 설사, 변비, 발열, 혹은 복부 팽만감이 있나요?</string>
+
+    <!-- 2. 피부과 (Dermatology) -->
+    <string name="dept_derm">피부과</string>
+    <string name="dept_derm_p">증상 전 새로운 음식, 약물, 화장품을 접했나요? 햇빛이나 금속 등에 노출되었나요?</string>
+    <string name="dept_derm_q">참기 힘들 정도로 가렵나요, 아니면 따갑고 화끈거리나요?</string>
+    <string name="dept_derm_r">특정 부위(팔, 다리 등)에만 있나요, 아니면 전신으로 퍼지고 있나요?</string>
+    <string name="dept_derm_s">가려움 때문에 잠을 자기 힘들 정도인가요? (NRS 0-10)</string>
+    <string name="dept_derm_t">증상이 나타난 지 얼마나 되었나요? 특정 시간대(밤 등)에 더 심해지나요?</string>
+    <string name="dept_derm_a">환부가 부어오름(팽진), 진물, 물집, 혹은 열감이 동반되나요?</string>
+
+    <!-- 3. 이비인후과 (ENT) -->
+    <string name="dept_ent">이비인후과</string>
+    <string name="dept_ent_p">침이나 음식물을 삼킬 때 통증이 심해지나요? 코를 풀거나 누우면 더 불편한가요?</string>
+    <string name="dept_ent_q">칼로 베는 듯한 통증인가요, 아니면 이물감이 느껴져 텁텁한가요?</string>
+    <string name="dept_ent_r">목 안쪽인가요, 코 주변인가요, 아니면 귀 깊숙한 곳인가요?</string>
+    <string name="dept_ent_s">음식을 먹기 힘들 정도로 통증이 심한가요? (NRS 0-10)</string>
+    <string name="dept_ent_t">증상이 시작된 지 며칠 되었나요? 아침에 일어났을 때 가장 심한가요?</string>
+    <string name="dept_ent_a">발열, 기침, 가래, 콧물, 혹은 청력 저하가 있나요?</string>
+
+    <!-- 4. 내과 - 호흡기/순환기 (Pulmonology / Cardiology) -->
+    <string name="dept_resp">내과 - 호흡기/순환기</string>
+    <string name="dept_resp_p">계단을 오르거나 운동할 때 심해지나요? 누워 있을 때 더 숨이 가쁜가요?</string>
+    <string name="dept_resp_q">가슴을 짓누르는 느낌인가요, 아니면 숨이 끝까지 안 들어가는 느낌인가요?</string>
+    <string name="dept_resp_r">통증이나 답답함이 왼쪽 가슴인가요, 아니면 목이나 어깨 쪽으로 퍼지나요?</string>
+    <string name="dept_resp_s">말을 하기 힘들 정도로 숨이 찬가요? (NRS 0-10)</string>
+    <string name="dept_resp_t">갑자기 발생했나요, 아니면 며칠에 걸쳐 서서히 심해졌나요?</string>
+    <string name="dept_resp_a">천명음(쌕쌕거림), 식은땀, 가래(색깔 포함), 혹은 가슴 통증이 있나요?</string>
+
+    <!-- 5. 안과 (Ophthalmology) -->
+    <string name="dept_oph">안과</string>
+    <string name="dept_oph_p">콘택트렌즈 착용 중인가요? 혹은 눈에 이물질이 들어갔나요?</string>
+    <string name="dept_oph_q">시야가 흐릿한가요, 아니면 모래가 들어간 것처럼 껄끄러운가요?</string>
+    <string name="dept_oph_r">한쪽 눈만 그런가요, 양쪽 모두 그런가요?</string>
+    <string name="dept_oph_s">눈을 뜨기 힘들 정도로 통증이 심한가요? (NRS 0-10)</string>
+    <string name="dept_oph_t">아침에 일어났을 때 심한가요, 아니면 시간이 지날수록 심해지나요?</string>
+    <string name="dept_oph_a">시력 저하, 눈꺼풀 부종(다래끼 등), 가려움이 있나요?</string>
+
+    <!-- 6. 비뇨의학과 (Urology) -->
+    <string name="dept_urol">비뇨의학과</string>
+    <string name="dept_urol_p">소변을 참을 때 통증이 심해지나요, 아니면 배뇨 중에 아픈가요?</string>
+    <string name="dept_urol_q">불에 데인 듯 따가운가요, 아니면 날카로운 것으로 찌르는 느낌인가요?</string>
+    <string name="dept_urol_r">옆구리에서 사타구니 쪽으로 통증이 내려가나요?</string>
+    <string name="dept_urol_s">허리를 펴기 힘들 정도로 통증이 심한가요? (NRS 0-10)</string>
+    <string name="dept_urol_t">소변 횟수가 하루 8회 이상으로 늘었나요?</string>
+    <string name="dept_urol_a">피 섞인 소변(혈뇨), 갑작스러운 발열, 오한이 있나요?</string>
+
+    <!-- 7. 신경과 (Neurology) -->
+    <string name="dept_neuro">신경과</string>
+    <string name="dept_neuro_p">고개를 돌리거나 일어날 때 증상이 심해지나요?</string>
+    <string name="dept_neuro_q">전기가 오는 것처럼 저릿한가요, 아니면 망치로 때리는 듯 욱신거리나요?</string>
+    <string name="dept_neuro_r">몸의 한쪽(왼쪽 또는 오른쪽)에만 증상이 집중되나요?</string>
+    <string name="dept_neuro_s">일상생활이 불가능할 정도로 어지럽거나 아픈가요? (NRS 0-10)</string>
+    <string name="dept_neuro_t">증상이 몇 초간 짧게 나타나나요, 아니면 몇 시간째 지속되나요?</string>
+    <string name="dept_neuro_a">물체가 두 개로 보임(복시), 발음이 꼬임, 한쪽 팔다리 힘 빠짐이 있나요?</string>
+
+    <!-- 8. 산부인과 (Gynecology) -->
+    <string name="dept_gyne">산부인과</string>
+    <string name="dept_gyne_p">성관계나 격한 움직임 후에 통증이 심해지나요?</string>
+    <string name="dept_gyne_q">쥐어짜는 느낌인가요, 아니면 밑이 빠질 것 같은 묵직한 통증인가요?</string>
+    <string name="dept_gyne_r">아랫배 전체가 아픈가요, 특정 한쪽(좌/우)이 더 아픈가요?</string>
+    <string name="dept_gyne_s">평소 생리통보다 현저히 심해 약을 먹어도 안 듣나요? (NRS 0-10)</string>
+    <string name="dept_gyne_t">마지막 생리일이 언제인가요? 통증이 며칠째인가요?</string>
+    <string name="dept_gyne_a">비정상적인 출혈, 분비물의 색/냄새 변화, 임신 가능성이 있나요?</string>
+
+    <!-- 9. 치과 (Dentistry) -->
+    <string name="dept_dent">치과</string>
+    <string name="dept_dent_p">찬물/뜨거운 음식을 먹을 때나 씹을 때 통증이 심해지나요?</string>
+    <string name="dept_dent_q">찌릿하며 날카로운가요, 아니면 둔하게 욱신거리나요?</string>
+    <string name="dept_dent_r">통증이 있는 특정 치아를 가리킬 수 있나요?</string>
+    <string name="dept_dent_s">진통제 없이 밤에 잠을 잘 수 있나요? (NRS 0-10)</string>
+    <string name="dept_dent_t">음식을 먹을 때만 아픈가요, 아니면 가만히 있어도 계속 아픈가요?</string>
+    <string name="dept_dent_a">잇몸 출혈, 얼굴이나 턱 주변의 부종, 치아 흔들림이 있나요?</string>
+
+    <!-- NRS 척도 -->
+    <string name="nrs_0">통증 없음</string>
+    <string name="nrs_1_4">경도</string>
+    <string name="nrs_5_6">중등도</string>
+    <string name="nrs_7_10">중증</string>
+    <string name="yes">예</string>
+
+    <!-- ========================= -->
+    <!-- Red Flag Questions (KO)   -->
+    <!-- ========================= -->
+
+    <!-- 1. Internal medicine (GI/Resp/Cardio) -->
+    <string name="redflag_internal_chest">가슴이 조이거나 짓누르는 듯한 통증이 턱, 목, 또는 왼쪽 팔로 퍼지나요?</string>
+    <string name="redflag_internal_breathing">입술이나 손톱이 파랗게 변하거나(청색증), 말을 한마디도 이어가기 힘들 정도로 숨이 찬가요?</string>
+    <string name="redflag_internal_gi_bleeding">대변이 짜장면처럼 검거나, 피를 토하셨나요? 혹은 배가 판자처럼 딱딱하고 만지지도 못할 만큼 아픈가요?</string>
+
+    <!-- 2. Dermatology -->
+    <string name="redflag_derm_anaphylaxis">피부 증상과 함께 목소리가 변하거나, 목 안이 부어올라 숨쉬기가 답답하신가요?</string>
+    <string name="redflag_derm_systemic">입술, 눈 주변이 심하게 붓고 혈압이 떨어지는 느낌(어지러움/실신)이 있나요?</string>
+
+    <!-- 3. ENT -->
+    <string name="redflag_ent_airway">침을 삼키기 어려워 계속 흘리거나, 숨을 들이쉴 때 쇳소리(거친 소리)가 나나요?</string>
+    <string name="redflag_ent_infection">목 주변이 심하게 붓고 입을 벌리기조차 힘드신가요?</string>
+
+    <!-- 4. Ophthalmology -->
+    <string name="redflag_oph_vision_loss">갑자기 한쪽 눈이 전혀 보이지 않거나, 커튼이 쳐진 것처럼 시야 일부가 가려지나요?</string>
+    <string name="redflag_oph_severe_pain_vomit">눈이 터질 것 같은 극심한 통증과 함께 구토가 동반되나요?</string>
+
+    <!-- 5. Urology -->
+    <string name="redflag_urol_flank_fever">진통제가 전혀 듣지 않는 극심한 옆구리 통증과 함께 고열(38도 이상)이 나나요?</string>
+    <string name="redflag_urol_urinary_retention">소변이 전혀 나오지 않아 방광 터질 듯한 고통이 있나요?</string>
+
+    <!-- 6. Neurology -->
+    <string name="redflag_neuro_fast">한쪽 팔다리에 힘이 빠져 움직일 수 없거나, 얼굴 한쪽이 처지고 말이 심하게 어눌한가요?</string>
+    <string name="redflag_neuro_thunderclap_headache">망치로 맞은 듯 생전 처음 겪는 극심한 두통이 갑자기 시작되었나요?</string>
+
+    <!-- 7. Gynecology -->
+    <string name="redflag_gyne_heavy_bleeding">생리대나 패드가 15분 만에 다 젖을 정도로 하혈이 심하고 어지러우신가요?</string>
+    <string name="redflag_gyne_ectopic">임신 가능성이 있는 상태에서 칼로 찌르는 듯한 하복부 통증과 함께 식은땀이 나나요?</string>
+
+    <!-- 8. Orthopedics -->
+    <string name="redflag_ortho_cauda_equina">사고 후 대소변 조절이 안 되거나, 항문 주변 및 다리의 감각이 전혀 느껴지지 않나요?</string>
+    <string name="redflag_ortho_compartment">골절 부위의 통증이 상상을 초월하고, 발가락이나 손가락 끝이 창백하고 마비되나요?</string>
+
+    <!-- 9. Dentistry -->
+    <string name="redflag_dent_ludwig">치통과 함께 얼굴과 목 전체가 심하게 부어올라 숨쉬기가 곤란하거나 침 삼키기가 힘든가요?</string>
+
+</resources>
