@@ -1,5 +1,6 @@
 package com.umc.hellodoctor.feature.userinfo.presentation
 
+
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -14,8 +15,11 @@ import com.umc.hellodoctor.databinding.FragmentUserInfoBinding
 import com.umc.hellodoctor.util.singleSelect
 import com.umc.hellodoctor.util.toggleSelect
 import com.umc.hellodoctor.util.showBirthDatePicker
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import com.umc.hellodoctor.feature.userinfo.presentation.AllergyTag
 
+@AndroidEntryPoint
 class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
 
     private var _binding: FragmentUserInfoBinding? = null
@@ -95,17 +99,17 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
             viewModel.onAllergySelected(YesNo.NO)
         }
 
-        // 알레르기 상세 (다중 선택)
-        val allergyTagButtons: List<Pair<MaterialButton, String>> = listOf(
-            btnAllergyAntibiotic to "항생제",
-            btnAllergyNsaid to "소염진통제",
-            btnAllergyVaccine to "백신 성분",
-            btnAllergyLocal to "국소 마취제",
-            btnAllergyOther to "기타"
+        val allergyTagButtons: Map<AllergyTag, MaterialButton> = mapOf(
+            AllergyTag.ANTIBIOTIC to binding.btnAllergyAntibiotic,
+            AllergyTag.NSAID to binding.btnAllergyNsaid,
+            AllergyTag.VACCINE to binding.btnAllergyVaccine,
+            AllergyTag.LOCAL_ANESTHETIC to binding.btnAllergyLocal,
+            AllergyTag.OTHER to binding.btnAllergyOther
         )
-        allergyTagButtons.forEach { (btn, tag) ->
+
+        allergyTagButtons.forEach { (tag, btn) ->
             btn.setOnClickListener {
-                toggleSelect(btn)
+                toggleSelect(button = btn)
                 viewModel.toggleAllergyTag(tag)
             }
         }
@@ -133,15 +137,25 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
         }
 
         // 유저 정보 출력
+//        btnNext.setOnClickListener {
+//            val state = viewModel.uiState.value
+//            android.util.Log.d("UserInfo", state.toString())
+//        }
         btnNext.setOnClickListener {
-            val state = viewModel.uiState.value
-            android.util.Log.d("UserInfo", state.toString())
+            val token = "여기에_액세스토큰" // 일단 테스트는 하드코딩
+            viewModel.submitProfile(token)
         }
     }
 
     private fun collectState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+                launch {
+                    viewModel.submitState.collect { s ->
+                        android.util.Log.d("UserInfoAPI", "submitState=$s")
+                    }
+                }
 
                 // 1) uiState 관찰
                 launch {
@@ -173,15 +187,16 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
                         // 알레르기 상세 노출
                         binding.groupAllergyDetail.isVisible = state.isAllergyDetailVisible
 
-                        // 알레르기 태그 버튼 상태
-                        val map = mapOf(
-                            "항생제" to binding.btnAllergyAntibiotic,
-                            "소염진통제" to binding.btnAllergyNsaid,
-                            "백신 성분" to binding.btnAllergyVaccine,
-                            "국소 마취제" to binding.btnAllergyLocal,
-                            "기타" to binding.btnAllergyOther
+                        // 알레르기 태그 버튼 매핑 (AllergyTag -> Button)
+                        val allergyTagButtons: Map<AllergyTag, MaterialButton> = mapOf(
+                            AllergyTag.ANTIBIOTIC to binding.btnAllergyAntibiotic,
+                            AllergyTag.NSAID to binding.btnAllergyNsaid,
+                            AllergyTag.VACCINE to binding.btnAllergyVaccine,
+                            AllergyTag.LOCAL_ANESTHETIC to binding.btnAllergyLocal,
+                            AllergyTag.OTHER to binding.btnAllergyOther
                         )
-                        map.forEach { (tag, btn) ->
+
+                        allergyTagButtons.forEach { (tag, btn) ->
                             btn.isSelected = state.allergySelectedTags.contains(tag)
                         }
 

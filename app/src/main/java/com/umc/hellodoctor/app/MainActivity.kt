@@ -18,6 +18,11 @@ import com.umc.hellodoctor.databinding.ActivityMainBinding
 import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
 import com.umc.hellodoctor.feature.location.LocationMapViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import com.umc.hellodoctor.feature.userinfo.data.remote.model.*
+import com.umc.hellodoctor.feature.userinfo.domain.repository.UserProfileRepository
+import javax.inject.Inject
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -29,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
     private lateinit var navController: NavController
+
+    @Inject lateinit var userProfileRepository: UserProfileRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,5 +85,40 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
+
+            binding.toMain.setOnLongClickListener {
+
+                val token = "여기에_액세스토큰"
+                val req = ProfileCreateRequest(
+                    displayName = "test-user",
+                    gender = GenderType.FEMALE,
+                    birthDate = "2000-01-01",
+                    bloodType = BloodType.A,
+                    bloodTypeDetail = null,
+                    hasAllergy = true,
+                    allergyTypes = listOf(AllergyType.ANTIBIOTIC),
+                    takesMedication = false,
+                    isPregnant = false
+                )
+
+                lifecycleScope.launch {
+                    runCatching {
+                        // 보통은 Bearer 붙여야 함
+                        userProfileRepository.createProfile("Bearer $token", req)
+
+                        // 만약 repo가 token만 받는 구조면 이걸로:
+                        // userProfileRepository.createProfile(token, req)
+
+                    }.onSuccess { res ->
+                        Log.d("API_TEST", "SUCCESS: $res")
+                    }.onFailure { e ->
+                        Log.e("API_TEST", "FAIL: ${e.message}", e)
+                    }
+                }
+
+                true
+            }
+
+
+        }
 }

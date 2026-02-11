@@ -12,6 +12,7 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import com.umc.hellodoctor.feature.userinfo.data.remote.UserProfileApi
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -38,4 +39,9 @@ object NetworkModule {
     ): NetworkMonitor {
         return NetworkMonitor(context)
     }
+
+    @Provides
+    @Singleton
+    fun provideUserProfileApi(retrofit: Retrofit): UserProfileApi =
+        retrofit.create(UserProfileApi::class.java)
 }
