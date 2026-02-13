@@ -7,7 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface AuthApi {
-    @POST("auth/google")
+    @POST("v1/auth/google")
     suspend fun socialLogin(
         @Body body: SocialLoginRequest
     ): BaseResponse<SocialLoginResponse>

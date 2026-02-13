@@ -16,7 +16,9 @@ import javax.inject.Inject
 data class AuthUiState(
     val isLoading: Boolean = false,
     val signInResult: SocialSignInResult? = null,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
+    val isNewUser: Boolean? = null,
+    val isProfileCreated: Boolean = false
 )
 
 @HiltViewModel
@@ -33,7 +35,8 @@ class AuthViewModel @Inject constructor(
             _uiState.value = _uiState.value.copy(
                 isLoading = true,
                 errorMessage = null,
-                signInResult = null
+                signInResult = null,
+                isNewUser = null
             )
 
             try {
@@ -44,6 +47,7 @@ class AuthViewModel @Inject constructor(
                             tokenManager.clearAllTokens()
                             Log.d(TAG, "socialLogin: $result")
                             val response = authRepository.loginWithSocial(result.user).result
+                            Log.d(TAG, "socialLogin성공: $response")
                             result.user.idToken?.let { tokenManager.saveGoogleIdToken(it) }
                             tokenManager.saveAuthTokens(
                                 accessToken = response.accessToken,
@@ -53,7 +57,8 @@ class AuthViewModel @Inject constructor(
                             _uiState.value = _uiState.value.copy(
                                 isLoading = false,
                                 signInResult = result,
-                                errorMessage = null
+                                errorMessage = null,
+                                isNewUser = response.isNewUser
                             )
 
                         } catch (e: Exception) {
@@ -61,7 +66,8 @@ class AuthViewModel @Inject constructor(
                             _uiState.value = _uiState.value.copy(
                                 isLoading = false,
                                 signInResult = null,
-                                errorMessage = e.message ?: "서버 통신 중 오류가 발생했습니다."
+                                errorMessage = e.message ?: "서버 통신 중 오류가 발생했습니다.",
+                                isNewUser = null
                             )
                         }
                     }
@@ -69,7 +75,8 @@ class AuthViewModel @Inject constructor(
                         _uiState.value = _uiState.value.copy(
                             isLoading = false,
                             signInResult = result,
-                            errorMessage = null
+                            errorMessage = null,
+                            isNewUser = null
                         )
                         Log.i(TAG, "socialLogin: Canceled")
                     }
@@ -77,7 +84,8 @@ class AuthViewModel @Inject constructor(
                         _uiState.value = _uiState.value.copy(
                             isLoading = false,
                             signInResult = null,
-                            errorMessage = result.throwable.message ?: "소셜 로그인 중 오류가 발생했습니다."
+                            errorMessage = result.throwable.message ?: "소셜 로그인 중 오류가 발생했습니다.",
+                            isNewUser = null
                         )
                     }
                 }
@@ -85,7 +93,8 @@ class AuthViewModel @Inject constructor(
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     signInResult = null,
-                    errorMessage = e.message ?: "소셜 로그인 실패"
+                    errorMessage = e.message ?: "소셜 로그인 실패",
+                    isNewUser = null
                 )
             }
         }
@@ -96,6 +105,34 @@ class AuthViewModel @Inject constructor(
     }
 
     fun clearSignInResult() {
-        _uiState.value = _uiState.value.copy(signInResult = null)
+        _uiState.value = _uiState.value.copy(signInResult = null, isNewUser = null)
+    }
+
+    fun signOut(service: SocialAuthService? = null) {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(
+                isLoading = true,
+                errorMessage = null,
+                signInResult = null,
+                isNewUser = null,
+                isProfileCreated = false
+            )
+            try {
+                service?.signOut()
+            } catch (e: Exception) {
+                Log.e(TAG, "signOut: ${e.message}")
+            } finally {
+                tokenManager.clearAllTokens()
+                _uiState.value = AuthUiState()
+            }
+        }
+    }
+
+    /**
+     * 프로필 생성 완료 상태 업데이트
+     * UserInfoFragment에서 프로필 생성 완료 시 호출
+     */
+    fun onProfileCreated() {
+        _uiState.value = _uiState.value.copy(isProfileCreated = true)
     }
 }

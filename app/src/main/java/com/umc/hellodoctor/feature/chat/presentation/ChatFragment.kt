@@ -124,6 +124,12 @@ class ChatFragment : Fragment() {
      * 버튼 리스너 설정
      */
     private fun setupListeners() {
+        // 뒤로가기 버튼
+        binding.backIcon.setOnClickListener {
+            viewModel.resetSession()
+            findNavController().popBackStack()
+        }
+
         binding.btnSend.setOnClickListener {
             val input = binding.editInput.text.toString().trim()
             if (input.isNotEmpty()) {
