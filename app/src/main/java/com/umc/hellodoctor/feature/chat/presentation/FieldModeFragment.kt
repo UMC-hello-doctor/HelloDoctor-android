@@ -10,17 +10,21 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.umc.hellodoctor.databinding.FragmentFieldModeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.umc.hellodoctor.feature.chat.data.ai.SymptomSummaryResponse
+import com.umc.hellodoctor.feature.userinfo.UserInfoViewModel
 import com.umc.hellodoctor.R
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FieldModeFragment : Fragment() {
     private var _binding: FragmentFieldModeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ChatViewModel by activityViewModels()
+    private val chatViewModel: ChatViewModel by activityViewModels()
+    private val userInfoViewModel: UserInfoViewModel by activityViewModels()
 
     // 현재 표시 언어 (true: 한글, false: 원본 언어)
     private var isShowingKorean = false
@@ -38,8 +42,13 @@ class FieldModeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
+
+        // 유저 프로필 조회 및 표시
+        userInfoViewModel.getMyProfile()
+        observeUserProfile()
+
         // 이미 존재하는 데이터가 있으면 먼저 표시
-        viewModel.symptomSummaryResponse.value?.let { summaryResponse ->
+        chatViewModel.symptomSummaryResponse.value?.let { summaryResponse ->
             currentSummaryResponse = summaryResponse
             isShowingKorean = false
             displaySymptomSummary(summaryResponse)
@@ -51,7 +60,7 @@ class FieldModeFragment : Fragment() {
     private fun setupViews() {
         // 돌아가기 버튼 클릭 리스너
         binding.btnBackToChat.setOnClickListener {
-            viewModel.resetSession()
+            chatViewModel.resetSession()
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
@@ -62,10 +71,43 @@ class FieldModeFragment : Fragment() {
     }
 
     /**
+     * 유저 프로필 관찰 및 UI 업데이트
+     */
+    private fun observeUserProfile() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            userInfoViewModel.uiState.collect { state ->
+                state.profileData?.let { profile ->
+                    // 이름
+                    binding.tvPatientName.text = profile.displayName
+
+                    // 성별 (MALE/FEMALE -> 남자/여자)
+                    binding.tvPatientGender.text = when (profile.gender.uppercase()) {
+                        "MALE" -> "남자"
+                        "FEMALE" -> "여자"
+                        else -> profile.gender
+                    }
+
+                    // 생년월일 (yyyy-MM-dd -> yyyy.MM.dd)
+                    binding.tvPatientBirth.text = profile.birthDate.replace("-", ".")
+
+                    // 혈액형
+                    binding.tvPatientBloodType.text = "${profile.bloodType}형"
+
+                    // 복용약 유무 (tags에서 "복용약" 관련 태그 확인)
+                    val hasMedication = profile.tags.any {
+                        it.contains("복용약") || it.contains("medication") || it.contains("약물")
+                    }
+                    binding.tvPatientMedication.text = if (hasMedication) "있음" else "없음"
+                }
+            }
+        }
+    }
+
+    /**
      * 증상 요약 LiveData 관찰
      */
     private fun observeSymptomSummary() {
-        viewModel.symptomSummaryResponse.observe(viewLifecycleOwner) { summaryResponse ->
+        chatViewModel.symptomSummaryResponse.observe(viewLifecycleOwner) { summaryResponse ->
             if (summaryResponse != null) {
                 currentSummaryResponse = summaryResponse
                 // 초기값: 원본 언어로 표시

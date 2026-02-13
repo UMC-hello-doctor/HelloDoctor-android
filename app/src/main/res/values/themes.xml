@@ -40,4 +40,163 @@
         <item name="android:textColor">@color/selector_button_secondary_text</item>
     </style>
 
+
+
+
+
+
+
+    <!-- ================= 위젯 / 텍스트 베이스 ================= -->
+
+    <!-- ■ 공통 위젯 베이스 -->
+    <style name="Widget.HelloDoctor" parent="@android:style/Widget" />
+
+    <!-- ■ 건강 기록 공통 위젯 베이스 -->
+    <style name="Widget.HelloDoctor.Health" parent="Widget.HelloDoctor">
+        <!-- Health 화면 공통 위젯 속성 넣고 싶으면 여기 -->
+    </style>
+
+    <!-- ■ 공통 텍스트 베이스 -->
+    <style name="TextAppearance.HelloDoctor" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/color_text_main</item>
+    </style>
+
+    <!-- ■ 건강 기록 텍스트 베이스 -->
+    <style name="TextAppearance.HelloDoctor.Health" parent="TextAppearance.HelloDoctor">
+        <!-- Health 공통 텍스트 속성 필요 시 추가 -->
+    </style>
+
+    <!-- ================= 건강 기록 카드/텍스트 ================= -->
+
+    <!-- ■ 건강 기록 카드 (Filled 카드) -->
+    <style name="Widget.HelloDoctor.HealthCard"
+        parent="Widget.Material3.CardView.Filled">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <!-- 카드 내부 레이아웃 -->
+    <style name="Widget.HelloDoctor.HealthCard.Content"
+        parent="Widget.HelloDoctor.Health">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingStart">15.35dp</item>
+        <item name="android:paddingEnd">15.35dp</item>
+        <item name="android:paddingTop">21dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <!-- 섹션 타이틀 행 (아이콘 + 텍스트) -->
+    <style name="Widget.HelloDoctor.Health.SectionHeaderRow"
+        parent="Widget.HelloDoctor.Health">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">14dp</item>
+    </style>
+
+    <!-- 라벨 텍스트 (이름, 성별, 혈액형 등) -->
+    <style name="TextAppearance.HelloDoctor.Health.Label"
+        parent="TextAppearance.HelloDoctor.Health">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_text_sub</item>
+        <item name="android:layout_marginTop">14dp</item>
+    </style>
+
+    <!-- 질문 문구 텍스트 -->
+    <style name="TextAppearance.HelloDoctor.Health.Question"
+        parent="TextAppearance.HelloDoctor.Health">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:layout_marginTop">12dp</item>
+    </style>
+
+    <!-- ================= 건강 기록 TextInput ================= -->
+
+    <!-- ■ 건강 기록 TextInputLayout (filled) -->
+    <style name="Widget.HelloDoctor.Health.TextInputLayout"
+        parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="boxBackgroundColor">@color/color_button_secondary_bg</item>
+        <item name="strokeColor">@color/selector_button_secondary_stroke</item>
+        <item name="strokeWidth">1dp</item>
+
+
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+    </style>
+
+    <!-- ■ 건강 기록 TextInputEditText -->
+    <style name="Widget.HelloDoctor.Health.TextInputEditText"
+        parent="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:textColorHint">#A0A0A0</item>
+    </style>
+
+    <!-- ================= 건강 기록 선택 버튼 ================= -->
+
+    <!-- ■ 건강 기록 선택 버튼 베이스 (예/아니오/성별/혈액형 공통) -->
+    <style name="Widget.HelloDoctor.Health.ChoiceButton"
+        parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:background">@null</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="backgroundTint">@color/selector_button_secondary_bg</item>
+        <item name="strokeColor">@color/selector_button_secondary_stroke</item>
+        <item name="android:textColor">@color/selector_button_secondary_text</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- GridLayout 안에서 쓰는 버튼 (columnWeight 포함) -->
+    <style name="Widget.HelloDoctor.Health.ChoiceButton.Grid"
+        parent="Widget.HelloDoctor.Health.ChoiceButton">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_gravity">fill</item>
+    </style>
+
+    <!-- 선택 버튼 행 컨테이너 (예/아니오, 성별 등) -->
+    <style name="Widget.HelloDoctor.Health.ChoiceRow"
+        parent="Widget.HelloDoctor.Health">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

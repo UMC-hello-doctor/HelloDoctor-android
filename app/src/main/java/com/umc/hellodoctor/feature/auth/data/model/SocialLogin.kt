@@ -7,4 +7,5 @@ data class SocialLoginRequest(
 data class SocialLoginResponse(
     val accessToken: String,
     val refreshToken: String?,
+    val isNewUser: Boolean,
 )

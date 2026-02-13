@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.umc.hellodoctor.R
 import com.umc.hellodoctor.databinding.FragmentChatResultContainerBinding
@@ -37,6 +38,11 @@ class ChatResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupButtons()
+
+        // 뒤로가기 버튼
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         val sessionId = args.sessionId
         Log.d("ChatResultFragment", "========== ChatResultFragment 세션 처리 ==========")

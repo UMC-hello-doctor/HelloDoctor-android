@@ -51,7 +51,8 @@ class GoogleAuthServiceImpl(
     ): SocialSignInResult {
         val googleIdOption = GetGoogleIdOption.Builder()
             .setServerClientId(BuildConfig.GOOGLE_OAUTH_CLIENT_ID)
-            .setFilterByAuthorizedAccounts(filterByAuthorizedAccounts)
+            .setFilterByAuthorizedAccounts(false)
+            .setAutoSelectEnabled(filterByAuthorizedAccounts)
             .build()
 
         val request = GetCredentialRequest.Builder()
@@ -95,6 +96,13 @@ class GoogleAuthServiceImpl(
 
 
     override suspend fun signOut() {
-        credentialManager.clearCredentialState(ClearCredentialStateRequest())
+        try {
+            credentialManager.clearCredentialState(
+                ClearCredentialStateRequest()
+            )
+            Log.d("Auth", "✅ 저장된 계정 초기화 완료")
+        } catch (e: Exception) {
+            Log.e("Auth", "초기화 실패: ${e.message}")
+        }
     }
 }

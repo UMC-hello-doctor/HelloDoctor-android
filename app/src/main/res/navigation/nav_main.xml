@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_homeMenuFragment_to_symptomMenuFragment"
             app:destination="@id/symptomMenuFragment" />
+        <action
+            android:id="@+id/action_homeMenuFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
     </fragment>
 
     <fragment
@@ -65,5 +68,9 @@
         android:id="@+id/naverMapFragment"
         android:name="com.umc.hellodoctor.feature.navermap.presentation.NaverMapFragment"
         android:label="NaverMapFragment" />
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.umc.hellodoctor.feature.userinfo.UserInfoFragment"
+        android:label="UserInfoFragment" />
 
 </navigation>
