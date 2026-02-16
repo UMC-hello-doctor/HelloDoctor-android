@@ -46,7 +46,7 @@ class HomeMenuFragment : Fragment() {
         }
 
         binding.menuPrescription.setOnClickListener {
-            Toast.makeText(requireContext(), "처방약 관리", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeMenuFragment_to_drugSerchFragment)
         }
 
         binding.menuSymptom.setOnClickListener {
