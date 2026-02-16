@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_homeMenuFragment_to_userInfoFragment"
             app:destination="@id/userInfoFragment" />
+        <action
+            android:id="@+id/action_homeMenuFragment_to_drugSerchFragment"
+            app:destination="@id/drugSerchFragment" />
     </fragment>
 
     <fragment
@@ -72,5 +75,10 @@
         android:id="@+id/userInfoFragment"
         android:name="com.umc.hellodoctor.feature.userinfo.UserInfoFragment"
         android:label="UserInfoFragment" />
+    <fragment
+        android:id="@+id/drugSerchFragment"
+        android:name="com.umc.hellodoctor.feature.drug.DrugSerchFragment"
+        android:label="DrugSerchFragment"
+        tools:layout="@layout/fragment_add_drug"/>
 
 </navigation>
