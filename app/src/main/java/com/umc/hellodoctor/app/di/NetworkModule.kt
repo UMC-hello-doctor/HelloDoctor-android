@@ -5,6 +5,7 @@ import com.umc.hellodoctor.BuildConfig
 import com.umc.hellodoctor.core.network.AuthInterceptor
 import com.umc.hellodoctor.core.network.status.NetworkMonitor
 import com.umc.hellodoctor.feature.auth.data.repository.AuthApi
+import com.umc.hellodoctor.feature.drug.data.api.MedicineApi
 import com.umc.hellodoctor.feature.navermap.data.HospitalApi
 import com.umc.hellodoctor.feature.userinfo.data.api.UserInfoApi
 import dagger.Module
@@ -56,6 +57,12 @@ object NetworkModule {
     fun provideHospitalApi(
         retrofit: Retrofit
     ): HospitalApi = retrofit.create(HospitalApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideMedicineApi(
+        retrofit: Retrofit
+    ): MedicineApi = retrofit.create(MedicineApi::class.java)
 
     @Provides
     @Singleton
