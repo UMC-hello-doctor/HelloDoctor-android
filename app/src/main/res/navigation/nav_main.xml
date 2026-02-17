@@ -39,6 +39,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/languageSelectFragment"
+        android:name="com.umc.hellodoctor.feature.language.presentation.LanguageSelectFragment"
+        android:label="LanguageSelectFragment"
+        tools:layout="@layout/fragment_language_select" />
+
+    <fragment
         android:id="@+id/symptomMenuFragment"
         android:name="com.umc.hellodoctor.feature.menu.presentation.SymptomMenuFragment"
         android:label="SymptomMenu"
