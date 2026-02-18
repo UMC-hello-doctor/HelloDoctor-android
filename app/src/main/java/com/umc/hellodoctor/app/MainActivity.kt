@@ -1,21 +1,28 @@
 package com.umc.hellodoctor.app
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.umc.hellodoctor.R
 import com.umc.hellodoctor.core.network.status.NetworkViewModel
 import com.umc.hellodoctor.core.permission.PermissionManager
 import com.umc.hellodoctor.databinding.ActivityMainBinding
+import com.umc.hellodoctor.feature.auth.domain.model.SocialSignInResult
 import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
 import com.umc.hellodoctor.core.location.LocationMapViewModel
 import com.umc.hellodoctor.feature.language.presentation.LanguageManager
+import com.umc.hellodoctor.feature.auth.domain.repository.GoogleAuthServiceImpl
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -24,9 +31,10 @@ class MainActivity : AppCompatActivity() {
     private val authViewModel: AuthViewModel by viewModels()
     private val locationViewModel: LocationMapViewModel by viewModels()
     private val networkViewModel: NetworkViewModel by viewModels()
-
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var googleAuthService: GoogleAuthServiceImpl
+    private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private var hasHandledLoginResult: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +44,9 @@ class MainActivity : AppCompatActivity() {
         languageManager.applyLanguage()
 
         enableEdgeToEdge()
+
+        // Google Auth Service 초기화
+        googleAuthService = GoogleAuthServiceImpl(this)
 
         permissionManager = PermissionManager(
             context = this,
@@ -54,7 +65,6 @@ class MainActivity : AppCompatActivity() {
         networkViewModel
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
 
@@ -62,24 +72,54 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
 
-        binding.toMain.setOnClickListener {
-            binding.toMain.isSelected = true
-            binding.toAuth.isSelected = false
-            navController.setGraph(R.navigation.nav_main)
-        }
-        binding.toAuth.setOnClickListener {
-            binding.toMain.isSelected = false
-            binding.toAuth.isSelected = true
-            navController.setGraph(R.navigation.nav_auth)
-        }
-
-
-
+        // 앱 시작 시 자동 로그인
+        performAutoSignIn()
+        observeAuthState()
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+    }
+
+    /**
+     * Google 로그인으로 자동 로그인 수행
+     */
+    private fun performAutoSignIn() {
+        lifecycleScope.launch {
+            authViewModel.socialLogin(googleAuthService)
+        }
+    }
+
+    private fun observeAuthState() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                authViewModel.uiState.collect { state ->
+                    if (hasHandledLoginResult) return@collect
+                    when (state.signInResult) {
+                        is SocialSignInResult.Success -> {
+                            Toast.makeText(this@MainActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+                            if (state.isNewUser == true) {
+                                navController.setGraph(R.navigation.nav_auth)
+                                navController.navigate(R.id.userInfoFragment2)
+                            } else {
+                                navController.setGraph(R.navigation.nav_main)
+                            }
+                            hasHandledLoginResult = true
+                        }
+                        is SocialSignInResult.Canceled, is SocialSignInResult.Error -> {
+                            navController.setGraph(R.navigation.nav_auth)
+                        }
+                        null -> Unit
+                    }
+
+                    // 프로필 생성 완료 시 메인 화면으로 이동
+                    if (state.isProfileCreated && state.isNewUser == true) {
+                        navController.setGraph(R.navigation.nav_main)
+                    }
+                }
+            }
         }
     }
 }

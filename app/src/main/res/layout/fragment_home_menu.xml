@@ -3,67 +3,80 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingHorizontal="16dp"
-    android:paddingTop="12dp">
+    android:layout_height="match_parent">
 
-    <!-- 의료기관 검색 -->
-    <ImageView
-        android:id="@+id/menuHospital"
+    <!-- 격자 컨테이너 (중앙 정렬) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gridContainer"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/menu_hospital"
-        android:adjustViewBounds="true"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_percent="0.48"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <!-- 처방약 관리 -->
-    <ImageView
-        android:id="@+id/menuPrescription"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/menu_prescription"
-        android:adjustViewBounds="true"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_percent="0.48"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="1">
 
-    <!-- 증상 번역 -->
-    <ImageView
-        android:id="@+id/menuSymptom"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/menu_symptom"
-        android:adjustViewBounds="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginTop="12dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_percent="0.48"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menuHospital"/>
+        <!-- 의료기관 검색 -->
+        <ImageView
+            android:id="@+id/menuHospital"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/menu_hospital"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    <!-- 마이페이지 -->
-    <ImageView
-        android:id="@+id/menuMyPage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/menu_mypage"
-        android:adjustViewBounds="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginTop="12dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_percent="0.48"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menuPrescription"/>
+        <!-- 처방약 관리 -->
+        <ImageView
+            android:id="@+id/menuPrescription"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/menu_prescription"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!-- 증상 번역 -->
+        <ImageView
+            android:id="@+id/menuSymptom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/menu_symptom"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="12dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menuHospital"/>
+
+        <!-- 마이페이지 -->
+        <ImageView
+            android:id="@+id/menuMyPage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/menu_mypage"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="12dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menuPrescription"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

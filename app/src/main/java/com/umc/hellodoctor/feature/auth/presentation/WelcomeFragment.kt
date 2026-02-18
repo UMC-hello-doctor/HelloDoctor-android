@@ -52,24 +52,28 @@ class WelcomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.uiState.collect { state ->
+                // 로딩 상태 처리
+                if (state.isLoading) {
+                    binding.googleSignInButton.visibility = View.GONE
+                    binding.progressLoading.visibility = View.VISIBLE
+                } else {
+                    binding.googleSignInButton.visibility = View.VISIBLE
+                    binding.progressLoading.visibility = View.GONE
+                }
+
                 // 에러 처리
                 state.errorMessage?.let { msg ->
+                    requireContext().toast(msg)
                 }
 
                 // 로그인 성공 / 취소 / 실패에 따른 UI 처리
                 when (val result = state.signInResult) {
                     is SocialSignInResult.Success -> {
-                        toast("로그인에 성공했습니다.")
-                        // 네비게이션 등
                     }
                     is SocialSignInResult.Canceled -> {
-                        toast("로그인이 취소되었습니다.")
-                        // 취소 처리
                     }
                     is SocialSignInResult.Error -> {
                         val message = result.throwable.message ?: "로그인에 실패했습니다."
-                        toast(message)
-                        // 실패 처리
                     }
                     null -> Unit
                 }

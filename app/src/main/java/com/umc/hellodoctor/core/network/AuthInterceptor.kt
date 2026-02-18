@@ -15,7 +15,7 @@ class AuthInterceptor @Inject constructor(
 
         // 토큰 가져오기
         val accessToken = tokenManager.getAccessToken()
-        Log.d("TAG", "intercept: accessToken 추가")
+        Log.d("TAG", "intercept: accessToken 추가 $accessToken")
         // 헤더 추가
         val newRequest = originalRequest.newBuilder().apply {
             if (accessToken.isNotEmpty()) {

@@ -21,13 +21,24 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
-    <ImageView
-        android:id="@+id/googleSignInButton"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_sign_in_rd_google"
-        android:layout_marginBottom="200dp"
-        />
+        android:layout_marginBottom="200dp">
+
+        <ImageView
+            android:id="@+id/googleSignInButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_sign_in_rd_google" />
+
+        <ProgressBar
+            android:id="@+id/progressLoading"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
 
 
 </LinearLayout>
