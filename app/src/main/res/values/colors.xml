@@ -44,4 +44,10 @@
     <!-- Additional colors for button states -->
     <color name="color_button_gray">@color/gray_400</color>
     <color name="color_button_pressed_bg">#E5E5E5</color>
+
+    <!-- Custom colors for drug alarm -->
+    <color name="blue_primary">#2563EB</color>
+    <color name="gray_600">#666666</color>
+    <color name="gray_700">#777777</color>
+    <color name="orange_accent">#FF6B35</color>
 </resources>
