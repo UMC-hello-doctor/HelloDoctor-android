@@ -14,6 +14,7 @@ import com.umc.hellodoctor.core.permission.PermissionManager
 import com.umc.hellodoctor.databinding.ActivityMainBinding
 import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
 import com.umc.hellodoctor.core.location.LocationMapViewModel
+import com.umc.hellodoctor.feature.language.presentation.LanguageManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +30,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 앱 시작 시 저장된 언어 설정 적용
+        val languageManager = LanguageManager(this)
+        languageManager.applyLanguage()
+
         enableEdgeToEdge()
 
         permissionManager = PermissionManager(
