@@ -31,7 +31,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="건강 상태 기록표"
+                        android:text="@string/health_status_record"
                         android:textColor="@color/color_text_main"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -50,7 +50,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:text="기본정보"
+                            android:text="@string/basic_info"
                             android:textColor="@color/color_text_sub"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -58,7 +58,7 @@
                     <!-- 이름 -->
                     <TextView
                         style="@style/TextAppearance.HelloDoctor.Health.Label"
-                        android:text="이름" />
+                        android:text="@string/name" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.HelloDoctor.Health.TextInputLayout"
@@ -67,13 +67,13 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etName"
                             style="@style/Widget.HelloDoctor.Health.TextInputEditText"
-                            android:hint="이름 입력" />
+                            android:hint="@string/name_input" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- 성별 -->
                     <TextView
                         style="@style/TextAppearance.HelloDoctor.Health.Label"
-                        android:text="성별" />
+                        android:text="@string/gender" />
 
                     <LinearLayout
                         style="@style/Widget.HelloDoctor.Health.ChoiceRow">
@@ -82,20 +82,20 @@
                             android:id="@+id/btnFemale"
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton"
                             android:layout_weight="1"
-                            android:text="여성" />
+                            android:text="@string/female" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnMale"
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton"
                             android:layout_weight="1"
                             android:layout_marginStart="10dp"
-                            android:text="남성" />
+                            android:text="@string/male" />
                     </LinearLayout>
 
                     <!-- 생년월일 -->
                     <TextView
                         style="@style/TextAppearance.HelloDoctor.Health.Label"
-                        android:text="생년월일" />
+                        android:text="@string/birth_date" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tilBirth"
@@ -107,7 +107,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etBirth"
                             style="@style/Widget.HelloDoctor.Health.TextInputEditText"
-                            android:hint="YYYY-MM-DD"
+                            android:hint="@string/birth_date_format"
                             android:clickable="true"
                             android:focusable="false" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -115,7 +115,7 @@
                     <!-- 혈액형 -->
                     <TextView
                         style="@style/TextAppearance.HelloDoctor.Health.Label"
-                        android:text="혈액형" />
+                        android:text="@string/blood_type" />
                     <GridLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                             android:id="@+id/btnBloodA"
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
                             android:layout_width="0dp"
-                            android:text="A형" />
+                            android:text="@string/blood_type_a" />
 
                         <!-- 1행 2열 -->
                         <com.google.android.material.button.MaterialButton
@@ -136,7 +136,7 @@
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
                             android:layout_width="0dp"
                             android:layout_marginStart="10dp"
-                            android:text="B형" />
+                            android:text="@string/blood_type_b" />
 
                         <!-- 2행 1열 -->
                         <com.google.android.material.button.MaterialButton
@@ -144,7 +144,7 @@
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
                             android:layout_width="0dp"
                             android:layout_marginTop="10dp"
-                            android:text="O형" />
+                            android:text="@string/blood_type_o" />
 
                         <!-- 2행 2열 -->
                         <com.google.android.material.button.MaterialButton
@@ -153,7 +153,7 @@
                             android:layout_width="0dp"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
-                            android:text="AB형" />
+                            android:text="@string/blood_type_ab" />
 
                     </GridLayout>
 
@@ -163,7 +163,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
                         android:layout_marginTop="10dp"
-                        android:text="직접 입력하기"
+                        android:text="@string/blood_type_manual"
                         app:layout_columnSpan="2" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -176,7 +176,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etBloodOther"
                             style="@style/Widget.HelloDoctor.Health.TextInputEditText"
-                            android:hint="혈액형 직접 입력" />
+                            android:hint="@string/blood_type_manual_input" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
@@ -205,7 +205,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:text="건강 상태"
+                            android:text="@string/health_status"
                             android:textStyle="bold"
                             android:textColor="@color/color_text_sub" />
                     </LinearLayout>
@@ -213,7 +213,7 @@
                     <!-- 1 -->
                     <TextView
                         style="@style/TextAppearance.HelloDoctor.Health.Question"
-                        android:text="1. 특정 약물이나 음식에 알레르기가 있나요?" />
+                        android:text="@string/allergy_question" />
 
                     <LinearLayout
                         style="@style/Widget.HelloDoctor.Health.ChoiceRow">
@@ -222,14 +222,14 @@
                             android:id="@+id/btnAllergyYes"
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton"
                             android:layout_weight="1"
-                            android:text="네, 있어요" />
+                            android:text="@string/yes_have" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnAllergyNo"
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton"
                             android:layout_weight="1"
                             android:layout_marginStart="10dp"
-                            android:text="아니요, 없어요" />
+                            android:text="@string/no_have" />
                     </LinearLayout>
 
                     <!-- 1-1 (Yes일 때만 노출) -->
@@ -244,14 +244,14 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="1-1. 어떤 알레르기를 가지고 있나요?"
+                            android:text="@string/allergy_detail_question"
                             android:textColor="@color/color_text_main" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="약물"
+                            android:text="@string/allergy_type_medicine"
                             android:textColor="@color/color_text_sub" />
 
                         <GridLayout
@@ -263,26 +263,26 @@
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnAllergyAntibiotic"
                                 style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
-                                android:text="항생제" />
+                                android:text="@string/allergy_antibiotic" />
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnAllergyNsaid"
                                 style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
                                 android:layout_marginStart="10dp"
-                                android:text="소염진통제" />
+                                android:text="@string/allergy_nsaid" />
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnAllergyVaccine"
                                 style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
                                 android:layout_marginTop="10dp"
-                                android:text="백신 성분" />
+                                android:text="@string/allergy_vaccine" />
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnAllergyLocal"
                                 style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="국소 마취제" />
+                                android:text="@string/allergy_local_anesthetic" />
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnAllergyOther"
@@ -291,7 +291,7 @@
                                 android:layout_height="44dp"
                                 android:layout_marginTop="10dp"
                                 android:layout_columnSpan="2"
-                                android:text="기타" />
+                                android:text="@string/allergy_other" />
                         </GridLayout>
                     </LinearLayout>
 
@@ -299,7 +299,7 @@
                     <TextView
                         style="@style/TextAppearance.HelloDoctor.Health.Question"
                         android:layout_marginTop="16dp"
-                        android:text="2. 현재 복용 중인 처방약이나 영양제가 있나요?" />
+                        android:text="@string/medicine_question" />
 
                     <LinearLayout
                         style="@style/Widget.HelloDoctor.Health.ChoiceRow">
@@ -308,21 +308,21 @@
                             android:id="@+id/btnMedsYes"
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton"
                             android:layout_weight="1"
-                            android:text="네, 있어요" />
+                            android:text="@string/yes_have" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnMedsNo"
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton"
                             android:layout_weight="1"
                             android:layout_marginStart="10dp"
-                            android:text="아니요, 없어요" />
+                            android:text="@string/no_have" />
                     </LinearLayout>
 
                     <!-- 3 -->
                     <TextView
                         style="@style/TextAppearance.HelloDoctor.Health.Question"
                         android:layout_marginTop="16dp"
-                        android:text="3. 현재 임신 중이거나 수유 중인가요?" />
+                        android:text="@string/pregnancy_question" />
 
                     <LinearLayout
                         style="@style/Widget.HelloDoctor.Health.ChoiceRow">
@@ -331,14 +331,14 @@
                             android:id="@+id/btnPregYes"
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton"
                             android:layout_weight="1"
-                            android:text="네" />
+                            android:text="@string/yes" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnPregNo"
                             style="@style/Widget.HelloDoctor.Health.ChoiceButton"
                             android:layout_weight="1"
                             android:layout_marginStart="10dp"
-                            android:text="아니요" />
+                            android:text="@string/no" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -354,7 +354,7 @@
                 style="@style/Widget.HelloDoctor.Button.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="다음"
+                android:text="@string/next"
                 android:enabled="false"
                 android:layout_marginTop="16dp"/>
 

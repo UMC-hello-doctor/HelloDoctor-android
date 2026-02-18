@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="32dp"
             android:paddingEnd="32dp"
-            android:text="증상번역"
+            android:text="@string/symptom_translation"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
