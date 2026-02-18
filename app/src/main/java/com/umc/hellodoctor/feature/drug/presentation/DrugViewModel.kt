@@ -1,4 +1,4 @@
-package com.umc.hellodoctor.feature.drug
+package com.umc.hellodoctor.feature.drug.presentation
 
 import android.util.Log
 import androidx.lifecycle.LiveData

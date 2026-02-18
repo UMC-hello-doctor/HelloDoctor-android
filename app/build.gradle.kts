@@ -8,6 +8,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    kotlin("plugin.parcelize")
 }
 val propertiesFile = rootProject.file("gradle.properties")
 val properties = Properties()

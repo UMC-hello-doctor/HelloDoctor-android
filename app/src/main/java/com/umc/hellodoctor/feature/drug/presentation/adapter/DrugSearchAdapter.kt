@@ -1,5 +1,6 @@
-package com.umc.hellodoctor.feature.drug
+package com.umc.hellodoctor.feature.drug.presentation.adapter
 
+import android.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,13 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.umc.hellodoctor.databinding.ItemDrugResultBinding
 import com.umc.hellodoctor.feature.drug.data.model.MedicineSearchItem
+import com.umc.hellodoctor.core.util.StartCropTransformation
 
-class DrugSearchAdapter : ListAdapter<MedicineSearchItem, DrugSearchAdapter.DrugSearchViewHolder>(
+class DrugSearchAdapter(
+    private val onItemClick: (MedicineSearchItem) -> Unit = {}
+) : ListAdapter<MedicineSearchItem, DrugSearchAdapter.DrugSearchViewHolder>(
     DrugSearchDiffCallback()
 ) {
 
     class DrugSearchViewHolder(
-        private val binding: ItemDrugResultBinding
+        private val binding: ItemDrugResultBinding,
+        private val onItemClick: (MedicineSearchItem) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MedicineSearchItem) {
             binding.tvDrugName.text = item.medicineName
@@ -23,17 +28,21 @@ class DrugSearchAdapter : ListAdapter<MedicineSearchItem, DrugSearchAdapter.Drug
             // Glide를 사용하여 이미지 로딩 (왼쪽 기준 crop)
             Glide.with(binding.ivDrugImage.context)
                 .load(item.medicineImage)
-                .placeholder(android.R.drawable.ic_menu_gallery)
-                .error(android.R.drawable.ic_menu_gallery)
+                .placeholder(R.drawable.ic_menu_gallery)
+                .error(R.drawable.ic_menu_gallery)
                 .skipMemoryCache(false)
                 .transform(StartCropTransformation())
                 .into(binding.ivDrugImage)
+
+            binding.root.setOnClickListener {
+                onItemClick(item)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrugSearchViewHolder {
         val binding = ItemDrugResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return DrugSearchViewHolder(binding)
+        return DrugSearchViewHolder(binding, onItemClick)
     }
 
     override fun onBindViewHolder(holder: DrugSearchViewHolder, position: Int) {
@@ -50,4 +59,3 @@ class DrugSearchAdapter : ListAdapter<MedicineSearchItem, DrugSearchAdapter.Drug
         }
     }
 }
-

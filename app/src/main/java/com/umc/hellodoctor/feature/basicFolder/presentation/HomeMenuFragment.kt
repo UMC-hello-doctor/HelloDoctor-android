@@ -46,7 +46,7 @@ class HomeMenuFragment : Fragment() {
         }
 
         binding.menuPrescription.setOnClickListener {
-            findNavController().navigate(R.id.action_homeMenuFragment_to_drugSerchFragment)
+            findNavController().navigate(R.id.action_homeMenuFragment_to_drugAlarmFragment)
         }
 
         binding.menuSymptom.setOnClickListener {
