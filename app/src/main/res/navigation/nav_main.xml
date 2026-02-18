@@ -29,7 +29,8 @@
     <fragment
         android:id="@+id/homeMenuFragment"
         android:name="com.umc.hellodoctor.feature.basicFolder.presentation.HomeMenuFragment"
-        android:label="HomeMenu" >
+        android:label="HomeMenu"
+        tools:layout="@layout/fragment_home_menu" >
         <action
             android:id="@+id/action_homeMenuFragment_to_naverMapFragment"
             app:destination="@id/naverMapFragment" />
@@ -42,6 +43,9 @@
         <action
             android:id="@+id/action_homeMenuFragment_to_drugSerchFragment"
             app:destination="@id/drugSerchFragment" />
+        <action
+            android:id="@+id/action_homeMenuFragment_to_drugAlarmFragment"
+            app:destination="@id/drugAlarmFragment" />
     </fragment>
 
     <fragment
@@ -70,15 +74,65 @@
     <fragment
         android:id="@+id/naverMapFragment"
         android:name="com.umc.hellodoctor.feature.navermap.presentation.NaverMapFragment"
-        android:label="NaverMapFragment" />
+        android:label="NaverMapFragment"
+        tools:layout="@layout/fragment_naver_map"/>
     <fragment
         android:id="@+id/userInfoFragment"
         android:name="com.umc.hellodoctor.feature.userinfo.UserInfoFragment"
-        android:label="UserInfoFragment" />
+        android:label="UserInfoFragment"
+        tools:layout="@layout/fragment_user_info"/>
     <fragment
         android:id="@+id/drugSerchFragment"
-        android:name="com.umc.hellodoctor.feature.drug.DrugSerchFragment"
+        android:name="com.umc.hellodoctor.feature.drug.presentation.DrugSerchFragment"
         android:label="DrugSerchFragment"
-        tools:layout="@layout/fragment_add_drug"/>
+        tools:layout="@layout/fragment_add_drug">
+        <action
+            android:id="@+id/action_drugSerchFragment_to_drugInfoInputFragment"
+            app:destination="@id/drugInfoInputFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/drugAlarmFragment"
+        android:name="com.umc.hellodoctor.feature.drug.presentation.DrugAlarmFragment"
+        android:label="DrugAlarmFragment"
+        tools:layout="@layout/fragment_drug_alarm">
+        <action
+            android:id="@+id/action_drugAlarmFragment_to_drugSerchFragment"
+            app:destination="@id/drugSerchFragment" />
+        <action
+            android:id="@+id/action_drugAlarmFragment_to_drugAlarmDetailFragment"
+            app:destination="@id/drugAlarmDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/drugInfoInputFragment"
+        android:name="com.umc.hellodoctor.feature.drug.presentation.DrugInfoInputFragment"
+        android:label="DrugInfoInputFragment"
+        tools:layout="@layout/fragment_drug_info_input">
+        <argument
+            android:name="medicines"
+            app:argType="com.umc.hellodoctor.feature.drug.data.model.MedicineSearchItem[]" />
+        <argument
+            android:name="planId"
+            app:argType="string"
+            android:defaultValue="@null"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/drugAlarmDetailFragment"
+        android:name="com.umc.hellodoctor.feature.drug.presentation.DrugAlarmDetailFragment"
+        android:label="DrugAlarmDetailFragment"
+        tools:layout="@layout/fragment_drug_alarm_detail">
+        <argument
+            android:name="planId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_drugAlarmDetailFragment_to_drugAlarmFragment"
+            app:destination="@id/drugAlarmFragment" />
+        <action
+            android:id="@+id/action_drugAlarmDetailFragment_to_drugInfoInputFragment"
+            app:destination="@id/drugInfoInputFragment" />
+    </fragment>
 
 </navigation>
