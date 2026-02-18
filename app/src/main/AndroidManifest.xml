@@ -59,6 +59,14 @@
             android:name="com.naver.maps.map.NCP_CLIENT_ID"
             android:value="${NAVER_MAP_CLIENT_ID}" />
 
+        <receiver
+            android:name="com.umc.hellodoctor.feature.drug.data.service.DrugAlarmReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.umc.hellodoctor.DRUG_ALARM" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".app.MainActivity"
             android:windowSoftInputMode="adjustPan"
