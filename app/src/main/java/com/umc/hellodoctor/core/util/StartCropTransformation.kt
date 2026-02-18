@@ -1,5 +1,6 @@
-package com.umc.hellodoctor.feature.drug
+package com.umc.hellodoctor.core.util
 
+import android.content.Context
 import android.graphics.Bitmap
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.Transformation
@@ -13,7 +14,7 @@ import java.security.MessageDigest
 class StartCropTransformation : Transformation<Bitmap> {
 
     override fun transform(
-        context: android.content.Context,
+        context: Context,
         resource: Resource<Bitmap>,
         outWidth: Int,
         outHeight: Int
@@ -67,4 +68,3 @@ class StartCropTransformation : Transformation<Bitmap> {
         private const val ID = "com.umc.hellodoctor.StartCropTransformation"
     }
 }
-
