@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="@string/menu_hospital"
             android:textColor="@color/hospital_text"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:text="@string/menu_prescription"
             android:textColor="@color/prescription_text"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:text="@string/menu_symptom"
             android:textColor="@color/symptom_text"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:text="@string/menu_mypage"
             android:textColor="@color/mypage_text"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
