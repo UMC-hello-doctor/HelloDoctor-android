@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.umc.hellodoctor.R
+import com.umc.hellodoctor.core.util.showToast
 import com.umc.hellodoctor.databinding.FragmentHomeMenuBinding
 import com.umc.hellodoctor.feature.userinfo.UserInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +43,8 @@ class HomeMenuFragment : Fragment() {
         }
 
         binding.menuHospital.setOnClickListener {
-            Toast.makeText(requireContext(), "의료기관 검색", Toast.LENGTH_SHORT).show()
+
+            showToast(requireContext(),"의료기관 검색 준비중입니다")
         }
 
         binding.menuPrescription.setOnClickListener {
@@ -54,7 +56,7 @@ class HomeMenuFragment : Fragment() {
         }
 
         binding.menuMyPage.setOnClickListener {
-            findNavController().navigate(R.id.action_homeMenuFragment_to_userInfoFragment)
+            showToast(requireContext(),"마이페이지 준비중입니다")
         }
 
         // 프로필 데이터 상태 관찰
