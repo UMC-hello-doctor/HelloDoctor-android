@@ -150,6 +150,10 @@
     <string name="language_japanese">日语 (日本語)</string>
     <string name="language_chinese">中文 (中文)</string>
     <string name="language_vietnamese">越南语 (tiếng Việt)</string>
+    <string name="language_change">更改语言</string>
+
+    <!-- 我的页面 -->
+    <string name="mypage_title">我的页面</string>
 
 </resources>
 

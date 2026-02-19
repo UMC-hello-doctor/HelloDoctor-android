@@ -32,20 +32,17 @@
         android:label="HomeMenu"
         tools:layout="@layout/fragment_home_menu" >
         <action
-            android:id="@+id/action_homeMenuFragment_to_naverMapFragment"
-            app:destination="@id/naverMapFragment" />
-        <action
             android:id="@+id/action_homeMenuFragment_to_symptomMenuFragment"
             app:destination="@id/symptomMenuFragment" />
-        <action
-            android:id="@+id/action_homeMenuFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
         <action
             android:id="@+id/action_homeMenuFragment_to_drugSerchFragment"
             app:destination="@id/drugSerchFragment" />
         <action
             android:id="@+id/action_homeMenuFragment_to_drugAlarmFragment"
             app:destination="@id/drugAlarmFragment" />
+        <action
+            android:id="@+id/action_homeMenuFragment_to_myPageMenuFragment"
+            app:destination="@id/myPageMenuFragment" />
     </fragment>
 
     <fragment
@@ -77,11 +74,6 @@
             app:destination="@id/chatResultFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/naverMapFragment"
-        android:name="com.umc.hellodoctor.feature.navermap.presentation.NaverMapFragment"
-        android:label="NaverMapFragment"
-        tools:layout="@layout/fragment_naver_map"/>
     <fragment
         android:id="@+id/userInfoFragment"
         android:name="com.umc.hellodoctor.feature.userinfo.UserInfoFragment"
@@ -139,6 +131,16 @@
         <action
             android:id="@+id/action_drugAlarmDetailFragment_to_drugInfoInputFragment"
             app:destination="@id/drugInfoInputFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/myPageMenuFragment"
+        android:name="com.umc.hellodoctor.feature.menu.presentation.MyPageMenuFragment"
+        android:label="MyPageMenu"
+        tools:layout="@layout/fragment_my_page_menu">
+        <action
+            android:id="@+id/action_myPageMenuFragment_to_languageSelectFragment"
+            app:destination="@id/languageSelectFragment" />
     </fragment>
 
 </navigation>

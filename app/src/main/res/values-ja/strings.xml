@@ -151,5 +151,9 @@
     <string name="language_chinese">中国語 (中文)</string>
     <string name="language_vietnamese">ベトナム語 (tiếng Việt)</string>
 
+    <!-- マイページ -->
+    <string name="mypage_title">マイページ</string>
+    <string name="language_change">言語の変更</string>
+
 </resources>
 

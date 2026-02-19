@@ -56,7 +56,7 @@ class HomeMenuFragment : Fragment() {
         }
 
         binding.menuMyPage.setOnClickListener {
-            showToast(requireContext(), getString(R.string.mypage_preparing))
+            findNavController().navigate(R.id.action_homeMenuFragment_to_myPageMenuFragment)
         }
 
         // 프로필 데이터 상태 관찰

@@ -151,5 +151,7 @@
     <string name="language_chinese">Tiếng Trung (中文)</string>
     <string name="language_vietnamese">Tiếng Việt (tiếng Việt)</string>
 
+    <!-- Tiêu đề Trang của tôi -->
+    <string name="mypage_title">Trang của tôi</string>
+    <string name="language_change">Đổi ngôn ngữ</string>
 </resources>
-

@@ -150,6 +150,8 @@
     <string name="language_chinese">중국어 (中文)</string>
     <string name="language_vietnamese">베트남어 (tiếng Việt)</string>
 
+    <!-- 마이페이지 메뉴 타이틀 -->
+    <string name="mypage_title">마이페이지</string>
+    <string name="language_change">언어 변경</string>
 </resources>
-
 

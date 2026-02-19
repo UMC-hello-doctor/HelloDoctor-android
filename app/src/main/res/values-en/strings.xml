@@ -151,5 +151,9 @@
     <string name="language_chinese">Chinese (中文)</string>
     <string name="language_vietnamese">Vietnamese (tiếng Việt)</string>
 
+    <!-- My Page -->
+    <string name="mypage_title">My Page</string>
+    <string name="language_change">Change Language</string>
+
 </resources>
 
