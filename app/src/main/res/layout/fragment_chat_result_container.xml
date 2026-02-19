@@ -20,7 +20,7 @@
             android:id="@+id/btnBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:contentDescription="뒤로가기"
+            android:contentDescription="@string/back"
             android:src="@drawable/rounded_arrow_back_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
-            android:text="진료 결과"
+            android:text="@string/medical_result"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:text="문진표" />
+            android:text="@string/questionnaire" />
 
         <Button
             android:id="@+id/btn_hospital_map"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:text="병원 지도" />
+            android:text="@string/hospital_map" />
     </LinearLayout>
 
     <!-- Fragment 컨테이너 -->

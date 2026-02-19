@@ -21,7 +21,7 @@
             android:id="@+id/backIcon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:contentDescription="뒤로가기"
+            android:contentDescription="@string/back"
             android:src="@drawable/rounded_arrow_back_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
-            android:text="증상 분석"
+            android:text="@string/symptom_analysis"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -75,7 +75,7 @@
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
             android:padding="12dp"
-            android:hint="증상을 입력하세요"
+            android:hint="@string/symptom_input_hint"
             android:maxLines="4"
             android:inputType="textMultiLine|textCapSentences" />
 
@@ -90,7 +90,7 @@
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="centerInside"
-                android:contentDescription="전송"
+                android:contentDescription="@string/send"
                 android:src="@drawable/ic_send_24" />
 
             <!-- 로딩 인디케이터 -->

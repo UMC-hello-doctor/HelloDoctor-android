@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HelloDoctor</string>
+
+    <!-- 通用 -->
+    <string name="back">返回</string>
+    <string name="button_text">按钮文本</string>
+    <string name="save">保存</string>
+    <string name="edit">编辑</string>
+    <string name="next">下一步</string>
+    <string name="select">选择</string>
+
+    <!-- 对话框 -->
+    <string name="selected_medicines">选定的药物</string>
+    <string name="no_selected_medicines">没有选定的药物。</string>
+
+    <!-- 聊天界面 -->
+    <string name="symptom_analysis">症状分析</string>
+    <string name="symptom_input_hint">输入您的症状</string>
+    <string name="send">发送</string>
+
+    <!-- 就诊结果 -->
+    <string name="medical_result">就诊结果</string>
+    <string name="questionnaire">问诊表</string>
+    <string name="hospital_map">医院地图</string>
+
+    <!-- 用药提醒 -->
+    <string name="drug_alarm">用药提醒</string>
+    <string name="add_drug">+ 添加药物</string>
+
+    <!-- 用药信息 -->
+    <string name="drug_info">用药信息</string>
+    <string name="pharmacy_label">药房：</string>
+    <string name="intake_type_label">用药类型：</string>
+    <string name="start_date_label">开始日期：</string>
+    <string name="end_date_label">结束日期：</string>
+    <string name="intake_time_title">用药时间</string>
+    <string name="medicine_list">药物列表</string>
+
+    <!-- 用药信息输入 -->
+    <string name="drug_info_input">输入用药信息</string>
+    <string name="pharmacy_name">药房名称</string>
+    <string name="pharmacy_name_hint">输入药房名称</string>
+    <string name="intake_type">用药类型</string>
+    <string name="start_date">开始日期</string>
+    <string name="end_date">结束日期</string>
+    <string name="add_time">+ 添加时间</string>
+
+    <!-- 问诊表（字段模式） -->
+    <string name="translate">翻译</string>
+    <string name="patient_info">患者信息</string>
+    <string name="name">姓名</string>
+    <string name="gender">性别</string>
+    <string name="birth_date">出生日期</string>
+    <string name="blood_type">血型</string>
+    <string name="medication_status">用药状态</string>
+    <string name="no_medication">无</string>
+    <string name="symptom">症状</string>
+    <string name="language_used">使用语言</string>
+    <string name="english">英语</string>
+    <string name="back_to_chat">返回HelloDoctor聊天</string>
+
+    <!-- 症状翻译菜单 -->
+    <string name="symptom_translation">症状翻译</string>
+    <string name="new_chat">新建聊天</string>
+    <string name="history">历史</string>
+
+    <!-- 用户信息 -->
+    <string name="health_status_record">健康状态记录表</string>
+    <string name="basic_info">基本信息</string>
+    <string name="name_input">输入姓名</string>
+    <string name="female">女性</string>
+    <string name="male">男性</string>
+    <string name="birth_date_format">YYYY-MM-DD</string>
+    <string name="blood_type_a">A型</string>
+    <string name="blood_type_b">B型</string>
+    <string name="blood_type_o">O型</string>
+    <string name="blood_type_ab">AB型</string>
+    <string name="blood_type_manual">手动输入</string>
+    <string name="blood_type_manual_input">手动输入血型</string>
+    <string name="health_status">健康状态</string>
+    <string name="allergy_question">1. 您对特定药物或食物过敏吗？</string>
+    <string name="yes_have">是的，我有</string>
+    <string name="no_have">不，我没有</string>
+    <string name="allergy_detail_question">1-1. 您有什么过敏症状？</string>
+    <string name="allergy_type_medicine">药物</string>
+    <string name="allergy_antibiotic">抗生素</string>
+    <string name="allergy_nsaid">非甾体抗炎药</string>
+    <string name="allergy_vaccine">疫苗成分</string>
+    <string name="allergy_local_anesthetic">局部麻醉药</string>
+    <string name="allergy_other">其他</string>
+    <string name="medicine_question">2. 您目前正在服用处方药或补充剂吗？</string>
+    <string name="pregnancy_question">3. 您目前是否怀孕或正在哺乳？</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+
+    <!-- 欢迎界面 -->
+    <string name="google_sign_in">使用Google登录</string>
+
+</resources>
+

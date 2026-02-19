@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HelloDoctor</string>
+
+    <!-- Common -->
+    <string name="back">Back</string>
+    <string name="button_text">Button Text</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="next">Next</string>
+    <string name="select">Select</string>
+
+    <!-- Dialog -->
+    <string name="selected_medicines">Selected Medicines</string>
+    <string name="no_selected_medicines">No selected medicines.</string>
+
+    <!-- Chat Screen -->
+    <string name="symptom_analysis">Symptom Analysis</string>
+    <string name="symptom_input_hint">Enter your symptoms</string>
+    <string name="send">Send</string>
+
+    <!-- Medical Result -->
+    <string name="medical_result">Medical Result</string>
+    <string name="questionnaire">Questionnaire</string>
+    <string name="hospital_map">Hospital Map</string>
+
+    <!-- Drug Alarm -->
+    <string name="drug_alarm">Medication Reminder</string>
+    <string name="add_drug">+ Add Medication</string>
+
+    <!-- Drug Info -->
+    <string name="drug_info">Medication Information</string>
+    <string name="pharmacy_label">Pharmacy:</string>
+    <string name="intake_type_label">Intake Type:</string>
+    <string name="start_date_label">Start Date:</string>
+    <string name="end_date_label">End Date:</string>
+    <string name="intake_time_title">Intake Time</string>
+    <string name="medicine_list">Medicine List</string>
+
+    <!-- Drug Info Input -->
+    <string name="drug_info_input">Medication Information Input</string>
+    <string name="pharmacy_name">Pharmacy Name</string>
+    <string name="pharmacy_name_hint">Enter pharmacy name</string>
+    <string name="intake_type">Intake Type</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="add_time">+ Add Time</string>
+
+    <!-- Questionnaire (Field Mode) -->
+    <string name="translate">Translate</string>
+    <string name="patient_info">Patient Information</string>
+    <string name="name">Name</string>
+    <string name="gender">Gender</string>
+    <string name="birth_date">Date of Birth</string>
+    <string name="blood_type">Blood Type</string>
+    <string name="medication_status">Medication Status</string>
+    <string name="no_medication">None</string>
+    <string name="symptom">Symptom</string>
+    <string name="language_used">Language Used</string>
+    <string name="english">English</string>
+    <string name="back_to_chat">Back to HelloDoctor Chat</string>
+
+    <!-- Symptom Translation Menu -->
+    <string name="symptom_translation">Symptom Translation</string>
+    <string name="new_chat">New Chat</string>
+    <string name="history">History</string>
+
+    <!-- User Info -->
+    <string name="health_status_record">Health Status Record</string>
+    <string name="basic_info">Basic Information</string>
+    <string name="name_input">Enter name</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="birth_date_format">YYYY-MM-DD</string>
+    <string name="blood_type_a">Type A</string>
+    <string name="blood_type_b">Type B</string>
+    <string name="blood_type_o">Type O</string>
+    <string name="blood_type_ab">Type AB</string>
+    <string name="blood_type_manual">Enter Manually</string>
+    <string name="blood_type_manual_input">Enter blood type manually</string>
+    <string name="health_status">Health Status</string>
+    <string name="allergy_question">1. Do you have any allergies to specific medications or foods?</string>
+    <string name="yes_have">Yes, I do</string>
+    <string name="no_have">No, I don\'t</string>
+    <string name="allergy_detail_question">1-1. What allergies do you have?</string>
+    <string name="allergy_type_medicine">Medication</string>
+    <string name="allergy_antibiotic">Antibiotic</string>
+    <string name="allergy_nsaid">Anti-inflammatory</string>
+    <string name="allergy_vaccine">Vaccine Component</string>
+    <string name="allergy_local_anesthetic">Local Anesthetic</string>
+    <string name="allergy_other">Other</string>
+    <string name="medicine_question">2. Are you currently taking any prescription medications or supplements?</string>
+    <string name="pregnancy_question">3. Are you currently pregnant or breastfeeding?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Welcome Screen -->
+    <string name="google_sign_in">Sign in with Google</string>
+
+</resources>
+
