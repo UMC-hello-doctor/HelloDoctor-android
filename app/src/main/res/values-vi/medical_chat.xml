@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Chung -->
+    <string name="first_question">Vui lòng cho tôi biết triệu chứng của bạn. (Ví dụ: Tôi bị đau bụng)</string>
+    <string name="more_symptom">Vui lòng mô tả triệu chứng của bạn chi tiết hơn.</string>
+    <string name="dept_detected">Khoa:</string>
+    <string name="nrs_selected">Mức độ đau: %d (0-10)</string>
+    <string name="emergency_call_119">Khẩn cấp! Đến phòng cấp cứu gần nhất hoặc gọi 115.</string>
+    <string name="hospital_search">Chế độ hiện trường: Tìm bệnh viện.</string>
+
+    <!-- 1. Tiêu hóa -->
+    <string name="dept_gastro">Nội khoa - Tiêu hóa</string>
+    <string name="dept_gastro_p">Cơn đau tệ hơn sau bữa ăn hay khi đói? Bạn có ăn thức ăn cay hoặc nhiều dầu mỡ không?</string>
+    <string name="dept_gastro_q">Đau như bị siết chặt hay cảm giác nóng rát (ợ nóng)?</string>
+    <string name="dept_gastro_r">Vùng thượng vị, hạ vị hay toàn bộ bụng?</string>
+    <string name="dept_gastro_s">Đau đến mức không thể duỗi lưng được? (NRS 0-10)</string>
+    <string name="dept_gastro_t">Cơn đau liên tục hay đau đi đau lại từng đợt?</string>
+    <string name="dept_gastro_a">Có nôn mửa, tiêu chảy, táo bón, sốt hoặc đầy hơi không?</string>
+
+    <!-- 2. Da liễu -->
+    <string name="dept_derm">Da liễu</string>
+    <string name="dept_derm_p">Trước khi có triệu chứng, bạn có ăn đồ mới, uống thuốc mới hoặc dùng mỹ phẩm mới không? Có tiếp xúc với ánh nắng mặt trời hoặc kim loại không?</string>
+    <string name="dept_derm_q">Ngứa không chịu được hay cảm giác châm chích và nóng rát?</string>
+    <string name="dept_derm_r">Chỉ ở một vị trí cụ thể (tay, chân) hay lan ra toàn thân?</string>
+    <string name="dept_derm_s">Ngứa đến mức không thể ngủ được? (NRS 0-10)</string>
+    <string name="dept_derm_t">Triệu chứng xuất hiện được bao lâu rồi? Có tệ hơn vào thời điểm cụ thể (như ban đêm) không?</string>
+    <string name="dept_derm_a">Vùng bị tổn thương có sưng (mề đay), chảy nước, phồng rộp hoặc nóng không?</string>
+
+    <!-- 3. Tai Mũi Họng -->
+    <string name="dept_ent">Tai Mũi Họng</string>
+    <string name="dept_ent_p">Đau tệ hơn khi nuốt nước bọt hoặc thức ăn? Tệ hơn khi xì mũi hoặc nằm xuống?</string>
+    <string name="dept_ent_q">Đau như bị cắt bằng dao hay cảm giác có dị vật trong cổ họng?</string>
+    <string name="dept_ent_r">Trong cổ họng, quanh mũi hay sâu trong tai?</string>
+    <string name="dept_ent_s">Đau đến mức khó ăn được? (NRS 0-10)</string>
+    <string name="dept_ent_t">Triệu chứng bắt đầu cách đây mấy ngày? Tệ nhất vào lúc thức dậy?</string>
+    <string name="dept_ent_a">Có sốt, ho, đờm, sổ mũi hoặc giảm thính lực không?</string>
+
+    <!-- 4. Hô hấp / Tim mạch -->
+    <string name="dept_resp">Nội khoa - Hô hấp/Tim mạch</string>
+    <string name="dept_resp_p">Triệu chứng tệ hơn khi leo cầu thang hoặc tập thể dục? Khó thở hơn khi nằm xuống?</string>
+    <string name="dept_resp_q">Cảm giác ngực bị ép hay không thể hít thở sâu?</string>
+    <string name="dept_resp_r">Đau hoặc tức ở ngực trái hay lan ra cổ hoặc vai?</string>
+    <string name="dept_resp_s">Khó thở đến mức không thể nói thành câu? (NRS 0-10)</string>
+    <string name="dept_resp_t">Triệu chứng xuất hiện đột ngột hay từ từ trầm trọng hơn trong vài ngày?</string>
+    <string name="dept_resp_a">Có thở khò khè, đổ mồ hôi lạnh, đờm (chú ý màu sắc) hoặc đau ngực không?</string>
+
+    <!-- 5. Nhãn khoa -->
+    <string name="dept_oph">Nhãn khoa</string>
+    <string name="dept_oph_p">Bạn có đang đeo kính áp tròng không? Có thứ gì đó bay vào mắt không?</string>
+    <string name="dept_oph_q">Nhìn mờ hay cảm giác như có cát trong mắt?</string>
+    <string name="dept_oph_r">Ảnh hưởng một mắt hay cả hai mắt?</string>
+    <string name="dept_oph_s">Đau đến mức không mở được mắt? (NRS 0-10)</string>
+    <string name="dept_oph_t">Tệ hơn khi thức dậy hay trầm trọng hơn trong suốt cả ngày?</string>
+    <string name="dept_oph_a">Có giảm thị lực, sưng mí mắt (lẹo) hoặc ngứa không?</string>
+
+    <!-- 6. Tiết niệu -->
+    <string name="dept_urol">Tiết niệu</string>
+    <string name="dept_urol_p">Đau tệ hơn khi nhịn tiểu hay trong khi đi tiểu?</string>
+    <string name="dept_urol_q">Cảm giác nóng rát hay như bị đâm bằng vật sắc nhọn?</string>
+    <string name="dept_urol_r">Đau di chuyển từ sườn xuống háng?</string>
+    <string name="dept_urol_s">Đau đến mức không thể đứng thẳng được? (NRS 0-10)</string>
+    <string name="dept_urol_t">Tần suất đi tiểu tăng lên hơn tám lần một ngày?</string>
+    <string name="dept_urol_a">Có máu trong nước tiểu, sốt cao đột ngột hoặc rét run không?</string>
+
+    <!-- 7. Thần kinh -->
+    <string name="dept_neuro">Thần kinh</string>
+    <string name="dept_neuro_p">Triệu chứng tệ hơn khi quay đầu hoặc đứng lên?</string>
+    <string name="dept_neuro_q">Cảm giác như bị điện giật hoặc tê râm ran hay đau nhói như bị đập bằng búa?</string>
+    <string name="dept_neuro_r">Triệu chứng chỉ ở một bên cơ thể (trái hoặc phải)?</string>
+    <string name="dept_neuro_s">Chóng mặt hoặc đau đến mức không thể sinh hoạt hàng ngày? (NRS 0-10)</string>
+    <string name="dept_neuro_t">Triệu chứng xuất hiện ngắn trong vài giây hay kéo dài vài giờ?</string>
+    <string name="dept_neuro_a">Có nhìn thấy đôi (song thị), nói ngọng hoặc yếu một tay hoặc chân không?</string>
+
+    <!-- 8. Phụ khoa -->
+    <string name="dept_gyne">Sản phụ khoa</string>
+    <string name="dept_gyne_p">Đau tệ hơn sau quan hệ tình dục hoặc vận động mạnh?</string>
+    <string name="dept_gyne_q">Đau co thắt hay đau nặng trĩu như sắp rơi ra?</string>
+    <string name="dept_gyne_r">Đau toàn bộ vùng bụng dưới hay một bên (trái/phải) tệ hơn?</string>
+    <string name="dept_gyne_s">Đau bụng kinh tệ hơn bình thường nhiều và thuốc giảm đau không giúp ích? (NRS 0-10)</string>
+    <string name="dept_gyne_t">Kỳ kinh cuối cùng là khi nào và bạn đau được mấy ngày rồi?</string>
+    <string name="dept_gyne_a">Có chảy máu bất thường, thay đổi màu sắc/mùi hương dịch tiết hoặc khả năng mang thai không?</string>
+
+    <!-- 9. Nha khoa -->
+    <string name="dept_dent">Nha khoa</string>
+    <string name="dept_dent_p">Đau tệ hơn khi ăn/uống đồ lạnh hoặc nóng, hoặc khi nhai?</string>
+    <string name="dept_dent_q">Đau nhói sắc hay đau âm ỉ nhói?</string>
+    <string name="dept_dent_r">Bạn có thể chỉ ra chiếc răng cụ thể bị đau không?</string>
+    <string name="dept_dent_s">Bạn có thể ngủ ban đêm mà không cần thuốc giảm đau không? (NRS 0-10)</string>
+    <string name="dept_dent_t">Chỉ đau khi ăn hay liên tục cả khi nghỉ ngơi?</string>
+    <string name="dept_dent_a">Có chảy máu nướu, sưng mặt hoặc hàm hoặc răng lung lay không?</string>
+
+    <!-- Thang NRS -->
+    <string name="nrs_0">Không đau</string>
+    <string name="nrs_1_4">Nhẹ</string>
+    <string name="nrs_5_6">Trung bình</string>
+    <string name="nrs_7_10">Nặng</string>
+
+    <!-- Câu hỏi cờ đỏ -->
+
+    <!-- 1. Nội khoa (Tiêu hóa/Hô hấp/Tim mạch) -->
+    <string name="redflag_internal_chest">Bạn có đau ngực như bị siết chặt hoặc ép lan ra hàm, cổ hoặc cánh tay trái không?</string>
+    <string name="redflag_internal_breathing">Môi hoặc móng tay chuyển xanh (tím tái) hoặc khó thở đến mức không thể nói được một câu?</string>
+    <string name="redflag_internal_gi_bleeding">Phân đen như hắc ín hoặc nôn ra máu? Hoặc bụng cứng như ván và đau không thể chạm vào?</string>
+
+    <!-- 2. Da liễu -->
+    <string name="redflag_derm_anaphylaxis">Cùng với triệu chứng da, bạn có thay đổi giọng nói hoặc sưng họng khiến khó thở không?</string>
+    <string name="redflag_derm_systemic">Môi hoặc quanh mắt sưng nghiêm trọng và cảm giác huyết áp giảm (chóng mặt/ngất xỉu)?</string>
+
+    <!-- 3. Tai Mũi Họng -->
+    <string name="redflag_ent_airway">Khó nuốt nước bọt đến mức chảy dãi liên tục hoặc nghe thấy tiếng kim loại (ran rít) khi hít vào?</string>
+    <string name="redflag_ent_infection">Vùng quanh cổ sưng nghiêm trọng và khó mở miệng?</string>
+
+    <!-- 4. Nhãn khoa -->
+    <string name="redflag_oph_vision_loss">Đột nhiên mất hoàn toàn thị lực một mắt hoặc một phần tầm nhìn bị che như có màn kéo?</string>
+    <string name="redflag_oph_severe_pain_vomit">Đau mắt cực độ như sắp nổ tung, kèm theo nôn mửa?</string>
+
+    <!-- 5. Tiết niệu -->
+    <string name="redflag_urol_flank_fever">Đau sườn nghiêm trọng không đáp ứng với thuốc giảm đau, kèm sốt cao (trên 38°C)?</string>
+    <string name="redflag_urol_urinary_retention">Hoàn toàn không có nước tiểu ra và cảm giác bàng quang sắp nổ?</string>
+
+    <!-- 6. Thần kinh -->
+    <string name="redflag_neuro_fast">Một tay hoặc chân yếu đến mức không thể di chuyển hoặc một bên mặt sụp xuống và nói nghiêm trọng không rõ ràng?</string>
+    <string name="redflag_neuro_thunderclap_headache">Đột nhiên đau đầu tệ nhất trong đời như bị đập bằng búa?</string>
+
+    <!-- 7. Phụ khoa -->
+    <string name="redflag_gyne_heavy_bleeding">Chảy máu nặng đến mức băng vệ sinh thấm hết trong 15 phút và cảm thấy chóng mặt?</string>
+    <string name="redflag_gyne_ectopic">Có khả năng mang thai, đau bụng dưới như bị đâm kèm đổ mồ hôi lạnh?</string>
+
+    <!-- 8. Chỉnh hình -->
+    <string name="redflag_ortho_cauda_equina">Sau tai nạn, mất kiểm soát đại tiện/tiểu tiện hoặc mất hoàn toàn cảm giác quanh hậu môn và chân?</string>
+    <string name="redflag_ortho_compartment">Đau ở vị trí gãy xương không thể chịu đựng được và ngón tay hoặc ngón chân tái nhợt và tê?</string>
+
+    <!-- 9. Nha khoa -->
+    <string name="redflag_dent_ludwig">Cùng với đau răng, toàn bộ mặt và cổ sưng nghiêm trọng, khiến khó thở hoặc nuốt?</string>
+
+</resources>
+
+

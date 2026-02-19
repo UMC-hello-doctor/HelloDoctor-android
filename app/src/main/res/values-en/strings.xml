@@ -145,6 +145,9 @@
     <string name="recommended_department">Recommended Department</string>
 
     <!-- LanguageSelectFragment -->
+    <string name="language_select_title">Nice to meet you!\nLet\'s set your language first.</string>
+    <string name="language_select_hint">Select a language</string>
+    <string name="save_language">Save</string>
     <string name="language_korean">Korean</string>
     <string name="language_english">English (English)</string>
     <string name="language_japanese">Japanese (日本語)</string>
@@ -154,6 +157,12 @@
     <!-- My Page -->
     <string name="mypage_title">My Page</string>
     <string name="language_change">Change Language</string>
+
+    <!-- Home Menu Buttons -->
+    <string name="menu_hospital">Hospital Search</string>
+    <string name="menu_prescription">Manage Prescriptions</string>
+    <string name="menu_symptom">Symptom Translation</string>
+    <string name="menu_mypage">My Page</string>
 
 </resources>
 

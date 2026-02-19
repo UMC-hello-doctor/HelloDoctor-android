@@ -145,6 +145,9 @@
     <string name="recommended_department">Khoa được đề xuất</string>
 
     <!-- LanguageSelectFragment -->
+    <string name="language_select_title">Rất vui được gặp bạn!\nHãy đặt ngôn ngữ trước.</string>
+    <string name="language_select_hint">Chọn ngôn ngữ</string>
+    <string name="save_language">Lưu</string>
     <string name="language_korean">Tiếng Hàn</string>
     <string name="language_english">Tiếng Anh (English)</string>
     <string name="language_japanese">Tiếng Nhật (日本語)</string>
@@ -154,4 +157,10 @@
     <!-- Tiêu đề Trang của tôi -->
     <string name="mypage_title">Trang của tôi</string>
     <string name="language_change">Đổi ngôn ngữ</string>
+
+    <!-- Nút Menu Trang chủ -->
+    <string name="menu_hospital">Tìm kiếm cơ sở y tế</string>
+    <string name="menu_prescription">Quản lý đơn thuốc</string>
+    <string name="menu_symptom">Dịch các triệu chứng</string>
+    <string name="menu_mypage">Trang của tôi</string>
 </resources>

@@ -50,4 +50,14 @@
     <color name="gray_600">#666666</color>
     <color name="gray_700">#777777</color>
     <color name="orange_accent">#FF6B35</color>
+
+    <!-- Home Menu Button Colors -->
+    <color name="hospital_bg">#F0F0F0</color>
+    <color name="hospital_text">#5B7FE6</color>
+    <color name="prescription_bg">#4A90FF</color>
+    <color name="prescription_text">#FFFFFF</color>
+    <color name="symptom_bg">#4A90FF</color>
+    <color name="symptom_text">#FFFFFF</color>
+    <color name="mypage_bg">#F0F0F0</color>
+    <color name="mypage_text">#5B7FE6</color>
 </resources>

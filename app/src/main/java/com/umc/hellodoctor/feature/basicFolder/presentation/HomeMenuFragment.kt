@@ -42,20 +42,20 @@ class HomeMenuFragment : Fragment() {
             userInfoViewModel.getMyProfile()
         }
 
-        binding.menuHospital.setOnClickListener {
+        binding.btnHospitalSearch.setOnClickListener {
 
             showToast(requireContext(), getString(R.string.hospital_search_preparing))
         }
 
-        binding.menuPrescription.setOnClickListener {
+        binding.btnPrescriptionManage.setOnClickListener {
             findNavController().navigate(R.id.action_homeMenuFragment_to_drugAlarmFragment)
         }
 
-        binding.menuSymptom.setOnClickListener {
+        binding.btnSymptomTranslate.setOnClickListener {
             findNavController().navigate(R.id.action_homeMenuFragment_to_symptomMenuFragment)
         }
 
-        binding.menuMyPage.setOnClickListener {
+        binding.btnMyPage.setOnClickListener {
             findNavController().navigate(R.id.action_homeMenuFragment_to_myPageMenuFragment)
         }
 

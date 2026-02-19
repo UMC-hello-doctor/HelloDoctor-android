@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <string name="first_question">Please tell me your symptoms. (e.g., I have a stomachache)</string>
+    <string name="more_symptom">Please describe your symptoms in more detail.</string>
+    <string name="dept_detected">Department:</string>
+    <string name="nrs_selected">Pain intensity: %d (0-10)</string>
+    <string name="emergency_call_119">Emergency! Go to the nearest ER or call emergency services.</string>
+    <string name="hospital_search">Field mode: Find a hospital.</string>
+
+    <!-- 1. Gastroenterology -->
+    <string name="dept_gastro">Internal Medicine - Gastroenterology</string>
+    <string name="dept_gastro_p">Does the pain worsen after meals, or when you have an empty stomach? Did you eat spicy or greasy food?</string>
+    <string name="dept_gastro_q">Is it a squeezing pain, or a burning sensation (heartburn)?</string>
+    <string name="dept_gastro_r">Is it around the upper abdomen, lower abdomen, or all over the abdomen?</string>
+    <string name="dept_gastro_s">Is the pain so severe you cannot straighten your back? (NRS 0-10)</string>
+    <string name="dept_gastro_t">Is the pain continuous, or does it come and go intermittently?</string>
+    <string name="dept_gastro_a">Do you have vomiting, diarrhea, constipation, fever, or abdominal bloating?</string>
+
+    <!-- 2. Dermatology -->
+    <string name="dept_derm">Dermatology</string>
+    <string name="dept_derm_p">Before symptoms, did you eat new food, take medication, or use new cosmetics? Were you exposed to sunlight or metal?</string>
+    <string name="dept_derm_q">Is it unbearably itchy, or stinging and burning?</string>
+    <string name="dept_derm_r">Is it only in specific areas (arms, legs), or spreading all over your body?</string>
+    <string name="dept_derm_s">Is the itching so bad you cannot sleep? (NRS 0-10)</string>
+    <string name="dept_derm_t">How long have symptoms been present? Are they worse at certain times (e.g., night)?</string>
+    <string name="dept_derm_a">Do you have swelling (wheals), oozing, blisters, or warmth at the affected area?</string>
+
+    <!-- 3. ENT -->
+    <string name="dept_ent">Otolaryngology (ENT)</string>
+    <string name="dept_ent_p">Does pain worsen when swallowing saliva or food? Is it worse when blowing your nose or lying down?</string>
+    <string name="dept_ent_q">Is it a sharp cutting pain, or a foreign body sensation in your throat?</string>
+    <string name="dept_ent_r">Is it inside your throat, around your nose, or deep in your ear?</string>
+    <string name="dept_ent_s">Is the pain so severe it is difficult to eat? (NRS 0-10)</string>
+    <string name="dept_ent_t">How many days ago did symptoms start? Are they worst when you wake up?</string>
+    <string name="dept_ent_a">Do you have fever, cough, sputum, runny nose, or decreased hearing?</string>
+
+    <!-- 4. Pulmonology / Cardiology -->
+    <string name="dept_resp">Internal Medicine - Respiratory/Cardiology</string>
+    <string name="dept_resp_p">Do symptoms worsen when climbing stairs or exercising? Are you more short of breath when lying down?</string>
+    <string name="dept_resp_q">Does it feel like your chest is being pressed, or like you cannot take a full breath?</string>
+    <string name="dept_resp_r">Is the pain or tightness in your left chest, or does it radiate to your neck or shoulder?</string>
+    <string name="dept_resp_s">Are you so short of breath you cannot speak in full sentences? (NRS 0-10)</string>
+    <string name="dept_resp_t">Did symptoms start suddenly, or gradually worsen over several days?</string>
+    <string name="dept_resp_a">Do you have wheezing, cold sweats, sputum (note the color), or chest pain?</string>
+
+    <!-- 5. Ophthalmology -->
+    <string name="dept_oph">Ophthalmology</string>
+    <string name="dept_oph_p">Are you wearing contact lenses, or did something get into your eye?</string>
+    <string name="dept_oph_q">Is your vision blurry, or does it feel gritty like sand in your eye?</string>
+    <string name="dept_oph_r">Is it affecting one eye or both eyes?</string>
+    <string name="dept_oph_s">Is the pain so severe you cannot open your eyes? (NRS 0-10)</string>
+    <string name="dept_oph_t">Is it worse when you wake up, or does it worsen throughout the day?</string>
+    <string name="dept_oph_a">Do you have decreased vision, swollen eyelids (stye), or itching?</string>
+
+    <!-- 6. Urology -->
+    <string name="dept_urol">Urology</string>
+    <string name="dept_urol_p">Does pain worsen when holding urine, or during urination?</string>
+    <string name="dept_urol_q">Does it feel like burning, or being stabbed with something sharp?</string>
+    <string name="dept_urol_r">Does pain move from your flank down toward your groin?</string>
+    <string name="dept_urol_s">Is the pain so severe you cannot stand up straight? (NRS 0-10)</string>
+    <string name="dept_urol_t">Has urination frequency increased to more than eight times a day?</string>
+    <string name="dept_urol_a">Do you have blood in urine, sudden high fever, or chills?</string>
+
+    <!-- 7. Neurology -->
+    <string name="dept_neuro">Neurology</string>
+    <string name="dept_neuro_p">Do symptoms worsen when turning your head or standing up?</string>
+    <string name="dept_neuro_q">Does it feel like electric shocks or tingling, or throbbing like being hit with a hammer?</string>
+    <string name="dept_neuro_r">Are symptoms limited to one side of your body (left or right)?</string>
+    <string name="dept_neuro_s">Is the dizziness or pain so severe you cannot carry out daily activities? (NRS 0-10)</string>
+    <string name="dept_neuro_t">Do symptoms appear briefly for a few seconds, or last for several hours?</string>
+    <string name="dept_neuro_a">Do you see double (diplopia), have slurred speech, or weakness in one arm or leg?</string>
+
+    <!-- 8. Gynecology -->
+    <string name="dept_gyne">Obstetrics and Gynecology</string>
+    <string name="dept_gyne_p">Does pain worsen after sexual intercourse or vigorous movement?</string>
+    <string name="dept_gyne_q">Is it cramping pain, or a heavy dragging pain as if everything is falling out?</string>
+    <string name="dept_gyne_r">Is pain over the entire lower abdomen, or is one side (left/right) worse?</string>
+    <string name="dept_gyne_s">Are menstrual cramps much worse than usual and not relieved by painkillers? (NRS 0-10)</string>
+    <string name="dept_gyne_t">When was your last menstrual period, and for how many days have you had this pain?</string>
+    <string name="dept_gyne_a">Do you have abnormal bleeding, changes in discharge color/smell, or possibility of pregnancy?</string>
+
+    <!-- 9. Dentistry -->
+    <string name="dept_dent">Dentistry</string>
+    <string name="dept_dent_p">Does pain worsen when eating/drinking something cold or hot, or when chewing?</string>
+    <string name="dept_dent_q">Is it a sharp shooting pain, or a dull throbbing pain?</string>
+    <string name="dept_dent_r">Can you point to the specific tooth that hurts?</string>
+    <string name="dept_dent_s">Can you sleep at night without painkillers? (NRS 0-10)</string>
+    <string name="dept_dent_t">Does it hurt only when eating, or does it continue even at rest?</string>
+    <string name="dept_dent_a">Do you have gum bleeding, facial or jaw swelling, or loose teeth?</string>
+
+    <!-- NRS scale -->
+    <string name="nrs_0">No pain</string>
+    <string name="nrs_1_4">Mild</string>
+    <string name="nrs_5_6">Moderate</string>
+    <string name="nrs_7_10">Severe</string>
+
+    <!-- Red Flag Questions -->
+
+    <!-- 1. Internal Medicine (GI/Resp/Cardio) -->
+    <string name="redflag_internal_chest">Do you have squeezing or pressing chest pain that radiates to your jaw, neck, or left arm?</string>
+    <string name="redflag_internal_breathing">Are your lips or fingernails turning blue (cyanosis), or are you so short of breath you cannot speak even one sentence?</string>
+    <string name="redflag_internal_gi_bleeding">Is your stool black like tar, or have you vomited blood? Or is your abdomen rigid like a board and too painful to touch?</string>
+
+    <!-- 2. Dermatology -->
+    <string name="redflag_derm_anaphylaxis">Along with skin symptoms, do you have voice changes or throat swelling making it hard to breathe?</string>
+    <string name="redflag_derm_systemic">Are your lips or around your eyes severely swollen, and do you feel like your blood pressure is dropping (dizziness/fainting)?</string>
+
+    <!-- 3. ENT -->
+    <string name="redflag_ent_airway">Is it difficult to swallow saliva so you keep drooling, or do you hear a metallic sound (stridor) when breathing in?</string>
+    <string name="redflag_ent_infection">Is the area around your neck severely swollen and is it difficult even to open your mouth?</string>
+
+    <!-- 4. Ophthalmology -->
+    <string name="redflag_oph_vision_loss">Did you suddenly lose vision in one eye completely, or is part of your vision blocked as if a curtain is drawn?</string>
+    <string name="redflag_oph_severe_pain_vomit">Do you have extreme eye pain as if your eye will burst, accompanied by vomiting?</string>
+
+    <!-- 5. Urology -->
+    <string name="redflag_urol_flank_fever">Do you have severe flank pain that does not respond to painkillers, accompanied by high fever (above 38°C)?</string>
+    <string name="redflag_urol_urinary_retention">Is no urine coming out at all, and do you feel like your bladder will burst?</string>
+
+    <!-- 6. Neurology -->
+    <string name="redflag_neuro_fast">Is one arm or leg so weak you cannot move it, or is one side of your face drooping and your speech severely slurred?</string>
+    <string name="redflag_neuro_thunderclap_headache">Did you suddenly develop the worst headache of your life, as if you were hit with a hammer?</string>
+
+    <!-- 7. Gynecology -->
+    <string name="redflag_gyne_heavy_bleeding">Is bleeding so heavy that your pad soaks through in 15 minutes, and are you feeling dizzy?</string>
+    <string name="redflag_gyne_ectopic">With a possibility of pregnancy, do you have stabbing lower abdominal pain accompanied by cold sweats?</string>
+
+    <!-- 8. Orthopedics -->
+    <string name="redflag_ortho_cauda_equina">After an accident, have you lost bowel/bladder control, or have you lost all sensation around your anus and legs?</string>
+    <string name="redflag_ortho_compartment">Is pain at the fracture site unbearably severe, and are your toes or fingers pale and numb?</string>
+
+    <!-- 9. Dentistry -->
+    <string name="redflag_dent_ludwig">Along with tooth pain, is your entire face and neck severely swollen, making it difficult to breathe or swallow?</string>
+
+</resources>
+

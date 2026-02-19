@@ -3,82 +3,216 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
-    <!-- 격자 컨테이너 (중앙 정렬) -->
+    <!-- 중앙 그리드 컨테이너 -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/gridContainer"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="12dp"
+        android:padding="16dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="1">
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <!-- 의료기관 검색 -->
+    <!-- 의료기관 검색 (위쪽 왼쪽) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnHospitalSearch"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/bg_hospital_rounded"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="12dp"
+        android:elevation="8dp"
+        app:layout_constraintStart_toStartOf="@id/gridContainer"
+        app:layout_constraintTop_toTopOf="@id/gridContainer">
+
+        <TextView
+            android:id="@+id/txtHospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_hospital"
+            android:textColor="@color/hospital_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
-            android:id="@+id/menuHospital"
-            android:layout_width="0dp"
+            android:id="@+id/imgHospital"
+            android:contentDescription="@string/menu_hospital"
             android:layout_height="0dp"
+            android:layout_width="0dp"
             android:src="@drawable/menu_hospital"
-            android:adjustViewBounds="true"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintWidth_percent="0.48"
+            android:scaleType="centerInside"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtHospital"
+            />
 
-        <!-- 처방약 관리 -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 처방약 관리 (위쪽 오른쪽) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnPrescriptionManage"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/bg_prescription_rounded"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="12dp"
+        android:elevation="8dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/btnHospitalSearch"
+        app:layout_constraintTop_toTopOf="@id/gridContainer">
+
+        <TextView
+            android:id="@+id/txtPrescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_prescription"
+            android:textColor="@color/prescription_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
-            android:id="@+id/menuPrescription"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/imgPrescription"
+            android:contentDescription="@string/menu_prescription"
             android:src="@drawable/menu_prescription"
-            android:adjustViewBounds="true"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintWidth_percent="0.48"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <!-- 증상 번역 -->
-        <ImageView
-            android:id="@+id/menuSymptom"
-            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/menu_symptom"
-            android:adjustViewBounds="true"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginTop="12dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintWidth_percent="0.48"
+            android:layout_width="0dp"
+            android:scaleType="centerInside"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/menuHospital"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtPrescription" />
 
-        <!-- 마이페이지 -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 증상 번역 (아래쪽 왼쪽) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnSymptomTranslate"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/bg_symptom_rounded"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:elevation="8dp"
+        app:layout_constraintStart_toStartOf="@id/gridContainer"
+        app:layout_constraintTop_toBottomOf="@id/btnHospitalSearch">
+
+        <TextView
+            android:id="@+id/txtSymptom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_symptom"
+            android:textColor="@color/symptom_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
-            android:id="@+id/menuMyPage"
-            android:layout_width="0dp"
+            android:id="@+id/imgSymptom"
+            android:src="@drawable/menu_symptom"
             android:layout_height="0dp"
-            android:src="@drawable/menu_mypage"
-            android:adjustViewBounds="true"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginTop="12dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintWidth_percent="0.48"
+            android:layout_width="0dp"
+            android:contentDescription="@string/menu_symptom"
+            android:scaleType="centerInside"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/menuPrescription"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtSymptom" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 마이페이지 (아래쪽 오른쪽) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnMyPage"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/bg_mypage_rounded"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:elevation="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@id/btnSymptomTranslate"
+        app:layout_constraintTop_toBottomOf="@id/btnPrescriptionManage">
+
+        <TextView
+            android:id="@+id/txtMyPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_mypage"
+            android:textColor="@color/mypage_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgMyPage"
+            android:contentDescription="@string/menu_mypage"
+            android:src="@drawable/menu_mypage"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:scaleType="centerInside"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtMyPage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

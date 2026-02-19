@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 通用 -->
+    <string name="first_question">请告诉我您的症状。（例如：我肚子疼）</string>
+    <string name="more_symptom">请更详细地描述您的症状。</string>
+    <string name="dept_detected">科室：</string>
+    <string name="nrs_selected">疼痛强度：%d (0-10)</string>
+    <string name="emergency_call_119">紧急情况！请前往最近的急诊室或拨打120。</string>
+    <string name="hospital_search">现场模式：查找医院。</string>
+
+    <!-- 1. 消化内科 -->
+    <string name="dept_gastro">内科 - 消化科</string>
+    <string name="dept_gastro_p">饭后疼痛加重，还是空腹时更痛？您吃了辛辣或油腻的食物吗？</string>
+    <string name="dept_gastro_q">是挤压般的疼痛，还是灼烧感（烧心）？</string>
+    <string name="dept_gastro_r">是上腹部、下腹部，还是整个腹部都痛？</string>
+    <string name="dept_gastro_s">疼痛严重到无法挺直腰吗？（NRS 0-10）</string>
+    <string name="dept_gastro_t">疼痛是持续的，还是间歇性的？</string>
+    <string name="dept_gastro_a">有呕吐、腹泻、便秘、发热或腹胀吗？</string>
+
+    <!-- 2. 皮肤科 -->
+    <string name="dept_derm">皮肤科</string>
+    <string name="dept_derm_p">症状出现前，您吃了新食物、服用了药物或使用了新化妆品吗？您接触过阳光或金属吗？</string>
+    <string name="dept_derm_q">是难以忍受的瘙痒，还是刺痛和灼热感？</string>
+    <string name="dept_derm_r">仅在特定部位（手臂、腿部），还是扩散到全身？</string>
+    <string name="dept_derm_s">瘙痒严重到无法入睡吗？（NRS 0-10）</string>
+    <string name="dept_derm_t">症状出现多久了？在特定时间（如夜间）会加重吗？</string>
+    <string name="dept_derm_a">患处有肿胀（风团）、渗液、水疱或发热吗？</string>
+
+    <!-- 3. 耳鼻喉科 -->
+    <string name="dept_ent">耳鼻喉科</string>
+    <string name="dept_ent_p">吞咽唾液或食物时疼痛加重吗？擤鼻涕或躺下时更不舒服吗？</string>
+    <string name="dept_ent_q">是刀割般的疼痛，还是喉咙有异物感？</string>
+    <string name="dept_ent_r">是喉咙里面、鼻子周围，还是耳朵深处？</string>
+    <string name="dept_ent_s">疼痛严重到难以进食吗？（NRS 0-10）</string>
+    <string name="dept_ent_t">症状开始几天了？早上起床时最严重吗？</string>
+    <string name="dept_ent_a">有发热、咳嗽、痰、流鼻涕或听力下降吗？</string>
+
+    <!-- 4. 呼吸内科/心内科 -->
+    <string name="dept_resp">内科 - 呼吸/心脏科</string>
+    <string name="dept_resp_p">爬楼梯或运动时症状加重吗？躺下时更气短吗？</string>
+    <string name="dept_resp_q">感觉胸部被压迫，还是无法深呼吸？</string>
+    <string name="dept_resp_r">疼痛或压迫感在左胸，还是放射到颈部或肩部？</string>
+    <string name="dept_resp_s">气短到无法完整说完一句话吗？（NRS 0-10）</string>
+    <string name="dept_resp_t">症状是突然发生的，还是几天内逐渐加重的？</string>
+    <string name="dept_resp_a">有哮鸣音、冷汗、痰（注意颜色）或胸痛吗？</string>
+
+    <!-- 5. 眼科 -->
+    <string name="dept_oph">眼科</string>
+    <string name="dept_oph_p">您戴着隐形眼镜吗？眼睛里进东西了吗？</string>
+    <string name="dept_oph_q">视力模糊，还是感觉眼里有沙子？</string>
+    <string name="dept_oph_r">影响一只眼睛还是两只眼睛？</string>
+    <string name="dept_oph_s">疼痛严重到无法睁开眼睛吗？（NRS 0-10）</string>
+    <string name="dept_oph_t">早上醒来时更严重，还是一天内逐渐加重？</string>
+    <string name="dept_oph_a">有视力下降、眼睑肿胀（麦粒肿）或瘙痒吗？</string>
+
+    <!-- 6. 泌尿科 -->
+    <string name="dept_urol">泌尿科</string>
+    <string name="dept_urol_p">憋尿或排尿时疼痛加重吗？</string>
+    <string name="dept_urol_q">是灼烧感，还是像被尖锐物体刺痛？</string>
+    <string name="dept_urol_r">疼痛从腰侧向腹股沟移动吗？</string>
+    <string name="dept_urol_s">疼痛严重到无法站直吗？（NRS 0-10）</string>
+    <string name="dept_urol_t">排尿次数增加到一天超过八次吗？</string>
+    <string name="dept_urol_a">有血尿、突发高热或寒战吗？</string>
+
+    <!-- 7. 神经内科 -->
+    <string name="dept_neuro">神经内科</string>
+    <string name="dept_neuro_p">转头或站起来时症状加重吗？</string>
+    <string name="dept_neuro_q">感觉像触电或麻刺，还是像被锤子敲击般的跳痛？</string>
+    <string name="dept_neuro_r">症状仅限于身体一侧（左侧或右侧）吗？</string>
+    <string name="dept_neuro_s">头晕或疼痛严重到无法进行日常活动吗？（NRS 0-10）</string>
+    <string name="dept_neuro_t">症状短暂出现几秒钟，还是持续几小时？</string>
+    <string name="dept_neuro_a">有复视（看东西重影）、说话不清或一侧手臂或腿无力吗？</string>
+
+    <!-- 8. 妇科 -->
+    <string name="dept_gyne">妇产科</string>
+    <string name="dept_gyne_p">性交后或剧烈运动后疼痛加重吗？</string>
+    <string name="dept_gyne_q">是痉挛性疼痛，还是沉重的下坠感？</string>
+    <string name="dept_gyne_r">整个下腹痛，还是一侧（左/右）更严重？</string>
+    <string name="dept_gyne_s">痛经比平时严重得多，止痛药无效吗？（NRS 0-10）</string>
+    <string name="dept_gyne_t">您上次月经是什么时候，这种疼痛持续了几天？</string>
+    <string name="dept_gyne_a">有异常出血、分泌物颜色/气味变化或怀孕可能吗？</string>
+
+    <!-- 9. 口腔科 -->
+    <string name="dept_dent">口腔科</string>
+    <string name="dept_dent_p">吃喝冷热食物或咀嚼时疼痛加重吗？</string>
+    <string name="dept_dent_q">是尖锐的刺痛，还是钝性的跳痛？</string>
+    <string name="dept_dent_r">能指出具体是哪颗牙痛吗？</string>
+    <string name="dept_dent_s">不吃止痛药能睡觉吗？（NRS 0-10）</string>
+    <string name="dept_dent_t">只在进食时痛，还是休息时也持续疼痛？</string>
+    <string name="dept_dent_a">有牙龈出血、面部或下颌肿胀或牙齿松动吗？</string>
+
+    <!-- NRS 量表 -->
+    <string name="nrs_0">无痛</string>
+    <string name="nrs_1_4">轻度</string>
+    <string name="nrs_5_6">中度</string>
+    <string name="nrs_7_10">重度</string>
+
+    <!-- 红旗问题 -->
+
+    <!-- 1. 内科（消化/呼吸/心脏） -->
+    <string name="redflag_internal_chest">有放射到下颌、颈部或左臂的挤压性或压迫性胸痛吗？</string>
+    <string name="redflag_internal_breathing">嘴唇或指甲发青（发绀），或气短到连一句话都说不出来吗？</string>
+    <string name="redflag_internal_gi_bleeding">大便黑如柏油，或吐血了吗？腹部硬如木板，痛到无法触碰吗？</string>
+
+    <!-- 2. 皮肤科 -->
+    <string name="redflag_derm_anaphylaxis">除了皮肤症状，还有声音变化或喉咙肿胀导致呼吸困难吗？</string>
+    <string name="redflag_derm_systemic">嘴唇或眼周严重肿胀，感觉血压下降（头晕/昏厥）吗？</string>
+
+    <!-- 3. 耳鼻喉科 -->
+    <string name="redflag_ent_airway">无法吞咽唾液而流口水，或吸气时听到金属音（喘鸣）吗？</string>
+    <string name="redflag_ent_infection">颈部周围严重肿胀，连张嘴都困难吗？</string>
+
+    <!-- 4. 眼科 -->
+    <string name="redflag_oph_vision_loss">一只眼睛突然完全失明，或部分视野像被窗帘遮住一样吗？</string>
+    <string name="redflag_oph_severe_pain_vomit">眼睛剧痛像要爆裂一样，并伴有呕吐吗？</string>
+
+    <!-- 5. 泌尿科 -->
+    <string name="redflag_urol_flank_fever">止痛药无效的严重腰侧痛，伴有高热（38°C以上）吗？</string>
+    <string name="redflag_urol_urinary_retention">完全无法排尿，感觉膀胱要爆裂吗？</string>
+
+    <!-- 6. 神经内科 -->
+    <string name="redflag_neuro_fast">一侧手臂或腿无力到无法移动，或一侧面部下垂且说话严重不清吗？</string>
+    <string name="redflag_neuro_thunderclap_headache">突然出现有生以来最严重的头痛，像被锤子砸了一样吗？</string>
+
+    <!-- 7. 妇科 -->
+    <string name="redflag_gyne_heavy_bleeding">出血严重到15分钟就浸透卫生巾，并感到头晕吗？</string>
+    <string name="redflag_gyne_ectopic">有怀孕可能，伴有冷汗的刺痛性下腹痛吗？</string>
+
+    <!-- 8. 骨科 -->
+    <string name="redflag_ortho_cauda_equina">事故后失去排便/排尿控制，或肛门周围和腿部完全失去感觉吗？</string>
+    <string name="redflag_ortho_compartment">骨折部位疼痛难以忍受，脚趾或手指苍白麻木吗？</string>
+
+    <!-- 9. 口腔科 -->
+    <string name="redflag_dent_ludwig">除了牙痛，整个面部和颈部严重肿胀，导致呼吸或吞咽困难吗？</string>
+
+</resources>
+

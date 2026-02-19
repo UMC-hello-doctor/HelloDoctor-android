@@ -12,33 +12,33 @@
 
     <!-- 对话框 -->
     <string name="selected_medicines">选定的药物</string>
-    <string name="no_selected_medicines">没有选定的药物。</string>
+    <string name="no_selected_medicines">未选择药物。</string>
 
-    <!-- 聊天界面 -->
+    <!-- 聊天屏幕 -->
     <string name="symptom_analysis">症状分析</string>
     <string name="symptom_input_hint">输入您的症状</string>
     <string name="send">发送</string>
 
-    <!-- 就诊结果 -->
-    <string name="medical_result">就诊结果</string>
-    <string name="questionnaire">问诊表</string>
+    <!-- 医疗结果 -->
+    <string name="medical_result">医疗结果</string>
+    <string name="questionnaire">问卷</string>
     <string name="hospital_map">医院地图</string>
 
-    <!-- 用药提醒 -->
+    <!-- 药物提醒 -->
     <string name="drug_alarm">用药提醒</string>
     <string name="add_drug">+ 添加药物</string>
 
-    <!-- 用药信息 -->
-    <string name="drug_info">用药信息</string>
-    <string name="pharmacy_label">药房：</string>
-    <string name="intake_type_label">用药类型：</string>
-    <string name="start_date_label">开始日期：</string>
-    <string name="end_date_label">结束日期：</string>
+    <!-- 药物信息 -->
+    <string name="drug_info">药物信息</string>
+    <string name="pharmacy_label">药房:</string>
+    <string name="intake_type_label">用药类型:</string>
+    <string name="start_date_label">开始日期:</string>
+    <string name="end_date_label">结束日期:</string>
     <string name="intake_time_title">用药时间</string>
     <string name="medicine_list">药物列表</string>
 
-    <!-- 用药信息输入 -->
-    <string name="drug_info_input">输入用药信息</string>
+    <!-- 药物信息输入 -->
+    <string name="drug_info_input">输入药物信息</string>
     <string name="pharmacy_name">药房名称</string>
     <string name="pharmacy_name_hint">输入药房名称</string>
     <string name="intake_type">用药类型</string>
@@ -46,7 +46,7 @@
     <string name="end_date">结束日期</string>
     <string name="add_time">+ 添加时间</string>
 
-    <!-- 问诊表（字段模式） -->
+    <!-- 问卷（字段模式）-->
     <string name="translate">翻译</string>
     <string name="patient_info">患者信息</string>
     <string name="name">姓名</string>
@@ -62,11 +62,11 @@
 
     <!-- 症状翻译菜单 -->
     <string name="symptom_translation">症状翻译</string>
-    <string name="new_chat">新建聊天</string>
+    <string name="new_chat">新聊天</string>
     <string name="history">历史</string>
 
     <!-- 用户信息 -->
-    <string name="health_status_record">健康状态记录表</string>
+    <string name="health_status_record">健康状态记录</string>
     <string name="basic_info">基本信息</string>
     <string name="name_input">输入姓名</string>
     <string name="female">女性</string>
@@ -82,32 +82,32 @@
     <string name="allergy_question">1. 您对特定药物或食物过敏吗？</string>
     <string name="yes_have">是的，我有</string>
     <string name="no_have">不，我没有</string>
-    <string name="allergy_detail_question">1-1. 您有什么过敏症状？</string>
+    <string name="allergy_detail_question">1-1. 您有什么过敏症？</string>
     <string name="allergy_type_medicine">药物</string>
     <string name="allergy_antibiotic">抗生素</string>
-    <string name="allergy_nsaid">非甾体抗炎药</string>
+    <string name="allergy_nsaid">消炎药</string>
     <string name="allergy_vaccine">疫苗成分</string>
-    <string name="allergy_local_anesthetic">局部麻醉药</string>
+    <string name="allergy_local_anesthetic">局部麻醉剂</string>
     <string name="allergy_other">其他</string>
-    <string name="medicine_question">2. 您目前正在服用处方药或补充剂吗？</string>
-    <string name="pregnancy_question">3. 您目前是否怀孕或正在哺乳？</string>
+    <string name="medicine_question">2. 您目前在服用任何处方药或补充剂吗？</string>
+    <string name="pregnancy_question">3. 您目前是否怀孕或哺乳？</string>
     <string name="yes">是</string>
     <string name="no">否</string>
 
-    <!-- 欢迎界面 -->
+    <!-- 欢迎屏幕 -->
     <string name="google_sign_in">使用Google登录</string>
 
     <!-- 吐司消息 -->
     <string name="login_failed">登录失败。</string>
-    <string name="hospital_search_preparing">医疗机构搜索准备中</string>
-    <string name="mypage_preparing">我的页面准备中</string>
+    <string name="hospital_search_preparing">医院搜索正在准备中</string>
+    <string name="mypage_preparing">我的页面正在准备中</string>
     <string name="pharmacy_name_required">请输入药房名称</string>
     <string name="alarm_time_required">请至少添加1个用药时间</string>
     <string name="medication_plan_saved">用药计划已保存</string>
     <string name="medication_plan_updated">用药计划已更新</string>
     <string name="medicine_added">已添加</string>
     <string name="medicine_removed">已移除</string>
-    <string name="profile_created_success">个人资料创建成功!</string>
+    <string name="profile_created_success">个人资料创建成功！</string>
 
     <!-- FieldModeFragment -->
     <string name="korean_language">🇰🇷 中文 (ZH)</string>
@@ -117,8 +117,8 @@
     <string name="medication_no">否</string>
 
     <!-- DrugAlarmDetailFragment -->
-    <string name="alarm_times_format">用药时间 (%d次)</string>
-    <string name="medicine_list_format">药物列表 (%d种)</string>
+    <string name="alarm_times_format">用药时间（%d次）</string>
+    <string name="medicine_list_format">药物列表（%d项）</string>
     <string name="intake_type_pre_meal">饭前</string>
     <string name="intake_type_between_meals">饭间</string>
     <string name="intake_type_post_meal">饭后</string>
@@ -131,15 +131,15 @@
     <string name="intake_type_post_meal_full">饭后</string>
     <string name="intake_type_other_full">其他</string>
 
-    <!-- DrugSerchFragment -->
-    <string name="medicine_added_count">)</string>
-    <string name="selection_complete">选择完成 (</string>
+    <!-- DrugSearchFragment -->
+    <string name="medicine_added_count">项）</string>
+    <string name="selection_complete">选择完成（</string>
 
     <!-- ChatFragment -->
     <string name="error_prefix">错误: </string>
-    <string name="department_start">🏥 开始%s科室咨询。</string>
-    <string name="pqrst_complete">PQRST分析完成。整理症状。</string>
-    <string name="symptom_confirmation">我明白了。您有%s症状。我会推荐相关科室。</string>
+    <string name="department_start">🏥 开始%s咨询。</string>
+    <string name="pqrst_complete">PQRST分析完成。整理您的症状。</string>
+    <string name="symptom_confirmation">我明白了。您有%s症状。让我推荐合适的科室。</string>
 
     <!-- NaverMapFragment -->
     <string name="recommended_department">推荐科室</string>
@@ -148,7 +148,7 @@
     <string name="language_select_title">很高兴认识您!\n首先请设置您的语言。</string>
     <string name="language_select_hint">选择语言</string>
     <string name="save_language">保存</string>
-    <string name="language_korean">韩语</string>
+    <string name="language_korean">中文</string>
     <string name="language_english">英语 (English)</string>
     <string name="language_japanese">日语 (日本語)</string>
     <string name="language_chinese">中文 (中文)</string>

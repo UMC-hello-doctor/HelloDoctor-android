@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 共通 -->
+    <string name="first_question">症状を教えてください。（例：お腹が痛いです）</string>
+    <string name="more_symptom">症状をもっと詳しく教えてください。</string>
+    <string name="dept_detected">診療科：</string>
+    <string name="nrs_selected">痛みの強さ：%d (0-10)</string>
+    <string name="emergency_call_119">緊急事態！最寄りの救急外来か119に電話してください。</string>
+    <string name="hospital_search">フィールドモード：病院を探す。</string>
+
+    <!-- 1. 消化器内科 -->
+    <string name="dept_gastro">内科 - 消化器</string>
+    <string name="dept_gastro_p">食後に痛みが悪化しますか、それとも空腹時に痛みますか？辛いものや脂っこいものを食べましたか？</string>
+    <string name="dept_gastro_q">締め付けられるような痛みですか、それとも焼けるような感じ（胸焼け）ですか？</string>
+    <string name="dept_gastro_r">上腹部、下腹部、それともお腹全体ですか？</string>
+    <string name="dept_gastro_s">背中を伸ばせないほどの痛みですか？（NRS 0-10）</string>
+    <string name="dept_gastro_t">痛みは持続的ですか、それとも断続的に来たり去ったりしますか？</string>
+    <string name="dept_gastro_a">嘔吐、下痢、便秘、発熱、腹部膨満感はありますか？</string>
+
+    <!-- 2. 皮膚科 -->
+    <string name="dept_derm">皮膚科</string>
+    <string name="dept_derm_p">症状の前に、新しい食べ物、薬、化粧品を使用しましたか？日光や金属に触れましたか？</string>
+    <string name="dept_derm_q">我慢できないほどかゆいですか、それともヒリヒリして熱く感じますか？</string>
+    <string name="dept_derm_r">特定の部位（腕、脚）だけですか、それとも全身に広がっていますか？</string>
+    <string name="dept_derm_s">かゆみで眠れないほどですか？（NRS 0-10）</string>
+    <string name="dept_derm_t">症状はどのくらい続いていますか？特定の時間帯（夜など）に悪化しますか？</string>
+    <string name="dept_derm_a">腫れ（蕁麻疹）、滲出液、水疱、患部の熱感はありますか？</string>
+
+    <!-- 3. 耳鼻咽喉科 -->
+    <string name="dept_ent">耳鼻咽喉科</string>
+    <string name="dept_ent_p">唾液や食べ物を飲み込むときに痛みが悪化しますか？鼻をかんだり横になったりすると悪化しますか？</string>
+    <string name="dept_ent_q">鋭い切るような痛みですか、それとも喉に異物感がありますか？</string>
+    <string name="dept_ent_r">喉の奥、鼻の周辺、それとも耳の奥深くですか？</string>
+    <string name="dept_ent_s">食事が困難なほど痛みますか？（NRS 0-10）</string>
+    <string name="dept_ent_t">症状が始まってから何日経ちましたか？朝起きたときが最も悪いですか？</string>
+    <string name="dept_ent_a">発熱、咳、痰、鼻水、聴力低下はありますか？</string>
+
+    <!-- 4. 呼吸器内科/循環器内科 -->
+    <string name="dept_resp">内科 - 呼吸器/循環器</string>
+    <string name="dept_resp_p">階段を上ったり運動したりすると悪化しますか？横になると息切れがひどくなりますか？</string>
+    <string name="dept_resp_q">胸が押さえつけられる感じですか、それとも息が十分に吸えない感じですか？</string>
+    <string name="dept_resp_r">痛みや圧迫感は左胸ですか、それとも首や肩に放散しますか？</string>
+    <string name="dept_resp_s">息切れがひどくて文章で話せませんか？（NRS 0-10）</string>
+    <string name="dept_resp_t">突然発症しましたか、それとも数日かけて徐々に悪化しましたか？</string>
+    <string name="dept_resp_a">喘鳴、冷や汗、痰（色に注意）、胸痛はありますか？</string>
+
+    <!-- 5. 眼科 -->
+    <string name="dept_oph">眼科</string>
+    <string name="dept_oph_p">コンタクトレンズを着用していますか？目に何か入りましたか？</string>
+    <string name="dept_oph_q">視界がぼやけますか、それとも砂が入ったようにゴロゴロしますか？</string>
+    <string name="dept_oph_r">片目だけですか、それとも両目ですか？</string>
+    <string name="dept_oph_s">痛くて目を開けられませんか？（NRS 0-10）</string>
+    <string name="dept_oph_t">朝起きたときが悪いですか、それとも一日を通して悪化しますか？</string>
+    <string name="dept_oph_a">視力低下、まぶたの腫れ（ものもらい）、かゆみはありますか？</string>
+
+    <!-- 6. 泌尿器科 -->
+    <string name="dept_urol">泌尿器科</string>
+    <string name="dept_urol_p">尿を我慢しているときや排尿時に痛みが悪化しますか？</string>
+    <string name="dept_urol_q">焼けるような感じですか、それとも鋭く刺されるような感じですか？</string>
+    <string name="dept_urol_r">脇腹から鼠径部に向かって痛みが移動しますか？</string>
+    <string name="dept_urol_s">痛みがひどくて真っ直ぐ立てませんか？（NRS 0-10）</string>
+    <string name="dept_urol_t">排尿回数が1日8回以上に増えましたか？</string>
+    <string name="dept_urol_a">血尿、突然の高熱、悪寒はありますか？</string>
+
+    <!-- 7. 神経内科 -->
+    <string name="dept_neuro">神経内科</string>
+    <string name="dept_neuro_p">頭を動かしたり立ち上がったりすると症状が悪化しますか？</string>
+    <string name="dept_neuro_q">電気が走るような感じやピリピリしますか、それともハンマーで叩かれたようにズキズキしますか？</string>
+    <string name="dept_neuro_r">症状は体の片側（左または右）だけですか？</string>
+    <string name="dept_neuro_s">めまいや痛みがひどくて日常生活ができませんか？（NRS 0-10）</string>
+    <string name="dept_neuro_t">症状は数秒間だけですか、それとも数時間続きますか？</string>
+    <string name="dept_neuro_a">複視（物が二重に見える）、呂律が回らない、片方の腕や脚の脱力はありますか？</string>
+
+    <!-- 8. 婦人科 -->
+    <string name="dept_gyne">産婦人科</string>
+    <string name="dept_gyne_p">性交後や激しい運動後に痛みが悪化しますか？</string>
+    <string name="dept_gyne_q">けいれん性の痛みですか、それとも重く引きずられるような痛みですか？</string>
+    <string name="dept_gyne_r">下腹部全体ですか、それとも片側（左/右）がひどいですか？</string>
+    <string name="dept_gyne_s">生理痛がいつもよりかなりひどく、鎮痛剤が効きませんか？（NRS 0-10）</string>
+    <string name="dept_gyne_t">最後の生理はいつで、この痛みは何日続いていますか？</string>
+    <string name="dept_gyne_a">不正出血、おりものの色や臭いの変化、妊娠の可能性はありますか？</string>
+
+    <!-- 9. 歯科 -->
+    <string name="dept_dent">歯科</string>
+    <string name="dept_dent_p">冷たいものや熱いものを食べたり飲んだりしたとき、または噛んだときに痛みが悪化しますか？</string>
+    <string name="dept_dent_q">鋭く刺すような痛みですか、それとも鈍くズキズキする痛みですか？</string>
+    <string name="dept_dent_r">痛む歯を特定できますか？</string>
+    <string name="dept_dent_s">鎮痛剤なしで夜眠れますか？（NRS 0-10）</string>
+    <string name="dept_dent_t">食事中だけ痛みますか、それとも安静時も続きますか？</string>
+    <string name="dept_dent_a">歯茎の出血、顔や顎の腫れ、歯のぐらつきはありますか？</string>
+
+    <!-- NRS スケール -->
+    <string name="nrs_0">痛みなし</string>
+    <string name="nrs_1_4">軽度</string>
+    <string name="nrs_5_6">中等度</string>
+    <string name="nrs_7_10">重度</string>
+
+    <!-- レッドフラッグ質問 -->
+
+    <!-- 1. 内科（消化器/呼吸器/循環器） -->
+    <string name="redflag_internal_chest">顎、首、左腕に放散する締め付けられる、または押さえつけられる胸痛はありますか？</string>
+    <string name="redflag_internal_breathing">唇や爪が青くなっている（チアノーゼ）、または息切れがひどくて一文も話せませんか？</string>
+    <string name="redflag_internal_gi_bleeding">便がタールのように黒い、または血を吐きましたか？腹部が板のように硬く触れないほど痛いですか？</string>
+
+    <!-- 2. 皮膚科 -->
+    <string name="redflag_derm_anaphylaxis">皮膚症状に加えて、声の変化や喉の腫れで呼吸困難がありますか？</string>
+    <string name="redflag_derm_systemic">唇や目の周りがひどく腫れ、血圧が下がっている感じ（めまい/失神）がありますか？</string>
+
+    <!-- 3. 耳鼻咽喉科 -->
+    <string name="redflag_ent_airway">唾液を飲み込めずによだれが垂れたり、息を吸うときに金属音（喘鳴）が聞こえますか？</string>
+    <string name="redflag_ent_infection">首の周りがひどく腫れて口を開けるのも困難ですか？</string>
+
+    <!-- 4. 眼科 -->
+    <string name="redflag_oph_vision_loss">突然片目の視力が完全に失われたり、カーテンが引かれたように視野の一部が遮られていますか？</string>
+    <string name="redflag_oph_severe_pain_vomit">目が破裂しそうなほどの激しい痛みと嘔吐がありますか？</string>
+
+    <!-- 5. 泌尿器科 -->
+    <string name="redflag_urol_flank_fever">鎮痛剤が効かないほどの激しい脇腹の痛みと高熱（38°C以上）がありますか？</string>
+    <string name="redflag_urol_urinary_retention">まったく尿が出ず、膀胱が破裂しそうな感じがありますか？</string>
+
+    <!-- 6. 神経内科 -->
+    <string name="redflag_neuro_fast">片方の腕や脚が動かせないほど弱い、または顔の片側が垂れ下がり、言葉がひどく不明瞭ですか？</string>
+    <string name="redflag_neuro_thunderclap_headache">ハンマーで叩かれたような、人生最悪の頭痛が突然発生しましたか？</string>
+
+    <!-- 7. 婦人科 -->
+    <string name="redflag_gyne_heavy_bleeding">出血がひどくて15分でナプキンが浸透し、めまいを感じますか？</string>
+    <string name="redflag_gyne_ectopic">妊娠の可能性があり、冷や汗を伴う刺すような下腹部痛がありますか？</string>
+
+    <!-- 8. 整形外科 -->
+    <string name="redflag_ortho_cauda_equina">事故後、排便/排尿のコントロールができなくなったり、肛門周囲や脚の感覚が完全に失われましたか？</string>
+    <string name="redflag_ortho_compartment">骨折部位の痛みが耐え難いほどひどく、指やつま先が青白く感覚がありませんか？</string>
+
+    <!-- 9. 歯科 -->
+    <string name="redflag_dent_ludwig">歯痛に加えて、顔全体と首がひどく腫れ、呼吸や嚥下が困難ですか？</string>
+
+</resources>
+

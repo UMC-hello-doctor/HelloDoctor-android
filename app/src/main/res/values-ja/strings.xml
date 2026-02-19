@@ -145,6 +145,9 @@
     <string name="recommended_department">推奨診療科</string>
 
     <!-- LanguageSelectFragment -->
+    <string name="language_select_title">お会いしましたね!\nまず言語を設定してください。</string>
+    <string name="language_select_hint">言語を選択</string>
+    <string name="save_language">保存</string>
     <string name="language_korean">韓国語</string>
     <string name="language_english">英語 (English)</string>
     <string name="language_japanese">日本語 (日本語)</string>
@@ -154,6 +157,12 @@
     <!-- マイページ -->
     <string name="mypage_title">マイページ</string>
     <string name="language_change">言語の変更</string>
+
+    <!-- ホームメニューボタン -->
+    <string name="menu_hospital">医療機関検索</string>
+    <string name="menu_prescription">処方薬管理</string>
+    <string name="menu_symptom">症状翻訳</string>
+    <string name="menu_mypage">マイページ</string>
 
 </resources>
 
