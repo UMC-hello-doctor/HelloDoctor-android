@@ -4,7 +4,6 @@
     <string name="first_question">Please tell me your symptoms. (e.g., I have a stomachache)</string>
     <string name="more_symptom">Please describe your symptoms in more detail.</string>
     <string name="dept_detected">Department:</string>
-    <string name="pqrst_complete">PQRST completed. Now checking red flags.</string>
     <string name="nrs_selected">Pain intensity: %d (0-10)</string>
     <string name="emergency_call_119">Emergency! Go to the nearest ER or call 119.</string>
     <string name="hospital_search">Field mode: Find a hospital.</string>

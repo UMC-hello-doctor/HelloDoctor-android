@@ -26,8 +26,8 @@ class SymptomMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnNewChat.searchText.text = "새 채팅"
-        binding.btnHistory.searchText.text = "기록"
+        binding.btnNewChat.searchText.text = getString(R.string.new_chat)
+        binding.btnHistory.searchText.text = getString(R.string.history)
 
         binding.btnNewChat.searchIcon.setImageResource(R.drawable.outline_add_comment_24)
         binding.btnHistory.searchIcon.setImageResource(R.drawable.outline_article_24)

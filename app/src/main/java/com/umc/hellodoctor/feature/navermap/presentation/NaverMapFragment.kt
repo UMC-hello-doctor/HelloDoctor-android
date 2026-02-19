@@ -79,7 +79,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         Log.d(TAG, "========== onViewCreated 진료과 확인 ==========")
         Log.d(TAG, "currentDepartment.value: $currentDept")
         Log.d(TAG, "진료과 null 여부: ${currentDept.isNullOrEmpty()}")
-        binding.departmentTitle.text = if (currentDept.isNullOrEmpty()) "추천 진료과" else currentDept
+        binding.departmentTitle.text = if (currentDept.isNullOrEmpty()) getString(R.string.recommended_department) else currentDept
 
         observeHospitalData()
         observeLocationForInitialSearch()

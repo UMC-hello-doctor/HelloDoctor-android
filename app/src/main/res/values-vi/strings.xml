@@ -97,5 +97,59 @@
     <!-- Màn hình chào mừng -->
     <string name="google_sign_in">Đăng nhập bằng Google</string>
 
+    <!-- Thông báo Toast -->
+    <string name="login_failed">Đăng nhập thất bại.</string>
+    <string name="hospital_search_preparing">Tìm kiếm cơ sở y tế đang được chuẩn bị</string>
+    <string name="mypage_preparing">Trang của tôi đang được chuẩn bị</string>
+    <string name="pharmacy_name_required">Vui lòng nhập tên nhà thuốc</string>
+    <string name="alarm_time_required">Vui lòng thêm ít nhất 1 thời gian dùng</string>
+    <string name="medication_plan_saved">Kế hoạch dùng thuốc đã được lưu</string>
+    <string name="medication_plan_updated">Kế hoạch dùng thuốc đã được cập nhật</string>
+    <string name="medicine_added">đã được thêm</string>
+    <string name="medicine_removed">đã được xóa</string>
+    <string name="profile_created_success">Hồ sơ được tạo thành công!</string>
+
+    <!-- FieldModeFragment -->
+    <string name="korean_language">🇰🇷 Tiếng Việt (VI)</string>
+    <string name="gender_male">Nam</string>
+    <string name="gender_female">Nữ</string>
+    <string name="medication_yes">Có</string>
+    <string name="medication_no">Không</string>
+
+    <!-- DrugAlarmDetailFragment -->
+    <string name="alarm_times_format">Thời gian dùng (%d lần)</string>
+    <string name="medicine_list_format">Danh sách thuốc (%d loại)</string>
+    <string name="intake_type_pre_meal">Trước ăn</string>
+    <string name="intake_type_between_meals">Giữa các bữa ăn</string>
+    <string name="intake_type_post_meal">Sau ăn</string>
+    <string name="intake_type_other">Khác</string>
+    <string name="date_format">dd/MM/yyyy</string>
+
+    <!-- DrugInfoInputFragment -->
+    <string name="intake_type_pre_meal_full">Trước ăn</string>
+    <string name="intake_type_between_meals_full">Giữa các bữa ăn</string>
+    <string name="intake_type_post_meal_full">Sau ăn</string>
+    <string name="intake_type_other_full">Khác</string>
+
+    <!-- DrugSerchFragment -->
+    <string name="medicine_added_count">)</string>
+    <string name="selection_complete">Hoàn thành lựa chọn (</string>
+
+    <!-- ChatFragment -->
+    <string name="error_prefix">Lỗi: </string>
+    <string name="department_start">🏥 Bắt đầu tư vấn %s.</string>
+    <string name="pqrst_complete">Phân tích PQRST hoàn tất. Sắp xếp các triệu chứng.</string>
+    <string name="symptom_confirmation">Tôi hiểu rồi. Bạn có các triệu chứng %s. Tôi sẽ giới thiệu các khoa liên quan.</string>
+
+    <!-- NaverMapFragment -->
+    <string name="recommended_department">Khoa được đề xuất</string>
+
+    <!-- LanguageSelectFragment -->
+    <string name="language_korean">Tiếng Hàn</string>
+    <string name="language_english">Tiếng Anh (English)</string>
+    <string name="language_japanese">Tiếng Nhật (日本語)</string>
+    <string name="language_chinese">Tiếng Trung (中文)</string>
+    <string name="language_vietnamese">Tiếng Việt (tiếng Việt)</string>
+
 </resources>
 

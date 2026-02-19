@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.umc.hellodoctor.R
 import com.umc.hellodoctor.databinding.FragmentUserInfoBinding
 import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
 import com.umc.hellodoctor.feature.userinfo.data.remote.model.GenderType
@@ -234,7 +235,7 @@ class UserInfoFragment : Fragment() {
     private fun handleApiResponse(state: UserInfoUiState) {
         // 프로필 생성 성공 처리
         if (state.isSuccess) {
-            Toast.makeText(requireContext(), "프로필이 성공적으로 생성되었습니다!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.profile_created_success), Toast.LENGTH_SHORT).show()
 
             // AuthViewModel에 프로필 생성 완료 알림
             authViewModel.onProfileCreated()

@@ -87,21 +87,21 @@ class ChatFragment : Fragment() {
         // 에러 메시지 옵저버
         viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
             if (error.isNotEmpty()) {
-                viewModel.addBotMessage("오류: $error")
+                viewModel.addBotMessage(getString(R.string.error_prefix) + error)
             }
         }
 
         // 현재 진료과 옵저버
         viewModel.currentDepartment.observe(viewLifecycleOwner) { dept ->
             if (dept.isNotEmpty()) {
-                viewModel.addBotMessage("🏥 ${dept} 진료를 시작하겠습니다.")
+                viewModel.addBotMessage(String.format(getString(R.string.department_start), dept))
             }
         }
 
         // PQRST 완료 옵저버
         viewModel.pqrstComplete.observe(viewLifecycleOwner) { isComplete ->
             if (isComplete) {
-                viewModel.addBotMessage("PQRST 분석 완료. 증상을 정리하겠습니다.")
+                viewModel.addBotMessage(getString(R.string.pqrst_complete))
                 viewModel.generateAndAddSymptomSummary()
 
                 // 결과 화면으로 이동
@@ -155,7 +155,7 @@ class ChatFragment : Fragment() {
         viewModel.addUserAnswer(userInput)
 
         // 사용자 입력에 대한 봇 확인 메시지 (답변이 아닌 일반 메시지)
-        val response = "알겠습니다. $userInput 증상이군요. 관련 진료과를 추천하겠습니다."
+        val response = String.format(getString(R.string.symptom_confirmation), userInput)
         viewModel.addBotMessage(response)  // ✅ addBotMessage로 변경 (session.answers에 저장 안 함)
 
         // 진료과 추천 시작 (AI API 호출 및 PQRST 질문 플로우 시작)

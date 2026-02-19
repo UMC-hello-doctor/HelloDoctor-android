@@ -82,8 +82,8 @@ class FieldModeFragment : Fragment() {
 
                     // 성별 (MALE/FEMALE -> 남자/여자)
                     binding.tvPatientGender.text = when (profile.gender.uppercase()) {
-                        "MALE" -> "남자"
-                        "FEMALE" -> "여자"
+                        "MALE" -> getString(R.string.gender_male)
+                        "FEMALE" -> getString(R.string.gender_female)
                         else -> profile.gender
                     }
 
@@ -97,7 +97,7 @@ class FieldModeFragment : Fragment() {
                     val hasMedication = profile.tags.any {
                         it.contains("복용약") || it.contains("medication") || it.contains("약물")
                     }
-                    binding.tvPatientMedication.text = if (hasMedication) "있음" else "없음"
+                    binding.tvPatientMedication.text = if (hasMedication) getString(R.string.medication_yes) else getString(R.string.medication_no)
                 }
             }
         }
@@ -137,7 +137,7 @@ class FieldModeFragment : Fragment() {
 
             if (isShowingKorean) {
                 // 한글 버전 표시
-                binding.langTextView.text = "🇰🇷 한국어 (KO)"
+                binding.langTextView.text = getString(R.string.korean_language)
                 summaryResponse.korean?.let { koreanList ->
                     koreanList.forEach { item ->
                         addTableRow(tableLayout, item.category, item.description)

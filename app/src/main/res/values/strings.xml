@@ -96,4 +96,60 @@
     <!-- 웰컴 스크린 -->
     <string name="google_sign_in">Google로 로그인</string>
 
+    <!-- 토스트 메시지 -->
+    <string name="login_failed">로그인에 실패했습니다.</string>
+    <string name="hospital_search_preparing">의료기관 검색 준비중입니다</string>
+    <string name="mypage_preparing">마이페이지 준비중입니다</string>
+    <string name="pharmacy_name_required">약국명을 입력해주세요</string>
+    <string name="alarm_time_required">복용 시간을 최소 1개 추가해주세요</string>
+    <string name="medication_plan_saved">복약 계획이 저장되었습니다</string>
+    <string name="medication_plan_updated">복약 계획이 수정되었습니다</string>
+    <string name="medicine_added">이(가) 추가되었습니다</string>
+    <string name="medicine_removed">이(가) 제거되었습니다</string>
+    <string name="profile_created_success">프로필이 성공적으로 생성되었습니다!</string>
+
+    <!-- FieldModeFragment -->
+    <string name="korean_language">🇰🇷 한국어 (KO)</string>
+    <string name="gender_male">남자</string>
+    <string name="gender_female">여자</string>
+    <string name="medication_yes">있음</string>
+    <string name="medication_no">없음</string>
+
+    <!-- DrugAlarmDetailFragment -->
+    <string name="alarm_times_format">복용 시간 (%d회)</string>
+    <string name="medicine_list_format">약 목록 (%d개)</string>
+    <string name="intake_type_pre_meal">식전</string>
+    <string name="intake_type_between_meals">식간</string>
+    <string name="intake_type_post_meal">식후</string>
+    <string name="intake_type_other">기타</string>
+    <string name="date_format">yyyy년 MM월 dd일</string>
+
+    <!-- DrugInfoInputFragment -->
+    <string name="intake_type_pre_meal_full">식전</string>
+    <string name="intake_type_between_meals_full">식간</string>
+    <string name="intake_type_post_meal_full">식후</string>
+    <string name="intake_type_other_full">기타</string>
+
+    <!-- DrugSerchFragment -->
+    <string name="medicine_added_count">개)</string>
+    <string name="selection_complete">선택 완료 (</string>
+
+    <!-- ChatFragment -->
+    <string name="error_prefix">오류: </string>
+    <string name="department_start">🏥 %s 진료를 시작하겠습니다.</string>
+    <string name="pqrst_complete">PQRST 분석 완료. 증상을 정리하겠습니다.</string>
+    <string name="symptom_confirmation">알겠습니다. %s 증상이군요. 관련 진료과를 추천하겠습니다.</string>
+
+    <!-- NaverMapFragment -->
+    <string name="recommended_department">추천 진료과</string>
+
+    <!-- LanguageSelectFragment -->
+    <string name="language_korean">한국어</string>
+    <string name="language_english">영어 (English)</string>
+    <string name="language_japanese">일본어 (日本語)</string>
+    <string name="language_chinese">중국어 (中文)</string>
+    <string name="language_vietnamese">베트남어 (tiếng Việt)</string>
+
 </resources>
+
+

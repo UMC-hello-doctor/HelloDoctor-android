@@ -97,5 +97,59 @@
     <!-- 欢迎界面 -->
     <string name="google_sign_in">使用Google登录</string>
 
+    <!-- 吐司消息 -->
+    <string name="login_failed">登录失败。</string>
+    <string name="hospital_search_preparing">医疗机构搜索准备中</string>
+    <string name="mypage_preparing">我的页面准备中</string>
+    <string name="pharmacy_name_required">请输入药房名称</string>
+    <string name="alarm_time_required">请至少添加1个用药时间</string>
+    <string name="medication_plan_saved">用药计划已保存</string>
+    <string name="medication_plan_updated">用药计划已更新</string>
+    <string name="medicine_added">已添加</string>
+    <string name="medicine_removed">已移除</string>
+    <string name="profile_created_success">个人资料创建成功!</string>
+
+    <!-- FieldModeFragment -->
+    <string name="korean_language">🇰🇷 中文 (ZH)</string>
+    <string name="gender_male">男性</string>
+    <string name="gender_female">女性</string>
+    <string name="medication_yes">是</string>
+    <string name="medication_no">否</string>
+
+    <!-- DrugAlarmDetailFragment -->
+    <string name="alarm_times_format">用药时间 (%d次)</string>
+    <string name="medicine_list_format">药物列表 (%d种)</string>
+    <string name="intake_type_pre_meal">饭前</string>
+    <string name="intake_type_between_meals">饭间</string>
+    <string name="intake_type_post_meal">饭后</string>
+    <string name="intake_type_other">其他</string>
+    <string name="date_format">yyyy年MM月dd日</string>
+
+    <!-- DrugInfoInputFragment -->
+    <string name="intake_type_pre_meal_full">饭前</string>
+    <string name="intake_type_between_meals_full">饭间</string>
+    <string name="intake_type_post_meal_full">饭后</string>
+    <string name="intake_type_other_full">其他</string>
+
+    <!-- DrugSerchFragment -->
+    <string name="medicine_added_count">)</string>
+    <string name="selection_complete">选择完成 (</string>
+
+    <!-- ChatFragment -->
+    <string name="error_prefix">错误: </string>
+    <string name="department_start">🏥 开始%s科室咨询。</string>
+    <string name="pqrst_complete">PQRST分析完成。整理症状。</string>
+    <string name="symptom_confirmation">我明白了。您有%s症状。我会推荐相关科室。</string>
+
+    <!-- NaverMapFragment -->
+    <string name="recommended_department">推荐科室</string>
+
+    <!-- LanguageSelectFragment -->
+    <string name="language_korean">韩语</string>
+    <string name="language_english">英语 (English)</string>
+    <string name="language_japanese">日语 (日本語)</string>
+    <string name="language_chinese">中文 (中文)</string>
+    <string name="language_vietnamese">越南语 (tiếng Việt)</string>
+
 </resources>
 

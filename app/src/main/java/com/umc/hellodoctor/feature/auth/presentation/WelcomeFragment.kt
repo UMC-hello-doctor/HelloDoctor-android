@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.umc.hellodoctor.R
 import com.umc.hellodoctor.core.util.showToast
 import com.umc.hellodoctor.core.util.toast
 import com.umc.hellodoctor.databinding.FragmentWelcomeBinding
@@ -73,7 +74,7 @@ class WelcomeFragment : Fragment() {
                     is SocialSignInResult.Canceled -> {
                     }
                     is SocialSignInResult.Error -> {
-                        val message = result.throwable.message ?: "로그인에 실패했습니다."
+                        val message = result.throwable.message ?: getString(R.string.login_failed)
                     }
                     null -> Unit
                 }

@@ -44,7 +44,7 @@ class HomeMenuFragment : Fragment() {
 
         binding.menuHospital.setOnClickListener {
 
-            showToast(requireContext(),"의료기관 검색 준비중입니다")
+            showToast(requireContext(), getString(R.string.hospital_search_preparing))
         }
 
         binding.menuPrescription.setOnClickListener {
@@ -56,7 +56,7 @@ class HomeMenuFragment : Fragment() {
         }
 
         binding.menuMyPage.setOnClickListener {
-            showToast(requireContext(),"마이페이지 준비중입니다")
+            showToast(requireContext(), getString(R.string.mypage_preparing))
         }
 
         // 프로필 데이터 상태 관찰

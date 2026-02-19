@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.umc.hellodoctor.R
 import com.umc.hellodoctor.databinding.FragmentDrugAlarmDetailBinding
 import com.umc.hellodoctor.feature.drug.presentation.adapter.AlarmTimeAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -80,21 +81,21 @@ class DrugAlarmDetailFragment : Fragment() {
     private fun observeData(planId: String) {
         viewModel.selectedPlan.observe(viewLifecycleOwner) { plan ->
             plan?.let {
-                val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+                val dateFormat = SimpleDateFormat(getString(R.string.date_format), Locale.KOREA)
 
                 binding.apply {
                     tvPharmacyName.text = it.pharmacyName
                     tvIntakeType.text = when (it.intakeType.name) {
-                        "PRE_MEAL" -> "식전"
-                        "BETWEEN_MEALS" -> "식간"
-                        "POST_MEAL" -> "식후"
-                        else -> "기타"
+                        "PRE_MEAL" -> getString(R.string.intake_type_pre_meal)
+                        "BETWEEN_MEALS" -> getString(R.string.intake_type_between_meals)
+                        "POST_MEAL" -> getString(R.string.intake_type_post_meal)
+                        else -> getString(R.string.intake_type_other)
                     }
                     tvStartDate.text = dateFormat.format(Date(it.startDateMillis))
                     tvEndDate.text = dateFormat.format(Date(it.endDateMillis))
 
-                    tvAlarmTitle.text = "복용 시간 (${it.alarms.size}회)"
-                    tvMedicineTitle.text = "약 목록 (${it.medicines.size}개)"
+                    tvAlarmTitle.text = String.format(getString(R.string.alarm_times_format), it.alarms.size)
+                    tvMedicineTitle.text = String.format(getString(R.string.medicine_list_format), it.medicines.size)
                 }
 
                 alarmAdapter.submitList(it.alarms)

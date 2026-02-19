@@ -4,7 +4,6 @@
     <string name="first_question">증상을 말씀해주세요. (예: 배가 아파요)</string>
     <string name="more_symptom">증상을 더 자세히 말씀해주세요.</string>
     <string name="dept_detected">진료과:</string>
-    <string name="pqrst_complete">PQRST 완료. 레드플래그 확인할게요.</string>
     <string name="nrs_selected">통증 강도: %d (0-10)</string>
     <string name="emergency_call_119">응급 상황! 가까운 응급실이나 119 호출하세요.</string>
     <string name="hospital_search">현장 모드: 병원 찾기.</string>

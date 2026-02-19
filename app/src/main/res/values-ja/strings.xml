@@ -97,5 +97,59 @@
     <!-- ウェルカムスクリーン -->
     <string name="google_sign_in">Googleでサインイン</string>
 
+    <!-- トーストメッセージ -->
+    <string name="login_failed">ログインに失敗しました。</string>
+    <string name="hospital_search_preparing">医療機関検索を準備中です</string>
+    <string name="mypage_preparing">マイページを準備中です</string>
+    <string name="pharmacy_name_required">薬局名を入力してください</string>
+    <string name="alarm_time_required">摂取時間を最低1つ追加してください</string>
+    <string name="medication_plan_saved">服用計画が保存されました</string>
+    <string name="medication_plan_updated">服用計画が更新されました</string>
+    <string name="medicine_added">が追加されました</string>
+    <string name="medicine_removed">が削除されました</string>
+    <string name="profile_created_success">プロフィールが正常に作成されました!</string>
+
+    <!-- FieldModeFragment -->
+    <string name="korean_language">🇰🇷 日本語 (JA)</string>
+    <string name="gender_male">男性</string>
+    <string name="gender_female">女性</string>
+    <string name="medication_yes">あり</string>
+    <string name="medication_no">なし</string>
+
+    <!-- DrugAlarmDetailFragment -->
+    <string name="alarm_times_format">摂取時間 (%d回)</string>
+    <string name="medicine_list_format">医薬品リスト (%d個)</string>
+    <string name="intake_type_pre_meal">食前</string>
+    <string name="intake_type_between_meals">食間</string>
+    <string name="intake_type_post_meal">食後</string>
+    <string name="intake_type_other">その他</string>
+    <string name="date_format">yyyy年MM月dd日</string>
+
+    <!-- DrugInfoInputFragment -->
+    <string name="intake_type_pre_meal_full">食前</string>
+    <string name="intake_type_between_meals_full">食間</string>
+    <string name="intake_type_post_meal_full">食後</string>
+    <string name="intake_type_other_full">その他</string>
+
+    <!-- DrugSerchFragment -->
+    <string name="medicine_added_count">)</string>
+    <string name="selection_complete">選択完了 (</string>
+
+    <!-- ChatFragment -->
+    <string name="error_prefix">エラー: </string>
+    <string name="department_start">🏥 %sの診療を開始します。</string>
+    <string name="pqrst_complete">PQRST分析完了。症状を整理します。</string>
+    <string name="symptom_confirmation">わかりました。%sの症状ですね。関連する診療科をお勧めします。</string>
+
+    <!-- NaverMapFragment -->
+    <string name="recommended_department">推奨診療科</string>
+
+    <!-- LanguageSelectFragment -->
+    <string name="language_korean">韓国語</string>
+    <string name="language_english">英語 (English)</string>
+    <string name="language_japanese">日本語 (日本語)</string>
+    <string name="language_chinese">中国語 (中文)</string>
+    <string name="language_vietnamese">ベトナム語 (tiếng Việt)</string>
+
 </resources>
 

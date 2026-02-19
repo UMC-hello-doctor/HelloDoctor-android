@@ -97,5 +97,59 @@
     <!-- Welcome Screen -->
     <string name="google_sign_in">Sign in with Google</string>
 
+    <!-- Toast Messages -->
+    <string name="login_failed">Login failed.</string>
+    <string name="hospital_search_preparing">Hospital search is being prepared</string>
+    <string name="mypage_preparing">My page is being prepared</string>
+    <string name="pharmacy_name_required">Please enter pharmacy name</string>
+    <string name="alarm_time_required">Please add at least 1 intake time</string>
+    <string name="medication_plan_saved">Medication plan saved</string>
+    <string name="medication_plan_updated">Medication plan updated</string>
+    <string name="medicine_added">has been added</string>
+    <string name="medicine_removed">has been removed</string>
+    <string name="profile_created_success">Profile created successfully!</string>
+
+    <!-- FieldModeFragment -->
+    <string name="korean_language">🇰🇷 Korean (KO)</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="medication_yes">Yes</string>
+    <string name="medication_no">No</string>
+
+    <!-- DrugAlarmDetailFragment -->
+    <string name="alarm_times_format">Intake Times (%d times)</string>
+    <string name="medicine_list_format">Medicine List (%d medicines)</string>
+    <string name="intake_type_pre_meal">Before meal</string>
+    <string name="intake_type_between_meals">Between meals</string>
+    <string name="intake_type_post_meal">After meal</string>
+    <string name="intake_type_other">Other</string>
+    <string name="date_format">yyyy-MM-dd</string>
+
+    <!-- DrugInfoInputFragment -->
+    <string name="intake_type_pre_meal_full">Before meal</string>
+    <string name="intake_type_between_meals_full">Between meals</string>
+    <string name="intake_type_post_meal_full">After meal</string>
+    <string name="intake_type_other_full">Other</string>
+
+    <!-- DrugSerchFragment -->
+    <string name="medicine_added_count">)</string>
+    <string name="selection_complete">Selection Complete (</string>
+
+    <!-- ChatFragment -->
+    <string name="error_prefix">Error: </string>
+    <string name="department_start">🏥 Starting consultation for %s.</string>
+    <string name="pqrst_complete">PQRST analysis complete. Organizing symptoms.</string>
+    <string name="symptom_confirmation">I understand. You have %s symptoms. I will recommend related departments.</string>
+
+    <!-- NaverMapFragment -->
+    <string name="recommended_department">Recommended Department</string>
+
+    <!-- LanguageSelectFragment -->
+    <string name="language_korean">Korean</string>
+    <string name="language_english">English (English)</string>
+    <string name="language_japanese">Japanese (日本語)</string>
+    <string name="language_chinese">Chinese (中文)</string>
+    <string name="language_vietnamese">Vietnamese (tiếng Việt)</string>
+
 </resources>
 

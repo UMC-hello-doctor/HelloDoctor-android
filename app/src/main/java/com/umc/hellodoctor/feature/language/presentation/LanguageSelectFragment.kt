@@ -18,11 +18,11 @@ class LanguageSelectFragment : Fragment(R.layout.fragment_language_select) {
         languageManager = LanguageManager(requireContext())
 
         val items = listOf(
-            LanguageItem("한국어", R.drawable.flag_korea),
-            LanguageItem("영어 (English)", R.drawable.flag_america),
-            LanguageItem("일본어 (日本語)", R.drawable.flag_japan),
-            LanguageItem("중국어 (中文)", R.drawable.flag_china),
-            LanguageItem("베트남어 (tiếng Việt)", R.drawable.flag_vietnam)
+            LanguageItem(getString(R.string.language_korean), R.drawable.flag_korea),
+            LanguageItem(getString(R.string.language_english), R.drawable.flag_america),
+            LanguageItem(getString(R.string.language_japanese), R.drawable.flag_japan),
+            LanguageItem(getString(R.string.language_chinese), R.drawable.flag_china),
+            LanguageItem(getString(R.string.language_vietnamese), R.drawable.flag_vietnam)
         )
 
         val adapter = LanguageAdapter(requireContext(), items)

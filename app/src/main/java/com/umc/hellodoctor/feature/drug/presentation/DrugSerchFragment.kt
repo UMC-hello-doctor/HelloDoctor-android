@@ -118,14 +118,14 @@ class DrugSerchFragment : Fragment() {
             selectedMedicines.remove(medicine)
             Toast.makeText(
                 requireContext(),
-                "${medicine.medicineName}이(가) 제거되었습니다",
+                "${medicine.medicineName}" + getString(R.string.medicine_removed),
                 Toast.LENGTH_SHORT
             ).show()
         } else {
             selectedMedicines.add(medicine)
             Toast.makeText(
                 requireContext(),
-                "${medicine.medicineName}이(가) 추가되었습니다 (${selectedMedicines.size}개)",
+                "${medicine.medicineName}" + getString(R.string.medicine_added) + " (${selectedMedicines.size}개)",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -140,7 +140,7 @@ class DrugSerchFragment : Fragment() {
                 binding.btnSelectedList?.visibility = View.GONE
             } else {
                 button.visibility = View.VISIBLE
-                button.text = "선택 완료 (${selectedMedicines.size}개)"
+                button.text = getString(R.string.selection_complete) + "${selectedMedicines.size}" + getString(R.string.medicine_added_count)
                 binding.btnSelectedList?.visibility = View.VISIBLE
             }
         }

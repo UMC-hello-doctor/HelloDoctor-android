@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.umc.hellodoctor.R
 import com.umc.hellodoctor.core.util.toast
 import com.umc.hellodoctor.databinding.FragmentDrugInfoInputBinding
 import com.umc.hellodoctor.feature.drug.data.database.AlarmInfo
@@ -107,7 +108,12 @@ class DrugInfoInputFragment : Fragment() {
 
     private fun setupUI() {
         // 복용 타입 스피너 설정
-        val intakeTypes = arrayOf("식전", "식간", "식후", "기타")
+        val intakeTypes = arrayOf(
+            getString(R.string.intake_type_pre_meal_full),
+            getString(R.string.intake_type_between_meals_full),
+            getString(R.string.intake_type_post_meal_full),
+            getString(R.string.intake_type_other_full)
+        )
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, intakeTypes)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerIntakeType.adapter = adapter
@@ -210,12 +216,12 @@ class DrugInfoInputFragment : Fragment() {
         val pharmacyName = binding.etPharmacyName.text.toString().trim()
 
         if (pharmacyName.isEmpty()) {
-            Toast.makeText(requireContext(), "약국명을 입력해주세요", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.pharmacy_name_required), Toast.LENGTH_SHORT).show()
             return
         }
 
         if (alarms.isEmpty()) {
-            Toast.makeText(requireContext(), "복용 시간을 최소 1개 추가해주세요", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.alarm_time_required), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -233,10 +239,10 @@ class DrugInfoInputFragment : Fragment() {
 
         if (isEditMode) {
             viewModel.updatePlan(plan)
-            toast("복약 계획이 수정되었습니다")
+            toast(getString(R.string.medication_plan_updated))
         } else {
             viewModel.savePlan(plan)
-            toast("복약 계획이 저장되었습니다")
+            toast(getString(R.string.medication_plan_saved))
         }
 
         // 저장 후 복약 목록 화면으로 이동
