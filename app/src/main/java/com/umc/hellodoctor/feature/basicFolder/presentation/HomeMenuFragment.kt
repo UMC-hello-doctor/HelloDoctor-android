@@ -1,19 +1,28 @@
 package com.umc.hellodoctor.feature.basicFolder.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.umc.hellodoctor.R
 import com.umc.hellodoctor.databinding.FragmentHomeMenuBinding
+import com.umc.hellodoctor.feature.userinfo.UserInfoViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeMenuFragment : Fragment() {
 
     private var _binding: FragmentHomeMenuBinding? = null
     private val binding get() = _binding!!
+    private val userInfoViewModel: UserInfoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,21 +36,38 @@ class HomeMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 이미 저장된 프로필이 없으면 조회
+        if (userInfoViewModel.uiState.value.profileData == null) {
+            userInfoViewModel.getMyProfile()
+        }
+
         binding.menuHospital.setOnClickListener {
             Toast.makeText(requireContext(), "의료기관 검색", Toast.LENGTH_SHORT).show()
         }
 
         binding.menuPrescription.setOnClickListener {
-            Toast.makeText(requireContext(), "처방약 관리", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeMenuFragment_to_drugAlarmFragment)
         }
 
         binding.menuSymptom.setOnClickListener {
-            Toast.makeText(requireContext(), "증상 번역", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_homeMenuFragment_to_symptomMenuFragment)
         }
 
         binding.menuMyPage.setOnClickListener {
-            Toast.makeText(requireContext(), "마이페이지", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeMenuFragment_to_userInfoFragment)
+        }
+
+        // 프로필 데이터 상태 관찰
+        observeProfileData()
+    }
+
+    private fun observeProfileData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            userInfoViewModel.uiState.collect { state ->
+                state.profileData?.let { profile ->
+                    Log.d("HomeMenuFragment", "프로필 로드됨: ${profile.displayName}")
+                }
+            }
         }
     }
 

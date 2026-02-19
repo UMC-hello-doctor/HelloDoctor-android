@@ -31,6 +31,12 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // 뒤로가기 버튼
+        binding.backIcon.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         setupRecyclerView()
         observeSessions()
         viewModel.loadSessions()

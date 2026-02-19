@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 기본정보 -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.HelloDoctor.HealthCard">
+
+                <LinearLayout
+                    style="@style/Widget.HelloDoctor.HealthCard.Content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/health_status_record"
+                        android:textColor="@color/color_text_main"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- 기본정보 섹션 타이틀 -->
+                    <LinearLayout
+                        style="@style/Widget.HelloDoctor.Health.SectionHeaderRow">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/folder"
+                            app:tint="@color/color_text_sub" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/basic_info"
+                            android:textColor="@color/color_text_sub"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- 이름 -->
+                    <TextView
+                        style="@style/TextAppearance.HelloDoctor.Health.Label"
+                        android:text="@string/name" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.HelloDoctor.Health.TextInputLayout"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etName"
+                            style="@style/Widget.HelloDoctor.Health.TextInputEditText"
+                            android:hint="@string/name_input" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 성별 -->
+                    <TextView
+                        style="@style/TextAppearance.HelloDoctor.Health.Label"
+                        android:text="@string/gender" />
+
+                    <LinearLayout
+                        style="@style/Widget.HelloDoctor.Health.ChoiceRow">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnFemale"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton"
+                            android:layout_weight="1"
+                            android:text="@string/female" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnMale"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/male" />
+                    </LinearLayout>
+
+                    <!-- 생년월일 -->
+                    <TextView
+                        style="@style/TextAppearance.HelloDoctor.Health.Label"
+                        android:text="@string/birth_date" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilBirth"
+                        style="@style/Widget.HelloDoctor.Health.TextInputLayout"
+                        app:hintEnabled="false"
+                        app:endIconDrawable="@drawable/calendar"
+                        app:endIconMode="custom">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etBirth"
+                            style="@style/Widget.HelloDoctor.Health.TextInputEditText"
+                            android:hint="@string/birth_date_format"
+                            android:clickable="true"
+                            android:focusable="false" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- 혈액형 -->
+                    <TextView
+                        style="@style/TextAppearance.HelloDoctor.Health.Label"
+                        android:text="@string/blood_type" />
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:columnCount="2"
+                        android:rowCount="2">
+
+                        <!-- 1행 1열 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnBloodA"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
+                            android:layout_width="0dp"
+                            android:text="@string/blood_type_a" />
+
+                        <!-- 1행 2열 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnBloodB"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
+                            android:layout_width="0dp"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/blood_type_b" />
+
+                        <!-- 2행 1열 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnBloodO"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
+                            android:layout_width="0dp"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/blood_type_o" />
+
+                        <!-- 2행 2열 -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnBloodAB"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
+                            android:layout_width="0dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/blood_type_ab" />
+
+                    </GridLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnBloodOther"
+                        style="@style/Widget.HelloDoctor.Health.ChoiceButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/blood_type_manual"
+                        app:layout_columnSpan="2" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilBloodOther"
+                        style="@style/Widget.HelloDoctor.Health.TextInputLayout"
+                        app:hintEnabled="false"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etBloodOther"
+                            style="@style/Widget.HelloDoctor.Health.TextInputEditText"
+                            android:hint="@string/blood_type_manual_input" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 건강 상태 -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.HelloDoctor.HealthCard"
+                android:layout_marginTop="14dp">
+
+                <LinearLayout
+                    style="@style/Widget.HelloDoctor.HealthCard.Content">
+
+                    <!-- 건강 상태 섹션 타이틀 -->
+                    <LinearLayout
+                        style="@style/Widget.HelloDoctor.Health.SectionHeaderRow"
+                        android:layout_marginTop="0dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/person"
+                            app:tint="@color/color_text_sub" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/health_status"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_text_sub" />
+                    </LinearLayout>
+
+                    <!-- 1 -->
+                    <TextView
+                        style="@style/TextAppearance.HelloDoctor.Health.Question"
+                        android:text="@string/allergy_question" />
+
+                    <LinearLayout
+                        style="@style/Widget.HelloDoctor.Health.ChoiceRow">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAllergyYes"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton"
+                            android:layout_weight="1"
+                            android:text="@string/yes_have" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAllergyNo"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/no_have" />
+                    </LinearLayout>
+
+                    <!-- 1-1 (Yes일 때만 노출) -->
+                    <LinearLayout
+                        android:id="@+id/groupAllergyDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/allergy_detail_question"
+                            android:textColor="@color/color_text_main" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/allergy_type_medicine"
+                            android:textColor="@color/color_text_sub" />
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:columnCount="2">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnAllergyAntibiotic"
+                                style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
+                                android:text="@string/allergy_antibiotic" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnAllergyNsaid"
+                                style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
+                                android:layout_marginStart="10dp"
+                                android:text="@string/allergy_nsaid" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnAllergyVaccine"
+                                style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
+                                android:layout_marginTop="10dp"
+                                android:text="@string/allergy_vaccine" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnAllergyLocal"
+                                style="@style/Widget.HelloDoctor.Health.ChoiceButton.Grid"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="10dp"
+                                android:text="@string/allergy_local_anesthetic" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnAllergyOther"
+                                style="@style/Widget.HelloDoctor.Health.ChoiceButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_columnSpan="2"
+                                android:text="@string/allergy_other" />
+                        </GridLayout>
+                    </LinearLayout>
+
+                    <!-- 2 -->
+                    <TextView
+                        style="@style/TextAppearance.HelloDoctor.Health.Question"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/medicine_question" />
+
+                    <LinearLayout
+                        style="@style/Widget.HelloDoctor.Health.ChoiceRow">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnMedsYes"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton"
+                            android:layout_weight="1"
+                            android:text="@string/yes_have" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnMedsNo"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/no_have" />
+                    </LinearLayout>
+
+                    <!-- 3 -->
+                    <TextView
+                        style="@style/TextAppearance.HelloDoctor.Health.Question"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/pregnancy_question" />
+
+                    <LinearLayout
+                        style="@style/Widget.HelloDoctor.Health.ChoiceRow">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPregYes"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton"
+                            android:layout_weight="1"
+                            android:text="@string/yes" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPregNo"
+                            style="@style/Widget.HelloDoctor.Health.ChoiceButton"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/no" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 스크롤 여백 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNext"
+                style="@style/Widget.HelloDoctor.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/next"
+                android:enabled="false"
+                android:layout_marginTop="16dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

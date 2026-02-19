@@ -15,5 +15,14 @@
         android:id="@+id/welcomeFragment"
         android:name="com.umc.hellodoctor.feature.auth.presentation.WelcomeFragment"
         android:label="WelcomeFragment"
-        tools:layout="@layout/fragment_welcome"/>
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcomeFragment_to_userInfoFragment2"
+            app:destination="@id/userInfoFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfoFragment2"
+        android:name="com.umc.hellodoctor.feature.userinfo.UserInfoFragment"
+        android:label="UserInfoFragment"
+        tools:layout="@layout/fragment_user_info"/>
 </navigation>
