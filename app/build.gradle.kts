@@ -1,5 +1,6 @@
 import java.io.FileInputStream
 import java.util.Properties
+import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
 
 plugins {
     alias(libs.plugins.android.application)
@@ -9,6 +10,8 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     kotlin("plugin.parcelize")
+    alias(libs.plugins.google.firebase.appdistribution)
+    alias(libs.plugins.google.gms.google.services)
 }
 val propertiesFile = rootProject.file("gradle.properties")
 val properties = Properties()
@@ -84,6 +87,9 @@ android {
         getByName("release") {
             signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
+            firebaseAppDistribution{
+                testers="sfpahsdev@gmail.com"
+            }
         }
     }
     compileOptions {
