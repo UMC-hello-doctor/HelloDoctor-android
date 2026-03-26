@@ -1,0 +1,47 @@
+# .github/workflows/pr-labeler.yml
+name: Auto-label PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, review_requested, review_requested_removed]
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      pull-requests: check
+
+    steps:
+      # 1️⃣ 파일 경로에 따른 자동 라벨링 (.github/labeler.yml 기준)
+      - name: Auto-label PR by file path
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 2️⃣ PR 상태별 라벨링
+      - name: Label PR by status
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            🏃 status: in progress
+
+      # 3️⃣ 리뷰 요청 시 → 코드리뷰 라벨 추가
+      - name: Add code review label
+        if: github.event.action == 'review_requested'
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            🔍 status: code review
+
+      # 4️⃣ 리뷰 요청 해제 시 → 코드리뷰 라벨 제거
+      - name: Remove code review label
+        if: github.event.action == 'review_requested_removed'
+        uses: actions-ecosystem/action-remove-labels@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            🔍 status: code review
