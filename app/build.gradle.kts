@@ -1,5 +1,6 @@
 import java.io.FileInputStream
 import java.util.Properties
+import org.gradle.testing.jacoco.tasks.JacocoCoverageVerification
 
 plugins {
     alias(libs.plugins.android.application)
@@ -13,7 +14,7 @@ plugins {
     // 🔧 CI/CD 플러그인 추가
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
-    id("jacoco")
+    jacoco
 }
 val propertiesFile = rootProject.file("gradle.properties")
 val properties = Properties()
@@ -105,14 +106,16 @@ jacoco {
     toolVersion = "0.8.11"
 }
 
-tasks.jacocoTestCoverageVerification {
-    violationRules {
+tasks.withType<JacocoCoverageVerification> {
+    it.violationRules {
         rule {
             limit {
-                minimum = 0.80.toBigDecimal()  // 80% 커버리지 필수
+                minimum = "0.80".toBigDecimal()
             }
         }
     }
+}
+tasks.named<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
     classDirectories.setFrom(files("$buildDir/tmp/kotlin-classes/debug"))
     sourceDirectories.setFrom(files("src/main/kotlin"))
     executionData.setFrom(files("$buildDir/jacoco/testDebugUnitTest.exec"))
@@ -128,12 +131,14 @@ ktlint {
     }
 }
 
-// 🔧 detekt 설정
+// 🔧 detekt 설정 (deprecation 수정)
 detekt {
     toolVersion = "1.23.6"
-    config = files("$projectDir/config/detekt/detekt.yml")
+    // config deprecated → from() 사용
+    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
     buildUponDefaultConfig = true
 }
+
 dependencies {
     //basic lib
     implementation(libs.androidx.core.ktx)
