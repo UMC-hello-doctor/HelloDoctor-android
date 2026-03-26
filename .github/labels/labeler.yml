@@ -1,32 +1,46 @@
 # .github/labeler.yml
 "📱 ui/presentation":
-  - "app/src/main/java/**/*Activity*"
-  - "app/src/main/java/**/*Fragment*"
-  - "app/src/main/res/layout/**/*"
-  - "app/src/main/res/values/**/*"
+  - changed-files:
+    - any-glob-to-any-file:
+      - "**/ui/**"
+      - "**/*.xml"
+      - "**/*.kt"
+      - "**/*.kts"
 
 "🧠 domain/usecase":
-  - "app/src/main/java/**/*UseCase*"
-  - "app/src/main/java/**/*Repository*"
-  - "app/src/main/java/**/domain/**/*"
+  - changed-files:
+    - any-glob-to-any-file:
+      - "app/src/main/java/**/*UseCase*"
+      - "app/src/main/java/**/*Repository*"
+      - "app/src/main/java/**/domain/**/*"
 
 "🗂 data/repository":
-  - "app/src/main/java/**/data/**/*"
-  - "app/src/main/java/**/*Dto*"
+  - changed-files:
+    - any-glob-to-any-file:
+      - "app/src/main/java/**/data/**/*"
+      - "app/src/main/java/**/*Dto*"
 
 "🌐 network/api":
-  - "app/src/main/java/**/network/**/*"
-  - "app/src/main/java/**/api/**/*"
+  - changed-files:
+    - any-glob-to-any-file:
+      - "app/src/main/java/**/network/**/*"
+      - "app/src/main/java/**/api/**/*"
 
 "💾 local/db":
-  - "app/src/main/java/**/local/**/*"
-  - "app/src/main/java/**/*Dao*"
+  - changed-files:
+    - any-glob-to-any-file:
+      - "app/src/main/java/**/local/**/*"
+      - "app/src/main/java/**/*Dao*"
 
 "🧪 test":
-  - "app/src/test/**/*"
-  - "app/src/androidTest/**/*"
+  - changed-files:
+    - any-glob-to-any-file:
+      - "app/src/test/**/*"
+      - "app/src/androidTest/**/*"
 
 "⚙️ build/gradle":
-  - "build.gradle*"
-  - "settings.gradle*"
-  - "gradle.properties"
+  - changed-files:
+    - any-glob-to-any-file:
+      - "build.gradle*"
+      - "settings.gradle*"
+      - "gradle.properties"
