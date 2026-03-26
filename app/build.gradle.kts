@@ -101,13 +101,13 @@ android {
     }
 }
 
-// 🔧 Jacoco 커버리지 설정 (80% 기준)
 jacoco {
     toolVersion = "0.8.11"
 }
 
-tasks.withType<JacocoCoverageVerification> {
-    it.violationRules {
+// Jacoco code coverage verification: 80% 이상
+tasks.withType<JacocoCoverageVerification>().configureEach {
+    violationRules {
         rule {
             limit {
                 minimum = "0.80".toBigDecimal()
@@ -115,10 +115,12 @@ tasks.withType<JacocoCoverageVerification> {
         }
     }
 }
+
+// Jacoco test coverage verification 태스크 설정
 tasks.named<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
-    classDirectories.setFrom(files("$buildDir/tmp/kotlin-classes/debug"))
+    classDirectories.setFrom(files(layout.buildDirectory.dir("tmp/kotlin-classes/debug")))
     sourceDirectories.setFrom(files("src/main/kotlin"))
-    executionData.setFrom(files("$buildDir/jacoco/testDebugUnitTest.exec"))
+    executionData.setFrom(files(layout.buildDirectory.file("jacoco/testDebugUnitTest.exec")))
 }
 
 // 🔧 ktlint 설정
@@ -134,7 +136,6 @@ ktlint {
 // 🔧 detekt 설정 (deprecation 수정)
 detekt {
     toolVersion = "1.23.6"
-    // config deprecated → from() 사용
     config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
     buildUponDefaultConfig = true
 }
