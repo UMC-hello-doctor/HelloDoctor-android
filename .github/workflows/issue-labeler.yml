@@ -1,0 +1,19 @@
+# .github/workflows/issue-labeler.yml
+name: Issue Labeler
+on:
+  issues:
+    types: [opened, edited]
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    permissions: { issues: write }
+    steps:
+      - uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: "📌 status: todo"
+      - name: Add labels by issue content
+        uses: deepakputhraya/action-branch-range-labeler@v1.0.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file-path: .github/labels/issue-labeler.yml

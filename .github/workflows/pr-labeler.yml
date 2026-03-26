@@ -15,8 +15,30 @@ jobs:
 
     steps:
       # 1️⃣ 파일 경로에 따른 자동 라벨링 (.github/labeler.yml 기준)
-      - name: Auto-label PR by file path
-        uses: actions/labeler@v5
+# .github/workflows/pr-labeler.yml
+name: PR Labeler
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, review_requested]
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    permissions: { contents: read, pull-requests: write }
+    steps:
+      - uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labels/labeler.yml
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: github.event.action == 'opened' || github.event.action == 'reopened'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: "🏃 status: in progress"
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: github.event.action == 'review_requested'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: "🔍 status: code review"        uses: actions/labeler@v5
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
