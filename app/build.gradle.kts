@@ -9,6 +9,11 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     kotlin("plugin.parcelize")
+
+    // 🔧 CI/CD 플러그인 추가
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    id("jacoco")
 }
 val propertiesFile = rootProject.file("gradle.properties")
 val properties = Properties()
@@ -95,6 +100,40 @@ android {
     }
 }
 
+// 🔧 Jacoco 커버리지 설정 (80% 기준)
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80.toBigDecimal()  // 80% 커버리지 필수
+            }
+        }
+    }
+    classDirectories.setFrom(files("$buildDir/tmp/kotlin-classes/debug"))
+    sourceDirectories.setFrom(files("src/main/kotlin"))
+    executionData.setFrom(files("$buildDir/jacoco/testDebugUnitTest.exec"))
+}
+
+// 🔧 ktlint 설정
+ktlint {
+    android.set(false)
+    ignoreFailures.set(false)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+}
+
+// 🔧 detekt 설정
+detekt {
+    toolVersion = "1.23.6"
+    config = files("$projectDir/config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
+}
 dependencies {
     //basic lib
     implementation(libs.androidx.core.ktx)

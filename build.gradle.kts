@@ -6,4 +6,12 @@ plugins {
     id("androidx.navigation.safeargs.kotlin") version "2.9.6" apply false
     id("com.google.devtools.ksp") version "2.0.21-1.0.27" apply false
     id("com.google.dagger.hilt.android") version "2.57.2" apply false
+    // ktlint
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
+    
+    // detekt
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    
+    // jacoco
+    id("jacoco")
 }
