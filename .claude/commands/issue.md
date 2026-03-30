@@ -24,7 +24,21 @@ Read the matching template from `.github/ISSUE_TEMPLATE/<type>.md`.
 - Extract the YAML frontmatter to get `labels` field (e.g., `labels: bug`)
 - Extract the body sections (everything after `---`)
 
-## Step 3 — Call github-issue-helper Agent
+## Step 3 — Validate GitHub CLI
+
+Check if GitHub CLI is installed and authenticated:
+
+```bash
+gh auth status
+```
+
+If failed:
+- Not installed: "❌ GitHub CLI가 설치되지 않았습니다. https://cli.github.com 에서 설치하세요."
+- Not authenticated: "❌ GitHub 인증이 필요합니다. `gh auth login`을 실행하세요."
+
+Proceed only if successful.
+
+## Step 4 — Call github-issue-helper Agent
 
 Pass the template content and user's description to the `github-issue-helper` agent:
 
@@ -37,17 +51,59 @@ Template body:
 """)
 ```
 
-The agent will auto-fill template sections and return a completed issue body.
+The agent will return a two-part output:
+- **SUMMARY: ...** (single line)
+- **---** (separator)
+- **Issue body** (markdown template)
 
-## Step 4 — Create the Issue
+## Step 5 — Parse Agent Output
+
+Extract from agent response:
+1. **First line** matching `SUMMARY: ...` → Extract text after `SUMMARY: ` as issue title
+2. **Content after `---` separator** → Complete markdown body
+
+Structure:
+```
+SUMMARY: 약국 목록 NPE 버그
+
+---
+
+## 🐞 문제 상황
+...
+```
+
+Parse to get:
+- Title: `약국 목록 NPE 버그`
+- Body: everything after `---`
+
+## Step 6 — Preview Issue Content
+
+Print to user:
+```
+─────────────────────────────────────
+📋 생성할 이슈 미리보기
+─────────────────────────────────────
+제목: [Bug] 약국 목록 NPE 버그
+
+본문:
+## 🐞 문제 상황
+...
+─────────────────────────────────────
+이 내용으로 이슈를 생성하시겠습니까? (y/n)
+```
+
+If user enters `n`: Offer to edit specific sections (optional — for now, abort and ask user to retry)
+If user enters `y`: Proceed to Step 7
+
+## Step 7 — Create the Issue
 
 Run `gh issue create` with:
-- `--title "[{TYPE_PREFIX}] {auto_summary_from_agent}"`
-- `--body "$(cat <<'EOF'{completed_body}EOF)"` (heredoc format)
-- `--label "{emoji_label}"` (e.g., `🐞 bug`)
+- `--title "[{TYPE_PREFIX}] {title_from_summary}"`
+- `--body "{body_from_agent}"`
+- `--label "{emoji_label}"` (from mapping table, not frontmatter)
 - Additional label: `📌 status: todo`
 
-**Type Prefix & Emoji Label Mapping:**
+**Type Prefix & Emoji Label Mapping (authoritative source):**
 
 | Type | Prefix | Label |
 |------|--------|-------|
@@ -57,29 +113,51 @@ Run `gh issue create` with:
 | refactor | Refactor | 🔧 refactor |
 | design | Design | 💡 design |
 
+**IMPORTANT**: Always use the values from this table, ignoring template frontmatter `labels:` field.
+
 Command template:
 ```bash
 gh issue create \
-  --title "[Bug] 앱이 크래시 남" \
-  --body "$(cat <<'EOF'
-## 🐞 문제 상황
-...
-EOF
-)" \
+  --title "[Bug] 약국 목록 NPE 버그" \
+  --body "## 🐞 문제 상황
+..." \
   --label "🐞 bug" \
   --label "📌 status: todo"
 ```
 
-## Step 5 — Print Result
+## Step 8 — Print Result
 
 Output the created issue URL and number in format:
 ```
-✅ Issue created: #123
+✅ 이슈 생성 완료: #123
 🔗 URL: https://github.com/UMC-hello-doctor/HelloDoctor-android/issues/123
 ```
 
 ## Error Handling
 
-- **Invalid type**: "❌ Invalid type. Use: bug, 버그, feature, 기능, chore, 보수, refactor, 리팩, design, 디자인"
-- **Template file missing**: "❌ Template not found: .github/ISSUE_TEMPLATE/{type}.md"
-- **gh issue create failed**: Print the error and ask user to check GitHub CLI credentials
+**Invalid type**:
+```
+❌ 유효하지 않은 타입입니다. 다음 중 하나를 사용하세요:
+bug, 버그, feature, 기능, chore, 보수, refactor, 리팩, design, 디자인
+```
+
+**Template file missing**:
+```
+❌ 템플릿을 찾을 수 없습니다: .github/ISSUE_TEMPLATE/{type}.md
+```
+
+**GitHub CLI not installed/authenticated**:
+(Caught in Step 3)
+
+**gh issue create failed**:
+```
+❌ 이슈 생성에 실패했습니다.
+오류: {error message}
+GitHub CLI 인증을 확인하세요: gh auth status
+```
+
+**User cancels preview**:
+```
+❌ 이슈 생성이 취소되었습니다.
+다시 시도하려면 `/issue {type} {description}`을 실행하세요.
+```

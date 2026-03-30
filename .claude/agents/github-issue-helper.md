@@ -40,7 +40,12 @@ grep -r "class DrugViewModel" --include="*.kt"
 grep -r "class UserRepository" --include="*.kt"
 ```
 
-Include the path in the filled template (e.g., "Related file: `app/feature/drug/presentation/DrugViewModel.kt`").
+**When multiple matches exist:**
+- If 2+ results found, prioritize based on user-provided context (screen name, feature module)
+- If still ambiguous, list all matching paths with a note: "(여러 파일에서 발견됨)"
+- If no matches, note as: "(파일을 찾을 수 없음)"
+
+Include the path(s) in the filled template (e.g., "Related file: `app/feature/drug/presentation/DrugViewModel.kt`").
 
 ## Step 3 — Fill Template Sections
 
@@ -61,13 +66,19 @@ For each section in the template (e.g., `## 🧩 개요`, `## 🎯 목표`):
 | 🧩 개요 (feature) | One-line summary of the feature |
 | 🎯 목표 (feature) | Extract user value + problem solved |
 | 🏗 설계 요약 (feature, optional) | If mentioned, extract UI/Domain/Data changes |
-| 🛠 작업 내용 | Identify which sections are relevant based on type |
+| 🛠 작업 내용 (chore) | Extract scope of work (new file/code generation), mark affected areas |
+| 🔧 개선 방안 (refactor) | Extract target state and why (performance, readability, maintainability) |
+| 📌 고려 사항 (design) | Extract design alternatives or constraints from description |
 
 ## Step 4 — Output Format
 
-Print the completed issue body exactly as it should appear in `gh issue create --body`:
+Print the completed issue in two-part format:
 
-```markdown
+```
+SUMMARY: 앱을 열고 약국 목록에서 스크롤 시 NPE 발생
+
+---
+
 ## 🐞 문제 상황
 앱을 열고 약국 목록 화면에서 스크롤을 내리면 NPE가 발생하며 앱이 크래시합니다.
 
@@ -84,10 +95,31 @@ Print the completed issue body exactly as it should appear in `gh issue create -
 ...
 ```
 
-**IMPORTANT**: Output ONLY the completed body markdown, nothing else. No explanations, no metadata, no "## Issue Body" header. The command will pipe this directly to `gh issue create --body`.
+**Output Structure:**
+1. **First line**: `SUMMARY: <한 줄 요약>` (max 70 characters for GitHub title)
+2. **Separator**: `---` (blank line before and after)
+3. **Body**: Complete markdown template sections
+
+**IMPORTANT**:
+- The `SUMMARY:` line will be extracted by orchestrator (issue.md) as the issue title
+- Everything after `---` becomes the issue body
+- Output ONLY the completed structure, nothing else. No explanations, no metadata
 
 ## Error Handling
 
-- If description is too vague (e.g., "it doesn't work"), ask for clarification by including a "❓ 추가 정보 필요" section
-- If a file/class is mentioned but not found, note it as "(파일을 찾을 수 없음)"
-- Do NOT fail the agent — always return a partially filled template
+**Vague Description Detection:**
+- Mark as vague if: description is <10 tokens (words) OR lacks type-critical info:
+  - **bug**: no error message, crash log, or reproduction steps
+  - **feature**: no user value or problem statement
+  - **chore**: no scope or affected files
+  - **refactor**: no target state or motivation
+  - **design**: no alternatives or constraints
+- When detected: include `❓ 추가 정보 필요` section at top with sample questions
+
+**File/Class Search:**
+- If mentioned but not found: note as "(파일을 찾을 수 없음)"
+- If multiple matches: list all with note "(여러 파일에서 발견됨)" and prioritize by context
+
+**General:**
+- Do NOT fail the agent — always return a partially filled template with `❓` markers for missing sections
+- Output SUMMARY and body structure even if incomplete
