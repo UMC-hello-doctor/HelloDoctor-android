@@ -3,9 +3,9 @@
   - changed-files:
     - any-glob-to-any-file:
       - "**/ui/**"
-      - "**/*.xml"
-      - "**/*.kt"
-      - "**/*.kts"
+      - "**/presentation/**"
+      - "**/res/**/*.xml"
+      - "**/layout/**"
 
 "🧠 domain/usecase":
   - changed-files:
