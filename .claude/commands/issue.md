@@ -1,59 +1,163 @@
 ---
 name: issue
-description: Creates a GitHub issue using the project's ISSUE_TEMPLATE for the given type. Reads the matching template and fills it in. Usage: /issue <type> <title> (type: feature | bug | refactor | chore | design)
+description: Creates a GitHub issue using templates and auto-fills content with github-issue-helper agent. Usage: /issue <type> <description>
 ---
 
-You will create a GitHub issue using the project's issue templates.
+You will create a GitHub issue for HelloDoctor-android following the project's issue templates.
 
-## Step 1 — Parse Arguments
+## Step 1 — Parse Issue Type
 
-The user's input after `/issue` follows this format:
-```
-/issue <type> <title>
-```
+Extract the first argument as the issue type. Support both English and Korean:
 
-- `<type>`: one of `feature`, `bug`, `refactor`, `chore`, `design`
-- `<title>`: brief description of the issue (everything after the type)
+**Type Mapping:**
+- `bug` | `버그` → `.github/ISSUE_TEMPLATE/bug.md`
+- `feature` | `기능` → `.github/ISSUE_TEMPLATE/feature.md`
+- `chore` | `보수` | `유지` → `.github/ISSUE_TEMPLATE/chore.md`
+- `refactor` | `리팩` | `리팩터` → `.github/ISSUE_TEMPLATE/refactor.md`
+- `design` | `디자인` → `.github/ISSUE_TEMPLATE/design.md`
 
-If no type is given, ask the user: "어떤 타입의 이슈인가요? (feature / bug / refactor / chore / design)"
-If no title is given, ask the user: "이슈 제목을 입력해주세요."
+If the type is invalid or empty, respond with an error message listing valid types.
 
 ## Step 2 — Read the Template
 
-Based on `<type>`, read the corresponding template file:
+Read the matching template from `.github/ISSUE_TEMPLATE/<type>.md`.
+- Extract the YAML frontmatter to get `labels` field (e.g., `labels: bug`)
+- Extract the body sections (everything after `---`)
 
-| type     | file                                      |
-|----------|-------------------------------------------|
-| feature  | `.github/ISSUE_TEMPLATE/feature.md`       |
-| bug      | `.github/ISSUE_TEMPLATE/bug.md`           |
-| refactor | `.github/ISSUE_TEMPLATE/refactor.md`      |
-| chore    | `.github/ISSUE_TEMPLATE/chore.md`         |
-| design   | `.github/ISSUE_TEMPLATE/design.md`        |
+## Step 3 — Validate GitHub CLI
 
-Strip the YAML frontmatter (everything between the first `---` and the second `---`) from the template body before using it.
+Check if GitHub CLI is installed and authenticated:
 
-## Step 3 — Fill the Template
+```bash
+gh auth status
+```
 
-Use the template body as the issue body structure. Fill in what you can from the title and context. Leave placeholder lines (e.g., `>`, empty checkboxes) as-is for the user to complete later.
+If failed:
+- Not installed: "❌ GitHub CLI가 설치되지 않았습니다. https://cli.github.com 에서 설치하세요."
+- Not authenticated: "❌ GitHub 인증이 필요합니다. `gh auth login`을 실행하세요."
 
-- For `feature`: fill the 개요 section from the title; leave Tasks and DoD as empty checkboxes
-- For `bug`: fill the 문제 상황 section from the title; leave 재현 방법, 환경 as placeholders
-- For `refactor`: fill 개선 내용 from the title; leave 영향 범위 as placeholders
-- For `chore`: fill 작업 내용 from the title; leave 작업 리스트 as empty checkboxes
-- For `design`: fill 주제 from the title; leave 고려 사항 and 결론 as placeholders
+Proceed only if successful.
 
-## Step 4 — Determine Label and Title Format
+## Step 4 — Call github-issue-helper Agent
 
-From the template frontmatter, extract the `labels` field to use as the issue label.
-Title format: `[Type] <title>` — capitalize the type (e.g., `[Feature]`, `[Bug]`).
+Pass the template content and user's description to the `github-issue-helper` agent:
 
-## Step 5 — Create the Issue
+```
+Invoke: Agent(subagent_type="github-issue-helper", prompt="""
+Issue type: {type}
+User description: {rest_of_args}
+Template body:
+{template_body}
+""")
+```
 
-Use `gh issue create` with:
-- `--title "[Type] <title>"`
-- `--label "<label from template>"`
-- `--body` containing the filled template body (use HEREDOC to preserve formatting)
+The agent will return a two-part output:
+- **SUMMARY: ...** (single line)
+- **---** (separator)
+- **Issue body** (markdown template)
 
-## Final Output
+## Step 5 — Parse Agent Output
 
-Print the issue URL after creation.
+Extract from agent response:
+1. **First line** matching `SUMMARY: ...` → Extract text after `SUMMARY: ` as issue title
+2. **Content after `---` separator** → Complete markdown body
+
+Structure:
+```
+SUMMARY: 약국 목록 NPE 버그
+
+---
+
+## 🐞 문제 상황
+...
+```
+
+Parse to get:
+- Title: `약국 목록 NPE 버그`
+- Body: everything after `---`
+
+## Step 6 — Preview Issue Content
+
+Print to user:
+```
+─────────────────────────────────────
+📋 생성할 이슈 미리보기
+─────────────────────────────────────
+제목: [Bug] 약국 목록 NPE 버그
+
+본문:
+## 🐞 문제 상황
+...
+─────────────────────────────────────
+이 내용으로 이슈를 생성하시겠습니까? (y/n)
+```
+
+If user enters `n`: Offer to edit specific sections (optional — for now, abort and ask user to retry)
+If user enters `y`: Proceed to Step 7
+
+## Step 7 — Create the Issue
+
+Run `gh issue create` with:
+- `--title "[{TYPE_PREFIX}] {title_from_summary}"`
+- `--body "{body_from_agent}"`
+- `--label "{emoji_label}"` (from mapping table, not frontmatter)
+- Additional label: `📌 status: todo`
+
+**Type Prefix & Emoji Label Mapping (authoritative source):**
+
+| Type | Prefix | Label |
+|------|--------|-------|
+| bug | Bug | 🐞 bug |
+| feature | Feature | ✨ feature |
+| chore | Chore | 🧹 chore |
+| refactor | Refactor | 🔧 refactor |
+| design | Design | 💡 design |
+
+**IMPORTANT**: Always use the values from this table, ignoring template frontmatter `labels:` field.
+
+Command template:
+```bash
+gh issue create \
+  --title "[Bug] 약국 목록 NPE 버그" \
+  --body "## 🐞 문제 상황
+..." \
+  --label "🐞 bug" \
+  --label "📌 status: todo"
+```
+
+## Step 8 — Print Result
+
+Output the created issue URL and number in format:
+```
+✅ 이슈 생성 완료: #123
+🔗 URL: https://github.com/UMC-hello-doctor/HelloDoctor-android/issues/123
+```
+
+## Error Handling
+
+**Invalid type**:
+```
+❌ 유효하지 않은 타입입니다. 다음 중 하나를 사용하세요:
+bug, 버그, feature, 기능, chore, 보수, refactor, 리팩, design, 디자인
+```
+
+**Template file missing**:
+```
+❌ 템플릿을 찾을 수 없습니다: .github/ISSUE_TEMPLATE/{type}.md
+```
+
+**GitHub CLI not installed/authenticated**:
+(Caught in Step 3)
+
+**gh issue create failed**:
+```
+❌ 이슈 생성에 실패했습니다.
+오류: {error message}
+GitHub CLI 인증을 확인하세요: gh auth status
+```
+
+**User cancels preview**:
+```
+❌ 이슈 생성이 취소되었습니다.
+다시 시도하려면 `/issue {type} {description}`을 실행하세요.
+```

@@ -15,6 +15,13 @@
 | `/pr` | PR 자동 생성 | 단독 (git + gh 명령) |
 | `/api` | Retrofit 엔드포인트 스캐폴딩 | 단독 (coder 패턴 참조) |
 | `/test` | 유닛 테스트 자동 생성 | 단독 |
+| `/issue` | GitHub 이슈 생성 | github-issue-helper |
+| `/workflow` | CI 워크플로우 상태 확인·재실행 | 단독 (gh run 명령) |
+
+---
+
+> **참고**: `/issue`·`/workflow`는 GitHub CLI(`gh`)가 설치·인증된 상태에서만 동작합니다.
+> 미설치 시: https://cli.github.com | 인증: `gh auth login`
 
 ---
 
@@ -72,6 +79,42 @@ Happy path, Error path, Edge case를 모두 커버합니다.
 ```
 /test feature/drug/presentation/DrugViewModel.kt
 /test UserInfoRepositoryImpl
+```
+
+---
+
+### `/issue` — GitHub 이슈 생성
+
+이슈 타입과 설명을 받아 템플릿을 자동으로 채워 GitHub 이슈를 생성합니다.
+- 타입: `bug`/`버그`, `feature`/`기능`, `chore`/`보수`, `refactor`/`리팩`, `design`/`디자인`
+- 생성 전 타이틀·본문 미리보기 확인 단계 포함
+- label(`🐞 bug` 등), `📌 status: todo` 자동 적용
+
+```
+/issue bug 약국 목록 화면에서 스크롤 시 NPE 발생
+/issue feature 즐겨찾기 기능 추가
+/issue chore gradle 버전 업그레이드
+```
+
+---
+
+### `/workflow` — CI 워크플로우 관리
+
+GitHub Actions 워크플로우 상태 확인, 로그 조회, 실패 재실행을 수행합니다.
+
+| 서브커맨드 | 용도 |
+|-----------|------|
+| `status` (기본) | 현재 브랜치의 최근 10개 실행 결과 표시 |
+| `check` | HEAD 커밋의 모든 워크플로우 결과 집계 (실패 로그 포함) |
+| `rerun <id\|name>` | 실패한 단계만 재실행 + 완료까지 폴링 |
+| `list` | 저장소의 전체 워크플로우 목록 |
+
+```
+/workflow
+/workflow check
+/workflow rerun test-coverage
+/workflow rerun 12344
+/workflow list
 ```
 
 ---
