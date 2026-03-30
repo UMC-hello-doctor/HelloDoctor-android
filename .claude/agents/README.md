@@ -16,7 +16,7 @@
 | `feature-refactorer.md` | `feature-refactorer` | 코드 품질 개선 (중복 제거, Kotlin 관용구) | Read, Glob, Grep, Edit |
 | `feature-reviewer.md` | `feature-reviewer` | 버그·보안·아키텍처 최종 리뷰 | Read, Glob, Grep |
 | `bug-analyzer.md` | `bug-analyzer` | 버그 원인 분석 → 수정 계획 수립 | Read, Glob, Grep |
-| `github-issue-helper.md` | `github-issue-helper` | 이슈 템플릿 본문 자동 작성 | Read, Glob, Grep |
+| `github-issue-helper.md` | `github-issue-helper` | 이슈 템플릿 타이틀·본문 자동 작성 (`SUMMARY:` + body 구조 출력) | Read, Glob, Grep |
 
 ## 에이전트 체인 구조
 
