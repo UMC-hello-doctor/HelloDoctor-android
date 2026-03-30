@@ -7,12 +7,12 @@ You will create a GitHub Pull Request for the current branch following the proje
 
 ## Step 1 — Gather Information
 
-Run these commands to understand what changed:
+Run these commands in parallel to understand what changed:
 - `git log develop..HEAD --oneline` — commit list
 - `git diff develop...HEAD --stat` — changed files summary
 - `git diff develop...HEAD` — full diff (for understanding changes)
 
-Also read `.github/pull-request-template.md` to know the required format.
+Then read `.github/pull-request-template.md` to get the exact template format. Use the template as-is — do not invent or skip any section.
 
 ## Step 2 — Determine PR Type
 
@@ -25,48 +25,27 @@ Based on the changes, determine the type label:
 
 ## Step 3 — Check Line Count
 
-Run `git diff develop...HEAD --stat` and count total lines changed.
-- If over 200 lines: warn the user and suggest splitting (project rule: PR must be ≤ 200 lines)
-- If using `stacked-pr` label: the 200-line limit is skipped
+Parse the `--stat` output and sum the insertions + deletions.
+- If over 200 lines: warn the user and ask for confirmation before proceeding (project rule: PR must be ≤ 200 lines)
+- Exception: if the branch contains a `stacked-pr` label or the user confirms, proceed anyway
 
-## Step 4 — Create the PR
+## Step 4 — Fill the Template
 
-Use `gh pr create` with the following body structure (fill in from the diff):
+Read `.github/pull-request-template.md` and fill in each section from the diff and commit history:
+- **PR title**: `[Type] 한 줄 요약` (match the title format shown at the top of the template)
+- **PR 개요**: one-line summary of what this PR does
+- **작업 내용**: checkbox list derived from actual changes
+- **관련 이슈**: use `Closes #N` if an issue number was passed as argument (e.g. `/pr 42` → `Closes #42`); omit if none
+- **화면 캡처**: leave placeholder text as-is (user fills this manually)
+- **체크 사항**: keep all checkboxes unchecked — do not pre-check any
+- **기타 참고 사항**: brief note for reviewers about non-obvious decisions or tradeoffs, if any
 
-```
-제목 형식: [Type] 작업 내용 한 줄 요약
+## Step 5 — Create the PR
 
-## 📌 PR 개요
-- [한 줄 요약]
-
----
-
-## ✨ 작업 내용
-- [ ] [변경 사항 1]
-- [ ] [변경 사항 2]
-
----
-
-## 🧩 관련 이슈
-- Closes #[이슈 번호] (사용자가 제공한 경우)
-
----
-
-## ⚠️ 체크 사항
-- [ ] 빌드 및 실행 정상 동작 확인
-- [ ] 기존 기능에 영향 없음
-- [ ] 변경 사항에 대한 테스트 작성 또는 기존 테스트 통과 확인
-- [ ] PR 변경 줄 수 200줄 이하 확인
-- [ ] 불필요한 로그 제거
-- [ ] 코드 컨벤션 준수
-
----
-
-## 💬 기타 참고 사항
-- [리뷰어가 알아야 할 사항]
-```
-
-Target branch: `develop`
+Use `gh pr create` with:
+- `--base develop`
+- `--title "[Type] 한 줄 요약"`
+- `--body` containing the filled template (use HEREDOC to preserve formatting)
 
 ## Final Output
 
