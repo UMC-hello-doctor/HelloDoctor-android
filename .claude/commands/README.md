@@ -15,6 +15,8 @@
 | `/pr` | PR 자동 생성 | 단독 (git + gh 명령) |
 | `/api` | Retrofit 엔드포인트 스캐폴딩 | 단독 (coder 패턴 참조) |
 | `/test` | 유닛 테스트 자동 생성 | 단독 |
+| `/issue` | GitHub 이슈 생성 | github-issue-helper |
+| `/workflow` | CI 워크플로우 상태 확인·재실행 | 단독 (gh run 명령) |
 
 ---
 
