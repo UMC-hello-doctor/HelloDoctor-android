@@ -1,5 +1,6 @@
 import java.io.FileInputStream
 import java.util.Properties
+import org.gradle.testing.jacoco.tasks.JacocoCoverageVerification
 
 plugins {
     alias(libs.plugins.android.application)
@@ -9,6 +10,11 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     kotlin("plugin.parcelize")
+
+    // 🔧 CI/CD 플러그인 추가
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    jacoco
 }
 val propertiesFile = rootProject.file("gradle.properties")
 val properties = Properties()
@@ -93,6 +99,45 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+// Jacoco code coverage verification: 80% 이상
+tasks.withType<JacocoCoverageVerification>().configureEach {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.80".toBigDecimal()
+            }
+        }
+    }
+}
+
+// Jacoco test coverage verification 태스크 설정
+tasks.named<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
+    classDirectories.setFrom(files(layout.buildDirectory.dir("tmp/kotlin-classes/debug")))
+    sourceDirectories.setFrom(files("src/main/kotlin"))
+    executionData.setFrom(files(layout.buildDirectory.file("jacoco/testDebugUnitTest.exec")))
+}
+
+// 🔧 ktlint 설정
+ktlint {
+    android.set(false)
+    ignoreFailures.set(false)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+}
+
+// 🔧 detekt 설정 (deprecation 수정)
+detekt {
+    toolVersion = "1.23.6"
+    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
+    buildUponDefaultConfig = true
 }
 
 dependencies {

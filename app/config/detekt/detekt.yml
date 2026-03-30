@@ -1,0 +1,19 @@
+style:
+  MaxLineLength:
+    active: true
+    max: 120
+  Spacing:
+    active: true
+  MaximumLineLength:
+    active: true
+    max: 120
+  NewLineAtEndOfFile:
+    active: true
+
+complexity:
+  LongMethod:
+    active: true
+    threshold: 60
+  LongParameterList:
+    active: true
+    threshold: 6
