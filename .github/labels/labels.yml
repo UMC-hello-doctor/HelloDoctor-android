@@ -67,3 +67,11 @@ labels:
   - name: "✅ status: done"
     color: "0e8a16"
     description: "완료"
+
+  - name: "🧹 chore"
+    color: "e4e669"
+    description: "설정/빌드/기타 작업"
+
+  - name: "💡 design"
+    color: "f9d0c4"
+    description: "설계 및 기술 논의"

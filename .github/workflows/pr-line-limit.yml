@@ -5,8 +5,10 @@ on:
 
 jobs:
   check-lines:
-    # design 라벨 있으면 스킵
-    if: "!contains(github.event.pull_request.labels.*.name, 'design')"
+    # design 또는 stacked-pr 라벨 있으면 스킵
+    if: |
+      !contains(github.event.pull_request.labels.*.name, 'design') &&
+      !contains(github.event.pull_request.labels.*.name, 'stacked-pr')
     runs-on: ubuntu-latest
     steps:
     # 1. 베이스 브랜치 체크아웃
@@ -58,7 +60,7 @@ jobs:
         script: |
           const lines = parseInt(process.env.ADDED_LINES || '0');
           const limit = 200;
-          const warnLimit = 190;
+          const warnLimit = 180;
           let message = '';
           
           if (lines > limit) {
@@ -80,15 +82,27 @@ jobs:
             });
           }
 
-    # 6. design 라벨 스킵 시 알림
-    - name: Notify design label skip
-      if: contains(github.event.pull_request.labels.*.name, 'design')
+    # 6. 스킵 라벨 감지 시 알림 (job 레벨에서 이미 스킵되므로 별도 job으로 처리)
+  notify-skip:
+    if: |
+      contains(github.event.pull_request.labels.*.name, 'design') ||
+      contains(github.event.pull_request.labels.*.name, 'stacked-pr')
+    runs-on: ubuntu-latest
+    steps:
+    - name: Notify skip reason
       uses: actions/github-script@v7
       with:
         script: |
+          const labels = context.payload.pull_request.labels.map(l => l.name);
+          let reason = '';
+          if (labels.includes('stacked-pr')) {
+            reason = '**stacked-pr 라벨 확인됨** - 줄 수 제한 체크 스킵됨\n\nStacked PR은 누적 diff로 인해 줄 수 제한을 적용하지 않습니다.';
+          } else if (labels.includes('design')) {
+            reason = '**design 라벨 확인됨** - 줄 수 제한 체크 스킵됨\n\n디자인/UI 변경은 예외 처리됩니다.';
+          }
           github.rest.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: '✅ **design 라벨 확인됨** - 줄 수 제한 체크 스킵됨\n\n디자인/UI 변경은 예외 처리됩니다.'
+            body: `✅ ${reason}`
           });

@@ -1,0 +1,35 @@
+name: PR Merge Status Sync
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  mark-done:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move linked issues to done
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const body = pr.body || "";
+
+            const issueNumbers = [...body.matchAll(/#(\d+)/g)].map(m => m[1]);
+
+            for (const issue_number of issueNumbers) {
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number,
+                name: "🏃 status: in progress"
+              }).catch(e => { if (e.status !== 404) throw e; });
+
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number,
+                labels: ["✅ status: done"]
+              });
+            }

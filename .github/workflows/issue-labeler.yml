@@ -8,12 +8,40 @@ jobs:
     runs-on: ubuntu-latest
     permissions: { issues: write }
     steps:
-      - uses: actions-ecosystem/action-add-labels@v1
+      - name: Add status todo label
+        uses: actions-ecosystem/action-add-labels@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labels: "📌 status: todo"
+
       - name: Add labels by issue content
-        uses: deepakputhraya/action-branch-range-labeler@v1.0.2
+        uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          file-path: .github/labels/issue-labeler.yml
+          script: |
+            const issue = context.payload.issue;
+            const text = (issue.title + ' ' + (issue.body || '')).toLowerCase();
+
+            const labelMap = {
+              '🐞 bug':      ['버그', '크래시', '오류', 'crash', 'exception'],
+              '✨ feature':  ['기능', '추가', 'feature', '새로운'],
+              '🔧 refactor': ['리팩토링', 'refactor', '개선'],
+              '📖 docs':     ['문서', 'docs', 'readme'],
+              '🧹 chore':    ['설정', 'chore', '빌드', 'gradle'],
+              '💡 design':   ['설계', '구조', 'architecture', '논의']
+            };
+
+            const labels = [];
+            for (const [label, keywords] of Object.entries(labelMap)) {
+              if (keywords.some(kw => text.includes(kw.toLowerCase()))) {
+                labels.push(label);
+              }
+            }
+
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels
+              });
+            }
