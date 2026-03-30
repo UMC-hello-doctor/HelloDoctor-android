@@ -58,7 +58,7 @@ jobs:
         script: |
           const lines = parseInt(process.env.ADDED_LINES || '0');
           const limit = 200;
-          const warnLimit = 190;
+          const warnLimit = 180;
           let message = '';
           
           if (lines > limit) {
