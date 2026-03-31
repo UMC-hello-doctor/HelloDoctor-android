@@ -7,14 +7,16 @@ import com.umc.hellodoctor.feature.auth.data.repository.AuthApi
 import com.umc.hellodoctor.feature.auth.domain.model.SocialUser
 import javax.inject.Inject
 
-class AuthRepositoryImpl @Inject constructor(
-    private val authApi: AuthApi
-) : AuthRepository {
-
-    override suspend fun loginWithSocial(user: SocialUser): BaseResponse<SocialLoginResponse> {
-        val request = SocialLoginRequest(
-            idToken = user.idToken,
-        )
-        return authApi.socialLogin(request)
+class AuthRepositoryImpl
+    @Inject
+    constructor(
+        private val authApi: AuthApi,
+    ) : AuthRepository {
+        override suspend fun loginWithSocial(user: SocialUser): BaseResponse<SocialLoginResponse> {
+            val request =
+                SocialLoginRequest(
+                    idToken = user.idToken,
+                )
+            return authApi.socialLogin(request)
+        }
     }
-}
