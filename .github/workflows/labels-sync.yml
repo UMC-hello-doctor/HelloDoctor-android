@@ -5,10 +5,18 @@ on:
     branches: [develop]
     paths: ['.github/labels/labels.yml']
   workflow_dispatch:
+
+concurrency:
+  group: labels-sync-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   sync-labels:
     runs-on: ubuntu-latest
-    permissions: { issues: write }
+    timeout-minutes: 2
+    permissions:
+      contents: read
+      issues: write
     steps:
       - uses: actions/checkout@v4
       - uses: crazy-max/ghaction-github-labeler@v5

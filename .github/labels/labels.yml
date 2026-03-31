@@ -75,3 +75,7 @@ labels:
   - name: "💡 design"
     color: "f9d0c4"
     description: "설계 및 기술 논의"
+
+  - name: "📚 stacked-pr"
+    color: "f0d9ff"
+    description: "스택 PR (누적 변경)"

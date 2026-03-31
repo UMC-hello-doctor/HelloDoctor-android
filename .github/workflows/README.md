@@ -9,7 +9,10 @@ PR 생성부터 머지까지 전 과정을 자동화하는 GitHub Actions 워크
 | `code-style-check.yml` | PR 생성/업데이트 | Kotlin 코드 스타일 검사 |
 | `test-coverage.yml` | PR 생성/업데이트 | 테스트 커버리지 검증 |
 | `pr-line-limit.yml` | PR 생성/업데이트/라벨 변경 | PR 변경 줄 수 제한 |
-| `pr-title-labeler.yml` | PR 생성/수정 | PR 제목 접두사 기반 라벨 부착 |
+| `pr-title-validate.yml` | PR 생성/수정 | PR 제목 Conventional Commits 형식 검증 |
+| `pr-title-labeler.yml` | PR 생성/수정 | PR 제목 기반 타입 라벨 자동 부착 |
+| `pr-stacked-detector.yml` | PR 생성/수정/업데이트 | Stacked PR 자동 감지 및 라벨 부착 |
+| `commit-message-lint.yml` | PR 생성/업데이트 | 커밋 메시지 Conventional Commits 검증 |
 | `pr-labeler.yml` | PR 이벤트 전체 | 파일 경로 기반 라벨 + 상태 라벨 관리 |
 | `issue-labeler.yml` | 이슈 생성/수정 | 이슈 상태/키워드 기반 라벨 부착 |
 | `labels-sync.yml` | develop 브랜치 push / 수동 | GitHub 라벨 목록 동기화 |
@@ -37,19 +40,56 @@ PR 생성부터 머지까지 전 과정을 자동화하는 GitHub Actions 워크
 - **임계값**:
   - 180줄 이상 → ⚠️ 경고 댓글 + 리뷰어 추가 권장
   - 200줄 초과 → 🚫 실패 + PR 분리 요청 댓글
-- **예외**: `design` 라벨이 붙은 PR은 검사 스킵
+- **예외** (검사 스킵):
+  - `design` 라벨 붙은 PR
+  - `stacked-pr` 라벨 붙은 PR
+  - `chore` 타입 PR (제목이 `chore:`로 시작)
+
+### pr-title-validate.yml
+- **트리거**: PR opened / edited / synchronize
+- **검증**: PR 제목이 Conventional Commits 형식을 따르는지 확인
+- **형식**: `<type>(<scope>): <subject>` 또는 `<type>: <subject>`
+- **Type**: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `perf`, `ci`
+- **Scope**: `auth`, `drug`, `chat`, `navermap`, `userinfo`, `network`, `ui`, `permission` (선택)
+- **Subject**: 최대 50자, 명령형, 마침표 없음
+- **위반 시**: 🚫 실패 + 상세한 규칙 설명 댓글
 
 ### pr-title-labeler.yml
 - **트리거**: PR opened / edited / synchronize
-- **동작**: PR 제목의 접두사를 감지하여 타입 라벨 부착
+- **동작**: PR 제목의 type을 감지하여 라벨 자동 부착 (Conventional Commits 기반)
+- **Type → 라벨 매핑**:
 
-| 접두사 | 부착 라벨 |
+| Type | 부착 라벨 |
 |---|---|
-| `[Feature]` | `✨ feature` |
-| `[Bug]` | `🐞 bug` |
-| `[Refactor]` | `🔧 refactor` |
-| `[Chore]` | `🧹 chore` |
-| `[Design]` | `💡 design` |
+| `feat` | `✨ feature` |
+| `fix` | `🐞 bug` |
+| `refactor` | `🔧 refactor` |
+| `chore` | `🧹 chore` |
+| `docs` | `📚 docs` |
+| `test` | `✅ test` |
+| `perf` | `⚡ performance` |
+| `ci` | `🤖 ci` |
+
+- **Scope 라벨**: `scope: <name>` 형태로 자동 부착
+  - 예: `feat(drug):`이면 `scope: drug` 라벨도 추가
+
+### pr-stacked-detector.yml
+- **트리거**: PR opened / edited / synchronize
+- **동작**: Stacked PR 패턴을 자동으로 감지하고 `📚 stacked-pr` 라벨 부착
+- **감지 패턴**:
+  1. **파트 형식**: PR 제목에 `[1/3]`, `[2/3]` 등이 있는 경우
+  2. **키워드**: PR 제목/본문에 `stacked`, `depends on`, `depends-on`, `stack of` 등이 있는 경우
+- **자동 댓글**: 감지 사유와 함께 알림 댓글 자동 작성
+- **라인 제한 스킵**: 자동으로 `pr-line-limit.yml` 체크 대상 제외
+
+### commit-message-lint.yml
+- **트리거**: PR opened / synchronize
+- **검증**: PR의 모든 커밋 메시지가 Conventional Commits 형식을 따르는지 확인
+- **검증 항목**:
+  1. 형식: `<type>(<scope>): <subject>`
+  2. Subject 길이: 최대 50자
+- **Type, Scope**: PR 제목과 동일한 규칙
+- **위반 시**: 🚫 실패 + 문제 있는 커밋 목록 + 규칙 설명 댓글
 
 ### pr-labeler.yml
 - **트리거**: PR opened / synchronize / reopened / edited / review_requested / review_request_removed
@@ -86,16 +126,23 @@ PR 생성부터 머지까지 전 과정을 자동화하는 GitHub Actions 워크
 이슈 생성
   └─ issue-labeler     → 📌 status: todo + 타입 라벨 부착
 
-PR 생성 (제목: [Feature] xxx, 본문: #이슈번호)
-  ├─ pr-title-labeler  → ✨ feature 라벨 부착
-  ├─ pr-labeler        → 🏃 status: in progress + 레이어 라벨 부착
-  ├─ code-style-check  → ktlint + detekt 검사
-  ├─ test-coverage     → 커버리지 80% 검증
-  └─ pr-line-limit     → 200줄 초과 시 실패
+PR 생성 (제목: feat(drug): 약물 검색 기능, 본문: #이슈번호)
+  ├─ pr-title-validate     → ✅ 제목 형식 검증 (Conventional Commits)
+  ├─ pr-title-labeler      → ✨ feature + scope: drug 라벨 부착
+  ├─ pr-stacked-detector   → Stacked PR 패턴 감지 시 📚 stacked-pr 라벨
+  ├─ commit-message-lint   → 커밋 메시지 형식 검증
+  ├─ pr-labeler            → 🏃 status: in progress + 레이어 라벨 부착
+  ├─ code-style-check      → ktlint + detekt 검사
+  ├─ test-coverage         → 커버리지 80% 검증
+  └─ pr-line-limit         → 200줄 초과 시 실패 (chore/design/stacked-pr은 스킵)
 
 리뷰 요청
-  └─ pr-labeler        → 🔍 status: code review 부착
+  └─ pr-labeler            → 🔍 status: code review 부착
 
 PR 머지
-  └─ pr-merge-status   → 연결 이슈에 ✅ status: done 부착
+  └─ pr-merge-status       → 연결 이슈에 ✅ status: done 부착
 ```
+
+## 커밋/PR 컨벤션 규칙
+
+자세한 규칙은 [.claude/rules/commit-conventions.md](../../.claude/rules/commit-conventions.md) 참고
