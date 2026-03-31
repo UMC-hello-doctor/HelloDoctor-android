@@ -1,7 +1,7 @@
-import java.io.FileInputStream
-import java.util.Properties
 import org.gradle.testing.jacoco.tasks.JacocoCoverageVerification
 import org.gradle.testing.jacoco.tasks.JacocoReport
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -29,12 +29,18 @@ if (keystorePropertiesFile.exists()) {
 }
 
 // Helper function to get API property with fallback to system environment variable
-fun getApiProperty(key: String, defaultValue: String = ""): String {
+fun getApiProperty(
+    key: String,
+    defaultValue: String = "",
+): String {
     return apiProperties.getProperty(key) ?: System.getenv(key) ?: defaultValue
 }
 
 // Helper function to get keystore property with fallback to system environment variable
-fun getKeystoreProperty(key: String, defaultValue: String = ""): String {
+fun getKeystoreProperty(
+    key: String,
+    defaultValue: String = "",
+): String {
     return keystoreProperties.getProperty(key) ?: System.getenv(key) ?: defaultValue
 }
 
@@ -59,27 +65,27 @@ android {
         buildConfigField(
             "String",
             "AI_API_KEY",
-            "\"${getApiProperty("AI_API_KEY")}\""
+            "\"${getApiProperty("AI_API_KEY")}\"",
         )
         buildConfigField(
             "String",
             "SERVER_BASE_URL",
-            "\"${getApiProperty("SERVER_BASE_URL", "https://api.hellodoctor.dev")}\""
+            "\"${getApiProperty("SERVER_BASE_URL", "https://api.hellodoctor.dev")}\"",
         )
         buildConfigField(
             "String",
             "NAVER_MAP_CLIENT_ID",
-            "\"${getApiProperty("NAVER_MAP_CLIENT_ID")}\""
+            "\"${getApiProperty("NAVER_MAP_CLIENT_ID")}\"",
         )
         buildConfigField(
             "String",
             "NAVER_MAP_CLIENT_SECRET",
-            "\"${getApiProperty("NAVER_MAP_CLIENT_SECRET")}\""
+            "\"${getApiProperty("NAVER_MAP_CLIENT_SECRET")}\"",
         )
         buildConfigField(
             "String",
             "GOOGLE_OAUTH_CLIENT_ID",
-            "\"${getApiProperty("GOOGLE_OAUTH_CLIENT_ID")}\""
+            "\"${getApiProperty("GOOGLE_OAUTH_CLIENT_ID")}\"",
         )
 
         manifestPlaceholders["NAVER_MAP_CLIENT_ID"] =
@@ -133,55 +139,57 @@ jacoco {
     toolVersion = "0.8.11"
 }
 
-val jacocoExcludedFiles = listOf(
-    "**/R.class",
-    "**/R$*.class",
-    "**/BuildConfig.*",
-    "**/Manifest*.*",
-    "**/*Test*.*",
-    "android/**/*.*",
-
-    // Android / Kotlin generated
-    "**/*\$ViewInjector*.*",
-    "**/*\$ViewBinder*.*",
-    "**/BR.*",
-    "**/DataBinderMapperImpl.*",
-    "**/*Binding*.*",
-    "**/*MapperImpl*.*",
-    "**/*Companion*.*",
-    "**/*Module*.*",
-    "**/*Dagger*.*",
-    "**/*Hilt*.*",
-    "**/*_Hilt*.*",
-    "**/*MembersInjector*.*",
-    "**/*_Factory*.*",
-    "**/*_Provide*Factory*.*",
-    "**/*Extensions*.*",
-    "**/*\$Result.*",
-    "**/*\$Result$*.*",
-    "**/*Directions*.*",
-    "**/*Args*.*",
-
-    // Compose / lambda / synthetic
-    "**/*ComposableSingletons*.*",
-    "**/*\$Lambda$*.*",
-    "**/*\$inlined$*.*"
-)
-
-val debugTree = fileTree("${layout.buildDirectory.get().asFile}/tmp/kotlin-classes/debug") {
-    exclude(jacocoExcludedFiles)
-}
-
-val mainJavaTree = fileTree("${layout.buildDirectory.get().asFile}/intermediates/javac/debug/classes") {
-    exclude(jacocoExcludedFiles)
-}
-
-val jacocoExecutionData = fileTree(layout.buildDirectory.get().asFile) {
-    include(
-        "jacoco/testDebugUnitTest.exec",
-        "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
+val jacocoExcludedFiles =
+    listOf(
+        "**/R.class",
+        "**/R$*.class",
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        "**/*Test*.*",
+        "android/**/*.*",
+        // Android / Kotlin generated
+        "**/*\$ViewInjector*.*",
+        "**/*\$ViewBinder*.*",
+        "**/BR.*",
+        "**/DataBinderMapperImpl.*",
+        "**/*Binding*.*",
+        "**/*MapperImpl*.*",
+        "**/*Companion*.*",
+        "**/*Module*.*",
+        "**/*Dagger*.*",
+        "**/*Hilt*.*",
+        "**/*_Hilt*.*",
+        "**/*MembersInjector*.*",
+        "**/*_Factory*.*",
+        "**/*_Provide*Factory*.*",
+        "**/*Extensions*.*",
+        "**/*\$Result.*",
+        "**/*\$Result$*.*",
+        "**/*Directions*.*",
+        "**/*Args*.*",
+        // Compose / lambda / synthetic
+        "**/*ComposableSingletons*.*",
+        "**/*\$Lambda$*.*",
+        "**/*\$inlined$*.*",
     )
-}
+
+val debugTree =
+    fileTree("${layout.buildDirectory.get().asFile}/tmp/kotlin-classes/debug") {
+        exclude(jacocoExcludedFiles)
+    }
+
+val mainJavaTree =
+    fileTree("${layout.buildDirectory.get().asFile}/intermediates/javac/debug/classes") {
+        exclude(jacocoExcludedFiles)
+    }
+
+val jacocoExecutionData =
+    fileTree(layout.buildDirectory.get().asFile) {
+        include(
+            "jacoco/testDebugUnitTest.exec",
+            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+        )
+    }
 
 tasks.register<JacocoReport>("jacocoDebugReport") {
     group = "verification"
@@ -226,7 +234,7 @@ tasks.register("testCoverage") {
     dependsOn(
         "testDebugUnitTest",
         "jacocoDebugReport",
-        "jacocoCoverageVerification"
+        "jacocoCoverageVerification",
     )
 }
 
