@@ -3,10 +3,16 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 6
+    permissions:
+      contents: read
     steps:
     - uses: actions/checkout@v4
     
@@ -19,14 +25,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     
-    - name: Cache Gradle + Build
+    - name: Cache Gradle (최적화 — build/ 제외)
       uses: actions/cache@v4
       with:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
           .gradle
-          build/
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
