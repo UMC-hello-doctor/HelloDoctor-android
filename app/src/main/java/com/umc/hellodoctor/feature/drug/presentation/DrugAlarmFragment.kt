@@ -15,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DrugAlarmFragment : Fragment() {
-
     private val viewModel: DrugPlanViewModel by viewModels()
     private lateinit var binding: FragmentDrugAlarmBinding
     private lateinit var adapter: DrugAlarmAdapter
@@ -23,13 +22,16 @@ class DrugAlarmFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentDrugAlarmBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
@@ -41,9 +43,10 @@ class DrugAlarmFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = DrugAlarmAdapter { plan ->
-            navigateToDrugDetail(plan.id)
-        }
+        adapter =
+            DrugAlarmAdapter { plan ->
+                navigateToDrugDetail(plan.id)
+            }
         binding.rvDrugAlarms.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@DrugAlarmFragment.adapter

@@ -12,12 +12,10 @@ import java.util.Date
 import java.util.Locale
 
 class DrugAlarmAdapter(
-    private val onItemClick: (DrugPlanEntity) -> Unit
+    private val onItemClick: (DrugPlanEntity) -> Unit,
 ) : ListAdapter<DrugPlanEntity, DrugAlarmAdapter.ViewHolder>(DrugPlanDiffCallback()) {
-
     inner class ViewHolder(private val binding: ItemDrugAlarmBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(plan: DrugPlanEntity) {
             val dateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.KOREA)
             val startDate = dateFormat.format(Date(plan.startDateMillis))
@@ -36,28 +34,39 @@ class DrugAlarmAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         return ViewHolder(
             ItemDrugAlarmBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
-            )
+                false,
+            ),
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position))
     }
 
     class DrugPlanDiffCallback : DiffUtil.ItemCallback<DrugPlanEntity>() {
-        override fun areItemsTheSame(oldItem: DrugPlanEntity, newItem: DrugPlanEntity): Boolean {
+        override fun areItemsTheSame(
+            oldItem: DrugPlanEntity,
+            newItem: DrugPlanEntity,
+        ): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: DrugPlanEntity, newItem: DrugPlanEntity): Boolean {
+        override fun areContentsTheSame(
+            oldItem: DrugPlanEntity,
+            newItem: DrugPlanEntity,
+        ): Boolean {
             return oldItem == newItem
         }
     }
 }
-

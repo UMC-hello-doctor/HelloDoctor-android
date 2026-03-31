@@ -14,16 +14,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DrugModule {
-
     @Provides
     @Singleton
     fun provideDrugDatabase(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): DrugDatabase {
         return Room.databaseBuilder(
             context,
             DrugDatabase::class.java,
-            "drug_database"
+            "drug_database",
         )
             .fallbackToDestructiveMigration()
             .build()
@@ -35,4 +34,3 @@ object DrugModule {
         return database.drugPlanDao()
     }
 }
-

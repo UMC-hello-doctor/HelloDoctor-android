@@ -8,12 +8,10 @@ import com.umc.hellodoctor.feature.drug.data.database.AlarmInfo
 
 class AlarmInfoAdapter(
     private val alarms: List<AlarmInfo>,
-    private val onDeleteClick: (Int) -> Unit
+    private val onDeleteClick: (Int) -> Unit,
 ) : RecyclerView.Adapter<AlarmInfoAdapter.ViewHolder>() {
-
     inner class ViewHolder(private val binding: ItemAlarmInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(alarm: AlarmInfo) {
             val timeText = String.format("%02d:%02d", alarm.hour, alarm.minute)
             binding.tvAlarmTime.text = timeText
@@ -27,17 +25,23 @@ class AlarmInfoAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         return ViewHolder(
             ItemAlarmInfoBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
-            )
+                false,
+            ),
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         holder.bind(alarms[position])
     }
 

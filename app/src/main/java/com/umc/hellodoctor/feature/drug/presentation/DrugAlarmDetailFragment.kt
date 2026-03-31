@@ -18,7 +18,6 @@ import java.util.Locale
 
 @AndroidEntryPoint
 class DrugAlarmDetailFragment : Fragment() {
-
     private val viewModel: DrugPlanViewModel by viewModels()
     private lateinit var binding: FragmentDrugAlarmDetailBinding
     private val args: DrugAlarmDetailFragmentArgs by navArgs()
@@ -29,13 +28,16 @@ class DrugAlarmDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentDrugAlarmDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         val planId = args.planId
@@ -68,10 +70,11 @@ class DrugAlarmDetailFragment : Fragment() {
 
         binding.btnEdit.setOnClickListener {
             viewModel.selectedPlan.value?.let { plan ->
-                val action = DrugAlarmDetailFragmentDirections.actionDrugAlarmDetailFragmentToDrugInfoInputFragment(
-                    plan.medicines.toTypedArray(),
-                    plan.id
-                )
+                val action =
+                    DrugAlarmDetailFragmentDirections.actionDrugAlarmDetailFragmentToDrugInfoInputFragment(
+                        plan.medicines.toTypedArray(),
+                        plan.id,
+                    )
                 findNavController().navigate(action)
             }
         }
@@ -84,12 +87,13 @@ class DrugAlarmDetailFragment : Fragment() {
 
                 binding.apply {
                     tvPharmacyName.text = it.pharmacyName
-                    tvIntakeType.text = when (it.intakeType.name) {
-                        "PRE_MEAL" -> "식전"
-                        "BETWEEN_MEALS" -> "식간"
-                        "POST_MEAL" -> "식후"
-                        else -> "기타"
-                    }
+                    tvIntakeType.text =
+                        when (it.intakeType.name) {
+                            "PRE_MEAL" -> "식전"
+                            "BETWEEN_MEALS" -> "식간"
+                            "POST_MEAL" -> "식후"
+                            else -> "기타"
+                        }
                     tvStartDate.text = dateFormat.format(Date(it.startDateMillis))
                     tvEndDate.text = dateFormat.format(Date(it.endDateMillis))
 

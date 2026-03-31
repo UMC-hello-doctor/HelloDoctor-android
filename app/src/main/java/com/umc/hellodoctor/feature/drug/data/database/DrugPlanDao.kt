@@ -8,7 +8,6 @@ import androidx.room.Update
 
 @Dao
 interface DrugPlanDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlan(plan: DrugPlanEntity)
 
@@ -27,4 +26,3 @@ interface DrugPlanDao {
     @Query("DELETE FROM drug_plans")
     suspend fun deleteAllPlans()
 }
-

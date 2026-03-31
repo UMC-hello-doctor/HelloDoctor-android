@@ -9,37 +9,45 @@ import com.umc.hellodoctor.feature.drug.data.database.AlarmInfo
 import java.util.Calendar
 
 class DrugAlarmManager(private val context: Context) {
-
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-    fun scheduleAlarms(planId: String, alarms: List<AlarmInfo>) {
+    fun scheduleAlarms(
+        planId: String,
+        alarms: List<AlarmInfo>,
+    ) {
         alarms.forEach { alarm ->
             scheduleAlarm(planId, alarm)
         }
     }
 
-    private fun scheduleAlarm(planId: String, alarm: AlarmInfo) {
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, alarm.hour)
-            set(Calendar.MINUTE, alarm.minute)
-            set(Calendar.SECOND, 0)
+    private fun scheduleAlarm(
+        planId: String,
+        alarm: AlarmInfo,
+    ) {
+        val calendar =
+            Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, alarm.hour)
+                set(Calendar.MINUTE, alarm.minute)
+                set(Calendar.SECOND, 0)
 
-            if (before(Calendar.getInstance())) {
-                add(Calendar.DAY_OF_YEAR, 1)
+                if (before(Calendar.getInstance())) {
+                    add(Calendar.DAY_OF_YEAR, 1)
+                }
             }
-        }
 
-        val intent = Intent(context, DrugAlarmReceiver::class.java).apply {
-            putExtra("planId", planId)
-            putExtra("alarmId", alarm.alarmId)
-        }
+        val intent =
+            Intent(context, DrugAlarmReceiver::class.java).apply {
+                putExtra("planId", planId)
+                putExtra("alarmId", alarm.alarmId)
+            }
 
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            alarm.alarmId,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
+        val pendingIntent =
+            PendingIntent.getBroadcast(
+                context,
+                alarm.alarmId,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -47,14 +55,14 @@ class DrugAlarmManager(private val context: Context) {
                     alarmManager.setExactAndAllowWhileIdle(
                         AlarmManager.RTC_WAKEUP,
                         calendar.timeInMillis,
-                        pendingIntent
+                        pendingIntent,
                     )
                 } else {
                     alarmManager.setRepeating(
                         AlarmManager.RTC_WAKEUP,
                         calendar.timeInMillis,
                         AlarmManager.INTERVAL_DAY,
-                        pendingIntent
+                        pendingIntent,
                     )
                 }
             } else {
@@ -62,7 +70,7 @@ class DrugAlarmManager(private val context: Context) {
                     AlarmManager.RTC_WAKEUP,
                     calendar.timeInMillis,
                     AlarmManager.INTERVAL_DAY,
-                    pendingIntent
+                    pendingIntent,
                 )
             }
         } catch (e: Exception) {
@@ -70,7 +78,10 @@ class DrugAlarmManager(private val context: Context) {
         }
     }
 
-    fun cancelAlarms(planId: String, alarms: List<AlarmInfo>) {
+    fun cancelAlarms(
+        planId: String,
+        alarms: List<AlarmInfo>,
+    ) {
         alarms.forEach { alarm ->
             cancelAlarm(alarm.alarmId)
         }
@@ -78,13 +89,13 @@ class DrugAlarmManager(private val context: Context) {
 
     private fun cancelAlarm(alarmId: Int) {
         val intent = Intent(context, DrugAlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            alarmId,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
+        val pendingIntent =
+            PendingIntent.getBroadcast(
+                context,
+                alarmId,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
         alarmManager.cancel(pendingIntent)
     }
 }
-
