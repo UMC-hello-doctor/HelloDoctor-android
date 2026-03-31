@@ -2,7 +2,6 @@ package com.umc.hellodoctor.feature.language.presentation
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import java.util.Locale
 
@@ -45,4 +44,3 @@ class LanguageManager(private val context: Context) {
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 }
-
