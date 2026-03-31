@@ -7,7 +7,6 @@ import android.os.Vibrator
 import android.os.VibratorManager
 
 class VibrationHelper(context: Context) {
-
     private val vibrator: Vibrator? =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val vm = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
@@ -23,8 +22,8 @@ class VibrationHelper(context: Context) {
             v.vibrate(
                 VibrationEffect.createOneShot(
                     duration,
-                    VibrationEffect.DEFAULT_AMPLITUDE
-                )
+                    VibrationEffect.DEFAULT_AMPLITUDE,
+                ),
             )
         } else {
             @Suppress("DEPRECATION")
