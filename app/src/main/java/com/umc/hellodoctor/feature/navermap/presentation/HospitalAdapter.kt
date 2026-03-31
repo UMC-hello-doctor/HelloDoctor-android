@@ -9,12 +9,11 @@ import com.umc.hellodoctor.databinding.ItemHospitalBinding
 import com.umc.hellodoctor.feature.navermap.data.HospitalItem
 
 class HospitalAdapter(
-    private val onItemClick: (HospitalItem) -> Unit = {}
+    private val onItemClick: (HospitalItem) -> Unit = {},
 ) : ListAdapter<HospitalItem, HospitalAdapter.HospitalViewHolder>(HospitalDiffCallback()) {
-
     class HospitalViewHolder(
         private val binding: ItemHospitalBinding,
-        private val onItemClick: (HospitalItem) -> Unit
+        private val onItemClick: (HospitalItem) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: HospitalItem) {
             binding.hospitalName.text = item.name
@@ -29,21 +28,33 @@ class HospitalAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HospitalViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): HospitalViewHolder {
         val binding = ItemHospitalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HospitalViewHolder(binding, onItemClick)
     }
 
-    override fun onBindViewHolder(holder: HospitalViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: HospitalViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position))
     }
 
     private class HospitalDiffCallback : DiffUtil.ItemCallback<HospitalItem>() {
-        override fun areItemsTheSame(oldItem: HospitalItem, newItem: HospitalItem): Boolean {
+        override fun areItemsTheSame(
+            oldItem: HospitalItem,
+            newItem: HospitalItem,
+        ): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: HospitalItem, newItem: HospitalItem): Boolean {
+        override fun areContentsTheSame(
+            oldItem: HospitalItem,
+            newItem: HospitalItem,
+        ): Boolean {
             return oldItem == newItem
         }
     }
