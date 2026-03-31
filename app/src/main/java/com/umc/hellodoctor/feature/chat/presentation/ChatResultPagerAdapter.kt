@@ -6,9 +6,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.umc.hellodoctor.feature.navermap.presentation.NaverMapFragment
 
 class ChatResultPagerAdapter(
-    fragmentActivity: FragmentActivity
+    fragmentActivity: FragmentActivity,
 ) : FragmentStateAdapter(fragmentActivity) {
-
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
@@ -21,4 +20,3 @@ class ChatResultPagerAdapter(
         }
     }
 }
-

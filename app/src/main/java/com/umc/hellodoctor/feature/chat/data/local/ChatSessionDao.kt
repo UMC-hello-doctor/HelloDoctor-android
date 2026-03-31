@@ -11,7 +11,6 @@ import androidx.room.Update
  */
 @Dao
 interface ChatSessionDao {
-
     /**
      * 채팅 세션 저장 (이미 존재하면 덮어쓰기)
      */
@@ -60,4 +59,3 @@ interface ChatSessionDao {
     @Query("DELETE FROM chat_sessions WHERE createdAt < :timestamp")
     suspend fun deleteSessionsOlderThan(timestamp: Long)
 }
-

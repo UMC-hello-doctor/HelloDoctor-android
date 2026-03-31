@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.hellodoctor.R
@@ -26,13 +25,16 @@ class ChatFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentChatBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         // 세션 초기화 (새로운 채팅 시작)
@@ -52,9 +54,10 @@ class ChatFragment : Fragment() {
     private fun setupRecyclerView() {
         adapter = MessageAdapter(messages)
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext()).apply {
-            stackFromEnd = true
-        }
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(requireContext()).apply {
+                stackFromEnd = true
+            }
     }
 
     /**
@@ -94,7 +97,7 @@ class ChatFragment : Fragment() {
         // 현재 진료과 옵저버
         viewModel.currentDepartment.observe(viewLifecycleOwner) { dept ->
             if (dept.isNotEmpty()) {
-                viewModel.addBotMessage("🏥 ${dept} 진료를 시작하겠습니다.")
+                viewModel.addBotMessage("🏥 $dept 진료를 시작하겠습니다.")
             }
         }
 
@@ -115,8 +118,9 @@ class ChatFragment : Fragment() {
      */
     private fun navigateToChatResult() {
         val sessionId = viewModel.chatSession.value?.id
-        val action = ChatFragmentDirections
-            .actionChatFragmentToChatResultFragment(sessionId)
+        val action =
+            ChatFragmentDirections
+                .actionChatFragmentToChatResultFragment(sessionId)
         findNavController().navigate(action)
     }
 
@@ -133,7 +137,6 @@ class ChatFragment : Fragment() {
         binding.btnSend.setOnClickListener {
             val input = binding.editInput.text.toString().trim()
             if (input.isNotEmpty()) {
-
                 // 진료과 추천 전인지 후인지 확인
                 if (viewModel.currentDepartment.value.isNullOrEmpty()) {
                     // 첫 번째 증상 입력 -> 진료과 추천 및 PQRST 시작
@@ -156,7 +159,7 @@ class ChatFragment : Fragment() {
 
         // 사용자 입력에 대한 봇 확인 메시지 (답변이 아닌 일반 메시지)
         val response = "알겠습니다. $userInput 증상이군요. 관련 진료과를 추천하겠습니다."
-        viewModel.addBotMessage(response)  // ✅ addBotMessage로 변경 (session.answers에 저장 안 함)
+        viewModel.addBotMessage(response) // ✅ addBotMessage로 변경 (session.answers에 저장 안 함)
 
         // 진료과 추천 시작 (AI API 호출 및 PQRST 질문 플로우 시작)
         viewModel.recommendAndStartDepartmentFlow()
@@ -172,7 +175,6 @@ class ChatFragment : Fragment() {
         // 다음 PQRST 단계로 진행
         viewModel.proceedToNextQuestionStage()
     }
-
 
     /**
      * 스크롤을 하단으로 이동

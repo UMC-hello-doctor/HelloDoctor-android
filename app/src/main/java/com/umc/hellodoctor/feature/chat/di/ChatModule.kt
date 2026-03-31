@@ -29,12 +29,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ChatModule {
-
     @Provides
     @Singleton
     fun provideGson(): Gson = GsonBuilder().create()
-
-
 
     @Provides
     @Singleton
@@ -48,13 +45,19 @@ object ChatModule {
 
     @Provides
     @Singleton
-    fun provideAiService(@Named("AI_Retrofit") retrofit: Retrofit): AiService {
+    fun provideAiService(
+        @Named("AI_Retrofit") retrofit: Retrofit,
+    ): AiService {
         return retrofit.create(AiService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideAiRepository(aiService: AiService, gson: Gson, @Named("AI_API_KEY") apiKey: String?): AiRepository {
+    fun provideAiRepository(
+        aiService: AiService,
+        gson: Gson,
+        @Named("AI_API_KEY") apiKey: String?,
+    ): AiRepository {
         return AiRepository(aiService, gson, apiKey ?: "")
     }
 
@@ -67,7 +70,9 @@ object ChatModule {
 
     @Provides
     @Singleton
-    fun provideDepartmentRepository(@ApplicationContext context: Context): DepartmentRepository {
+    fun provideDepartmentRepository(
+        @ApplicationContext context: Context,
+    ): DepartmentRepository {
         return DepartmentRepository(context)
     }
 
@@ -81,11 +86,13 @@ object ChatModule {
 
     @Provides
     @Singleton
-    fun provideChatDatabase(@ApplicationContext context: Context): ChatDatabase {
+    fun provideChatDatabase(
+        @ApplicationContext context: Context,
+    ): ChatDatabase {
         return Room.databaseBuilder(
             context,
             ChatDatabase::class.java,
-            "chat_database"
+            "chat_database",
         )
             .fallbackToDestructiveMigration()
             .build()

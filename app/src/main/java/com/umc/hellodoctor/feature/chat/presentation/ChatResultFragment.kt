@@ -29,13 +29,16 @@ class ChatResultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentChatResultContainerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setupButtons()
 
@@ -90,10 +93,11 @@ class ChatResultFragment : Fragment() {
     private fun showFragment(type: FragmentType) {
         currentFragmentType = type
 
-        val fragment = when (type) {
-            FragmentType.FIELD_MODE -> FieldModeFragment()
-            FragmentType.HOSPITAL_MAP -> NaverMapFragment()
-        }
+        val fragment =
+            when (type) {
+                FragmentType.FIELD_MODE -> FieldModeFragment()
+                FragmentType.HOSPITAL_MAP -> NaverMapFragment()
+            }
 
         childFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
@@ -126,6 +130,6 @@ class ChatResultFragment : Fragment() {
      */
     private enum class FragmentType {
         FIELD_MODE,
-        HOSPITAL_MAP
+        HOSPITAL_MAP,
     }
 }

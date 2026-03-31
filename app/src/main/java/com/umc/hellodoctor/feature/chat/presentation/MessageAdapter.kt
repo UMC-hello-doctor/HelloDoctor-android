@@ -5,9 +5,7 @@ import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.umc.hellodoctor.R
 import com.umc.hellodoctor.databinding.ViewChatHistoryAiBinding
 import com.umc.hellodoctor.databinding.ViewChatHistoryHumanBinding
 import com.umc.hellodoctor.feature.chat.domain.model.Message
@@ -15,7 +13,6 @@ import com.umc.hellodoctor.feature.chat.domain.model.MessageType
 
 class MessageAdapter(private val messages: MutableList<Message>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     companion object {
         private const val VIEW_TYPE_BOT = 0
         private const val VIEW_TYPE_USER = 1
@@ -33,25 +30,37 @@ class MessageAdapter(private val messages: MutableList<Message>) :
         return if (messages[position].isBot) VIEW_TYPE_BOT else VIEW_TYPE_USER
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_TYPE_BOT -> {
-                val binding = ViewChatHistoryAiBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false
-                )
+                val binding =
+                    ViewChatHistoryAiBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false,
+                    )
                 BotViewHolder(binding)
             }
             VIEW_TYPE_USER -> {
-                val binding = ViewChatHistoryHumanBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false
-                )
+                val binding =
+                    ViewChatHistoryHumanBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false,
+                    )
                 UserViewHolder(binding)
             }
             else -> throw IllegalArgumentException("Unknown viewType: $viewType")
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+    ) {
         val message = messages[position]
 
         when (holder) {
@@ -69,7 +78,10 @@ class MessageAdapter(private val messages: MutableList<Message>) :
     /**
      * 메시지 타입에 따라 스타일 적용
      */
-    private fun applyMessageTypeStyle(textView: TextView, message: Message) {
+    private fun applyMessageTypeStyle(
+        textView: TextView,
+        message: Message,
+    ) {
         // 기본 스타일 초기화
         textView.setBackgroundColor(Color.TRANSPARENT)
         textView.setPadding(16, 16, 16, 16)
@@ -133,4 +145,3 @@ class MessageAdapter(private val messages: MutableList<Message>) :
         notifyDataSetChanged()
     }
 }
-

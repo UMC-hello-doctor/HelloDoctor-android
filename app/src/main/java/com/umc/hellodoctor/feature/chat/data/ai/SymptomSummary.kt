@@ -8,9 +8,8 @@ import com.google.gson.annotations.SerializedName
 data class SymptomSummaryResponse(
     @SerializedName("original")
     val original: OriginalLanguageData? = null,
-
     @SerializedName("korean")
-    val korean: List<SummaryItem>? = null
+    val korean: List<SummaryItem>? = null,
 )
 
 /**
@@ -19,12 +18,10 @@ data class SymptomSummaryResponse(
 data class OriginalLanguageData(
     @SerializedName("language")
     val language: String = "",
-
     @SerializedName("languageName")
     val languageName: String = "",
-
     @SerializedName("data")
-    val data: List<SummaryItem>? = null
+    val data: List<SummaryItem>? = null,
 )
 
 /**
@@ -33,8 +30,6 @@ data class OriginalLanguageData(
 data class SummaryItem(
     @SerializedName("category")
     val category: String = "",
-
     @SerializedName("description")
-    val description: String = ""
+    val description: String = "",
 )
-

@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
-
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
 
@@ -23,13 +22,16 @@ class HistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         // 뒤로가기 버튼
@@ -43,11 +45,13 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = HistoryAdapter { session ->
-            val action = HistoryFragmentDirections
-                .actionHistoryFragmentToChatResultFragment(session.id)
-            findNavController().navigate(action)
-        }
+        adapter =
+            HistoryAdapter { session ->
+                val action =
+                    HistoryFragmentDirections
+                        .actionHistoryFragmentToChatResultFragment(session.id)
+                findNavController().navigate(action)
+            }
         binding.historyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.historyRecyclerView.adapter = adapter
     }
