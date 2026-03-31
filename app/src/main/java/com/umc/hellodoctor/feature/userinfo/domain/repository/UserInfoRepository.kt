@@ -6,6 +6,6 @@ import com.umc.hellodoctor.feature.userinfo.data.remote.model.ProfileCreateResul
 
 interface UserInfoRepository {
     suspend fun createProfile(request: ProfileCreateRequest): Result<ProfileCreateResult>
+
     suspend fun getMyProfile(): Result<MyProfileResponse>
 }
-

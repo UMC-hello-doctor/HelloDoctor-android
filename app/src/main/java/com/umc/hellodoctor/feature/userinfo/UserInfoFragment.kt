@@ -9,14 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.umc.hellodoctor.databinding.FragmentUserInfoBinding
 import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.GenderType
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.BloodType
 import com.umc.hellodoctor.feature.userinfo.data.remote.model.AllergyType
+import com.umc.hellodoctor.feature.userinfo.data.remote.model.BloodType
+import com.umc.hellodoctor.feature.userinfo.data.remote.model.GenderType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -25,7 +24,6 @@ import java.util.Locale
 
 @AndroidEntryPoint
 class UserInfoFragment : Fragment() {
-
     private var _binding: FragmentUserInfoBinding? = null
     private val binding get() = _binding!!
     private val viewModel: UserInfoViewModel by activityViewModels()
@@ -34,13 +32,16 @@ class UserInfoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentUserInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setupClickListeners()
         setupValidation()
@@ -48,13 +49,27 @@ class UserInfoFragment : Fragment() {
 
     private fun setupClickListeners() {
         // 이름 입력
-        binding.etName.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                viewModel.setName(s.toString())
-            }
-        })
+        binding.etName.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    viewModel.setName(s.toString())
+                }
+            },
+        )
 
         // 다음 버튼 클릭
         binding.btnNext.setOnClickListener {
@@ -113,13 +128,27 @@ class UserInfoFragment : Fragment() {
         }
 
         // 혈액형 직접 입력 텍스트 변경 리스너 (실시간 감지)
-        binding.etBloodOther.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                viewModel.setBloodTypeOther(s.toString())
-            }
-        })
+        binding.etBloodOther.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    viewModel.setBloodTypeOther(s.toString())
+                }
+            },
+        )
     }
 
     // ========== 건강상태 섹션 ==========
@@ -154,7 +183,7 @@ class UserInfoFragment : Fragment() {
             viewModel.toggleAllergyDetail(AllergyType.OTHER)
         }
     }
-    
+
     /** Q2: 처방약/영양제 복용 여부 (단일선택) */
     private fun setupMedicationButtons() {
         binding.btnMedsYes.setOnClickListener {
@@ -181,29 +210,33 @@ class UserInfoFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collect { state ->
                 // 혈액형 검증: OTHER 선택 시 직접 입력 필드가 비어있지 않아야 함
-                val bloodTypeValid = when (state.bloodType) {
-                    BloodType.OTHER -> state.bloodTypeOther.isNotBlank()
-                    null -> false
-                    else -> true
-                }
+                val bloodTypeValid =
+                    when (state.bloodType) {
+                        BloodType.OTHER -> state.bloodTypeOther.isNotBlank()
+                        null -> false
+                        else -> true
+                    }
 
                 // 기본정보 필수항목 체크
-                val basicInfoValid = state.name.isNotBlank() &&
+                val basicInfoValid =
+                    state.name.isNotBlank() &&
                         state.gender != null &&
                         state.birthDate != null &&
                         bloodTypeValid
 
                 // 건강상태 필수항목 체크
-                val healthStateValid = state.allergy != null &&
+                val healthStateValid =
+                    state.allergy != null &&
                         state.medication != null &&
                         state.pregnancy != null
 
                 // Q1-1: 알레르기 'Yes'인 경우 상세항목 최소 1개 선택 필수
-                val allergyDetailValid = if (state.allergy == true) {
-                    state.allergyDetails.isNotEmpty()
-                } else {
-                    true
-                }
+                val allergyDetailValid =
+                    if (state.allergy == true) {
+                        state.allergyDetails.isNotEmpty()
+                    } else {
+                        true
+                    }
 
                 val isFormValid = basicInfoValid && healthStateValid && allergyDetailValid
 
@@ -299,9 +332,10 @@ class UserInfoFragment : Fragment() {
     // ========== 날짜 선택 ==========
 
     private fun showDatePicker() {
-        val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("생년월일 선택")
-            .build()
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("생년월일 선택")
+                .build()
 
         datePicker.addOnPositiveButtonClickListener { timestamp ->
             val date = Date(timestamp)
@@ -319,4 +353,3 @@ class UserInfoFragment : Fragment() {
         _binding = null
     }
 }
-

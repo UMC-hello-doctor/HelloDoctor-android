@@ -11,7 +11,7 @@ import retrofit2.http.POST
 interface UserInfoApi {
     @POST("v1/users/profiles")
     suspend fun createProfile(
-        @Body request: ProfileCreateRequest
+        @Body request: ProfileCreateRequest,
     ): BaseResponse<ProfileCreateResult>
 
     @GET("v1/users/profiles/me")
