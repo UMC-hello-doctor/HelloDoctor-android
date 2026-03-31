@@ -7,10 +7,11 @@
 .gradle/
 build/
 */build/
-gradle.properties
 
 # Local configuration file (SDK path, API 키 등)
 local.properties
+api.properties
+keystore.properties
 
 # Android Studio / IntelliJ
 *.iml
