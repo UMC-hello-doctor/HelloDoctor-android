@@ -12,11 +12,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object UserInfoModule {
-
     @Provides
     @Singleton
-    fun provideUserInfoRepository(
-        userInfoApi: UserInfoApi
-    ): UserInfoRepository = UserInfoRepositoryImpl(userInfoApi)
+    fun provideUserInfoRepository(userInfoApi: UserInfoApi): UserInfoRepository = UserInfoRepositoryImpl(userInfoApi)
 }
-
