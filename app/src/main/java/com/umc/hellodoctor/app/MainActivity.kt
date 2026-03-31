@@ -13,20 +13,19 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.umc.hellodoctor.R
+import com.umc.hellodoctor.core.location.LocationMapViewModel
 import com.umc.hellodoctor.core.network.status.NetworkViewModel
 import com.umc.hellodoctor.core.permission.PermissionManager
 import com.umc.hellodoctor.databinding.ActivityMainBinding
 import com.umc.hellodoctor.feature.auth.domain.model.SocialSignInResult
-import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
-import com.umc.hellodoctor.core.location.LocationMapViewModel
-import com.umc.hellodoctor.feature.language.presentation.LanguageManager
 import com.umc.hellodoctor.feature.auth.domain.repository.GoogleAuthServiceImpl
+import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
+import com.umc.hellodoctor.feature.language.presentation.LanguageManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val TAG = this.javaClass.simpleName
     private lateinit var permissionManager: PermissionManager
     private val authViewModel: AuthViewModel by viewModels()
     private val locationViewModel: LocationMapViewModel by viewModels()
@@ -35,6 +34,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private var hasHandledLoginResult: Boolean = false
+
+    companion object {
+        private const val TAG = "MainActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,29 +51,32 @@ class MainActivity : AppCompatActivity() {
         // Google Auth Service 초기화
         googleAuthService = GoogleAuthServiceImpl(this)
 
-        permissionManager = PermissionManager(
-            context = this,
-            caller = this
-        )
+        permissionManager =
+            PermissionManager(
+                context = this,
+                caller = this,
+            )
         // 앱 실행 시 기본 권한 요청
-        permissionManager.requestInitialPermissions(callback = object : PermissionManager.Callback {
-            override fun onPermissionsResult(
-                granted: List<String>,
-                denied: List<String>
-            ) {
-                // 필요 없으면 비워둠
-            }
-        })
-        //사용해야 networkViewmodel활성화됨 
+        permissionManager.requestInitialPermissions(
+            callback =
+                object : PermissionManager.Callback {
+                    override fun onPermissionsResult(
+                        granted: List<String>,
+                        denied: List<String>,
+                    ) {
+                        // 필요 없으면 비워둠
+                    }
+                },
+        )
+        // 사용해야 networkViewmodel활성화됨
         networkViewModel
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-
+        val navHostFragment =
+            supportFragmentManager
+                .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
 
         navController = navHostFragment.navController
-
 
         // 앱 시작 시 자동 로그인
         performAutoSignIn()

@@ -1,6 +1,5 @@
 package com.umc.hellodoctor.feature.navermap.presentation
 
-
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +14,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -36,7 +34,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NaverMapFragment : Fragment(), OnMapReadyCallback {
-    private val TAG = "NaverMapFragment"
     private var _binding: FragmentNaverMapBinding? = null
     private val binding get() = _binding!!
 
@@ -54,7 +51,11 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     private var hasPerformedInitialSearch = false
     private var hasMovedCameraToInitialLocation = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         _binding = FragmentNaverMapBinding.inflate(inflater, container, false)
 
         locationViewModel.loadCurrentLocationOnce()
@@ -62,14 +63,18 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         locationViewModel.startContinuousLocation()
 
         val fm = childFragmentManager
-        val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
-            ?: MapFragment.newInstance().also { fm.beginTransaction().add(R.id.map, it).commit() }
+        val mapFragment =
+            fm.findFragmentById(R.id.map) as MapFragment?
+                ?: MapFragment.newInstance().also { fm.beginTransaction().add(R.id.map, it).commit() }
         mapFragment.getMapAsync(this)
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupBottomSheetBehavior()
@@ -139,11 +144,12 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         Log.i(TAG, "onMapReady: map 초기화 완료")
 
         // LocationOverlay (기존)
-        val locationOverlay = naverMap.locationOverlay.apply {
-            subIcon = LocationOverlay.DEFAULT_SUB_ICON_ARROW
-            circleOutlineWidth = 0
-            isVisible = true
-        }
+        val locationOverlay =
+            naverMap.locationOverlay.apply {
+                subIcon = LocationOverlay.DEFAULT_SUB_ICON_ARROW
+                circleOutlineWidth = 0
+                isVisible = true
+            }
 
         // 위치 업데이트에 따른 오버레이 업데이트
         viewLifecycleOwner.lifecycleScope.launch {
@@ -175,23 +181,24 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupRecyclerView() {
-        hospitalAdapter = HospitalAdapter { hospital ->
-            Log.d(TAG, "========== 병원 아이템 클릭 ==========")
-            Log.d(TAG, "클릭 병원: ${hospital.name} (ID: ${hospital.id})")
-            Log.d(TAG, "위치: lat=${hospital.latitude}, lng=${hospital.longitude}")
+        hospitalAdapter =
+            HospitalAdapter { hospital ->
+                Log.d(TAG, "========== 병원 아이템 클릭 ==========")
+                Log.d(TAG, "클릭 병원: ${hospital.name} (ID: ${hospital.id})")
+                Log.d(TAG, "위치: lat=${hospital.latitude}, lng=${hospital.longitude}")
 
-            // 아이템 클릭 시 바텀시트 축소 방지
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                // 아이템 클릭 시 바텀시트 축소 방지
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
-            // 카메라 해당 병원으로 이동
-            naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(hospital.latitude, hospital.longitude)))
+                // 카메라 해당 병원으로 이동
+                naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(hospital.latitude, hospital.longitude)))
 
-            // 해당 마커 선택 표시
-            selectHospitalMarker(hospital.id)
+                // 해당 마커 선택 표시
+                selectHospitalMarker(hospital.id)
 
-            // 병원을 최상단으로 올리기 (리사이클러뷰 스크롤)
-            scrollToHospitalAtTop(hospital)
-        }
+                // 병원을 최상단으로 올리기 (리사이클러뷰 스크롤)
+                scrollToHospitalAtTop(hospital)
+            }
         binding.hospitalRecyclerView.apply {
             adapter = hospitalAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -219,15 +226,25 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setupBottomSheetBehavior() {
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetContainer).apply {
-            isFitToContents = false
-            isDraggable = true
-        }
-        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
+        bottomSheetBehavior =
+            BottomSheetBehavior.from(binding.bottomSheetContainer).apply {
+                isFitToContents = false
+                isDraggable = true
             }
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-        })
+        bottomSheetBehavior.addBottomSheetCallback(
+            object : BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(
+                    bottomSheet: View,
+                    newState: Int,
+                ) {
+                }
+
+                override fun onSlide(
+                    bottomSheet: View,
+                    slideOffset: Float,
+                ) {}
+            },
+        )
     }
 
     private fun observeHospitalData() {
@@ -267,22 +284,24 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     private fun addHospitalMarkers(hospitals: List<HospitalItem>) {
         Log.d(TAG, "========== 마커 추가 시작 ==========")
         hospitals.forEach { hospital ->
-            val marker = Marker().apply {
-                position = LatLng(hospital.latitude, hospital.longitude)
-                map = naverMap
-                captionText = hospital.name
+            val marker =
+                Marker().apply {
+                    position = LatLng(hospital.latitude, hospital.longitude)
+                    map = naverMap
+                    captionText = hospital.name
 
-                // 마커 클릭 리스너
-                onClickListener = Overlay.OnClickListener{ marker ->
-                    Log.d(TAG, "========== 마커 클릭 ==========")
-                    Log.d(TAG, "클릭 마커: ${hospital.name} (ID: ${hospital.id})")
+                    // 마커 클릭 리스너
+                    onClickListener =
+                        Overlay.OnClickListener { marker ->
+                            Log.d(TAG, "========== 마커 클릭 ==========")
+                            Log.d(TAG, "클릭 마커: ${hospital.name} (ID: ${hospital.id})")
 
-                    // 해당 병원 아이템을 최상단으로 올리기
-                    scrollToHospitalAtTop(hospital)
+                            // 해당 병원 아이템을 최상단으로 올리기
+                            scrollToHospitalAtTop(hospital)
 
-                    true
+                            true
+                        }
                 }
-            }
             hospitalMarkers[hospital.id] = marker
             Log.d(TAG, "마커 추가: ${hospital.name} (lat=${hospital.latitude}, lng=${hospital.longitude})")
         }
@@ -359,5 +378,9 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         clearMarkers()
         _binding = null
         locationViewModel.stopContinuousLocation()
+    }
+
+    companion object {
+        private const val TAG = "NaverMapFragment"
     }
 }

@@ -2,11 +2,9 @@ package com.umc.hellodoctor.feature.chat.data.ai
 
 import com.google.gson.annotations.SerializedName
 
-/**
- * DTOs for calling Google Gemini API via REST
- * API Endpoint: POST /v1beta/models/{model}:generateContent?key={API_KEY}
- * Model: gemini-pro, gemini-1.5-pro, gemini-2.0-flash
- */
+// DTOs for calling Google Gemini API via REST
+// API Endpoint: POST /v1beta/models/{model}:generateContent?key={API_KEY}
+// Model: gemini-pro, gemini-1.5-pro, gemini-2.0-flash
 
 // ============= Request DTOs =============
 
@@ -18,19 +16,20 @@ data class GeminiGenerateRequest(
     @SerializedName("safetySettings")
     val safetySettings: List<SafetySetting>? = null,
     @SerializedName("systemInstruction")
-    val systemInstruction: SystemInstruction? = null
+    val systemInstruction: SystemInstruction? = null,
 )
 
+// role: "user" or "model"
 data class Content(
     @SerializedName("role")
-    val role: String, // "user" or "model"
+    val role: String,
     @SerializedName("parts")
-    val parts: List<Part>
+    val parts: List<Part>,
 )
 
 data class Part(
     @SerializedName("text")
-    val text: String
+    val text: String,
 )
 
 data class GenerationConfig(
@@ -43,19 +42,21 @@ data class GenerationConfig(
     @SerializedName("maxOutputTokens")
     val maxOutputTokens: Int = 1024,
     @SerializedName("stopSequences")
-    val stopSequences: List<String>? = null
+    val stopSequences: List<String>? = null,
 )
 
+// category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", "HARM_CATEGORY_HATE_SPEECH", etc.
+// threshold: "BLOCK_NONE", "BLOCK_ONLY_HIGH", "BLOCK_MEDIUM_AND_ABOVE", "BLOCK_LOW_AND_ABOVE"
 data class SafetySetting(
     @SerializedName("category")
-    val category: String, // "HARM_CATEGORY_SEXUALLY_EXPLICIT", "HARM_CATEGORY_HATE_SPEECH", etc.
+    val category: String,
     @SerializedName("threshold")
-    val threshold: String // "BLOCK_NONE", "BLOCK_ONLY_HIGH", "BLOCK_MEDIUM_AND_ABOVE", "BLOCK_LOW_AND_ABOVE"
+    val threshold: String,
 )
 
 data class SystemInstruction(
     @SerializedName("parts")
-    val parts: List<Part>
+    val parts: List<Part>,
 )
 
 // ============= Response DTOs =============
@@ -66,34 +67,37 @@ data class GeminiGenerateResponse(
     @SerializedName("promptFeedback")
     val promptFeedback: PromptFeedback? = null,
     @SerializedName("usageMetadata")
-    val usageMetadata: UsageMetadata? = null
+    val usageMetadata: UsageMetadata? = null,
 )
 
+// finishReason: "STOP", "MAX_TOKENS", "SAFETY", "RECITATION", "OTHER"
 data class CandidateResponse(
     @SerializedName("content")
     val content: Content,
     @SerializedName("finishReason")
-    val finishReason: String? = null, // "STOP", "MAX_TOKENS", "SAFETY", "RECITATION", "OTHER"
+    val finishReason: String? = null,
     @SerializedName("safetyRatings")
     val safetyRatings: List<SafetyRatingResponse>? = null,
     @SerializedName("index")
-    val index: Int? = null
+    val index: Int? = null,
 )
 
+// probability: "NEGLIGIBLE", "LOW", "MEDIUM", "HIGH"
 data class SafetyRatingResponse(
     @SerializedName("category")
     val category: String,
     @SerializedName("probability")
-    val probability: String, // "NEGLIGIBLE", "LOW", "MEDIUM", "HIGH"
+    val probability: String,
     @SerializedName("blocked")
-    val blocked: Boolean? = false
+    val blocked: Boolean? = false,
 )
 
+// blockReason: "SAFETY", "OTHER"
 data class PromptFeedback(
     @SerializedName("safetyRatings")
     val safetyRatings: List<SafetyRatingResponse>? = null,
     @SerializedName("blockReason")
-    val blockReason: String? = null // "SAFETY", "OTHER"
+    val blockReason: String? = null,
 )
 
 data class UsageMetadata(
@@ -102,5 +106,5 @@ data class UsageMetadata(
     @SerializedName("candidatesTokenCount")
     val candidatesTokenCount: Int? = null,
     @SerializedName("totalTokenCount")
-    val totalTokenCount: Int? = null
+    val totalTokenCount: Int? = null,
 )
