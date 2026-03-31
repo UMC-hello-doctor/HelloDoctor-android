@@ -1,8 +1,8 @@
 package com.umc.hellodoctor.feature.userinfo.domain.repository
 
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.MyProfileResponse
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.ProfileCreateRequest
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.ProfileCreateResult
+import com.umc.hellodoctor.feature.userinfo.data.model.MyProfileResponse
+import com.umc.hellodoctor.feature.userinfo.data.model.ProfileCreateRequest
+import com.umc.hellodoctor.feature.userinfo.data.model.ProfileCreateResult
 
 interface UserInfoRepository {
     suspend fun createProfile(request: ProfileCreateRequest): Result<ProfileCreateResult>

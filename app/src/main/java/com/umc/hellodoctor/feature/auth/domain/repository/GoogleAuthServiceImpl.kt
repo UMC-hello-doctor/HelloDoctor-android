@@ -23,6 +23,7 @@ class GoogleAuthServiceImpl(
         private const val TAG = "GoogleAuthServiceImpl"
     }
 
+    @Suppress("TooGenericExceptionCaught")
     override suspend fun signIn(): SocialSignInResult {
         return try {
             // 1차: 이미 권한 준 계정만 대상으로 시도
@@ -94,6 +95,7 @@ class GoogleAuthServiceImpl(
         }
     }
 
+    @Suppress("TooGenericExceptionCaught")
     override suspend fun signOut() {
         try {
             credentialManager.clearCredentialState(

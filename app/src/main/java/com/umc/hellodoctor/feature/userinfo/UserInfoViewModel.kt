@@ -2,11 +2,11 @@ package com.umc.hellodoctor.feature.userinfo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.AllergyType
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.BloodType
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.GenderType
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.MyProfileResponse
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.ProfileCreateRequest
+import com.umc.hellodoctor.feature.userinfo.data.model.AllergyType
+import com.umc.hellodoctor.feature.userinfo.data.model.BloodType
+import com.umc.hellodoctor.feature.userinfo.data.model.GenderType
+import com.umc.hellodoctor.feature.userinfo.data.model.MyProfileResponse
+import com.umc.hellodoctor.feature.userinfo.data.model.ProfileCreateRequest
 import com.umc.hellodoctor.feature.userinfo.domain.repository.UserInfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

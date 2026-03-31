@@ -1,4 +1,4 @@
-package com.umc.hellodoctor.feature.navermap.adapter
+package com.umc.hellodoctor.feature.navermap.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ class HospitalAdapter(
             binding.hospitalName.text = item.name
             binding.hospitalAddress.text = item.address
             binding.hospitalTel.text = item.tel
-            binding.hospitalDistance.text = "${String.format("%.0f", item.distance)}m"
+            binding.hospitalDistance.text = "${String.format(java.util.Locale.US, "%.0f", item.distance)}m"
             binding.hospitalHours.text = item.businessHours
 
             binding.root.setOnClickListener {

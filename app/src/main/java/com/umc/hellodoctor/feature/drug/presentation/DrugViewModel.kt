@@ -31,12 +31,17 @@ class DrugViewModel
 
         private var searchJob: Job? = null
 
+        companion object {
+            private const val SEARCH_DEBOUNCE_MS = 300L
+        }
+
         fun updateInputText(text: String) {
             if (_inputText.value != text) {
                 _inputText.value = text
             }
         }
 
+        @Suppress("TooGenericExceptionCaught")
         fun searchMedicines(keyword: String) {
             val trimmed = keyword.trim()
             if (trimmed.isEmpty()) {
@@ -50,7 +55,7 @@ class DrugViewModel
             searchJob =
                 viewModelScope.launch {
                     _uiState.value = DrugSearchUiState.Loading
-                    delay(300)
+                    delay(SEARCH_DEBOUNCE_MS)
                     try {
                         val response = medicineApi.searchMedicines(trimmed)
                         if (response.success) {

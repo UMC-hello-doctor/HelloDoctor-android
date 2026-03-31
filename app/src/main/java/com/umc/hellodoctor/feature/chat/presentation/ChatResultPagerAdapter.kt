@@ -16,7 +16,7 @@ class ChatResultPagerAdapter(
             1 -> {
                 NaverMapFragment()
             }
-            else -> throw IllegalStateException("Invalid position $position")
+            else -> error("Invalid position $position")
         }
     }
 }

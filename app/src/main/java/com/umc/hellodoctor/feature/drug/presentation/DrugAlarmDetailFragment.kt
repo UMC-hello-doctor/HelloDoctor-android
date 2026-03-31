@@ -44,7 +44,7 @@ class DrugAlarmDetailFragment : Fragment() {
 
         setupRecyclerViews()
         setupButtons()
-        observeData(planId)
+        observeData()
 
         viewModel.loadPlan(planId)
     }
@@ -80,7 +80,7 @@ class DrugAlarmDetailFragment : Fragment() {
         }
     }
 
-    private fun observeData(planId: String) {
+    private fun observeData() {
         viewModel.selectedPlan.observe(viewLifecycleOwner) { plan ->
             plan?.let {
                 val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)

@@ -24,6 +24,13 @@ import kotlin.math.roundToInt
 class BearingProvider(
     context: Context,
 ) {
+    companion object {
+        private const val SENSOR_VECTOR_SIZE = 3
+        private const val ROTATION_MATRIX_SIZE = 9
+        private const val FULL_ROTATION_DEGREES = 360.0
+        private const val AZIMUTH_ROUNDING_FACTOR = 10
+    }
+
     /** 센서 접근을 위한 SensorManager */
     private val sensorManager =
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -41,10 +48,10 @@ class BearingProvider(
         sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
 
     /** 가속도 센서 값을 임시로 저장하는 배열 */
-    private val accelValues = FloatArray(3)
+    private val accelValues = FloatArray(SENSOR_VECTOR_SIZE)
 
     /** 자기장 센서 값을 임시로 저장하는 배열 */
-    private val magnetValues = FloatArray(3)
+    private val magnetValues = FloatArray(SENSOR_VECTOR_SIZE)
 
     /**
      * 북을 0도로 하는 방위각(bearing)을 0f~360f 범위로 연속 방출하는 Flow.
@@ -67,13 +74,14 @@ class BearingProvider(
                             when (event.sensor.type) {
                                 // Rotation Vector 센서가 있는 경우: 회전 행렬 → orientation → azimuth 계산
                                 Sensor.TYPE_ROTATION_VECTOR -> {
-                                    val rMat = FloatArray(9)
+                                    val rMat = FloatArray(ROTATION_MATRIX_SIZE)
                                     SensorManager.getRotationMatrixFromVector(rMat, event.values)
 
-                                    val orientation = FloatArray(3)
+                                    val orientation = FloatArray(SENSOR_VECTOR_SIZE)
                                     SensorManager.getOrientation(rMat, orientation)
                                     // orientation[0] = azimuth (라디안) → 도로 변환 후 0~360 범위로 정규화
-                                    ((Math.toDegrees(orientation[0].toDouble()) + 360) % 360).toFloat()
+                                    val degrees = Math.toDegrees(orientation[0].toDouble())
+                                    ((degrees + FULL_ROTATION_DEGREES) % FULL_ROTATION_DEGREES).toFloat()
                                 }
 
                                 // 가속도/자기장 센서 조합으로 회전 행렬을 계산하는 경우[web:50]
@@ -84,7 +92,7 @@ class BearingProvider(
                                         System.arraycopy(event.values, 0, magnetValues, 0, magnetValues.size)
                                     }
 
-                                    val rMat = FloatArray(9)
+                                    val rMat = FloatArray(ROTATION_MATRIX_SIZE)
                                     val success =
                                         SensorManager.getRotationMatrix(
                                             rMat,
@@ -94,9 +102,10 @@ class BearingProvider(
                                         )
                                     if (!success) return
 
-                                    val orientation = FloatArray(3)
+                                    val orientation = FloatArray(SENSOR_VECTOR_SIZE)
                                     SensorManager.getOrientation(rMat, orientation)
-                                    ((Math.toDegrees(orientation[0].toDouble()) + 360) % 360).toFloat()
+                                    val degrees = Math.toDegrees(orientation[0].toDouble())
+                                    ((degrees + FULL_ROTATION_DEGREES) % FULL_ROTATION_DEGREES).toFloat()
                                 }
 
                                 // 그 외 센서 타입은 무시
@@ -104,7 +113,9 @@ class BearingProvider(
                             }
 
                         // 소수 첫째 자리까지 반올림해서 너무 자주 튀는 값을 완화
-                        val rounded = ((azimuthDeg * 10).roundToInt() / 10f)
+                        val rounded =
+                            (azimuthDeg * AZIMUTH_ROUNDING_FACTOR).roundToInt() /
+                                AZIMUTH_ROUNDING_FACTOR.toFloat()
 
                         // callbackFlow의 채널로 값 전송
                         trySend(rounded)

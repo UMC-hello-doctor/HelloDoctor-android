@@ -73,8 +73,8 @@ class DrugAlarmManager(private val context: Context) {
                     pendingIntent,
                 )
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch (e: SecurityException) {
+            android.util.Log.e("DrugAlarmManager", "알람 설정 실패: 권한 없음", e)
         }
     }
 
@@ -82,6 +82,7 @@ class DrugAlarmManager(private val context: Context) {
         planId: String,
         alarms: List<AlarmInfo>,
     ) {
+        android.util.Log.d("DrugAlarmManager", "플랜 알람 취소: $planId")
         alarms.forEach { alarm ->
             cancelAlarm(alarm.alarmId)
         }

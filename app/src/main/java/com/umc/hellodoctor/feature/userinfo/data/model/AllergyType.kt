@@ -1,4 +1,4 @@
-package com.umc.hellodoctor.feature.userinfo.data.remote.model
+package com.umc.hellodoctor.feature.userinfo.data.model
 
 enum class AllergyType {
     ANTIBIOTIC, // 항생제

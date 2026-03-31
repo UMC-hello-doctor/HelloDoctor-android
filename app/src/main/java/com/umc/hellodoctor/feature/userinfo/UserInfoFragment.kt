@@ -13,9 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.umc.hellodoctor.databinding.FragmentUserInfoBinding
 import com.umc.hellodoctor.feature.auth.presentation.AuthViewModel
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.AllergyType
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.BloodType
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.GenderType
+import com.umc.hellodoctor.feature.userinfo.data.model.AllergyType
+import com.umc.hellodoctor.feature.userinfo.data.model.BloodType
+import com.umc.hellodoctor.feature.userinfo.data.model.GenderType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -272,8 +272,6 @@ class UserInfoFragment : Fragment() {
             // AuthViewModel에 프로필 생성 완료 알림
             authViewModel.onProfileCreated()
 
-            // TODO: 다음 화면으로 이동
-            // findNavController().navigate(R.id.action_userInfoFragment_to_nextFragment)
         }
 
         // 에러 처리

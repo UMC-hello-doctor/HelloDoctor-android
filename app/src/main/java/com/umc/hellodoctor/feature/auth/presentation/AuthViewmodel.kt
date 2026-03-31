@@ -30,6 +30,7 @@ class AuthViewModel
         private val _uiState = MutableStateFlow(AuthUiState())
         val uiState: StateFlow<AuthUiState> = _uiState
 
+        @Suppress("TooGenericExceptionCaught")
         fun socialLogin(service: SocialAuthService) {
             viewModelScope.launch {
                 _uiState.value =
@@ -112,6 +113,7 @@ class AuthViewModel
             _uiState.value = _uiState.value.copy(signInResult = null, isNewUser = null)
         }
 
+        @Suppress("TooGenericExceptionCaught")
         fun signOut(service: SocialAuthService? = null) {
             viewModelScope.launch {
                 _uiState.value =

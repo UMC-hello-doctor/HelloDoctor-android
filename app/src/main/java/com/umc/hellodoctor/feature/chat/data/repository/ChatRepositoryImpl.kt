@@ -18,6 +18,7 @@ class ChatRepositoryImpl
         /**
          * 채팅 세션 저장
          */
+        @Suppress("TooGenericExceptionCaught")
         override suspend fun saveChatSession(session: ChatSession) {
             try {
                 Log.d(TAG, "세션 저장 시작: ${session.id}")
@@ -38,6 +39,7 @@ class ChatRepositoryImpl
         /**
          * 세션 ID로 조회
          */
+        @Suppress("TooGenericExceptionCaught")
         override suspend fun getChatSession(sessionId: String): ChatSession? {
             return try {
                 Log.d(TAG, "세션 조회: $sessionId")
@@ -57,6 +59,7 @@ class ChatRepositoryImpl
         /**
          * 모든 세션 조회 (최신순)
          */
+        @Suppress("TooGenericExceptionCaught")
         override suspend fun getAllSessions(): List<ChatSession> {
             return try {
                 Log.d(TAG, "모든 세션 조회")
@@ -73,6 +76,7 @@ class ChatRepositoryImpl
         /**
          * 세션 삭제
          */
+        @Suppress("TooGenericExceptionCaught")
         override suspend fun deleteChatSession(sessionId: String) {
             try {
                 Log.d(TAG, "세션 삭제: $sessionId")

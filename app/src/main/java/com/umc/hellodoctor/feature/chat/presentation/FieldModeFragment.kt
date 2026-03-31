@@ -184,7 +184,7 @@ class FieldModeFragment : Fragment() {
             TextView(requireContext()).apply {
                 text = category
                 setTextColor(resources.getColor(R.color.color_text_main, null))
-                setPadding(0, 8, 8, 8)
+                setPadding(PADDING_ZERO, PADDING_SMALL, PADDING_SMALL, PADDING_SMALL)
                 layoutParams =
                     TableRow.LayoutParams(
                         TableRow.LayoutParams.WRAP_CONTENT,
@@ -197,12 +197,12 @@ class FieldModeFragment : Fragment() {
             TextView(requireContext()).apply {
                 text = description
                 setTextColor(resources.getColor(R.color.color_text_main, null))
-                setPadding(8, 8, 0, 8)
+                setPadding(PADDING_SMALL, PADDING_SMALL, PADDING_ZERO, PADDING_SMALL)
                 layoutParams =
                     TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.WRAP_CONTENT,
-                        1f,
+                        TABLE_WEIGHT_DESCRIPTION,
                     )
             }
 
@@ -214,5 +214,11 @@ class FieldModeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val PADDING_ZERO = 0
+        private const val PADDING_SMALL = 8
+        private const val TABLE_WEIGHT_DESCRIPTION = 1f
     }
 }

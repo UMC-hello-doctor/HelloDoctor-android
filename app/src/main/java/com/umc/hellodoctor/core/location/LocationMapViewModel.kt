@@ -52,6 +52,7 @@ class LocationMapViewModel
          * - cameraLat/cameraLng를 현재 위치로 초기화
          * - lastLat/lastLng에 현재 위치 저장 (Flow로 공개하지 않음)
          */
+        @Suppress("TooGenericExceptionCaught")
         fun loadCurrentLocationOnce() {
             _uiState.value =
                 _uiState.value.copy(

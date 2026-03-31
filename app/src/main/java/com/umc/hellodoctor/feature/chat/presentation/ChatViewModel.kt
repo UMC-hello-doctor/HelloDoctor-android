@@ -174,6 +174,7 @@ class ChatViewModel
         /**
          * 추천 진료과 자동화 및 진료과별 질문 플로우 시작
          */
+        @Suppress("TooGenericExceptionCaught")
         fun recommendAndStartDepartmentFlow() {
             val session = _chatSession.value ?: return
             val symptoms = session.answers.toList()
@@ -309,6 +310,7 @@ class ChatViewModel
         /**
          * PQRST 질문의 다음 단계 진행
          */
+        @Suppress("ReturnCount")
         fun proceedToNextQuestionStage() {
             val currentStage = _currentQuestionStage.value ?: return
             val questions = _departmentQuestions.value ?: return
@@ -340,6 +342,7 @@ class ChatViewModel
         /**
          * 증상 요약 생성 및 추가 (Gemini API 호출)
          */
+        @Suppress("TooGenericExceptionCaught")
         fun generateAndAddSymptomSummary() {
             val session =
                 _chatSession.value ?: run {
@@ -402,6 +405,7 @@ class ChatViewModel
         /**
          * 현재 세션을 DB에 저장
          */
+        @Suppress("TooGenericExceptionCaught")
         private fun saveChatSession() {
             val session =
                 _chatSession.value ?: run {

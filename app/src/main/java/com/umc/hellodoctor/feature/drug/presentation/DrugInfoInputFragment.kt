@@ -80,10 +80,10 @@ class DrugInfoInputFragment : Fragment() {
                 // 복용 타입 설정
                 val intakeTypeIndex =
                     when (it.intakeType) {
-                        IntakeType.PRE_MEAL -> 0
-                        IntakeType.BETWEEN_MEALS -> 1
-                        IntakeType.POST_MEAL -> 2
-                        else -> 3
+                        IntakeType.PRE_MEAL -> INTAKE_PRE_MEAL_INDEX
+                        IntakeType.BETWEEN_MEALS -> INTAKE_BETWEEN_MEALS_INDEX
+                        IntakeType.POST_MEAL -> INTAKE_POST_MEAL_INDEX
+                        else -> INTAKE_OTHER_INDEX
                     }
                 binding.spinnerIntakeType.setSelection(intakeTypeIndex)
                 selectedIntakeType = it.intakeType
@@ -216,8 +216,8 @@ class DrugInfoInputFragment : Fragment() {
                 { _, hourOfDay, minute ->
                     onTimeSelected(hourOfDay, minute)
                 },
-                12,
-                0,
+                DEFAULT_HOUR,
+                DEFAULT_MINUTE,
                 true,
             )
         timePickerDialog.show()
@@ -264,5 +264,14 @@ class DrugInfoInputFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    companion object {
+        private const val INTAKE_PRE_MEAL_INDEX = 0
+        private const val INTAKE_BETWEEN_MEALS_INDEX = 1
+        private const val INTAKE_POST_MEAL_INDEX = 2
+        private const val INTAKE_OTHER_INDEX = 3
+        private const val DEFAULT_HOUR = 12
+        private const val DEFAULT_MINUTE = 0
     }
 }

@@ -27,7 +27,7 @@ import com.umc.hellodoctor.R
 import com.umc.hellodoctor.core.location.LocationMapViewModel
 import com.umc.hellodoctor.databinding.FragmentNaverMapBinding
 import com.umc.hellodoctor.feature.chat.presentation.ChatViewModel
-import com.umc.hellodoctor.feature.navermap.adapter.HospitalAdapter
+import com.umc.hellodoctor.feature.navermap.presentation.HospitalAdapter
 import com.umc.hellodoctor.feature.navermap.data.HospitalItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -327,11 +327,11 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         hospitalMarkers.forEach { (id, marker) ->
 
             if (id == hospitalId) {
-                marker.alpha = 1.0f
-                marker.zIndex = 100
+                marker.alpha = MARKER_ALPHA_SELECTED
+                marker.zIndex = MARKER_Z_INDEX_SELECTED
             } else {
-                marker.alpha = 0.8f
-                marker.zIndex = 0
+                marker.alpha = MARKER_ALPHA_UNSELECTED
+                marker.zIndex = MARKER_Z_INDEX_UNSELECTED
             }
         }
     }
@@ -345,7 +345,8 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
 
         if (position >= 0) {
             Log.d(TAG, "병원 최상단 스크롤: ${hospital.name} (위치: $position)")
-            (binding.hospitalRecyclerView.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(position, 0)
+            val layoutManager = binding.hospitalRecyclerView.layoutManager as? LinearLayoutManager
+            layoutManager?.scrollToPositionWithOffset(position, 0)
         }
     }
 
@@ -382,5 +383,9 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
 
     companion object {
         private const val TAG = "NaverMapFragment"
+        private const val MARKER_ALPHA_SELECTED = 1.0f
+        private const val MARKER_ALPHA_UNSELECTED = 0.8f
+        private const val MARKER_Z_INDEX_SELECTED = 100
+        private const val MARKER_Z_INDEX_UNSELECTED = 0
     }
 }

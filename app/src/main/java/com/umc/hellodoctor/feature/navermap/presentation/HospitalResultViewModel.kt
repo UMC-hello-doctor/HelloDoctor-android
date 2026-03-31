@@ -23,6 +23,7 @@ class HospitalResultViewModel
         private val _uiState = MutableLiveData<ApiState>()
         val uiState: LiveData<ApiState> = _uiState
 
+        @Suppress("TooGenericExceptionCaught")
         fun fetchNearbyHospitals(
             lat: Double,
             lng: Double,

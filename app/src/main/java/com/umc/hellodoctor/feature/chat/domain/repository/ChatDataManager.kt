@@ -35,6 +35,7 @@ class ChatDataManager
          * @param answers 답변 리스트
          * @return 증상 요약 JSON 객체
          */
+        @Suppress("TooGenericExceptionCaught")
         suspend fun generateSymptomSummaryWithAI(
             questions: List<String>,
             answers: List<String>,
@@ -68,31 +69,6 @@ class ChatDataManager
                 com.umc.hellodoctor.feature.chat.data.ai.SymptomSummaryResponse()
             } finally {
                 Log.d(TAG, "--- ChatDataManager.generateSymptomSummaryWithAI 종료 ---")
-            }
-        }
-
-        /**
-         * 질문 목록으로부터 증상 요약 생성 (폴백 - 기존 방식)
-         */
-        private fun generateSymptomSummaryFallback(
-            questions: List<String>,
-            answers: List<String>,
-        ): String {
-            return buildString {
-                appendLine("=== 증상 요약 ===")
-                appendLine()
-
-                // Q&A 목록 출력
-                if (questions.isNotEmpty()) {
-                    appendLine("📋 진료 기록:")
-                    questions.forEachIndexed { index, question ->
-                        appendLine("Q${index + 1}: $question")
-                        if (index < answers.size) {
-                            appendLine("A${index + 1}: ${answers[index]}")
-                        }
-                        appendLine()
-                    }
-                }
             }
         }
 
@@ -143,6 +119,7 @@ class ChatDataManager
          * 사용자 입력에 따른 진료과 추천
          * Gemini 호출을 시도하고 실패 시 로컬 폴백(정규식)을 사용합니다.
          */
+        @Suppress("TooGenericExceptionCaught", "SwallowedException")
         suspend fun recommendDepartments(symptoms: List<String>): List<String> {
             val combined = symptoms.joinToString(". ") { it }
 

@@ -17,6 +17,7 @@ class DepartmentRepository
          * @param deptKey 진료과 키 (예: "gastro", "derm", "ent", "resp" 등)
          * @return 질문 타입(P, Q, R, S, T, A)과 질문 텍스트의 맵
          */
+        @Suppress("TooGenericExceptionCaught", "SwallowedException")
         fun getDepartmentQuestions(deptKey: String): Map<String, String> {
             val resources = context.resources
             val packageName = context.packageName
@@ -159,6 +160,7 @@ class DepartmentRepository
                         ),
                 ).mapValues { (_, questions) -> questions.filter { it.isNotEmpty() } }
             } catch (e: Exception) {
+                android.util.Log.w("DepartmentRepository", "getAllRedFlagQuestions 로드 실패", e)
                 emptyMap()
             }
         }
@@ -181,6 +183,7 @@ class DepartmentRepository
                 val resId = resources.getIdentifier(resourceName, "string", packageName)
                 if (resId != 0) resources.getString(resId) else ""
             } catch (e: Exception) {
+                android.util.Log.w("DepartmentRepository", "getString 실패: $resourceName", e)
                 ""
             }
         }

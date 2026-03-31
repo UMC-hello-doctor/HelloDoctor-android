@@ -80,7 +80,4 @@ class WelcomeFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        private const val TAG = "WelcomeFragment"
-    }
 }

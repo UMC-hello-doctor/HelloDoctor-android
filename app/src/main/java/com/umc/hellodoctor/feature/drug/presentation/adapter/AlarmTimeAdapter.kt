@@ -16,7 +16,7 @@ class AlarmTimeAdapter :
     inner class ViewHolder(private val binding: ItemAlarmTimeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(alarm: AlarmInfo) {
-            val timeText = String.format("%02d:%02d", alarm.hour, alarm.minute)
+            val timeText = String.format(java.util.Locale.US, "%02d:%02d", alarm.hour, alarm.minute)
             binding.tvAlarmTime.text = timeText
 
             // 수정 모드에만 삭제 버튼 표시

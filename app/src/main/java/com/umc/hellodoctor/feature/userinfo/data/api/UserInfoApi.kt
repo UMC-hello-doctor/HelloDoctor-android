@@ -1,9 +1,9 @@
 package com.umc.hellodoctor.feature.userinfo.data.api
 
 import com.umc.hellodoctor.core.network.BaseResponse
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.MyProfileResponse
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.ProfileCreateRequest
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.ProfileCreateResult
+import com.umc.hellodoctor.feature.userinfo.data.model.MyProfileResponse
+import com.umc.hellodoctor.feature.userinfo.data.model.ProfileCreateRequest
+import com.umc.hellodoctor.feature.userinfo.data.model.ProfileCreateResult
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

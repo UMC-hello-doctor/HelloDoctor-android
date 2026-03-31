@@ -13,7 +13,7 @@ class AlarmInfoAdapter(
     inner class ViewHolder(private val binding: ItemAlarmInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(alarm: AlarmInfo) {
-            val timeText = String.format("%02d:%02d", alarm.hour, alarm.minute)
+            val timeText = String.format(java.util.Locale.US, "%02d:%02d", alarm.hour, alarm.minute)
             binding.tvAlarmTime.text = timeText
 
             binding.btnDelete.setOnClickListener {

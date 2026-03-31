@@ -1,4 +1,4 @@
-package com.umc.hellodoctor.feature.userinfo.data.remote.model
+package com.umc.hellodoctor.feature.userinfo.data.model
 
 data class MyProfileResponse(
     val displayName: String,

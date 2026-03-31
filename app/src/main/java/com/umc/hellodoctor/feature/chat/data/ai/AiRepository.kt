@@ -20,6 +20,7 @@ class AiRepository
         /**
          * 상세 진료과 추천 (JSON 구조화 응답)
          */
+        @Suppress("ReturnCount", "TooGenericExceptionCaught")
         suspend fun recommendDepartmentDetailed(symptom: String): Result<DepartmentRecommendation> {
             if (apiKey.isNullOrBlank()) {
                 return Result.failure(Exception("API 키가 설정되지 않았습니다"))
@@ -81,13 +82,14 @@ class AiRepository
          * 대화 이력 포함 메시지 전송
          * chatHistory: list of (role, text) pairs
          */
+        @Suppress("ReturnCount", "TooGenericExceptionCaught")
         suspend fun sendMessageWithHistory(
             chatHistory: List<Pair<String, String>>,
             newMessage: String,
         ): Result<String> {
             Log.d(tag, "--- sendMessageWithHistory 시작 ---")
             Log.d(tag, "대화 이력 개수: ${chatHistory.size}")
-            Log.d(tag, "새 메시지: ${newMessage.take(100)}...")
+            Log.d(tag, "새 메시지: ${newMessage.take(LOG_PREVIEW_LENGTH)}...")
 
             if (apiKey.isNullOrBlank()) {
                 Log.e(tag, "API 키가 설정되지 않았습니다")
@@ -107,8 +109,8 @@ class AiRepository
                         contents = contents,
                         generationConfig =
                             GenerationConfig(
-                                temperature = 0.7,
-                                maxOutputTokens = 2048,
+                                temperature = MESSAGE_TEMPERATURE,
+                                maxOutputTokens = MESSAGE_MAX_OUTPUT_TOKENS,
                             ),
                     )
 
@@ -129,14 +131,14 @@ class AiRepository
                 }
 
                 Log.d(tag, "응답 텍스트 길이: ${text.length}자")
-                Log.d(tag, "응답 텍스트: ${text.take(200)}...")
+                Log.d(tag, "응답 텍스트: ${text.take(LOG_RESPONSE_PREVIEW_LENGTH)}...")
                 Log.d(tag, "--- sendMessageWithHistory 성공 ---")
 
                 Result.success(text)
             } catch (e: Exception) {
                 Log.e(tag, "대화 전송 오류: ${e.message}", e)
                 Log.e(tag, "예외 타입: ${e.javaClass.simpleName}")
-                Log.e(tag, "StackTrace: ${e.stackTraceToString().take(500)}")
+                Log.e(tag, "StackTrace: ${e.stackTraceToString().take(LOG_STACKTRACE_PREVIEW_LENGTH)}")
                 Result.failure(e)
             }
         }
@@ -179,7 +181,7 @@ class AiRepository
                 Log.d(tag, "증상 요약 생성 성공")
                 Log.d(tag, "생성된 응답 길이: ${result.getOrNull()?.length}자")
                 result.getOrNull()?.let { response ->
-                    Log.d(tag, "생성된 응답: ${response.take(200)}...")
+                    Log.d(tag, "생성된 응답: ${response.take(LOG_RESPONSE_PREVIEW_LENGTH)}...")
                 }
             } else {
                 Log.e(tag, "증상 요약 생성 실패: ${result.exceptionOrNull()?.message}")
@@ -334,5 +336,13 @@ class AiRepository
                 // 폴백: 빈 응답 반환
                 SymptomSummaryResponse()
             }
+        }
+
+        companion object {
+            private const val LOG_PREVIEW_LENGTH = 100
+            private const val LOG_RESPONSE_PREVIEW_LENGTH = 200
+            private const val LOG_STACKTRACE_PREVIEW_LENGTH = 500
+            private const val MESSAGE_TEMPERATURE = 0.7
+            private const val MESSAGE_MAX_OUTPUT_TOKENS = 2048
         }
     }

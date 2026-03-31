@@ -2,9 +2,9 @@ package com.umc.hellodoctor.feature.userinfo.data.repository
 
 import android.util.Log
 import com.umc.hellodoctor.feature.userinfo.data.api.UserInfoApi
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.MyProfileResponse
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.ProfileCreateRequest
-import com.umc.hellodoctor.feature.userinfo.data.remote.model.ProfileCreateResult
+import com.umc.hellodoctor.feature.userinfo.data.model.MyProfileResponse
+import com.umc.hellodoctor.feature.userinfo.data.model.ProfileCreateRequest
+import com.umc.hellodoctor.feature.userinfo.data.model.ProfileCreateResult
 import com.umc.hellodoctor.feature.userinfo.domain.repository.UserInfoRepository
 import javax.inject.Inject
 
@@ -13,6 +13,7 @@ class UserInfoRepositoryImpl
     constructor(
         private val userInfoApi: UserInfoApi,
     ) : UserInfoRepository {
+        @Suppress("TooGenericExceptionCaught")
         override suspend fun createProfile(request: ProfileCreateRequest): Result<ProfileCreateResult> {
             return try {
                 Log.d(TAG, "Creating profile: $request")
@@ -31,6 +32,7 @@ class UserInfoRepositoryImpl
             }
         }
 
+        @Suppress("TooGenericExceptionCaught")
         override suspend fun getMyProfile(): Result<MyProfileResponse> {
             return try {
                 Log.d(TAG, "Getting my profile")
