@@ -8,6 +8,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   commit-lint:
     runs-on: ubuntu-latest
@@ -23,7 +28,8 @@ jobs:
           fetch-depth: 0
 
       - name: Validate commit messages
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
+        
         with:
           script: |
             const { owner, repo } = context.repo;
