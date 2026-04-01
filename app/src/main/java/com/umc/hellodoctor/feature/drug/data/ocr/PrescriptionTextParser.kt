@@ -11,13 +11,14 @@ class PrescriptionTextParser {
         private val FREQUENCY_REGEX = Regex("""1일\s*(\d+)\s*회""")
         private val DURATION_REGEX = Regex("""(\d+)\s*일\s*(?:분|간|치)""")
         private val DOSAGE_REGEX = Regex("""1회\s*(\d+(?:\.\d+)?)\s*(?:정|캡슐|포|ml)""")
+        private const val MIN_MEDICINE_NAME_LENGTH = 3
     }
 
     fun parse(rawText: String): OcrResult {
         val medicines =
             MEDICINE_SUFFIX_REGEX.findAll(rawText)
                 .map { it.value.trim() }
-                .filter { it.length >= 3 }
+                .filter { it.length >= MIN_MEDICINE_NAME_LENGTH }
                 .distinct()
                 .toList()
         return OcrResult(
