@@ -253,6 +253,7 @@ detekt {
     toolVersion = "1.23.6"
     config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
     buildUponDefaultConfig = true
+    autoCorrect = true
 }
 
 dependencies {
@@ -317,4 +318,10 @@ dependencies {
 
     // Compose LiveData observation
     implementation("androidx.compose.runtime:runtime-livedata")
+
+    // CameraX
+    implementation("androidx.camera:camera-core:1.4.1")
+    implementation("androidx.camera:camera-camera2:1.4.1")
+    implementation("androidx.camera:camera-lifecycle:1.4.1")
+    implementation("androidx.camera:camera-view:1.4.1")
 }
