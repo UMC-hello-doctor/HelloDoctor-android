@@ -20,7 +20,14 @@ import kotlinx.coroutines.withContext
 import java.util.UUID
 import javax.inject.Inject
 
+data class MessageConfig(
+    val isEmergency: Boolean = false,
+    val saveToQuestions: Boolean = false,
+    val saveToAnswers: Boolean = false,
+)
+
 @HiltViewModel
+@Suppress("TooManyFunctions")
 class ChatViewModel
     @Inject
     constructor(
@@ -99,14 +106,15 @@ class ChatViewModel
          * 사용자 답변 추가 (진료과 질문 답변용)
          */
         fun addUserAnswer(answer: String) {
-            addMessage(answer, isBot = false, type = MessageType.ANSWER, saveToAnswers = true)
+            addMessage(answer, isBot = false, type = MessageType.ANSWER, config = MessageConfig(saveToAnswers = true))
         }
 
         /**
          * 봇 질문 추가
          */
         fun addBotQuestion(question: String) {
-            addMessage(question, isBot = true, type = MessageType.QUESTION, saveToQuestions = true)
+            val config = MessageConfig(saveToQuestions = true)
+            addMessage(question, isBot = true, type = MessageType.QUESTION, config = config)
         }
 
         /**
@@ -120,7 +128,7 @@ class ChatViewModel
          * 응급 경고 메시지 추가 (붉은색 텍스트)
          */
         fun addEmergencyMessage(message: String) {
-            addMessage(message, isBot = true, type = MessageType.EMERGENCY, isEmergency = true)
+            addMessage(message, isBot = true, type = MessageType.EMERGENCY, config = MessageConfig(isEmergency = true))
         }
 
         /**
@@ -142,9 +150,7 @@ class ChatViewModel
             text: String,
             isBot: Boolean,
             type: MessageType,
-            isEmergency: Boolean = false,
-            saveToQuestions: Boolean = false,
-            saveToAnswers: Boolean = false,
+            config: MessageConfig = MessageConfig(),
         ) {
             val currentMessages = _messages.value?.toMutableList() ?: mutableListOf()
             val message =
@@ -152,21 +158,21 @@ class ChatViewModel
                     text = text,
                     isBot = isBot,
                     type = type,
-                    isEmergency = isEmergency,
+                    isEmergency = config.isEmergency,
                 )
             currentMessages.add(message)
             _messages.value = currentMessages
 
             // 세션에 저장
-            if (saveToQuestions) {
+            if (config.saveToQuestions) {
                 _chatSession.value?.questions?.add(text)
                 Log.d(TAG, "질문 저장: $text")
             }
-            if (saveToAnswers) {
+            if (config.saveToAnswers) {
                 _chatSession.value?.answers?.add(text)
                 Log.d(TAG, "답변 저장: $text")
             }
-            if (isEmergency) {
+            if (config.isEmergency) {
                 Log.w(TAG, "⚠️ 응급 메시지: $text")
             }
         }

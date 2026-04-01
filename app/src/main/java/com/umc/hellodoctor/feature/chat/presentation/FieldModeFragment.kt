@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
+@Suppress("TooManyFunctions")
 class FieldModeFragment : Fragment() {
     private var _binding: FragmentFieldModeBinding? = null
     private val binding get() = _binding!!
@@ -135,30 +136,40 @@ class FieldModeFragment : Fragment() {
      * 증상 요약을 TableLayout에 표시
      */
     private fun displaySymptomSummary(summaryResponse: SymptomSummaryResponse) {
-        try {
-            val tableLayout = binding.tableSymptomItems
-            tableLayout.removeAllViews()
+        val tableLayout = binding.tableSymptomItems
+        tableLayout.removeAllViews()
 
+        try {
             if (isShowingKorean) {
-                // 한글 버전 표시
-                binding.langTextView.text = "🇰🇷 한국어 (KO)"
-                summaryResponse.korean?.let { koreanList ->
-                    koreanList.forEach { item ->
-                        addTableRow(tableLayout, item.category, item.description)
-                    }
-                }
+                displayKoreanSummary(summaryResponse)
             } else {
-                // 원본 언어 버전 표시
-                summaryResponse.original?.let { original ->
-                    binding.langTextView.text =
-                        "📋 ${original.languageName} (${original.language.uppercase()})"
-                    original.data?.forEach { item ->
-                        addTableRow(tableLayout, item.category, item.description)
-                    }
-                }
+                displayOriginalSummary(summaryResponse)
             }
         } catch (_: Exception) {
             // 에러 처리
+        }
+    }
+
+    /**
+     * 한글 요약 표시
+     */
+    private fun displayKoreanSummary(summaryResponse: SymptomSummaryResponse) {
+        binding.langTextView.text = "🇰🇷 한국어 (KO)"
+        summaryResponse.korean?.forEach { item ->
+            addTableRow(binding.tableSymptomItems, item.category, item.description)
+        }
+    }
+
+    /**
+     * 원본 언어 요약 표시
+     */
+    private fun displayOriginalSummary(summaryResponse: SymptomSummaryResponse) {
+        summaryResponse.original?.let { original ->
+            binding.langTextView.text =
+                "📋 ${original.languageName} (${original.language.uppercase()})"
+            original.data?.forEach { item ->
+                addTableRow(binding.tableSymptomItems, item.category, item.description)
+            }
         }
     }
 

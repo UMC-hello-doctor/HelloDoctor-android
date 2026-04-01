@@ -43,54 +43,13 @@ class DepartmentRepository
          */
         fun getDepartmentKey(departmentName: String): String {
             val lowerName = departmentName.lowercase()
-            return when {
-                // 소화기내과 / Gastroenterology
-                lowerName.contains("소화기") || lowerName.contains("위장") ||
-                    lowerName.contains("gastro") -> "gastro"
-
-                // 피부과 / Dermatology
-                lowerName.contains("피부") || lowerName.contains("derm") -> "derm"
-
-                // 이비인후과 / ENT (Ear, Nose, Throat)
-                lowerName.contains("이비인후") || lowerName.contains("ent") ||
-                    lowerName.contains("ear") || lowerName.contains("nose") || lowerName.contains("throat") -> "ent"
-
-                // 호흡기/순환기내과 / Respiratory/Cardiology
-                lowerName.contains("호흡기") || lowerName.contains("순환기") ||
-                    lowerName.contains("respiratory") || lowerName.contains("cardio") ||
-                    lowerName.contains("pulmonary") -> "resp"
-
-                // 안과 / Ophthalmology
-                lowerName.contains("안과") || lowerName.contains("oph") ||
-                    lowerName.contains("eye") -> "oph"
-
-                // 비뇨의학과 / Urology
-                lowerName.contains("비뇨") || lowerName.contains("urol") -> "urol"
-
-                // 신경과 / Neurology
-                lowerName.contains("신경과") || lowerName.contains("neuro") -> "neuro"
-
-                // 산부인과 / Gynecology/Obstetrics
-                lowerName.contains("산부인과") || lowerName.contains("부인") ||
-                    lowerName.contains("gyne") || lowerName.contains("obstetric") -> "gyne"
-
-                // 치과 / Dentistry
-                lowerName.contains("치과") || lowerName.contains("dent") -> "dent"
-
-                // 정형외과 / Orthopedics
-                lowerName.contains("정형") || lowerName.contains("orthop") -> "ortho"
-
-                // 내과 / Internal Medicine
-                lowerName.contains("내과") || lowerName.contains("internal") -> "internal"
-
-                // 소아청소년과 / Pediatrics
-                lowerName.contains("소아") || lowerName.contains("pediatric") -> "pedi"
-
-                else -> {
-                    android.util.Log.e("DepartmentRepository", "알 수 없는 진료과: $departmentName")
+            return DEPARTMENT_KEY_MAP.entries
+                .firstOrNull { (_, keywords) -> keywords.any { lowerName.contains(it) } }
+                ?.key
+                ?: run {
+                    android.util.Log.e(TAG, "알 수 없는 진료과: $departmentName")
                     ""
                 }
-            }
         }
 
         /**
@@ -103,7 +62,8 @@ class DepartmentRepository
             val packageName = context.packageName
             return try {
                 getString(resources, packageName, "dept_$deptKey")
-            } catch (e: Exception) {
+            } catch (e: android.content.res.Resources.NotFoundException) {
+                Log.e("DepartmentRepository", "Department name not found for key: $deptKey", e)
                 ""
             }
         }
@@ -159,7 +119,7 @@ class DepartmentRepository
                             getString(resources, packageName, "redflag_dent_ludwig"),
                         ),
                 ).mapValues { (_, questions) -> questions.filter { it.isNotEmpty() } }
-            } catch (e: Exception) {
+            } catch (e: android.content.res.Resources.NotFoundException) {
                 android.util.Log.w("DepartmentRepository", "getAllRedFlagQuestions 로드 실패", e)
                 emptyMap()
             }
@@ -182,9 +142,28 @@ class DepartmentRepository
             return try {
                 val resId = resources.getIdentifier(resourceName, "string", packageName)
                 if (resId != 0) resources.getString(resId) else ""
-            } catch (e: Exception) {
+            } catch (e: android.content.res.Resources.NotFoundException) {
                 android.util.Log.w("DepartmentRepository", "getString 실패: $resourceName", e)
                 ""
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "DepartmentRepository"
+
+        private val DEPARTMENT_KEY_MAP = mapOf(
+            "gastro" to listOf("소화기", "위장", "gastro"),
+            "derm" to listOf("피부", "derm"),
+            "ent" to listOf("이비인후", "ent", "ear", "nose", "throat"),
+            "resp" to listOf("호흡기", "순환기", "respiratory", "cardio", "pulmonary"),
+            "oph" to listOf("안과", "oph", "eye"),
+            "urol" to listOf("비뇨", "urol"),
+            "neuro" to listOf("신경과", "neuro"),
+            "gyne" to listOf("산부인과", "부인", "gyne", "obstetric"),
+            "dent" to listOf("치과", "dent"),
+            "ortho" to listOf("정형", "orthop"),
+            "internal" to listOf("내과", "internal"),
+            "pedi" to listOf("소아", "pediatric"),
+        )
     }
