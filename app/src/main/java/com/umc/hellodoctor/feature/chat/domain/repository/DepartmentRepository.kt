@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+
 /**
  * DepartmentRepository - XML에서 진료과 관련 질문과 정보를 관리
  */
