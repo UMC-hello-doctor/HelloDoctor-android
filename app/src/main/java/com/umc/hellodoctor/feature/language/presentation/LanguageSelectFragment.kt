@@ -44,8 +44,7 @@ class LanguageSelectFragment : Fragment(R.layout.fragment_language_select) {
         binding.btnSaveLanguage.setOnClickListener {
             val selectedLanguage = binding.selectLanguage.text.toString().trim()
 
-            if (selectedLanguage.isEmpty()) {
-            } else {
+            if (selectedLanguage.isNotEmpty()) {
                 // 선택된 언어 저장
                 languageManager.saveLanguage(selectedLanguage)
 
