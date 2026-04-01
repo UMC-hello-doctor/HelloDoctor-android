@@ -22,6 +22,7 @@ import com.umc.hellodoctor.feature.drug.presentation.adapter.SelectedMedicineAda
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+@Suppress("TooManyFunctions")
 class DrugSerchFragment : Fragment() {
     private var _binding: FragmentAddDrugBinding? = null
     private val binding get() = _binding!!

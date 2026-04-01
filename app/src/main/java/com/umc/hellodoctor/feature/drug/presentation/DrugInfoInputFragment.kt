@@ -27,6 +27,7 @@ import java.util.Locale
 import java.util.UUID
 
 @AndroidEntryPoint
+@Suppress("TooManyFunctions")
 class DrugInfoInputFragment : Fragment() {
     private var _binding: FragmentDrugInfoInputBinding? = null
     private val binding get() = _binding!!
