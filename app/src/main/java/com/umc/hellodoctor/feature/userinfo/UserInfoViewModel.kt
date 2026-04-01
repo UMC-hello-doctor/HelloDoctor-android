@@ -122,9 +122,9 @@ class UserInfoViewModel
                 val request =
                     ProfileCreateRequest(
                         displayName = state.name,
-                        gender = state.gender,
-                        birthDate = state.birthDate,
-                        bloodType = state.bloodType,
+                        gender = requireNotNull(state.gender),
+                        birthDate = requireNotNull(state.birthDate),
+                        bloodType = requireNotNull(state.bloodType),
                         bloodTypeDetail = if (state.bloodType == BloodType.OTHER) state.bloodTypeOther else null,
                         hasAllergy = state.allergy ?: false,
                         allergyTypes = if (state.allergy == true) state.allergyDetails else emptyList(),

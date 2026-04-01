@@ -3,7 +3,7 @@ package com.umc.hellodoctor.feature.chat.domain.repository
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-
+import android.util.Log
 /**
  * DepartmentRepository - XML에서 진료과 관련 질문과 정보를 관리
  */
@@ -47,7 +47,7 @@ class DepartmentRepository
                 .firstOrNull { (_, keywords) -> keywords.any { lowerName.contains(it) } }
                 ?.key
                 ?: run {
-                    android.util.Log.e(TAG, "알 수 없는 진료과: $departmentName")
+                    Log.e(TAG, "알 수 없는 진료과: $departmentName")
                     ""
                 }
         }
