@@ -19,7 +19,7 @@ class UserInfoRepositoryImpl
                 Log.d(TAG, "Creating profile: $request")
                 val response = userInfoApi.createProfile(request)
 
-                if (response.success && response.result != null) {
+                if (response.success) {
                     Log.d(TAG, "Profile created successfully: ${response.result}")
                     Result.success(response.result)
                 } else {
@@ -38,7 +38,7 @@ class UserInfoRepositoryImpl
                 Log.d(TAG, "Getting my profile")
                 val response = userInfoApi.getMyProfile()
 
-                if (response.success && response.result != null) {
+                if (response.success) {
                     Log.d(TAG, "Profile fetched successfully: ${response.result}")
                     Result.success(response.result)
                 } else {
