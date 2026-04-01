@@ -23,6 +23,7 @@ import java.util.Date
 import java.util.Locale
 
 @AndroidEntryPoint
+@Suppress("TooManyFunctions")
 class UserInfoFragment : Fragment() {
     private var _binding: FragmentUserInfoBinding? = null
     private val binding get() = _binding!!
@@ -56,14 +57,18 @@ class UserInfoFragment : Fragment() {
                     start: Int,
                     count: Int,
                     after: Int,
-                ) {}
+                ) {
+                    // no-op
+                }
 
                 override fun onTextChanged(
                     s: CharSequence?,
                     start: Int,
                     before: Int,
                     count: Int,
-                ) {}
+                ) {
+                    // no-op
+                }
 
                 override fun afterTextChanged(s: Editable?) {
                     viewModel.setName(s.toString())
@@ -135,14 +140,18 @@ class UserInfoFragment : Fragment() {
                     start: Int,
                     count: Int,
                     after: Int,
-                ) {}
+                ) {
+                    // no-op
+                }
 
                 override fun onTextChanged(
                     s: CharSequence?,
                     start: Int,
                     before: Int,
                     count: Int,
-                ) {}
+                ) {
+                    // no-op
+                }
 
                 override fun afterTextChanged(s: Editable?) {
                     viewModel.setBloodTypeOther(s.toString())

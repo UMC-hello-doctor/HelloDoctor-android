@@ -37,6 +37,7 @@ data class UserInfoUiState(
 )
 
 @HiltViewModel
+@Suppress("TooManyFunctions")
 class UserInfoViewModel
     @Inject
     constructor(
@@ -110,7 +111,7 @@ class UserInfoViewModel
             val state = _uiState.value
 
             // 검증: 필수 항목 체크
-            if (state.name.isBlank() || state.gender == null || state.birthDate == null || state.bloodType == null) {
+            if (state.isRequiredFieldsMissing()) {
                 _uiState.update { it.copy(errorMessage = "필수 항목을 모두 입력해주세요") }
                 return
             }
@@ -185,3 +186,7 @@ class UserInfoViewModel
             }
         }
     }
+}
+
+private fun UserInfoUiState.isRequiredFieldsMissing(): Boolean =
+    name.isBlank() || gender == null || birthDate == null || bloodType == null
