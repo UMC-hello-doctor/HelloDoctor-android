@@ -20,6 +20,14 @@ class PrescriptionScanViewModel
         private val _uiState = MutableLiveData<PrescriptionScanUiState>(PrescriptionScanUiState.Idle)
         val uiState: LiveData<PrescriptionScanUiState> get() = _uiState
 
+        fun resetToIdle() {
+            _uiState.value = PrescriptionScanUiState.Idle
+        }
+
+        fun onCaptureFailed(message: String) {
+            _uiState.value = PrescriptionScanUiState.Error(message)
+        }
+
         fun onImageCaptured(uri: Uri) {
             _uiState.value = PrescriptionScanUiState.Loading
             viewModelScope.launch {
