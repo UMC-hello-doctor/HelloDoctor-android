@@ -43,55 +43,9 @@ class AuthViewModel
 
                 try {
                     when (val result = service.signIn()) {
-                        is SocialSignInResult.Success -> {
-                            try {
-                                tokenManager.clearAllTokens()
-                                Log.d(TAG, "socialLogin: $result")
-                                val response = authRepository.loginWithSocial(result.user).result
-                                Log.d(TAG, "socialLogin성공: $response")
-                                result.user.idToken?.let { tokenManager.saveGoogleIdToken(it) }
-                                tokenManager.saveAuthTokens(
-                                    accessToken = response.accessToken,
-                                    refreshToken = response.refreshToken,
-                                )
-                                tokenManager.debugLog()
-                                _uiState.value =
-                                    _uiState.value.copy(
-                                        isLoading = false,
-                                        signInResult = result,
-                                        errorMessage = null,
-                                        isNewUser = response.isNewUser,
-                                    )
-                            } catch (e: Exception) {
-                                Log.e(TAG, "socialLogin: ${e.message}")
-                                _uiState.value =
-                                    _uiState.value.copy(
-                                        isLoading = false,
-                                        signInResult = null,
-                                        errorMessage = e.message ?: "서버 통신 중 오류가 발생했습니다.",
-                                        isNewUser = null,
-                                    )
-                            }
-                        }
-                        is SocialSignInResult.Canceled -> {
-                            _uiState.value =
-                                _uiState.value.copy(
-                                    isLoading = false,
-                                    signInResult = result,
-                                    errorMessage = null,
-                                    isNewUser = null,
-                                )
-                            Log.i(TAG, "socialLogin: Canceled")
-                        }
-                        is SocialSignInResult.Error -> {
-                            _uiState.value =
-                                _uiState.value.copy(
-                                    isLoading = false,
-                                    signInResult = null,
-                                    errorMessage = result.throwable.message ?: "소셜 로그인 중 오류가 발생했습니다.",
-                                    isNewUser = null,
-                                )
-                        }
+                        is SocialSignInResult.Success -> handleLoginSuccess(result)
+                        is SocialSignInResult.Canceled -> handleLoginCanceled(result)
+                        is SocialSignInResult.Error -> handleLoginError(result)
                     }
                 } catch (e: Exception) {
                     _uiState.value =
@@ -103,6 +57,59 @@ class AuthViewModel
                         )
                 }
             }
+        }
+
+        @Suppress("TooGenericExceptionCaught")
+        private suspend fun handleLoginSuccess(result: SocialSignInResult.Success) {
+            try {
+                tokenManager.clearAllTokens()
+                Log.d(TAG, "socialLogin: $result")
+                val response = authRepository.loginWithSocial(result.user).result
+                Log.d(TAG, "socialLogin성공: $response")
+                result.user.idToken?.let { tokenManager.saveGoogleIdToken(it) }
+                tokenManager.saveAuthTokens(
+                    accessToken = response.accessToken,
+                    refreshToken = response.refreshToken,
+                )
+                tokenManager.debugLog()
+                _uiState.value =
+                    _uiState.value.copy(
+                        isLoading = false,
+                        signInResult = result,
+                        errorMessage = null,
+                        isNewUser = response.isNewUser,
+                    )
+            } catch (e: Exception) {
+                Log.e(TAG, "socialLogin: ${e.message}")
+                _uiState.value =
+                    _uiState.value.copy(
+                        isLoading = false,
+                        signInResult = null,
+                        errorMessage = e.message ?: "서버 통신 중 오류가 발생했습니다.",
+                        isNewUser = null,
+                    )
+            }
+        }
+
+        private fun handleLoginCanceled(result: SocialSignInResult.Canceled) {
+            _uiState.value =
+                _uiState.value.copy(
+                    isLoading = false,
+                    signInResult = result,
+                    errorMessage = null,
+                    isNewUser = null,
+                )
+            Log.i(TAG, "socialLogin: Canceled")
+        }
+
+        private fun handleLoginError(result: SocialSignInResult.Error) {
+            _uiState.value =
+                _uiState.value.copy(
+                    isLoading = false,
+                    signInResult = null,
+                    errorMessage = result.throwable.message ?: "소셜 로그인 중 오류가 발생했습니다.",
+                    isNewUser = null,
+                )
         }
 
         fun clearError() {
