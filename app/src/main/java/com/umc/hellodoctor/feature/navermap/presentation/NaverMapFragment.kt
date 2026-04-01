@@ -33,6 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
+@Suppress("TooManyFunctions")
 class NaverMapFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentNaverMapBinding? = null
     private val binding get() = _binding!!
@@ -237,12 +238,15 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
                     bottomSheet: View,
                     newState: Int,
                 ) {
+                    // no-op: 상태 변경 처리 불필요
                 }
 
                 override fun onSlide(
                     bottomSheet: View,
                     slideOffset: Float,
-                ) {}
+                ) {
+                    // no-op: 슬라이드 오프셋 처리 불필요
+                }
             },
         )
     }
