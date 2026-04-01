@@ -8,10 +8,10 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.57.2" apply false
     // ktlint
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
-    
+
     // detekt
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
-    
+
     // jacoco
     id("jacoco")
 }

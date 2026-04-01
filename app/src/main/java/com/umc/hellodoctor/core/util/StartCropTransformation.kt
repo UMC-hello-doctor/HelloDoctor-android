@@ -12,12 +12,11 @@ import java.security.MessageDigest
  * 왼쪽(시작점) 기준으로 crop하는 Transformation
  */
 class StartCropTransformation : Transformation<Bitmap> {
-
     override fun transform(
         context: Context,
         resource: Resource<Bitmap>,
         outWidth: Int,
-        outHeight: Int
+        outHeight: Int,
     ): Resource<Bitmap> {
         val toTransform = resource.get()
         val width = toTransform.width

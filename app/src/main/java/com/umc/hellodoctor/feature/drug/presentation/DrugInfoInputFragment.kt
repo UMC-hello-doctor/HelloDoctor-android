@@ -27,8 +27,8 @@ import java.util.Locale
 import java.util.UUID
 
 @AndroidEntryPoint
+@Suppress("TooManyFunctions")
 class DrugInfoInputFragment : Fragment() {
-
     private var _binding: FragmentDrugInfoInputBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DrugPlanViewModel by viewModels()
@@ -48,13 +48,16 @@ class DrugInfoInputFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentDrugInfoInputBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         medicines = args.medicines.toList()
@@ -76,12 +79,13 @@ class DrugInfoInputFragment : Fragment() {
                 binding.etPharmacyName.setText(it.pharmacyName)
 
                 // 복용 타입 설정
-                val intakeTypeIndex = when (it.intakeType) {
-                    IntakeType.PRE_MEAL -> 0
-                    IntakeType.BETWEEN_MEALS -> 1
-                    IntakeType.POST_MEAL -> 2
-                    else -> 3
-                }
+                val intakeTypeIndex =
+                    when (it.intakeType) {
+                        IntakeType.PRE_MEAL -> INTAKE_PRE_MEAL_INDEX
+                        IntakeType.BETWEEN_MEALS -> INTAKE_BETWEEN_MEALS_INDEX
+                        IntakeType.POST_MEAL -> INTAKE_POST_MEAL_INDEX
+                        else -> INTAKE_OTHER_INDEX
+                    }
                 binding.spinnerIntakeType.setSelection(intakeTypeIndex)
                 selectedIntakeType = it.intakeType
 
@@ -111,28 +115,36 @@ class DrugInfoInputFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, intakeTypes)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerIntakeType.adapter = adapter
-        binding.spinnerIntakeType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedIntakeType = when (position) {
-                    0 -> IntakeType.PRE_MEAL
-                    1 -> IntakeType.BETWEEN_MEALS
-                    2 -> IntakeType.POST_MEAL
-                    else -> IntakeType.OTHER
+        binding.spinnerIntakeType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long,
+                ) {
+                    selectedIntakeType =
+                        when (position) {
+                            0 -> IntakeType.PRE_MEAL
+                            1 -> IntakeType.BETWEEN_MEALS
+                            2 -> IntakeType.POST_MEAL
+                            else -> IntakeType.OTHER
+                        }
                 }
-            }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) = Unit
-        }
+                override fun onNothingSelected(parent: AdapterView<*>?) = Unit
+            }
 
         // 날짜 초기값 설정
         updateDateDisplay()
     }
 
     private fun setupRecyclerView() {
-        alarmAdapter = AlarmInfoAdapter(alarms) { position ->
-            alarms.removeAt(position)
-            alarmAdapter.notifyItemRemoved(position)
-        }
+        alarmAdapter =
+            AlarmInfoAdapter(alarms) { position ->
+                alarms.removeAt(position)
+                alarmAdapter.notifyItemRemoved(position)
+            }
         binding.rvAlarmTimes.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = alarmAdapter
@@ -177,32 +189,38 @@ class DrugInfoInputFragment : Fragment() {
         binding.tvEndDateDisplay.text = dateFormat.format(endDate.time)
     }
 
-    private fun showDatePickerDialog(calendar: Calendar, onDateSelected: (Calendar) -> Unit) {
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { _, year, month, dayOfMonth ->
-                val newCalendar = Calendar.getInstance().apply {
-                    set(year, month, dayOfMonth)
-                }
-                onDateSelected(newCalendar)
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        )
+    private fun showDatePickerDialog(
+        calendar: Calendar,
+        onDateSelected: (Calendar) -> Unit,
+    ) {
+        val datePickerDialog =
+            DatePickerDialog(
+                requireContext(),
+                { _, year, month, dayOfMonth ->
+                    val newCalendar =
+                        Calendar.getInstance().apply {
+                            set(year, month, dayOfMonth)
+                        }
+                    onDateSelected(newCalendar)
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+            )
         datePickerDialog.show()
     }
 
     private fun showTimePickerDialog(onTimeSelected: (Int, Int) -> Unit) {
-        val timePickerDialog = TimePickerDialog(
-            requireContext(),
-            { _, hourOfDay, minute ->
-                onTimeSelected(hourOfDay, minute)
-            },
-            12,
-            0,
-            true
-        )
+        val timePickerDialog =
+            TimePickerDialog(
+                requireContext(),
+                { _, hourOfDay, minute ->
+                    onTimeSelected(hourOfDay, minute)
+                },
+                DEFAULT_HOUR,
+                DEFAULT_MINUTE,
+                true,
+            )
         timePickerDialog.show()
     }
 
@@ -221,15 +239,16 @@ class DrugInfoInputFragment : Fragment() {
 
         val planId = if (isEditMode) editingPlanId!! else UUID.randomUUID().toString()
 
-        val plan = DrugPlanEntity(
-            id = planId,
-            pharmacyName = pharmacyName,
-            intakeType = selectedIntakeType,
-            startDateMillis = startDate.timeInMillis,
-            endDateMillis = endDate.timeInMillis,
-            alarms = alarms.toList(),
-            medicines = medicines
-        )
+        val plan =
+            DrugPlanEntity(
+                id = planId,
+                pharmacyName = pharmacyName,
+                intakeType = selectedIntakeType,
+                startDateMillis = startDate.timeInMillis,
+                endDateMillis = endDate.timeInMillis,
+                alarms = alarms.toList(),
+                medicines = medicines,
+            )
 
         if (isEditMode) {
             viewModel.updatePlan(plan)
@@ -246,5 +265,14 @@ class DrugInfoInputFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    companion object {
+        private const val INTAKE_PRE_MEAL_INDEX = 0
+        private const val INTAKE_BETWEEN_MEALS_INDEX = 1
+        private const val INTAKE_POST_MEAL_INDEX = 2
+        private const val INTAKE_OTHER_INDEX = 3
+        private const val DEFAULT_HOUR = 12
+        private const val DEFAULT_MINUTE = 0
     }
 }

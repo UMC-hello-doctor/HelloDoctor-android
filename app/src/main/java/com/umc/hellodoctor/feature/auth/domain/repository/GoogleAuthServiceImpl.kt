@@ -1,10 +1,8 @@
 package com.umc.hellodoctor.feature.auth.domain.repository
 
 import android.content.Context
-import android.os.Build
 import android.util.Log
 import androidx.credentials.ClearCredentialStateRequest
-import androidx.credentials.Credential
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -17,12 +15,15 @@ import com.umc.hellodoctor.feature.auth.domain.model.SocialSignInResult
 import com.umc.hellodoctor.feature.auth.domain.model.SocialUser
 
 class GoogleAuthServiceImpl(
-    private val context: Context
+    private val context: Context,
 ) : SocialAuthService {
-
-    private val TAG = this.javaClass.simpleName
     private val credentialManager = CredentialManager.create(context)
 
+    companion object {
+        private const val TAG = "GoogleAuthServiceImpl"
+    }
+
+    @Suppress("TooGenericExceptionCaught")
     override suspend fun signIn(): SocialSignInResult {
         return try {
             // 1차: 이미 권한 준 계정만 대상으로 시도
@@ -46,18 +47,18 @@ class GoogleAuthServiceImpl(
         }
     }
 
-    private suspend fun signInInternal(
-        filterByAuthorizedAccounts: Boolean
-    ): SocialSignInResult {
-        val googleIdOption = GetGoogleIdOption.Builder()
-            .setServerClientId(BuildConfig.GOOGLE_OAUTH_CLIENT_ID)
-            .setFilterByAuthorizedAccounts(false)
-            .setAutoSelectEnabled(filterByAuthorizedAccounts)
-            .build()
+    private suspend fun signInInternal(filterByAuthorizedAccounts: Boolean): SocialSignInResult {
+        val googleIdOption =
+            GetGoogleIdOption.Builder()
+                .setServerClientId(BuildConfig.GOOGLE_OAUTH_CLIENT_ID)
+                .setFilterByAuthorizedAccounts(false)
+                .setAutoSelectEnabled(filterByAuthorizedAccounts)
+                .build()
 
-        val request = GetCredentialRequest.Builder()
-            .addCredentialOption(googleIdOption)
-            .build()
+        val request =
+            GetCredentialRequest.Builder()
+                .addCredentialOption(googleIdOption)
+                .build()
 
         val result = credentialManager.getCredential(context, request)
         val credential = result.credential
@@ -70,11 +71,11 @@ class GoogleAuthServiceImpl(
             if (BuildConfig.DEBUG) {
                 Log.d(
                     TAG,
-                    "Google sign-in success (authorizedOnly=$filterByAuthorizedAccounts), providerId=${c.id}"
+                    "Google sign-in success (authorizedOnly=$filterByAuthorizedAccounts), providerId=${c.id}",
                 )
                 Log.d(
-                        TAG,
-                "Google sign-in success (authorizedOnly=$filterByAuthorizedAccounts), idToken=${c.idToken}"
+                    TAG,
+                    "Google sign-in success (authorizedOnly=$filterByAuthorizedAccounts), idToken=${c.idToken}",
                 )
             }
 
@@ -84,8 +85,8 @@ class GoogleAuthServiceImpl(
                     idToken = c.idToken,
                     accessToken = null,
                     email = c.id,
-                    name = c.displayName
-                )
+                    name = c.displayName,
+                ),
             )
         } else {
             val error = IllegalArgumentException("Unsupported credential type: ${credential::class.java}")
@@ -94,11 +95,11 @@ class GoogleAuthServiceImpl(
         }
     }
 
-
+    @Suppress("TooGenericExceptionCaught")
     override suspend fun signOut() {
         try {
             credentialManager.clearCredentialState(
-                ClearCredentialStateRequest()
+                ClearCredentialStateRequest(),
             )
             Log.d("Auth", "✅ 저장된 계정 초기화 완료")
         } catch (e: Exception) {

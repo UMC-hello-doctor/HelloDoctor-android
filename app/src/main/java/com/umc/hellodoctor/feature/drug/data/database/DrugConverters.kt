@@ -43,4 +43,3 @@ class DrugConverters {
         return IntakeType.valueOf(value)
     }
 }
-

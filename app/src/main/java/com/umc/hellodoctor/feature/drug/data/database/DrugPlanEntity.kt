@@ -15,6 +15,5 @@ data class DrugPlanEntity(
     val startDateMillis: Long,
     val endDateMillis: Long,
     val alarms: List<AlarmInfo>,
-    val medicines: List<MedicineSearchItem>
+    val medicines: List<MedicineSearchItem>,
 )
-

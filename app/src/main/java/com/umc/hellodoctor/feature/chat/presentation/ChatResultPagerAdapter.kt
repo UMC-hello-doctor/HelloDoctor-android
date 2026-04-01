@@ -6,9 +6,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.umc.hellodoctor.feature.navermap.presentation.NaverMapFragment
 
 class ChatResultPagerAdapter(
-    fragmentActivity: FragmentActivity
+    fragmentActivity: FragmentActivity,
 ) : FragmentStateAdapter(fragmentActivity) {
-
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
@@ -17,8 +16,7 @@ class ChatResultPagerAdapter(
             1 -> {
                 NaverMapFragment()
             }
-            else -> throw IllegalStateException("Invalid position $position")
+            else -> error("Invalid position $position")
         }
     }
 }
-

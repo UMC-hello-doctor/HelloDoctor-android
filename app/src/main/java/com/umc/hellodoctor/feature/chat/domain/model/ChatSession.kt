@@ -7,14 +7,21 @@ import com.umc.hellodoctor.feature.chat.data.ai.SymptomSummaryResponse
  */
 data class ChatSession(
     val id: String = "",
-    val questions: MutableList<String> = mutableListOf(),        // 사용자 질문들
-    val answers: MutableList<String> = mutableListOf(),          // 봇 답변들
-    val recommendedDepartments: MutableList<String> = mutableListOf(), // 추천 진료과
-    var symptomSummaryResponse: SymptomSummaryResponse? = null,   // 증상 요약 (JSON 객체)
-    val createdAt: Long = System.currentTimeMillis()
+    // 사용자 질문들
+    val questions: MutableList<String> = mutableListOf(),
+    // 봇 답변들
+    val answers: MutableList<String> = mutableListOf(),
+    // 추천 진료과
+    val recommendedDepartments: MutableList<String> = mutableListOf(),
+    // 증상 요약 (JSON 객체)
+    var symptomSummaryResponse: SymptomSummaryResponse? = null,
+    val createdAt: Long = System.currentTimeMillis(),
 ) {
     // Q&A 쌍 추가
-    fun addQA(question: String, answer: String) {
+    fun addQA(
+        question: String,
+        answer: String,
+    ) {
         questions.add(question)
         answers.add(answer)
     }

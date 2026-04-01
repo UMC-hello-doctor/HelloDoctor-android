@@ -1,6 +1,5 @@
 package com.umc.hellodoctor.feature.basicFolder.presentation
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BasicFragment : Fragment() {
-
     private var _binding: FragmentBasicBinding? = null
     private val binding get() = _binding!!
 
@@ -24,9 +22,11 @@ class BasicFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 
     override fun onDestroyView() {

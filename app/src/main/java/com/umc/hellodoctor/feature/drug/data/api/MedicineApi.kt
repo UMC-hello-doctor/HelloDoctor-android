@@ -8,7 +8,6 @@ import retrofit2.http.Query
 interface MedicineApi {
     @GET("v1/medicines/search")
     suspend fun searchMedicines(
-        @Query("name") keyword: String
+        @Query("name") keyword: String,
     ): BaseResponse<List<MedicineSearchItem>>
 }
-

@@ -1,8 +1,12 @@
 package com.umc.hellodoctor.feature.chat.domain.model
 
 data class Department(
-    val nameKey: String,              // "dept_gastro"
-    val keywordKeys: List<String>,    // 증상 키워드
-    val pqrstKeys: Map<String, String>, // "P" -> "dept_gastro_p"
-    val redflagKeys: List<String>     // "redflag_internal_chest"
+    // "dept_gastro"
+    val nameKey: String,
+    // 증상 키워드
+    val keywordKeys: List<String>,
+    // "P" -> "dept_gastro_p"
+    val pqrstKeys: Map<String, String>,
+    // "redflag_internal_chest"
+    val redflagKeys: List<String>,
 )

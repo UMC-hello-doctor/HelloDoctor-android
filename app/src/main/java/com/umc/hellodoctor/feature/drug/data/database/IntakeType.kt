@@ -4,6 +4,5 @@ enum class IntakeType {
     PRE_MEAL,
     BETWEEN_MEALS,
     POST_MEAL,
-    OTHER
+    OTHER,
 }
-

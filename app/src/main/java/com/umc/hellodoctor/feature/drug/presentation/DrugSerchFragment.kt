@@ -22,8 +22,8 @@ import com.umc.hellodoctor.feature.drug.presentation.adapter.SelectedMedicineAda
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+@Suppress("TooManyFunctions")
 class DrugSerchFragment : Fragment() {
-
     private var _binding: FragmentAddDrugBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DrugViewModel by viewModels()
@@ -33,13 +33,16 @@ class DrugSerchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentAddDrugBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
@@ -51,9 +54,10 @@ class DrugSerchFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = DrugSearchAdapter { medicine: MedicineSearchItem ->
-            onMedicineSelected(medicine)
-        }
+        adapter =
+            DrugSearchAdapter { medicine: MedicineSearchItem ->
+                onMedicineSelected(medicine)
+            }
         binding.rvDrugResults.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@DrugSerchFragment.adapter
@@ -61,17 +65,29 @@ class DrugSerchFragment : Fragment() {
     }
 
     private fun setupSearchInput() {
-        binding.etDrugSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+        binding.etDrugSearch.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) = Unit
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val query = s?.toString().orEmpty()
-                viewModel.updateInputText(query)
-                viewModel.searchMedicines(query)
-            }
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                    val query = s?.toString().orEmpty()
+                    viewModel.updateInputText(query)
+                    viewModel.searchMedicines(query)
+                }
 
-            override fun afterTextChanged(s: Editable?) = Unit
-        })
+                override fun afterTextChanged(s: Editable?) = Unit
+            },
+        )
 
         viewModel.inputText.observe(viewLifecycleOwner) { text ->
             val current = binding.etDrugSearch.text?.toString().orEmpty()
@@ -119,14 +135,14 @@ class DrugSerchFragment : Fragment() {
             Toast.makeText(
                 requireContext(),
                 "${medicine.medicineName}이(가) 제거되었습니다",
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_SHORT,
             ).show()
         } else {
             selectedMedicines.add(medicine)
             Toast.makeText(
                 requireContext(),
                 "${medicine.medicineName}이(가) 추가되었습니다 (${selectedMedicines.size}개)",
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_SHORT,
             ).show()
         }
 
@@ -152,13 +168,14 @@ class DrugSerchFragment : Fragment() {
         val recyclerView = dialogView.findViewById<RecyclerView>(R.id.rvSelectedMedicines)
         val emptyView = dialogView.findViewById<TextView>(R.id.tvEmptySelectedMedicines)
 
-        val adapter = SelectedMedicineAdapter { medicine ->
-            if (selectedMedicines.remove(medicine)) {
-                updateConfirmButton()
-                adapter.submitList(selectedMedicines.toList())
-                emptyView.visibility = if (selectedMedicines.isEmpty()) View.VISIBLE else View.GONE
+        val adapter =
+            SelectedMedicineAdapter { medicine ->
+                if (selectedMedicines.remove(medicine)) {
+                    updateConfirmButton()
+                    adapter.submitList(selectedMedicines.toList())
+                    emptyView.visibility = if (selectedMedicines.isEmpty()) View.VISIBLE else View.GONE
+                }
             }
-        }
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         adapter.submitList(selectedMedicines.toList())
@@ -170,9 +187,10 @@ class DrugSerchFragment : Fragment() {
     }
 
     private fun navigateToDrugInfoInput() {
-        val action = DrugSerchFragmentDirections.actionDrugSerchFragmentToDrugInfoInputFragment(
-            selectedMedicines.toTypedArray()
-        )
+        val action =
+            DrugSerchFragmentDirections.actionDrugSerchFragmentToDrugInfoInputFragment(
+                selectedMedicines.toTypedArray(),
+            )
         findNavController().navigate(action)
     }
 

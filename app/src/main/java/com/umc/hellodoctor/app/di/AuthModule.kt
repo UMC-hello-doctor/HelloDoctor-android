@@ -12,10 +12,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AuthModule {
-
     @Provides
     @Singleton
-    fun provideAuthRepository(
-        authApi: AuthApi
-    ): AuthRepository = AuthRepositoryImpl(authApi)
+    fun provideAuthRepository(authApi: AuthApi): AuthRepository = AuthRepositoryImpl(authApi)
 }

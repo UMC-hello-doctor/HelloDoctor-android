@@ -11,12 +11,16 @@ import com.umc.hellodoctor.R
 
 class LanguageAdapter(
     context: Context,
-    private val items: List<LanguageItem>
+    private val items: List<LanguageItem>,
 ) : ArrayAdapter<LanguageItem>(context, 0, items) {
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: LayoutInflater.from(context)
-            .inflate(R.layout.item_language_row, parent, false)
+    override fun getView(
+        position: Int,
+        convertView: View?,
+        parent: ViewGroup,
+    ): View {
+        val view =
+            convertView ?: LayoutInflater.from(context)
+                .inflate(R.layout.item_language_row, parent, false)
 
         val item = items[position]
         view.findViewById<ImageView>(R.id.imgFlag).setImageResource(item.iconRes)
@@ -27,7 +31,11 @@ class LanguageAdapter(
     }
 
     // 사실상 없어도 되지만 남겨도 OK
-    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+    override fun getDropDownView(
+        position: Int,
+        convertView: View?,
+        parent: ViewGroup,
+    ): View {
         return getView(position, convertView, parent)
     }
 }

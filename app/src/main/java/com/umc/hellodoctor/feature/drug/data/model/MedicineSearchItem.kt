@@ -9,5 +9,5 @@ data class MedicineSearchItem(
     val medicineName: String,
     val entpName: String,
     val medicineImage: String,
-    val efficacy: String
+    val efficacy: String,
 ) : Parcelable

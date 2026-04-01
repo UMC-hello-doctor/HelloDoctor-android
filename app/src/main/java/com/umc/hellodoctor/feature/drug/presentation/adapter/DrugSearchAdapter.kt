@@ -7,19 +7,18 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.umc.hellodoctor.core.util.StartCropTransformation
 import com.umc.hellodoctor.databinding.ItemDrugResultBinding
 import com.umc.hellodoctor.feature.drug.data.model.MedicineSearchItem
-import com.umc.hellodoctor.core.util.StartCropTransformation
 
 class DrugSearchAdapter(
-    private val onItemClick: (MedicineSearchItem) -> Unit = {}
+    private val onItemClick: (MedicineSearchItem) -> Unit = {},
 ) : ListAdapter<MedicineSearchItem, DrugSearchAdapter.DrugSearchViewHolder>(
-    DrugSearchDiffCallback()
-) {
-
+        DrugSearchDiffCallback(),
+    ) {
     class DrugSearchViewHolder(
         private val binding: ItemDrugResultBinding,
-        private val onItemClick: (MedicineSearchItem) -> Unit
+        private val onItemClick: (MedicineSearchItem) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MedicineSearchItem) {
             binding.tvDrugName.text = item.medicineName
@@ -40,21 +39,33 @@ class DrugSearchAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrugSearchViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): DrugSearchViewHolder {
         val binding = ItemDrugResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DrugSearchViewHolder(binding, onItemClick)
     }
 
-    override fun onBindViewHolder(holder: DrugSearchViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: DrugSearchViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position))
     }
 
     private class DrugSearchDiffCallback : DiffUtil.ItemCallback<MedicineSearchItem>() {
-        override fun areItemsTheSame(oldItem: MedicineSearchItem, newItem: MedicineSearchItem): Boolean {
+        override fun areItemsTheSame(
+            oldItem: MedicineSearchItem,
+            newItem: MedicineSearchItem,
+        ): Boolean {
             return oldItem.medicineId == newItem.medicineId
         }
 
-        override fun areContentsTheSame(oldItem: MedicineSearchItem, newItem: MedicineSearchItem): Boolean {
+        override fun areContentsTheSame(
+            oldItem: MedicineSearchItem,
+            newItem: MedicineSearchItem,
+        ): Boolean {
             return oldItem == newItem
         }
     }

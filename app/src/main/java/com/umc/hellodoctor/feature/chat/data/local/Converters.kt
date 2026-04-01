@@ -46,4 +46,3 @@ class Converters {
         return gson.fromJson(value, SymptomSummaryResponse::class.java)
     }
 }
-

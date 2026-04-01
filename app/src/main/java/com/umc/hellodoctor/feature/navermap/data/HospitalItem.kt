@@ -8,5 +8,5 @@ data class HospitalItem(
     val distance: Double,
     val latitude: Double,
     val longitude: Double,
-    val businessHours: String
+    val businessHours: String,
 )

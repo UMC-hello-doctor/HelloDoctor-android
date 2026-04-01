@@ -3,8 +3,8 @@ package com.umc.hellodoctor.feature.chat.data.local
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.umc.hellodoctor.feature.chat.domain.model.ChatSession
 import com.umc.hellodoctor.feature.chat.data.ai.SymptomSummaryResponse
+import com.umc.hellodoctor.feature.chat.domain.model.ChatSession
 
 /**
  * Room Entity - ChatSession 저장용
@@ -18,7 +18,7 @@ data class ChatSessionEntity(
     val answers: List<String>,
     val recommendedDepartments: List<String>,
     val symptomSummaryResponse: SymptomSummaryResponse?,
-    val createdAt: Long = System.currentTimeMillis()
+    val createdAt: Long = System.currentTimeMillis(),
 ) {
     /**
      * Entity -> Domain Model 변환
@@ -30,7 +30,7 @@ data class ChatSessionEntity(
             answers = answers.toMutableList(),
             recommendedDepartments = recommendedDepartments.toMutableList(),
             symptomSummaryResponse = symptomSummaryResponse,
-            createdAt = createdAt
+            createdAt = createdAt,
         )
     }
 
@@ -45,9 +45,8 @@ data class ChatSessionEntity(
                 answers = session.answers.toList(),
                 recommendedDepartments = session.recommendedDepartments.toList(),
                 symptomSummaryResponse = session.symptomSummaryResponse,
-                createdAt = session.createdAt
+                createdAt = session.createdAt,
             )
         }
     }
 }
-
