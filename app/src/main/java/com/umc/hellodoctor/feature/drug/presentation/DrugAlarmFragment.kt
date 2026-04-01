@@ -54,6 +54,10 @@ class DrugAlarmFragment : Fragment() {
     }
 
     private fun setupButton() {
+        binding.btnScanPrescription.setOnClickListener {
+            findNavController().navigate(R.id.action_drugAlarmFragment_to_prescriptionScanFragment)
+        }
+
         binding.btnAddDrug.setOnClickListener {
             findNavController().navigate(R.id.action_drugAlarmFragment_to_drugSerchFragment)
         }

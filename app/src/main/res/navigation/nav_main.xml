@@ -108,6 +108,9 @@
         <action
             android:id="@+id/action_drugAlarmFragment_to_drugAlarmDetailFragment"
             app:destination="@id/drugAlarmDetailFragment" />
+        <action
+            android:id="@+id/action_drugAlarmFragment_to_prescriptionScanFragment"
+            app:destination="@id/prescriptionScanFragment" />
     </fragment>
 
     <fragment
@@ -138,6 +141,27 @@
             app:destination="@id/drugAlarmFragment" />
         <action
             android:id="@+id/action_drugAlarmDetailFragment_to_drugInfoInputFragment"
+            app:destination="@id/drugInfoInputFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/prescriptionScanFragment"
+        android:name="com.umc.hellodoctor.feature.drug.presentation.PrescriptionScanFragment"
+        android:label="PrescriptionScanFragment">
+        <action
+            android:id="@+id/action_prescriptionScanFragment_to_ocrResultFragment"
+            app:destination="@id/ocrResultFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ocrResultFragment"
+        android:name="com.umc.hellodoctor.feature.drug.presentation.OcrResultFragment"
+        android:label="OcrResultFragment">
+        <argument
+            android:name="ocrMedicineNames"
+            app:argType="string[]" />
+        <action
+            android:id="@+id/action_ocrResultFragment_to_drugInfoInputFragment"
             app:destination="@id/drugInfoInputFragment" />
     </fragment>
 
