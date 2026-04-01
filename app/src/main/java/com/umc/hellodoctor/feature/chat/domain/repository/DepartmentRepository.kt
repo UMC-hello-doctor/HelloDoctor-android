@@ -147,23 +147,24 @@ class DepartmentRepository
                 ""
             }
         }
-    }
 
-    companion object {
-        private const val TAG = "DepartmentRepository"
+        companion object {
+            private const val TAG = "DepartmentRepository"
 
-        private val DEPARTMENT_KEY_MAP = mapOf(
-            "gastro" to listOf("소화기", "위장", "gastro"),
-            "derm" to listOf("피부", "derm"),
-            "ent" to listOf("이비인후", "ent", "ear", "nose", "throat"),
-            "resp" to listOf("호흡기", "순환기", "respiratory", "cardio", "pulmonary"),
-            "oph" to listOf("안과", "oph", "eye"),
-            "urol" to listOf("비뇨", "urol"),
-            "neuro" to listOf("신경과", "neuro"),
-            "gyne" to listOf("산부인과", "부인", "gyne", "obstetric"),
-            "dent" to listOf("치과", "dent"),
-            "ortho" to listOf("정형", "orthop"),
-            "internal" to listOf("내과", "internal"),
-            "pedi" to listOf("소아", "pediatric"),
-        )
+            private val DEPARTMENT_KEY_MAP =
+                mapOf(
+                    "gastro" to listOf("소화기", "위장", "gastro"),
+                    "derm" to listOf("피부", "derm"),
+                    "ent" to listOf("이비인후", "ent", "ear", "nose", "throat"),
+                    "resp" to listOf("호흡기", "순환기", "respiratory", "cardio", "pulmonary"),
+                    "oph" to listOf("안과", "oph", "eye"),
+                    "urol" to listOf("비뇨", "urol"),
+                    "neuro" to listOf("신경과", "neuro"),
+                    "gyne" to listOf("산부인과", "부인", "gyne", "obstetric"),
+                    "dent" to listOf("치과", "dent"),
+                    "ortho" to listOf("정형", "orthop"),
+                    "internal" to listOf("내과", "internal"),
+                    "pedi" to listOf("소아", "pediatric"),
+                )
+        }
     }

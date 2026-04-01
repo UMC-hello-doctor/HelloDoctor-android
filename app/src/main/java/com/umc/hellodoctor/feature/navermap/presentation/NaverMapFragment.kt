@@ -27,7 +27,6 @@ import com.umc.hellodoctor.R
 import com.umc.hellodoctor.core.location.LocationMapViewModel
 import com.umc.hellodoctor.databinding.FragmentNaverMapBinding
 import com.umc.hellodoctor.feature.chat.presentation.ChatViewModel
-import com.umc.hellodoctor.feature.navermap.presentation.HospitalAdapter
 import com.umc.hellodoctor.feature.navermap.data.HospitalItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

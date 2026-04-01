@@ -280,7 +280,6 @@ class UserInfoFragment : Fragment() {
 
             // AuthViewModel에 프로필 생성 완료 알림
             authViewModel.onProfileCreated()
-
         }
 
         // 에러 처리

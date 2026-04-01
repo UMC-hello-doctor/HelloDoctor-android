@@ -186,7 +186,9 @@ class UserInfoViewModel
             }
         }
     }
-}
 
 private fun UserInfoUiState.isRequiredFieldsMissing(): Boolean =
-    name.isBlank() || gender == null || birthDate == null || bloodType == null
+    name.isBlank() ||
+        gender == null ||
+        birthDate == null ||
+        bloodType == null
