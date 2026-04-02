@@ -1,6 +1,7 @@
 package com.umc.hellodoctor.feature.drug.presentation
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,10 @@ class PrescriptionScanViewModel
     constructor(
         private val scanPrescriptionUseCase: ScanPrescriptionUseCase,
     ) : ViewModel() {
+        companion object {
+            private const val TAG = "PrescriptionScanVM"
+        }
+
         private val _uiState = MutableLiveData<PrescriptionScanUiState>(PrescriptionScanUiState.Idle)
         val uiState: LiveData<PrescriptionScanUiState> get() = _uiState
 
@@ -24,9 +29,17 @@ class PrescriptionScanViewModel
             _uiState.value = PrescriptionScanUiState.Loading
             viewModelScope.launch {
                 scanPrescriptionUseCase(uri)
-                    .onSuccess { _uiState.value = PrescriptionScanUiState.Success(it) }
+                    .onSuccess { result ->
+                        Log.d(
+                            TAG,
+                            "사용자에게 결과 표시: " +
+                                "${result.recognizedMedicineNames.size}개 약명",
+                        )
+                        _uiState.value = PrescriptionScanUiState.Success(result)
+                    }
                     .onFailure { exception ->
                         val errorMessage = exception.message ?: "약명 인식 실패"
+                        Log.d(TAG, "사용자에게 에러 표시: $errorMessage")
                         _uiState.value = PrescriptionScanUiState.Error(errorMessage)
                     }
             }

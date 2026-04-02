@@ -46,3 +46,5 @@ google-services.json
 .claude/settings.local.json
 .claude/memory/
 .claude/plans/
+#Claude Code draft files
+docs/draft*

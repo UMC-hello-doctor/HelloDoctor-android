@@ -8,6 +8,7 @@ import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.net.Uri
+import android.util.Log
 import androidx.exifinterface.media.ExifInterface
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
@@ -28,6 +29,7 @@ class OcrRepositoryImpl
         @ApplicationContext @Suppress("UnusedPrivateProperty") private val context: Context,
     ) : OcrRepository {
         companion object {
+            private const val TAG = "OcrRepository"
             private const val ROTATION_90 = 90
             private const val ROTATION_180 = 180
             private const val ROTATION_270 = 270
@@ -42,8 +44,10 @@ class OcrRepositoryImpl
         private val parser = PrescriptionTextParser()
 
         @Suppress("TooGenericExceptionCaught", "LongMethod")
-        override suspend fun recognizeText(imageUri: Uri): Result<OcrResult> =
-            withTimeoutOrNull(OCR_TIMEOUT_MS) {
+        override suspend fun recognizeText(imageUri: Uri): Result<OcrResult> {
+            val startTime = System.currentTimeMillis()
+            Log.d(TAG, "OCR 인식 시작: $imageUri")
+            return withTimeoutOrNull(OCR_TIMEOUT_MS) {
                 suspendCancellableCoroutine { cont ->
                     try {
                         // Extract file path from URI
@@ -81,11 +85,24 @@ class OcrRepositoryImpl
                             .addOnSuccessListener { visionText ->
                                 preprocessedBitmap.recycle()
                                 originalBitmap.recycle()
-                                cont.resume(Result.success(parser.parse(visionText.text)))
+                                val result = parser.parse(visionText.text)
+                                val elapsedTime = System.currentTimeMillis() - startTime
+                                Log.d(
+                                    TAG,
+                                    "OCR 성공 (${elapsedTime}ms): " +
+                                        "약명 ${result.recognizedMedicineNames.size}개 인식",
+                                )
+                                cont.resume(Result.success(result))
                             }
                             .addOnFailureListener { exception ->
                                 preprocessedBitmap.recycle()
                                 originalBitmap.recycle()
+                                val elapsedTime = System.currentTimeMillis() - startTime
+                                Log.e(
+                                    TAG,
+                                    "OCR 실패 (${elapsedTime}ms): ${exception.message}",
+                                    exception,
+                                )
                                 val errorMsg =
                                     exception.message
                                         ?: "약명을 인식할 수 없습니다\n각도를 맞춰 다시 촬영해주세요"
@@ -105,13 +122,31 @@ class OcrRepositoryImpl
                         @Suppress("SwallowedException")
                         e: IllegalArgumentException,
                     ) {
+                        val elapsedTime = System.currentTimeMillis() - startTime
+                        Log.e(
+                            TAG,
+                            "이미지 처리 오류 (${elapsedTime}ms): ${e.message}",
+                            e,
+                        )
                         cont.resume(Result.failure(Exception("이미지 처리 중 오류가 발생했습니다")))
                     } catch (e: IOException) {
+                        val elapsedTime = System.currentTimeMillis() - startTime
+                        Log.e(
+                            TAG,
+                            "파일 읽기 오류 (${elapsedTime}ms): ${e.message}",
+                            e,
+                        )
                         cont.resume(Result.failure(e))
                     } catch (
                         @Suppress("SwallowedException")
                         e: RuntimeException,
                     ) {
+                        val elapsedTime = System.currentTimeMillis() - startTime
+                        Log.e(
+                            TAG,
+                            "예상치 못한 오류 (${elapsedTime}ms): ${e.message}",
+                            e,
+                        )
                         cont.resume(
                             Result.failure(
                                 Exception(
@@ -121,7 +156,12 @@ class OcrRepositoryImpl
                         )
                     }
                 }
-            } ?: Result.failure(Exception("OCR 분석 시간 초과 (5초 이상)"))
+            } ?: run {
+                val elapsedTime = System.currentTimeMillis() - startTime
+                Log.w(TAG, "타임아웃 (${elapsedTime}ms 초과)")
+                Result.failure(Exception("OCR 분석 시간 초과 (5초 이상)"))
+            }
+        }
 
         /**
          * Preprocess bitmap: convert to grayscale and enhance contrast
