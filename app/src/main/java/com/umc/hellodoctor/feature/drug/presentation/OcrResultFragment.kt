@@ -26,6 +26,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -44,7 +45,7 @@ class OcrResultFragment : Fragment() {
     ): View =
         androidx.compose.ui.platform.ComposeView(requireContext()).apply {
             setViewCompositionStrategy(
-                androidx.compose.ui.viewinterop.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed,
+                ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed,
             )
             setContent {
                 ocrResultScreen(
@@ -79,7 +80,9 @@ internal fun ocrResultScreen(
 ) {
     val medicineNames =
         remember {
-            mutableStateListOf(*initialMedicineNames.toTypedArray())
+            mutableStateListOf<String>().apply {
+                addAll(initialMedicineNames)
+            }
         }
 
     Column(
@@ -97,68 +100,82 @@ internal fun ocrResultScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        if (medicineNames.isEmpty()) {
-            Text(
-                text = "약 이름을 찾지 못했습니다.",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(16.dp),
-            )
-        } else {
-            LazyColumn(
-                modifier =
-                    Modifier
-                        .weight(1f)
-                        .fillMaxWidth(),
-            ) {
-                itemsIndexed(medicineNames) { index, name ->
-                    Row(
-                        modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(8.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween,
+        medicineListSection(medicineNames, Modifier.weight(1f))
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        confirmButtonSection(medicineNames, onConfirm, onBack)
+    }
+}
+
+@Composable
+private fun medicineListSection(
+    medicineNames: MutableList<String>,
+    modifier: Modifier = Modifier,
+) {
+    if (medicineNames.isEmpty()) {
+        Text(
+            text = "약 이름을 찾지 못했습니다.",
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(16.dp),
+        )
+    } else {
+        LazyColumn(
+            modifier =
+                modifier
+                    .fillMaxWidth(),
+        ) {
+            itemsIndexed(medicineNames) { index, name ->
+                Row(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Text(
+                        text = name,
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    IconButton(
+                        onClick = { medicineNames.removeAt(index) },
                     ) {
-                        Text(
-                            text = name,
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.weight(1f),
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "삭제",
                         )
-                        IconButton(
-                            onClick = { medicineNames.removeAt(index) },
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Close,
-                                contentDescription = "삭제",
-                            )
-                        }
                     }
                 }
             }
         }
+    }
+}
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Row(
-            modifier =
-                Modifier
-                    .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+@Composable
+private fun confirmButtonSection(
+    medicineNames: List<String>,
+    onConfirm: (List<String>) -> Unit,
+    onBack: () -> Unit,
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Button(
+            onClick = onBack,
+            modifier = Modifier.weight(1f),
         ) {
-            Button(
-                onClick = onBack,
-                modifier = Modifier.weight(1f),
-            ) {
-                Text("돌아가기")
-            }
+            Text("돌아가기")
+        }
 
-            Button(
-                onClick = { onConfirm(medicineNames) },
-                enabled = medicineNames.isNotEmpty(),
-                modifier = Modifier.weight(1f),
-            ) {
-                Text("처방전으로 추가")
-            }
+        Button(
+            onClick = { onConfirm(medicineNames) },
+            enabled = medicineNames.isNotEmpty(),
+            modifier = Modifier.weight(1f),
+        ) {
+            Text("처방전으로 추가")
         }
     }
 }

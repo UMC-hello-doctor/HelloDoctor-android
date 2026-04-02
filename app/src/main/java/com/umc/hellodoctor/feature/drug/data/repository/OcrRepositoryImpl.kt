@@ -9,8 +9,10 @@ import com.umc.hellodoctor.feature.drug.data.ocr.PrescriptionTextParser
 import com.umc.hellodoctor.feature.drug.domain.model.OcrResult
 import com.umc.hellodoctor.feature.drug.domain.repository.OcrRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.suspendCancellableCoroutine
+import java.io.IOException
 import javax.inject.Inject
-import kotlin.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 class OcrRepositoryImpl
     @Inject
@@ -18,10 +20,11 @@ class OcrRepositoryImpl
         @ApplicationContext private val context: Context,
     ) : OcrRepository {
         private val recognizer by lazy {
-            TextRecognition.getClient(KoreanTextRecognizerOptions.DEFAULT_OPTIONS)
+            TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
         }
         private val parser = PrescriptionTextParser()
 
+        @Suppress("TooGenericExceptionCaught")
         override suspend fun recognizeText(imageUri: Uri): Result<OcrResult> =
             suspendCancellableCoroutine { cont ->
                 try {
@@ -33,7 +36,11 @@ class OcrRepositoryImpl
                         .addOnFailureListener { exception ->
                             cont.resume(Result.failure(exception))
                         }
-                } catch (e: Exception) {
+                } catch (e: IllegalArgumentException) {
+                    cont.resume(Result.failure(e))
+                } catch (e: IOException) {
+                    cont.resume(Result.failure(e))
+                } catch (e: RuntimeException) {
                     cont.resume(Result.failure(e))
                 }
             }
