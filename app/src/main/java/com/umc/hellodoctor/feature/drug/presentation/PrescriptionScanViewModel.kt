@@ -28,6 +28,10 @@ class PrescriptionScanViewModel
                     .onFailure { _uiState.value = PrescriptionScanUiState.Error(it.message ?: "인식 실패") }
             }
         }
+
+        fun resetToIdle() {
+            _uiState.value = PrescriptionScanUiState.Idle
+        }
     }
 
 sealed class PrescriptionScanUiState {

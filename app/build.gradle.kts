@@ -304,6 +304,15 @@ dependencies {
     // ML Kit (Korean Text Recognition)
     implementation("com.google.mlkit:text-recognition-korean:16.0.1")
 
+    // CameraX
+    implementation("androidx.camera:camera-core:1.4.2")
+    implementation("androidx.camera:camera-camera2:1.4.2")
+    implementation("androidx.camera:camera-lifecycle:1.4.2")
+    implementation("androidx.camera:camera-view:1.4.2")
+
+    // ExifInterface for EXIF rotation handling
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
+
     // Compose BOM
     val composeBom = platform("androidx.compose:compose-bom:2024.12.01")
     implementation(composeBom)
