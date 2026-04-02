@@ -17,6 +17,7 @@ import com.umc.hellodoctor.feature.drug.domain.model.OcrResult
 import com.umc.hellodoctor.feature.drug.domain.repository.OcrRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withTimeoutOrNull
 import java.io.IOException
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -32,6 +33,7 @@ class OcrRepositoryImpl
             private const val ROTATION_270 = 270
             private const val CONTRAST_SCALE = 1.5f
             private const val CONTRAST_TRANSLATE = -50f
+            private const val OCR_TIMEOUT_MS = 5000L
         }
 
         private val recognizer by lazy {
@@ -41,56 +43,58 @@ class OcrRepositoryImpl
 
         @Suppress("TooGenericExceptionCaught")
         override suspend fun recognizeText(imageUri: Uri): Result<OcrResult> =
-            suspendCancellableCoroutine { cont ->
-                try {
-                    // Extract file path from URI
-                    val filePath = imageUri.path ?: throw IOException("Invalid URI: $imageUri")
+            withTimeoutOrNull(OCR_TIMEOUT_MS) {
+                suspendCancellableCoroutine { cont ->
+                    try {
+                        // Extract file path from URI
+                        val filePath = imageUri.path ?: throw IOException("Invalid URI: $imageUri")
 
-                    // Read EXIF rotation information
-                    val exif = ExifInterface(filePath)
-                    val rotationDegrees =
-                        when (
-                            exif.getAttributeInt(
-                                ExifInterface.TAG_ORIENTATION,
-                                ExifInterface.ORIENTATION_NORMAL,
-                            )
-                        ) {
-                            ExifInterface.ORIENTATION_ROTATE_90 -> ROTATION_90
-                            ExifInterface.ORIENTATION_ROTATE_180 -> ROTATION_180
-                            ExifInterface.ORIENTATION_ROTATE_270 -> ROTATION_270
-                            else -> 0
-                        }
+                        // Read EXIF rotation information
+                        val exif = ExifInterface(filePath)
+                        val rotationDegrees =
+                            when (
+                                exif.getAttributeInt(
+                                    ExifInterface.TAG_ORIENTATION,
+                                    ExifInterface.ORIENTATION_NORMAL,
+                                )
+                            ) {
+                                ExifInterface.ORIENTATION_ROTATE_90 -> ROTATION_90
+                                ExifInterface.ORIENTATION_ROTATE_180 -> ROTATION_180
+                                ExifInterface.ORIENTATION_ROTATE_270 -> ROTATION_270
+                                else -> 0
+                            }
 
-                    // Decode bitmap from file
-                    val originalBitmap =
-                        BitmapFactory.decodeFile(filePath)
-                            ?: throw IOException("Failed to decode image at $filePath")
+                        // Decode bitmap from file
+                        val originalBitmap =
+                            BitmapFactory.decodeFile(filePath)
+                                ?: throw IOException("Failed to decode image at $filePath")
 
-                    // Preprocess bitmap (grayscale + contrast enhancement)
-                    val preprocessedBitmap = preprocessBitmap(originalBitmap)
+                        // Preprocess bitmap (grayscale + contrast enhancement)
+                        val preprocessedBitmap = preprocessBitmap(originalBitmap)
 
-                    // Create InputImage with rotation information
-                    val image = InputImage.fromBitmap(preprocessedBitmap, rotationDegrees)
+                        // Create InputImage with rotation information
+                        val image = InputImage.fromBitmap(preprocessedBitmap, rotationDegrees)
 
-                    recognizer.process(image)
-                        .addOnSuccessListener { visionText ->
-                            preprocessedBitmap.recycle()
-                            originalBitmap.recycle()
-                            cont.resume(Result.success(parser.parse(visionText.text)))
-                        }
-                        .addOnFailureListener { exception ->
-                            preprocessedBitmap.recycle()
-                            originalBitmap.recycle()
-                            cont.resume(Result.failure(exception))
-                        }
-                } catch (e: IllegalArgumentException) {
-                    cont.resume(Result.failure(e))
-                } catch (e: IOException) {
-                    cont.resume(Result.failure(e))
-                } catch (e: RuntimeException) {
-                    cont.resume(Result.failure(e))
+                        recognizer.process(image)
+                            .addOnSuccessListener { visionText ->
+                                preprocessedBitmap.recycle()
+                                originalBitmap.recycle()
+                                cont.resume(Result.success(parser.parse(visionText.text)))
+                            }
+                            .addOnFailureListener { exception ->
+                                preprocessedBitmap.recycle()
+                                originalBitmap.recycle()
+                                cont.resume(Result.failure(exception))
+                            }
+                    } catch (e: IllegalArgumentException) {
+                        cont.resume(Result.failure(e))
+                    } catch (e: IOException) {
+                        cont.resume(Result.failure(e))
+                    } catch (e: RuntimeException) {
+                        cont.resume(Result.failure(e))
+                    }
                 }
-            }
+            } ?: Result.failure(Exception("OCR 분석 시간 초과 (5초 이상)"))
 
         /**
          * Preprocess bitmap: convert to grayscale and enhance contrast
