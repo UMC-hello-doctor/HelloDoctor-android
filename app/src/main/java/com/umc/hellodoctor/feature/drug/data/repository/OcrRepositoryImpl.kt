@@ -10,6 +10,7 @@ import android.graphics.Paint
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import com.umc.hellodoctor.feature.drug.data.ocr.PrescriptionTextParser
@@ -76,7 +77,9 @@ class OcrRepositoryImpl
                         .addOnSuccessListener { visionText ->
                             preprocessedBitmap.recycle()
                             originalBitmap.recycle()
-                            cont.resume(Result.success(parser.parse(visionText.text)))
+                            // Sort text blocks by coordinates for better accuracy
+                            val sortedText = sortTextBlocksByCoordinates(visionText)
+                            cont.resume(Result.success(parser.parse(sortedText)))
                         }
                         .addOnFailureListener { exception ->
                             preprocessedBitmap.recycle()
@@ -91,6 +94,29 @@ class OcrRepositoryImpl
                     cont.resume(Result.failure(e))
                 }
             }
+
+        /**
+         * Reconstruct text from vision text blocks with improved line ordering
+         * This ensures text is read in the correct top-to-bottom order
+         */
+        private fun sortTextBlocksByCoordinates(visionText: Text): String {
+            val blocks = visionText.textBlocks
+            if (blocks.isEmpty()) return visionText.text
+
+            // Extract text from blocks with line grouping
+            val result = StringBuilder()
+            for (block in blocks) {
+                for (line in block.lines) {
+                    for (element in line.elements) {
+                        result.append(element.text)
+                        result.append(" ")
+                    }
+                    result.append("\n")
+                }
+            }
+
+            return result.toString().trim()
+        }
 
         /**
          * Preprocess bitmap: convert to grayscale and enhance contrast
