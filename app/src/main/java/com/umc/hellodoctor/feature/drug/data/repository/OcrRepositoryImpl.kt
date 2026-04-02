@@ -10,6 +10,7 @@ import android.graphics.Paint
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import com.umc.hellodoctor.feature.drug.data.ocr.PrescriptionTextParser
@@ -76,7 +77,9 @@ class OcrRepositoryImpl
                         .addOnSuccessListener { visionText ->
                             preprocessedBitmap.recycle()
                             originalBitmap.recycle()
-                            cont.resume(Result.success(parser.parse(visionText.text)))
+                            // Sort text blocks by coordinates for better accuracy
+                            val sortedText = sortTextBlocksByCoordinates(visionText)
+                            cont.resume(Result.success(parser.parse(sortedText)))
                         }
                         .addOnFailureListener { exception ->
                             preprocessedBitmap.recycle()
@@ -91,6 +94,62 @@ class OcrRepositoryImpl
                     cont.resume(Result.failure(e))
                 }
             }
+
+        /**
+         * Sort text elements by Y coordinate (line-based) then X coordinate (within-line)
+         * This ensures text is read in proper top-to-bottom, left-to-right order
+         */
+        @Suppress("MagicNumber")
+        private fun sortTextBlocksByCoordinates(visionText: Text): String {
+            val allLines = mutableListOf<Text.Line>()
+
+            // Extract all lines from all blocks
+            for (block in visionText.textBlocks) {
+                allLines.addAll(block.lines)
+            }
+
+            if (allLines.isEmpty()) return visionText.text
+
+            // Group lines by Y coordinate (within tolerance)
+            val lineGroups = mutableListOf<MutableList<Text.Line>>()
+            val yTolerance = 10
+
+            for (line in allLines) {
+                val boundingBox = line.boundingBox
+                if (boundingBox == null) {
+                    continue
+                }
+
+                val lineTop = boundingBox.top.toInt()
+                val existingGroup =
+                    lineGroups.find { group ->
+                        val groupTop = group[0].boundingBox?.top?.toInt() ?: 0
+                        kotlin.math.abs(lineTop - groupTop) <= yTolerance
+                    }
+
+                if (existingGroup != null) {
+                    existingGroup.add(line)
+                } else {
+                    lineGroups.add(mutableListOf(line))
+                }
+            }
+
+            // Sort groups by Y coordinate and lines within groups by X coordinate
+            val sortedGroups =
+                lineGroups
+                    .sortedBy { group ->
+                        (group[0].boundingBox?.top ?: 0.0f).toInt()
+                    }
+                    .map { group ->
+                        group
+                            .sortedBy { (it.boundingBox?.left ?: 0.0f).toInt() }
+                            .joinToString(" ") { line ->
+                                line.text
+                            }
+                    }
+
+            return sortedGroups.joinToString("\n")
+        }
 
         /**
          * Preprocess bitmap: convert to grayscale and enhance contrast
