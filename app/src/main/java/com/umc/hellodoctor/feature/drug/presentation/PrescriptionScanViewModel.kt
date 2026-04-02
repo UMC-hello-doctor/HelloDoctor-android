@@ -9,7 +9,6 @@ import com.umc.hellodoctor.feature.drug.domain.model.OcrResult
 import com.umc.hellodoctor.feature.drug.domain.usecase.ScanPrescriptionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,17 +26,7 @@ class PrescriptionScanViewModel
                 scanPrescriptionUseCase(uri)
                     .onSuccess { _uiState.value = PrescriptionScanUiState.Success(it) }
                     .onFailure { exception ->
-                        val errorMessage =
-                            when {
-                                exception.message?.contains("시간 초과") == true ->
-                                    "분석 시간 초과\n다시 촬영해주세요"
-                                exception is IOException ->
-                                    "이미지를 읽을 수 없습니다"
-                                exception.message?.contains("Invalid URI") == true ->
-                                    "유효하지 않은 이미지입니다"
-                                else ->
-                                    exception.message ?: "약명 인식 실패"
-                            }
+                        val errorMessage = exception.message ?: "약명 인식 실패"
                         _uiState.value = PrescriptionScanUiState.Error(errorMessage)
                     }
             }

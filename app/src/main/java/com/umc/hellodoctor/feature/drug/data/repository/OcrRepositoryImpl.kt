@@ -41,13 +41,15 @@ class OcrRepositoryImpl
         }
         private val parser = PrescriptionTextParser()
 
-        @Suppress("TooGenericExceptionCaught")
+        @Suppress("TooGenericExceptionCaught", "LongMethod")
         override suspend fun recognizeText(imageUri: Uri): Result<OcrResult> =
             withTimeoutOrNull(OCR_TIMEOUT_MS) {
                 suspendCancellableCoroutine { cont ->
                     try {
                         // Extract file path from URI
-                        val filePath = imageUri.path ?: throw IOException("Invalid URI: $imageUri")
+                        val filePath =
+                            imageUri.path
+                                ?: throw IOException("유효하지 않은 이미지 파일입니다")
 
                         // Read EXIF rotation information
                         val exif = ExifInterface(filePath)
@@ -67,7 +69,7 @@ class OcrRepositoryImpl
                         // Decode bitmap from file
                         val originalBitmap =
                             BitmapFactory.decodeFile(filePath)
-                                ?: throw IOException("Failed to decode image at $filePath")
+                                ?: throw IOException("이미지 파일을 읽을 수 없습니다\n형식 또는 용량 확인 필요")
 
                         // Preprocess bitmap (grayscale + contrast enhancement)
                         val preprocessedBitmap = preprocessBitmap(originalBitmap)
@@ -84,14 +86,39 @@ class OcrRepositoryImpl
                             .addOnFailureListener { exception ->
                                 preprocessedBitmap.recycle()
                                 originalBitmap.recycle()
-                                cont.resume(Result.failure(exception))
+                                val errorMsg =
+                                    exception.message
+                                        ?: "약명을 인식할 수 없습니다\n각도를 맞춰 다시 촬영해주세요"
+                                cont.resume(
+                                    Result.failure(
+                                        Exception(
+                                            if (errorMsg.contains("시간 초과")) {
+                                                "분석 시간 초과\n다시 촬영해주세요"
+                                            } else {
+                                                errorMsg
+                                            },
+                                        ),
+                                    ),
+                                )
                             }
-                    } catch (e: IllegalArgumentException) {
-                        cont.resume(Result.failure(e))
+                    } catch (
+                        @Suppress("SwallowedException")
+                        e: IllegalArgumentException,
+                    ) {
+                        cont.resume(Result.failure(Exception("이미지 처리 중 오류가 발생했습니다")))
                     } catch (e: IOException) {
                         cont.resume(Result.failure(e))
-                    } catch (e: RuntimeException) {
-                        cont.resume(Result.failure(e))
+                    } catch (
+                        @Suppress("SwallowedException")
+                        e: RuntimeException,
+                    ) {
+                        cont.resume(
+                            Result.failure(
+                                Exception(
+                                    "예상치 못한 오류가 발생했습니다\n다시 촬영해주세요",
+                                ),
+                            ),
+                        )
                     }
                 }
             } ?: Result.failure(Exception("OCR 분석 시간 초과 (5초 이상)"))
