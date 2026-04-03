@@ -1,4 +1,4 @@
-package com.umc.hellodoctor.core.design_system.token
+package com.umc.hellodoctor.core.designsystem.token
 
 import androidx.compose.ui.graphics.Color
 
@@ -101,30 +101,30 @@ object HelloDoctorColors {
     val Scrim = Color(0xFF000000)
 
     // ==================== GRAY SCALE (8-step + 확장) ====================
-    val Gray50 = Color(0xFFFAFAFA)     // 극연한 회색
-    val Gray100 = Color(0xFFF5F5F5)    // 매우 연한 회색
-    val Gray200 = Color(0xFFEEEEEE)    // 연한 회색
-    val Gray300 = Color(0xFFE0E0E0)    // 밝은 회색 (배경용)
-    val Gray400 = Color(0xFFBDBDBD)    // 중간 회색 (분리선)
-    val Gray500 = Color(0xFF9E9E9E)    // 중간 회색
-    val Gray600 = Color(0xFF757575)    // Issue #61: #666666 → 스케일 정정
-    val Gray700 = Color(0xFF616161)    // Issue #61: #777777 → 스케일 정정
-    val Gray800 = Color(0xFF424242)    // 어두운 회색
-    val Gray900 = Color(0xFF212121)    // 매우 어두운 회색
+    val Gray50 = Color(0xFFFAFAFA) // 극연한 회색
+    val Gray100 = Color(0xFFF5F5F5) // 매우 연한 회색
+    val Gray200 = Color(0xFFEEEEEE) // 연한 회색
+    val Gray300 = Color(0xFFE0E0E0) // 밝은 회색 (배경용)
+    val Gray400 = Color(0xFFBDBDBD) // 중간 회색 (분리선)
+    val Gray500 = Color(0xFF9E9E9E) // 중간 회색
+    val Gray600 = Color(0xFF757575) // Issue #61: #666666 → 스케일 정정
+    val Gray700 = Color(0xFF616161) // Issue #61: #777777 → 스케일 정정
+    val Gray800 = Color(0xFF424242) // 어두운 회색
+    val Gray900 = Color(0xFF212121) // 매우 어두운 회색
 
     // ==================== BUTTON STATES ====================
-    val ButtonPrimaryBg = Color(0xFF1852FF)              // Primary 버튼 배경
-    val ButtonPrimaryText = Color(0xFFFFFFFF)            // Primary 버튼 텍스트
-    val ButtonPrimaryBgDisabled = Color(0xFFCCCCCC)      // Primary 버튼 비활성
+    val ButtonPrimaryBg = Color(0xFF1852FF) // Primary 버튼 배경
+    val ButtonPrimaryText = Color(0xFFFFFFFF) // Primary 버튼 텍스트
+    val ButtonPrimaryBgDisabled = Color(0xFFCCCCCC) // Primary 버튼 비활성
     val ButtonPrimaryTextDisabled = Color(0xFFFFFFFF)
 
-    val ButtonSecondaryBg = Color(0xFFFFFFFF)            // Secondary 버튼 배경
-    val ButtonSecondaryText = Color(0xFF555555)          // Issue #61: #696969 → 가독성 강화
+    val ButtonSecondaryBg = Color(0xFFFFFFFF) // Secondary 버튼 배경
+    val ButtonSecondaryText = Color(0xFF555555) // Issue #61: #696969 → 가독성 강화
     val ButtonSecondaryBgDisabled = Color(0xFFF0F0F0)
     val ButtonSecondaryTextDisabled = Color(0xFFB0B0B0)
 
     // ==================== SEMANTIC COLORS ====================
-    val Success = Color(0xFF10B981)      // 성공/확인 (초록)
-    val Warning = Color(0xFFF59E0B)      // 경고 (주황)
-    val Info = Color(0xFF0EA5E9)         // 정보 (청록)
+    val Success = Color(0xFF10B981) // 성공/확인 (초록)
+    val Warning = Color(0xFFF59E0B) // 경고 (주황)
+    val Info = Color(0xFF0EA5E9) // 정보 (청록)
 }

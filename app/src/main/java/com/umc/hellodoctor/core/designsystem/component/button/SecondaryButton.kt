@@ -1,20 +1,19 @@
-package com.umc.hellodoctor.core.design_system.component.button
+package com.umc.hellodoctor.core.designsystem.component.button
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.umc.hellodoctor.core.design_system.theme.HelloDoctorTheme
-import com.umc.hellodoctor.core.design_system.token.HelloDoctorColors
-import com.umc.hellodoctor.core.design_system.token.HelloDoctorDimensions
+import com.umc.hellodoctor.core.designsystem.theme.HelloDoctorTheme
+import com.umc.hellodoctor.core.designsystem.token.HelloDoctorColors
+import com.umc.hellodoctor.core.designsystem.token.HelloDoctorDimensions
 
 /**
  * HelloDoctor Secondary Button
@@ -39,31 +38,33 @@ import com.umc.hellodoctor.core.design_system.token.HelloDoctorDimensions
 fun SecondaryButton(
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
-        .fillMaxWidth()
-        .height(HelloDoctorDimensions.ButtonHeight)
-        .padding(
-            horizontal = HelloDoctorDimensions.Spacing20,
-            vertical = HelloDoctorDimensions.Spacing8
-        ),
-    enabled: Boolean = true
+    modifier: Modifier =
+        Modifier
+            .fillMaxWidth()
+            .height(HelloDoctorDimensions.ButtonHeight)
+            .padding(
+                horizontal = HelloDoctorDimensions.Spacing20,
+                vertical = HelloDoctorDimensions.Spacing8,
+            ),
+    enabled: Boolean = true,
 ) {
     OutlinedButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.outlinedButtonColors(
-            containerColor = HelloDoctorColors.ButtonSecondaryBg,
-            contentColor = HelloDoctorColors.ButtonSecondaryText,
-            disabledContainerColor = HelloDoctorColors.ButtonSecondaryBgDisabled,
-            disabledContentColor = HelloDoctorColors.ButtonSecondaryTextDisabled
-        ),
-        shape = RoundedCornerShape(HelloDoctorDimensions.CornerLarge)
+        colors =
+            ButtonDefaults.outlinedButtonColors(
+                containerColor = HelloDoctorColors.ButtonSecondaryBg,
+                contentColor = HelloDoctorColors.ButtonSecondaryText,
+                disabledContainerColor = HelloDoctorColors.ButtonSecondaryBgDisabled,
+                disabledContentColor = HelloDoctorColors.ButtonSecondaryTextDisabled,
+            ),
+        shape = RoundedCornerShape(HelloDoctorDimensions.CornerLarge),
     ) {
         Text(
             text = text,
             fontWeight = FontWeight.SemiBold,
-            fontSize = HelloDoctorDimensions.TextSizeBody
+            fontSize = HelloDoctorDimensions.TextSizeBody,
         )
     }
 }
@@ -74,7 +75,7 @@ private fun SecondaryButtonPreview() {
     HelloDoctorTheme {
         SecondaryButton(
             text = "취소",
-            onClick = { }
+            onClick = { },
         )
     }
 }
@@ -86,7 +87,7 @@ private fun SecondaryButtonDisabledPreview() {
         SecondaryButton(
             text = "취소",
             onClick = { },
-            enabled = false
+            enabled = false,
         )
     }
 }

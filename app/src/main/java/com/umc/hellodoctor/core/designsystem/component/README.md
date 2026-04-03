@@ -242,7 +242,7 @@ Android Studio에서 `@Preview` 함수를 마우스 우측 클릭하면 "Show Co
 ## 🔗 관련 문서
 
 - [Design System 구조 계획](../../docs/DESIGN_SYSTEM_COMPOSE_STRUCTURE.md)
-- [Token 정의](../token/Color.kt)
+- [Token 정의](../token/HelloDoctorColors.kt)
 - [Theme 정의](../theme/HelloDoctorTheme.kt)
 
 ## 📋 확장 계획

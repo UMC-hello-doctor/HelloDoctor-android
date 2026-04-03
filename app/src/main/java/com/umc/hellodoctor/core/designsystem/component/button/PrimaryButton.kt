@@ -1,4 +1,4 @@
-package com.umc.hellodoctor.core.design_system.component.button
+package com.umc.hellodoctor.core.designsystem.component.button
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -11,9 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.umc.hellodoctor.core.design_system.theme.HelloDoctorTheme
-import com.umc.hellodoctor.core.design_system.token.HelloDoctorColors
-import com.umc.hellodoctor.core.design_system.token.HelloDoctorDimensions
+import com.umc.hellodoctor.core.designsystem.theme.HelloDoctorTheme
+import com.umc.hellodoctor.core.designsystem.token.HelloDoctorColors
+import com.umc.hellodoctor.core.designsystem.token.HelloDoctorDimensions
 
 /**
  * HelloDoctor Primary Button
@@ -39,31 +39,33 @@ import com.umc.hellodoctor.core.design_system.token.HelloDoctorDimensions
 fun PrimaryButton(
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
-        .fillMaxWidth()
-        .height(HelloDoctorDimensions.ButtonHeight)
-        .padding(
-            horizontal = HelloDoctorDimensions.Spacing20,
-            vertical = HelloDoctorDimensions.Spacing8
-        ),
-    enabled: Boolean = true
+    modifier: Modifier =
+        Modifier
+            .fillMaxWidth()
+            .height(HelloDoctorDimensions.ButtonHeight)
+            .padding(
+                horizontal = HelloDoctorDimensions.Spacing20,
+                vertical = HelloDoctorDimensions.Spacing8,
+            ),
+    enabled: Boolean = true,
 ) {
     Button(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = HelloDoctorColors.Primary,
-            contentColor = HelloDoctorColors.OnPrimary,
-            disabledContainerColor = HelloDoctorColors.ButtonPrimaryBgDisabled,
-            disabledContentColor = HelloDoctorColors.ButtonPrimaryTextDisabled
-        ),
-        shape = RoundedCornerShape(HelloDoctorDimensions.CornerLarge)
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor = HelloDoctorColors.Primary,
+                contentColor = HelloDoctorColors.OnPrimary,
+                disabledContainerColor = HelloDoctorColors.ButtonPrimaryBgDisabled,
+                disabledContentColor = HelloDoctorColors.ButtonPrimaryTextDisabled,
+            ),
+        shape = RoundedCornerShape(HelloDoctorDimensions.CornerLarge),
     ) {
         Text(
             text = text,
             fontWeight = FontWeight.SemiBold,
-            fontSize = HelloDoctorDimensions.TextSizeBody
+            fontSize = HelloDoctorDimensions.TextSizeBody,
         )
     }
 }
@@ -74,7 +76,7 @@ private fun PrimaryButtonPreview() {
     HelloDoctorTheme {
         PrimaryButton(
             text = "로그인",
-            onClick = { }
+            onClick = { },
         )
     }
 }
@@ -86,7 +88,7 @@ private fun PrimaryButtonDisabledPreview() {
         PrimaryButton(
             text = "로그인",
             onClick = { },
-            enabled = false
+            enabled = false,
         )
     }
 }
