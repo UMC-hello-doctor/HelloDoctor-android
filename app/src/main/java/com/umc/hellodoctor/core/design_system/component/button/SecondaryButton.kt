@@ -1,11 +1,10 @@
 package com.umc.hellodoctor.core.design_system.component.button
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -49,16 +48,11 @@ fun SecondaryButton(
         ),
     enabled: Boolean = true
 ) {
-    Button(
+    OutlinedButton(
         onClick = onClick,
-        modifier = modifier.border(
-            width = 1.dp,
-            color = if (enabled) HelloDoctorColors.Outline
-                    else HelloDoctorColors.Gray300,
-            shape = RoundedCornerShape(HelloDoctorDimensions.CornerLarge)
-        ),
+        modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
+        colors = ButtonDefaults.outlinedButtonColors(
             containerColor = HelloDoctorColors.ButtonSecondaryBg,
             contentColor = HelloDoctorColors.ButtonSecondaryText,
             disabledContainerColor = HelloDoctorColors.ButtonSecondaryBgDisabled,
