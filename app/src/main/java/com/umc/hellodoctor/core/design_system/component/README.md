@@ -39,7 +39,7 @@ PrimaryButton(
 - 모서리: 15dp (CornerLarge)
 - 상태: enabled/disabled
 
-#### SecondaryButton (보조 액션)
+#### SecondaryButton (보조 액션 - OutlinedButton)
 
 ```kotlin
 import com.umc.hellodoctor.core.design_system.component.button.SecondaryButton
@@ -51,11 +51,12 @@ SecondaryButton(
 ```
 
 **특징:**
-- 흰색 배경 + 1dp 테두리
+- Material Design 3 OutlinedButton 스타일
+- 투명 배경 + 테두리 (Outline color)
 - 높이: 50dp (ButtonHeight)
 - 좌우 여백: 20dp (Spacing20)
 - 모서리: 15dp (CornerLarge)
-- 상태: enabled/disabled
+- 상태: enabled/disabled (비활성화 시 테두리 색상 변경)
 
 ### ComposeView에서 사용
 
@@ -261,4 +262,4 @@ Android Studio에서 `@Preview` 함수를 마우스 우측 클릭하면 "Show Co
 
 ---
 
-**마지막 업데이트**: 2026-04-03
+**마지막 업데이트**: 2026-04-03 (SecondaryButton → OutlinedButton 변경)
