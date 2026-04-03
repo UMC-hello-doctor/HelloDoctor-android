@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============= Base Theme ============= -->
+    <style name="Theme.HelloDoctor" parent="Theme.MaterialComponents.Light">
+        <!-- Color system -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="colorBackground">@color/color_background</item>
+        <item name="colorSurface">@color/white</item>
+
+        <!-- Typography -->
+        <item name="displayTextAppearance">@style/TextAppearance.Display</item>
+        <item name="headlineTextAppearance">@style/TextAppearance.Headline</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Title</item>
+        <item name="bodyTextAppearance">@style/TextAppearance.Body</item>
+        <item name="labelTextAppearance">@style/TextAppearance.Label</item>
+        <item name="captionTextAppearance">@style/TextAppearance.Caption</item>
+    </style>
+
+    <!-- ============= Typography Styles ============= -->
+
+    <!-- Display: 34sp, Medium, line-height 1.5x -->
+    <style name="TextAppearance.Display" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">@dimen/text_size_display</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Headline: 28sp, Medium, line-height 1.5x -->
+    <style name="TextAppearance.Headline" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textSize">@dimen/text_size_headline</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <!-- Title: 20sp, Medium, line-height 1.5x -->
+    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <!-- Body: 15sp, Regular, line-height 1.5x -->
+    <style name="TextAppearance.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <!-- Label: 13sp, Medium, line-height 1.5x -->
+    <style name="TextAppearance.Label" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/text_size_label</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <!-- Caption: 12sp, Regular, line-height 1.5x -->
+    <style name="TextAppearance.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">@dimen/text_size_caption</item>
+        <item name="android:textColor">@color/color_text_sub</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <!-- ============= Component Styles ============= -->
+
+    <!-- Primary Button -->
+    <style name="Widget.Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAppearance">@style/TextAppearance.Label</item>
+        <item name="android:minHeight">@dimen/button_height_medium</item>
+        <item name="android:paddingLeft">@dimen/button_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/button_padding_horizontal</item>
+        <item name="android:paddingTop">@dimen/button_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
+        <item name="cornerRadius">@dimen/corner_radius_small</item>
+        <item name="backgroundTint">@color/color_button_primary_bg</item>
+    </style>
+
+    <!-- Secondary Button -->
+    <style name="Widget.Button.Secondary" parent="Widget.MaterialComponents.OutlinedButton">
+        <item name="android:textAppearance">@style/TextAppearance.Label</item>
+        <item name="android:minHeight">@dimen/button_height_medium</item>
+        <item name="android:paddingLeft">@dimen/button_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/button_padding_horizontal</item>
+        <item name="android:paddingTop">@dimen/button_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
+        <item name="cornerRadius">@dimen/corner_radius_small</item>
+        <item name="strokeColor">@color/gray_300</item>
+    </style>
+
+    <!-- Text Input -->
+    <style name="Widget.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:minHeight">@dimen/text_input_height</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/corner_radius_small</item>
+        <item name="boxCornerRadiusTopStart">@dimen/corner_radius_small</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/corner_radius_small</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/corner_radius_small</item>
+    </style>
+
+    <!-- Card -->
+    <style name="Widget.Card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">@dimen/corner_radius_medium</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+</resources>
