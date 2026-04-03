@@ -56,7 +56,7 @@
     <style name="Widget.HelloDoctor.Health" parent="Widget.HelloDoctor" />
 
     <!-- Common text appearance base -->
-    <style name="TextAppearance.HelloDoctor" parent="TextAppearance.MaterialComponents.BodyMedium">
+    <style name="TextAppearance.HelloDoctor" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/color_text_main</item>
     </style>
 

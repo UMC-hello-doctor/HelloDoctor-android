@@ -21,6 +21,7 @@
     <!-- color_text_sub: 교체 (#696969 → #555555) -->
     <!-- 이유: 14px 미만 소폰트에서 가독성 위험. 대비율 강화 (7.4:1) -->
     <color name="color_text_sub">#555555</color>         <!-- 서브/보조 설명 텍스트 -->
+    <color name="color_text_hint">#A0A0A0</color>        <!-- Placeholder, 부가 설명 텍스트 -->
 
     <!-- Background / Surface -->
     <color name="color_background">#F4F4F4</color>       <!-- 레이어 0: 화면 기본 배경 -->
@@ -43,12 +44,14 @@
     <color name="gray_50">#FAFAFA</color>
     <color name="gray_100">#F5F5F5</color>
     <color name="gray_200">#EEEEEE</color>
+    <color name="gray_300">#E0E0E0</color>     <!-- Added: separator, disabled state -->
     <color name="gray_400">#BDBDBD</color>
     <color name="gray_500">#9E9E9E</color>
     <color name="gray_800">#424242</color>
 
-    <!-- DEPRECATED: Alias -->
+    <!-- DEPRECATED: Alias (호환성 유지) -->
     <!-- "primary": color_primary와 완전히 동일한 중복 alias → color_primary 사용 권장 -->
+    <color name="primary">@color/color_primary</color>
 
     <!-- Legacy colors for button states -->
     <color name="color_button_gray">@color/gray_400</color>
@@ -64,7 +67,9 @@
     <color name="gray_600">#757575</color>   <!-- 기존 #666666 → #757575 (더 밝음) -->
     <color name="gray_700">#616161</color>   <!-- 기존 #777777 → #616161 (더 어두움) -->
 
-    <!-- DEPRECATED: 삭제 또는 역할 정의 필요 -->
+    <!-- DEPRECATED: 삭제 또는 역할 정의 필요 (호환성 유지) -->
     <!-- blue_primary: color_primary와 역할 중복 → 사용 금지 -->
+    <color name="blue_primary">#2563EB</color>
     <!-- orange_accent: 역할 미정의 → CTA 강조/배지/이벤트 등 구체적 용도 정의 후 사용 -->
+    <!-- orange_accent 색상은 주석 처리 (사용처 확인 후 정의 필요) -->
 </resources>
