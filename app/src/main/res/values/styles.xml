@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============= Typography Styles ============= -->
+
+    <!-- Display: 34sp, Medium, line-height 1.5x -->
+    <style name="TextAppearance.Display" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">@dimen/text_size_display</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Headline: 28sp, Medium, line-height 1.5x -->
+    <style name="TextAppearance.Headline" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textSize">@dimen/text_size_headline</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <!-- Title: 20sp, Medium, line-height 1.5x -->
+    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <!-- Body: 15sp, Regular, line-height 1.5x -->
+    <style name="TextAppearance.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <!-- Label: 13sp, Medium, line-height 1.5x -->
+    <style name="TextAppearance.Label" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/text_size_label</item>
+        <item name="android:textColor">@color/color_text_main</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <!-- Caption: 12sp, Regular, line-height 1.5x -->
+    <style name="TextAppearance.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">@dimen/text_size_caption</item>
+        <item name="android:textColor">@color/color_text_sub</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+
+</resources>
