@@ -1,8 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_size_caption">12sp</dimen> <!-- 작은 보조 텍스트 -->
-    <dimen name="text_size_body">15sp</dimen>    <!-- 기본 본문/버튼 텍스트 -->
-    <dimen name="text_size_title">20sp</dimen>   <!-- 화면 타이틀 -->
 
+    <!-- ============= Typography ============= -->
+    <!-- Font Sizes (sp) -->
+    <dimen name="text_size_display">34sp</dimen>  <!-- Display: 큰 제목 -->
+    <dimen name="text_size_headline">28sp</dimen> <!-- Headline: 섹션 제목 -->
+    <dimen name="text_size_title">20sp</dimen>   <!-- Title: 화면 타이틀 -->
+    <dimen name="text_size_body">15sp</dimen>    <!-- Body: 기본 본문/버튼 텍스트 -->
+    <dimen name="text_size_label">13sp</dimen>   <!-- Label: 버튼, 탭 라벨 -->
+    <dimen name="text_size_caption">12sp</dimen>  <!-- Caption: 작은 보조 텍스트 -->
+
+    <!-- ============= Spacing Scale (8dp) ============= -->
+    <!-- Base unit: 8dp -->
+    <dimen name="spacing_4">4dp</dimen>    <!-- 0.5x -->
+    <dimen name="spacing_8">8dp</dimen>    <!-- 1x  (base) -->
+    <dimen name="spacing_16">16dp</dimen>  <!-- 2x -->
+    <dimen name="spacing_24">24dp</dimen>  <!-- 3x -->
+    <dimen name="spacing_32">32dp</dimen>  <!-- 4x -->
+    <dimen name="spacing_40">40dp</dimen>  <!-- 5x -->
+    <dimen name="spacing_48">48dp</dimen>  <!-- 6x -->
+    <dimen name="spacing_56">56dp</dimen>  <!-- 7x -->
+
+    <!-- ============= Component Sizes ============= -->
+    <!-- Button sizes -->
+    <dimen name="button_height_small">36dp</dimen>   <!-- 버튼 높이 (소) -->
+    <dimen name="button_height_medium">44dp</dimen>  <!-- 버튼 높이 (중) -->
+    <dimen name="button_height_large">56dp</dimen>   <!-- 버튼 높이 (대) -->
+    <dimen name="button_padding_horizontal">16dp</dimen>
+    <dimen name="button_padding_vertical">8dp</dimen>
+
+    <!-- Text input sizes -->
+    <dimen name="text_input_height">44dp</dimen>
+    <dimen name="text_input_padding_horizontal">12dp</dimen>
+    <dimen name="text_input_padding_vertical">10dp</dimen>
+
+    <!-- Card/Item sizes -->
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="list_item_height_small">48dp</dimen>
+    <dimen name="list_item_height_medium">64dp</dimen>
+    <dimen name="list_item_height_large">80dp</dimen>
+    <dimen name="list_item_padding">12dp</dimen>
+
+    <!-- Icon sizes -->
+    <dimen name="icon_size_small">20dp</dimen>
+    <dimen name="icon_size_medium">24dp</dimen>
+    <dimen name="icon_size_large">32dp</dimen>
+
+    <!-- ============= Corner Radius ============= -->
+    <dimen name="corner_radius_small">4dp</dimen>    <!-- 버튼, 인풋 모서리 -->
+    <dimen name="corner_radius_medium">8dp</dimen>   <!-- 카드, 모달 모서리 -->
+    <dimen name="corner_radius_large">12dp</dimen>   <!-- 대형 컴포넌트 모서리 -->
+    <dimen name="corner_radius_extra_large">16dp</dimen> <!-- 특수 컴포넌트 모서리 -->
+
+    <!-- Legacy: to be removed -->
     <dimen name="chat_coner">15dp</dimen>
+
 </resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============= Typography Attributes ============= -->
+    <!-- Display: 34sp, Medium weight, line-height 1.5x (51sp) -->
+    <attr name="displayTextAppearance" format="reference" />
+
+    <!-- Headline: 28sp, Medium weight, line-height 1.5x (42sp) -->
+    <attr name="headlineTextAppearance" format="reference" />
+
+    <!-- Title: 20sp, Medium weight, line-height 1.5x (30sp) -->
+    <attr name="titleTextAppearance" format="reference" />
+
+    <!-- Body: 15sp, Regular weight, line-height 1.5x (22.5sp) -->
+    <attr name="bodyTextAppearance" format="reference" />
+
+    <!-- Label: 13sp, Medium weight, line-height 1.5x (19.5sp) -->
+    <attr name="labelTextAppearance" format="reference" />
+
+    <!-- Caption: 12sp, Regular weight, line-height 1.5x (18sp) -->
+    <attr name="captionTextAppearance" format="reference" />
+
+</resources>

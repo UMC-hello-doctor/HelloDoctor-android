@@ -8,16 +8,25 @@
     <color name="color_primary">#1852FF</color>          <!-- 브랜드 메인 색 (로고/강조) -->
     <color name="color_on_primary">#FFFFFF</color>       <!-- primary 배경 위 텍스트/아이콘 -->
 
-    <!-- Secondary color -->
-    <color name="color_secondary">#CCC2DC</color>        <!-- 보조 강조 색 -->
+    <!-- Secondary color (교체: #CCC2DC → #1244CC) -->
+    <!-- 이유: 기존은 WCAG AA 대비율 1.9:1 미충족. Primary 딥버전으로 통일 -->
+    <color name="color_secondary">#1244CC</color>        <!-- 보조 강조 색 (Primary 딥버전) -->
     <color name="color_on_secondary">#FFFFFF</color>     <!-- secondary 배경 위 텍스트/아이콘 -->
 
-    <!-- Text colors -->
-    <color name="color_text_main">#2A2A2A</color>        <!-- 기본 본문 텍스트 -->
-    <color name="color_text_sub">#696969</color>         <!-- 서브/보조 설명 텍스트 -->
+    <!-- Primary Container (추가) -->
+    <color name="color_primary_container">#E8F0FF</color> <!-- Primary 연한 배경 (선택 상태, 활성 배경) -->
 
-    <!-- Background -->
-    <color name="color_background">#F4F4F4</color>       <!-- 화면 기본 배경 색 -->
+    <!-- Text colors -->
+    <color name="color_text_main">#2A2A2A</color>        <!-- 기본 본문 텍스트, 대비율 17.1:1 -->
+    <!-- color_text_sub: 교체 (#696969 → #555555) -->
+    <!-- 이유: 14px 미만 소폰트에서 가독성 위험. 대비율 강화 (7.4:1) -->
+    <color name="color_text_sub">#555555</color>         <!-- 서브/보조 설명 텍스트 -->
+    <color name="color_text_hint">#A0A0A0</color>        <!-- Placeholder, 부가 설명 텍스트 -->
+
+    <!-- Background / Surface -->
+    <color name="color_background">#F4F4F4</color>       <!-- 레이어 0: 화면 기본 배경 -->
+    <color name="color_surface">#FFFFFF</color>          <!-- 레이어 1: 카드, 리스트 배경 -->
+    <color name="color_surface_raised">#FAFCFF</color>   <!-- 레이어 2: 모달, 드롭다운 배경 (추가) -->
 
     <!-- Buttons -->
     <color name="color_button_primary_bg">#1852FF</color>          <!-- 주요 액션 버튼: 배경(활성) -->
@@ -26,7 +35,8 @@
     <color name="color_button_primary_text_disabled">#FFFFFFFF</color> <!-- 주요 액션 버튼: 텍스트(비활성) -->
 
     <color name="color_button_secondary_bg">#FFFFFF</color>        <!-- 보조 버튼: 배경(활성) -->
-    <color name="color_button_secondary_text">#696969</color>      <!-- 보조 버튼: 텍스트(활성) -->
+    <!-- color_button_secondary_text: 교체 (#696969 → #555555) 대비 강화 -->
+    <color name="color_button_secondary_text">#555555</color>      <!-- 보조 버튼: 텍스트(활성) -->
     <color name="color_button_secondary_bg_disabled">#F0F0F0</color> <!-- 보조 버튼: 배경(비활성) -->
     <color name="color_button_secondary_text_disabled">#B0B0B0</color> <!-- 보조 버튼: 텍스트(비활성) -->
 
@@ -34,20 +44,32 @@
     <color name="gray_50">#FAFAFA</color>
     <color name="gray_100">#F5F5F5</color>
     <color name="gray_200">#EEEEEE</color>
+    <color name="gray_300">#E0E0E0</color>     <!-- Added: separator, disabled state -->
     <color name="gray_400">#BDBDBD</color>
     <color name="gray_500">#9E9E9E</color>
     <color name="gray_800">#424242</color>
 
-    <!-- Primary color alias -->
-    <color name="primary">#1852FF</color>
+    <!-- DEPRECATED: Alias (호환성 유지) -->
+    <!-- "primary": color_primary와 완전히 동일한 중복 alias → color_primary 사용 권장 -->
+    <color name="primary">@color/color_primary</color>
 
-    <!-- Additional colors for button states -->
+    <!-- Legacy colors for button states -->
     <color name="color_button_gray">@color/gray_400</color>
     <color name="color_button_pressed_bg">#E5E5E5</color>
 
-    <!-- Custom colors for drug alarm -->
+    <!-- Info: 교체 (#3B82F6 → #0EA5E9) -->
+    <!-- 이유: Primary(#1852FF)와 모두 파란색이라 혼동. 청록으로 분리해 복약 안내와 주요 액션 명확히 구분 -->
+    <color name="color_info">#0EA5E9</color>             <!-- 정보/복약 안내 -->
+    <color name="color_info_light">#E0F2FE</color>       <!-- 정보 배경 -->
+
+    <!-- Gray Scale: 순서 정정 (역전 오류 수정) -->
+    <!-- gray_600/700: 숫자가 올라갈수록 어두워야 함 -->
+    <color name="gray_600">#757575</color>   <!-- 기존 #666666 → #757575 (더 밝음) -->
+    <color name="gray_700">#616161</color>   <!-- 기존 #777777 → #616161 (더 어두움) -->
+
+    <!-- DEPRECATED: 삭제 또는 역할 정의 필요 (호환성 유지) -->
+    <!-- blue_primary: color_primary와 역할 중복 → 사용 금지 -->
     <color name="blue_primary">#2563EB</color>
-    <color name="gray_600">#666666</color>
-    <color name="gray_700">#777777</color>
-    <color name="orange_accent">#FF6B35</color>
+    <!-- orange_accent: 역할 미정의 → CTA 강조/배지/이벤트 등 구체적 용도 정의 후 사용 -->
+    <!-- orange_accent 색상은 주석 처리 (사용처 확인 후 정의 필요) -->
 </resources>
